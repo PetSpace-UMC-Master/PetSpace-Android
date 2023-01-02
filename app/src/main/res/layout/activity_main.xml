@@ -60,6 +60,8 @@
             android:text="이메일 로그인"/>
 
         <EditText
+            android:paddingLeft="20dp"
+            android:background="@drawable/btn_custom"
             android:id="@+id/editText_email"
             android:layout_marginTop="30dp"
             android:layout_width="match_parent"
@@ -69,27 +71,82 @@
             android:layout_height="48dp"/>
 
         <EditText
+            android:paddingLeft="20dp"
+            android:background="@drawable/btn_custom"
             android:textSize="16dp"
             android:fontFamily="@font/pretendard_regular"
             android:id="@+id/editText_password"
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
-            android:hint="이메일을 입력하세요"
+            android:hint="비밀번호를 입력하세요"
             android:layout_height="48dp"/>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_email"
+            android:background="@drawable/btn_customfull"
+            android:backgroundTint="@color/main_green"
             android:layout_marginTop="15dp"
             android:text="이메일로 로그인"
             android:textSize="16dp"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:backgroundTint="#AB8262"
+            android:textColor="#EEF5F5"
+
+            />
+
+        <ImageView
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/line1"
             />
 
 
+        <TextView
+            android:layout_marginTop="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="16dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="간편 로그인"/>
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_kakao"
+            android:textSize="16dp"
+            android:textColor="@color/textForBlack"
+            android:layout_marginTop="33dp"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:backgroundTint="@color/kakao"
+            android:background="@drawable/btn_customfull"
+            android:text="카카오로 로그인"
+            />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_google"
+            android:fontFamily="@font/roboto_medium"
+            android:textSize="16dp"
+            android:textColor="@color/textForBlack"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/btn_google"
+            android:text="Google로 로그인"
+            android:textAllCaps="false"
 
+            />
+
+        <TextView
+            android:id="@+id/btn_newAccount"
+            android:textSize="16dp"
+            android:layout_marginTop="60dp"
+            android:textColor="@color/textForBlack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/createId"
+            android:gravity="center"
+            />
 
     </LinearLayout>
 

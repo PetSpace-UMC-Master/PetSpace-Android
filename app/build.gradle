@@ -33,9 +33,13 @@ android {
     viewBinding{
         enabled true
     }
+
 }
 
 dependencies {
+
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
