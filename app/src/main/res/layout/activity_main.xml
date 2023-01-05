@@ -113,7 +113,8 @@
             <CheckBox
                 android:id="@+id/checkbox_agree_to_info"
                 android:layout_width="20dp"
-                android:layout_height="20dp" />
+                android:layout_height="20dp"
+                android:buttonTint="#40A196" />
         </LinearLayout>
 
         <kr.co.prnd.readmore.ReadMoreTextView
@@ -176,7 +177,8 @@
             <CheckBox
                 android:id="@+id/checkbox_agree_to_marketing"
                 android:layout_width="20dp"
-                android:layout_height="20dp" />
+                android:layout_height="20dp"
+                android:buttonTint="#40A196"/>
         </LinearLayout>
 
         <kr.co.prnd.readmore.ReadMoreTextView
