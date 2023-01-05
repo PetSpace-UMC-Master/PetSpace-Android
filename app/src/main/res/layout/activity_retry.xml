@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+       >
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/closesvg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bmjua"
+            android:text="회원가입 완료하기"
+            android:textColor="#0C201E"
+            android:textSize="20dp"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#D9D9D9" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginTop="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#0C201E"
+            android:textSize="16sp"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="이메일"/>
+
+        <EditText
+            android:paddingLeft="20dp"
+            android:background="@drawable/btn_custom_red"
+            android:id="@+id/editText_email"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:hint="이메일을 입력하세요"
+            android:textSize="16sp"
+            android:fontFamily="@font/pretendard_regular"
+            android:layout_height="48sp"
+            android:textColor="#7F7F7F"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="중복된 이메일입니다. 다른 이메일을 사용해주세요."
+            android:layout_marginTop="5dp"
+            android:textSize="12sp"
+            android:textColor="@color/red"
+            />
+
+        <TextView
+            android:layout_marginTop="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#0C201E"
+            android:textSize="16sp"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="비밀번호"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintEnabled="false"
+            android:layout_marginTop="20dp"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:paddingLeft="20dp"
+                android:background="@drawable/btn_custom_red"
+                android:textSize="16sp"
+                android:fontFamily="@font/pretendard_regular"
+                android:id="@+id/editText_password"
+                android:layout_width="match_parent"
+                android:hint="비밀번호를 입력하세요"
+                android:textColor="#7F7F7F"
+                android:layout_height="48sp"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="특수문자 포함 7자 이상 입력해야 합니다."
+            android:layout_marginTop="5dp"
+            android:textSize="12sp"
+            android:textColor="@color/red"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
+            app:hintEnabled="false"
+            android:layout_marginTop="15dp"
+            >
+
+            <EditText
+                android:paddingLeft="20dp"
+                android:background="@drawable/btn_custom_red"
+                android:textSize="16sp"
+                android:fontFamily="@font/pretendard_regular"
+                android:id="@+id/editText_password_again"
+                android:layout_width="match_parent"
+                android:hint="비밀번호를 다시 한번 입력하세요"
+                android:textColor="#7F7F7F"
+                android:layout_height="48sp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="비밀번호와 일치하지 않습니다. 다시 확인해주세요."
+            android:layout_marginTop="5dp"
+            android:textSize="12sp"
+            android:textColor="@color/red"
+            />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:paddingLeft="20dp"
+            android:paddingRight="43dp"
+            android:id="@+id/btn_continue"
+            android:fontFamily="@font/roboto_medium"
+            android:textSize="16dp"
+            android:textColor="#EEF5F5"
+            android:layout_marginTop="187dp"
+            android:layout_width="match_parent"
+            android:layout_height="48sp"
+            android:background="@drawable/btn_continue_grey"
+            android:text="계속하기"
+            android:textAllCaps="false"
+
+            />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

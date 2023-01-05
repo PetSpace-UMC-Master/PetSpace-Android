@@ -19,8 +19,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun initNext() {
         binding.apply {
-            btnEmail.setOnClickListener {
-                val intent = Intent(this@MainActivity,GifActivity::class.java)
+            btnContinue.setOnClickListener {
+                val intent = Intent(this@MainActivity,RetryActivity::class.java)
                 startActivity(intent)
             }
         }
