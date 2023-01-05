@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.CompoundButton
 import com.example.petspace3.databinding.ActivityMainBinding
 import kr.co.prnd.readmore.ReadMoreTextView
 
@@ -61,17 +62,24 @@ class MainActivity : AppCompatActivity() {
          */
 
         //checkbox 모두 선택 시 버튼 활성화
-        var ifChecked : Int = 0
+        var if1Checked : Int = 0
+        var if2Checked : Int = 0
         binding.checkboxAgreeToInfo.setOnCheckedChangeListener { buttonView, isChecked ->
-            ifChecked = if (isChecked){
-                1
-            } else{
-                0
+            if(isChecked){
+                if1Checked = 1
+                if(if2Checked == 1){
+                    binding.btnComleteAfter.visibility = View.VISIBLE
+                }
+            }
+            else{
+                if1Checked = 0
+                binding.btnComleteAfter.visibility=View.INVISIBLE
             }
         }
         binding.checkboxAgreeToMarketing.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked){
-                if ( ifChecked == 1 ){
+                if2Checked = 1
+                if ( if1Checked == 1 ){
                     binding.btnComleteAfter.visibility = View.VISIBLE
                 }
                 else{
@@ -88,5 +96,4 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
 }
