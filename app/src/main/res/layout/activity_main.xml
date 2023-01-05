@@ -117,23 +117,43 @@
                 android:buttonTint="#40A196" />
         </LinearLayout>
 
-        <kr.co.prnd.readmore.ReadMoreTextView
-            android:id="@+id/tv_agree_content1"
+        <FrameLayout
+            android:id="@+id/frame_layout_1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edge"
-            android:fontFamily="@font/pretendard_regular"
-            android:lineHeight="12dp"
-            android:paddingLeft="15dp"
-            android:paddingTop="15dp"
-            android:paddingEnd="15dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="15dp"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            app:readMoreColor="#2662BB"
-            app:readMoreMaxLine="4"
-            app:readMoreText="..더보기"/>
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_agree_content1_fixed"
+                android:background="@drawable/edge"
+                android:fontFamily="@font/pretendard_regular"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="-2sp"
+                android:lineHeight="14dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:paddingEnd="15dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="15dp"
+                android:textColor="@color/black"
+                android:text="1. 펫스페이스가 수집하는 개인정보\nPet Space 및 해당 회사 그룹의 모바일 앱 및 서비스에 대한 접속은 본 개인정보 보호정책이 적용됩니다. 모바일 앱에 접속하고 제공된 서비스를 계속 사용하면 본 개인정보 보호정책을 수락한 것으로 간주되며, 특히 본 개인정보 보호정책에 명시된 방식으로 그리고 조항 3.7 및 4.1에 명시된 목적을 위해 이용자의 개인정보를 사용하고 공개할 수 "
+                android:textSize="12dp"
+                tools:layout_editor_absoluteX="23dp"
+                tools:layout_editor_absoluteY="412dp"
+                android:maxLines="6"
+                android:ellipsize="end"/>
+
+            <Button
+                android:id="@+id/btn_view_more_1"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@android:color/transparent"
+                android:gravity="right"
+                android:text="\n\n\n\n\n..더보기"
+                android:textColor="#2662BB"
+                android:textSize="12sp"></Button>
+        </FrameLayout>
 
     </LinearLayout>
 
@@ -180,28 +200,46 @@
                 android:layout_height="20dp"
                 android:buttonTint="#40A196"/>
         </LinearLayout>
-
-        <kr.co.prnd.readmore.ReadMoreTextView
-            android:id="@+id/tv_agree_content2"
+        <FrameLayout
+            android:id="@+id/frame_layout_2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edge"
-            android:fontFamily="@font/pretendard_regular"
-            android:gravity="center_vertical"
-            android:lineHeight="12dp"
-            android:lineSpacingExtra="-2sp"
-            android:paddingLeft="15dp"
-            android:paddingTop="15dp"
-            android:paddingEnd="15dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="15dp"
-            android:textColor="@color/black"
-            android:textSize="12dp"
-            tools:layout_editor_absoluteX="23dp"
-            tools:layout_editor_absoluteY="412dp"
-            app:readMoreColor="#2662BB"
-            app:readMoreMaxLine="4"
-            app:readMoreText="..더보기"/>
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_agree_content2_fixed"
+                android:background="@drawable/edge"
+                android:fontFamily="@font/pretendard_regular"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="-2sp"
+                android:lineHeight="14dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:paddingEnd="15dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="15dp"
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                android:text="1. 펫 스페이스 마케팅 수신동의\n
+Pet Space는 회원가입 시 수집된 개인정보를 이용하여 탈퇴 시까지 각종 서비스, 상품 및 타사 서비스와 결합된 상품에 대하여 홍보, 가입권유, 프로모션, 이벤트 안내 목적으로 본인에게 정보, 광고를 전화, DM, SMS, MMS, 이메일, 우편 등의 방법으로 전달합니다.
+고객은 이에 동의하지 아니할 권리가 있으며, 동의하지 않는 경우에도 회원"
+                tools:layout_editor_absoluteX="23dp"
+                tools:layout_editor_absoluteY="412dp"
+                android:maxLines="6"
+                android:ellipsize="end"/>
+            <Button
+                android:id="@+id/btn_view_more_2"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@android:color/transparent"
+                android:text="\n\n\n\n\n..더보기"
+                android:gravity="right"
+                android:textSize="12sp"
+                android:textColor="#2662BB">
+            </Button>
+        </FrameLayout>
+
 
     </LinearLayout>
 
