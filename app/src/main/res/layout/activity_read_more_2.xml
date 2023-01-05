@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 약관동의 화면 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="411dp"
+        android:layout_height="69dp"
+        android:background="@drawable/edge_below"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <!-- close -->
+        <ImageButton
+            android:id="@+id/close"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="320dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/arrow_back_ios_new"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- 마케팅 수신 동의 -->
+        <TextView
+            android:id="@+id/some_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="126dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/bmjua_ttf"
+            android:lineSpacingExtra="-1sp"
+            android:paddingTop="3dp"
+            android:text="마케팅 수신동의"
+            android:textColor="#0C201E"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="316dp"
+        android:fontFamily="@font/pretendard_semibold"
+        android:text="마케팅 수신정보"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="365dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.043">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.043"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edge_gray"
+            android:fontFamily="@font/pretendard_regular"
+            android:lineHeight="17dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="15dp"
+            android:paddingEnd="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="15dp"
+            android:lineSpacingExtra="-2sp"
+            android:gravity="center_vertical"
+            android:textColor="#7F7F7F"
+            android:textSize="12sp"
+            android:text="이 몸이 얼음과 않는 같은 그들을 두기 못할 사막이다. 맺어, 뭇
+ 방지하는 인생을 실현에 내려온 소금이라 구하지 길지 칼이다.
+용기가 사라지지 유소년에게서 그들의 있는 뭇 사막이다. 되는
+품었기 불어 소금이라 것이다. 그들에게 설레는 하는 같이, 있으
+며, 이 아니더면, 것이다. 크고 과실이 든 부패를 이상의 희망의
+것이다. 인간은 그들은 어디 구하지 바로 사막이다. 옷을 귀는
+그들의 그들의 별과 못할 천하를 더운지라 할지라도 것이다. 천
+하를 보배를 작고 뛰노는 소금이라 길지 사람은 그들은 인생을
+아니다. 끝까지 목숨이 스며들어 튼튼하며, 열락의 심장은 낙원
+을 방황하였으며, 인생의 봄바람이다. 너의 두기 트고, 위하여,
+돋고, 심장의 칼이다. 더운지라 가슴에 같이, 그리하였는가? 보
+배를 인생을 곧 현저하게 위하여서. 하는 속잎나고, 시들어 않는
+현저하게 길을 용감하고 얼마나 못할 것이다. 어디 황금시대의
+보내는 때에, 하는 가는 현저하게 철환하였는가? 청춘이 바로
+온갖 이상, 바이며, 그와 것이다. 수 우리의 가슴이 밝은 이상은
+것이다. 방지하는 길지 소담스러운 구하기 미인을 영원히 우리
+의 스며들어 끓는다. 모래뿐일 능히 생의 창공에 그들은 투명하
+되 피어나기 낙원을 있는가? 피는 것이다.보라, 이는 원질이 그
+리하였는가? 사는가 충분히 가는 실로 실현에 길을 되려니와,
+속에서 것이다. 자신과 구할 무엇을 황금시대를 대한 같지 있으
+랴? 보배를 관현악이며, 실로 바이며, 이상의 이것이다. 인생을
+보내는 아름답고 뜨고, 얼마나 꽃 웅대한 것이다. 못할 두기 풍
+부하게 할지니, 남는 그리하였는가? 사랑의 끓는 뜨거운지라,
+얼음과 고동을 실로 칼이다. 피고 찾아다녀도, 눈에 크고 새 황
+금시대의 기쁘며, 과실이 거선의 봄바람이다. 인생을 듣기만 낙
+원을 없으면 수 광야에서 이것이야말로 속에 끓는 피다. 품으며,
+위하여서 뜨거운지라, 부패를 커다란 청춘에서만 것이다.\n\n\n" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
