@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnComleteAfter.setOnClickListener{
-            val intent = Intent(this, TermsContentActivity2::class.java)
+            val intent = Intent(this, ReviewReadMoreActivity::class.java)
             //**이 부분 약관 동의 완료 시 "000님 환영합니다" 있는 시작 화면으로 수정해야 함.**
             startActivity(intent)
         }
