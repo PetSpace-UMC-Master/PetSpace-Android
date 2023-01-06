@@ -30,11 +30,13 @@
             android:layout_marginEnd="320dp"
             android:layout_marginBottom="20dp"
             android:backgroundTint="@color/white"
-            android:src="@drawable/close"
+            android:src="@drawable/arrow_back_ios_new"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.372"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <!-- 회원가입 완료하기 -->
@@ -45,16 +47,16 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="126dp"
             android:layout_marginBottom="20dp"
             android:fontFamily="@font/bmjua_ttf"
             android:gravity="center"
             android:lineSpacingExtra="-1sp"
-            android:text="회원가입 완료하기"
+            android:text="회원가입"
             android:textColor="#0C201E"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
