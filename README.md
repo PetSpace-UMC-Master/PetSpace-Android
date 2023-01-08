@@ -8,6 +8,7 @@
 + 화면 구현 및 기능 구현은 해당 activity/fragment 에서 연결되는 event까지 해줍니다!
 
 + 깃 커밋 메시지
+
 feat : 새로운 기능 추가
 fix : 버그 수정
 docs: 문서 수정
