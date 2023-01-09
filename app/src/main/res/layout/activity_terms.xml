@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TermsActivity"
+    android:backgroundTint="#40A196">
+
+    <!-- 약관동의 화면 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="69dp"
+        android:background="@drawable/edge_below"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <!-- close -->
+        <ImageButton
+            android:id="@+id/close"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="320dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/arrow_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.372"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <!-- 회원가입 완료하기 -->
+        <TextView
+            android:id="@+id/some_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/bmjua"
+            android:gravity="center"
+            android:lineSpacingExtra="-1sp"
+            android:text="회원가입"
+            android:textColor="#0C201E"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="316dp"
+        android:fontFamily="@font/pretendard_semibold"
+        android:text="약관 동의"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="365dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.043">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.043">
+
+            <TextView
+                android:layout_width="335dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_semibold"
+                android:text="개인정보 수집 및 이용에 동의합니다. (필수)\n"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:id="@+id/checkbox_agree_to_info"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:buttonTint="#40A196" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/frame_layout_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_agree_content1_fixed"
+                android:background="@drawable/edge"
+                android:fontFamily="@font/pretendard_regular"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="-2sp"
+                android:lineHeight="14dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:paddingEnd="15dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="15dp"
+                android:textColor="@color/black"
+                android:text="1. 펫스페이스가 수집하는 개인정보\nPet Space 및 해당 회사 그룹의 모바일 앱 및 서비스에 대한 접속은 본 개인정보 보호정책이 적용됩니다. 모바일 앱에 접속하고 제공된 서비스를 계속 사용하면 본 개인정보 보호정책을 수락한 것으로 간주되며, 특히 본 개인정보 보호정책에 명시된 방식으로 그리고 조항 3.7 및 4.1에 명시된 목적을 위해 이용자의 개인정보를 사용하고 공개할 수 "
+                android:textSize="12dp"
+                tools:layout_editor_absoluteX="23dp"
+                tools:layout_editor_absoluteY="412dp"
+                android:maxLines="6"
+                android:ellipsize="end"/>
+
+            <Button
+                android:id="@+id/btn_view_more_1"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@android:color/transparent"
+                android:gravity="right"
+                android:text="\n\n\n\n\n..더보기"
+                android:textColor="#2662BB"
+                android:textSize="12sp"></Button>
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="365dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout1"
+        app:layout_constraintVertical_bias="0.043">
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.043">
+
+            <TextView
+                android:layout_width="335dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_semibold"
+                android:text="마케팅 이메일 수신에 동의합니다. (선택)\n"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:id="@+id/checkbox_agree_to_marketing"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:buttonTint="#40A196"/>
+        </LinearLayout>
+        <FrameLayout
+            android:id="@+id/frame_layout_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_agree_content2_fixed"
+                android:background="@drawable/edge"
+                android:fontFamily="@font/pretendard_regular"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="-2sp"
+                android:lineHeight="14dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:paddingEnd="15dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="15dp"
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                android:text="1. 펫 스페이스 마케팅 수신동의\n
+Pet Space는 회원가입 시 수집된 개인정보를 이용하여 탈퇴 시까지 각종 서비스, 상품 및 타사 서비스와 결합된 상품에 대하여 홍보, 가입권유, 프로모션, 이벤트 안내 목적으로 본인에게 정보, 광고를 전화, DM, SMS, MMS, 이메일, 우편 등의 방법으로 전달합니다.
+고객은 이에 동의하지 아니할 권리가 있으며, 동의하지 않는 경우에도 회원"
+                tools:layout_editor_absoluteX="23dp"
+                tools:layout_editor_absoluteY="412dp"
+                android:maxLines="6"
+                android:ellipsize="end"/>
+            <Button
+                android:id="@+id/btn_view_more_2"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@android:color/transparent"
+                android:text="\n\n\n\n\n..더보기"
+                android:gravity="right"
+                android:textSize="12sp"
+                android:textColor="#2662BB">
+            </Button>
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_comlete_before"
+        android:layout_width="364dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="134dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="50dp"
+        android:backgroundTint="#D9D9D9"
+        android:fontFamily="@font/pretendard_semibold"
+        android:gravity="center"
+        android:text="완료하기"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        tools:ignore="DuplicateClickableBoundsCheck" />
+
+    <Button
+        android:id="@+id/btn_comlete_after"
+        android:layout_width="364dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="134dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="50dp"
+        android:backgroundTint="#40A196"
+        android:fontFamily="@font/pretendard_semibold"
+        android:gravity="center"
+        android:text="완료하기"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

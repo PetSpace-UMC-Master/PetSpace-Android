@@ -13,6 +13,7 @@ class Signin2Activity : AppCompatActivity() {
         setContentView(binding.root)
 
         initNext()
+        initPrevious()
 
 
     }
@@ -21,6 +22,15 @@ class Signin2Activity : AppCompatActivity() {
         binding.apply {
             btnContinue.setOnClickListener {
                 val intent = Intent(this@Signin2Activity,SigninDescriptionActivity::class.java)
+                startActivity(intent)
+            }
+        }
+    }
+
+    private fun initPrevious() {
+        binding.apply {
+            btnBack.setOnClickListener {
+                val intent = Intent(this@Signin2Activity,LoginActivity::class.java)
                 startActivity(intent)
             }
         }

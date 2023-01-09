@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 약관동의 화면 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="411dp"
+        android:layout_height="69dp"
+        android:background="@drawable/edge_below"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <!-- close -->
+        <ImageButton
+            android:id="@+id/close"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="320dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/arrow_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- 회원가입 완료하기 -->
+        <TextView
+            android:id="@+id/some_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="126dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/bmjua"
+            android:lineSpacingExtra="-1sp"
+            android:paddingTop="3dp"
+            android:text="개인정보 이용처리"
+            android:textColor="#0C201E"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="316dp"
+        android:fontFamily="@font/pretendard_medium"
+        android:text="펫스페이스가 수집하는 개인정보"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="365dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.043">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.043"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edge_gray"
+            android:fontFamily="@font/pretendard_regular"
+            android:lineHeight="17dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="15dp"
+            android:paddingEnd="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="15dp"
+            android:lineSpacingExtra="-2sp"
+            android:gravity="center_vertical"
+            android:textColor="#7F7F7F"
+            android:textSize="12sp"
+            android:text="1. 펫스페이스가 수집하는 개인정보\n\nPet Space 및 해당 회사 그룹의 모바일 앱 및 서비스에 대한 접속은 본 개인정보 보호정책이 적용됩니다.
+모바일 앱에 접속하고 제공된 서비스를 계속 사용하면 본 개인정보 보호정책을 수락한 것으로 간주되며, 특히 본 개인정보 보호정책에 명시된 방식으로 그리고 조항 3.7 및 4.1에 명시된 목적을 위해 이용자의 개인정보를 사용하고 공개하는데 동의한 것으로 간주됩니다.\n
+회사는 본 개인정보 보호정책을 수시로 수정할 수 있습니다.이 개인 정보 보호 정책의 일부분에 동의하지 않는 경우 모바일 앱 및 서비스 접속 및 사용을 즉시 중단해야 합니다.\n
+회사는 사업을 운영하기 위하여 그리고 제품 및 서비스를 전달하기 위하여 이용자에 관한 정보를 수집, 사용 및 경우에 따라 제3자에게 제공합니다.\n 따라서 본 개인정보 보호정책은 이용자가 모바일 응용프로그램을 사용할 때 개인정보를 수집, 사용, 작성 및 삭제하는 방법의 이해를 돕기 위해 작성되었습니다:\n
+개인 정보를 수집하기 전이나 수집 시점에 회사는 정보가 수집되고 있는 목적을 확인할 것입니다.\n
+회사는 회사에서 명시한 목적 및 기타 양립 가능한 목적을 달성하기 위한 목적으로만 개인 정보를 수집하고 사용합니다.\n
+단, 관련 개인의 동의나 법률에서 요구하는 사항은 제외됩니다. \n회사는 이러한 목적을 달성하기 위해 필요한 경우에만 개인 정보를 보유할 것입니다.\n
+회사는 적법하고 공정한 수단으로 개인 정보를 수집하고, 해당되는 경우 해당 개인의 동의를 통해 개인 정보를 수집합니다.
+개인 정보는 사용되는 목적과 관련이 있어야 하며, 이러한 목적에 필요한 만큼 정확하고 완전하며 최신 상태여야 합니다." />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

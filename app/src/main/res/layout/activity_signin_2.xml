@@ -18,7 +18,7 @@
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/closesvg"
+            android:src="@drawable/arrow_back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/bmjua"
-            android:text="회원가입 완료하기"
+            android:text="회원가입"
             android:textColor="#0C201E"
             android:textSize="20dp"
             android:gravity="center"
@@ -110,6 +110,7 @@
             android:hint="비밀번호를 입력하세요"
             android:textColor="#7F7F7F"
             android:layout_height="48sp"
+            android:inputType="textPassword"
             />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -143,6 +144,7 @@
             android:hint="비밀번호를 다시 한번 입력하세요"
             android:textColor="#7F7F7F"
             android:layout_height="48sp"
+            android:inputType="textPassword"
             />
         </com.google.android.material.textfield.TextInputLayout>
 
