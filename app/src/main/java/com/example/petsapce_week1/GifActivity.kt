@@ -13,8 +13,7 @@ class GifActivity:AppCompatActivity() {
         binding = ActivityGifBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //testcode
-        //testcode12
+        //gif를 한프레임이 아닌 계속된 프레임으로 움직이게 하는 코드.
         Glide.with(this).load(R.raw.petgif).override(560, 560).into(binding.imgGif)
 
     }

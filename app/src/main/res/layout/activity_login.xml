@@ -61,9 +61,9 @@
 
         <EditText
 
+            android:background="@drawable/btn_custom"
             android:id="@+id/editText_email"
             android:paddingLeft="20dp"
-            android:background="@drawable/btn_custom"
             android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:hint="이메일을 입력하세요"
@@ -139,8 +139,8 @@
             android:text="간편 로그인"/>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:paddingLeft="20dp"
-            android:paddingRight="43dp"
+           android:paddingLeft="20dp"
+            android:paddingRight="40dp"
             android:drawableLeft="@drawable/icons8_kakaotalk"
             android:textStyle="bold"
             android:id="@+id/btn_kakao"
@@ -170,6 +170,10 @@
             android:textAllCaps="false"
 
             />
+
+
+
+
 
         <LinearLayout
             android:layout_marginTop="67dp"

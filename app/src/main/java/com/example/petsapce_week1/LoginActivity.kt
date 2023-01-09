@@ -42,6 +42,7 @@ class LoginActivity : AppCompatActivity() {
 
 
         binding.apply {
+
             btnEmail.setOnClickListener {
                 //edittext에서 값을 받아옴
                 val inputEmail = editTextEmail.text.toString()

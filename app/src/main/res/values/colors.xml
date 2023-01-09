@@ -12,4 +12,5 @@
     <color name="red">#BB2649</color>
     <color name="kakao">#FEE500</color>
     <color name="textForBlack">#0C201E</color>
+    <color name="btn_notTouch">#D9D9D9</color>
 </resources>

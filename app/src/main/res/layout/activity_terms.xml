@@ -114,8 +114,8 @@
 
             <CheckBox
                 android:id="@+id/checkbox_agree_to_info"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:buttonTint="#40A196" />
         </LinearLayout>
 
@@ -198,8 +198,8 @@
 
             <CheckBox
                 android:id="@+id/checkbox_agree_to_marketing"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:buttonTint="#40A196"/>
         </LinearLayout>
         <FrameLayout
@@ -254,6 +254,7 @@ Pet Space는 회원가입 시 수집된 개인정보를 이용하여 탈퇴 시�
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="50dp"
         android:backgroundTint="#D9D9D9"
+        android:background="@drawable/btn_customfull"
         android:fontFamily="@font/pretendard_semibold"
         android:gravity="center"
         android:text="완료하기"
@@ -275,6 +276,7 @@ Pet Space는 회원가입 시 수집된 개인정보를 이용하여 탈퇴 시�
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="50dp"
         android:backgroundTint="#40A196"
+        android:background="@drawable/btn_customfull"
         android:fontFamily="@font/pretendard_semibold"
         android:gravity="center"
         android:text="완료하기"
