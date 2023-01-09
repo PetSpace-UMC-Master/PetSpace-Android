@@ -14,6 +14,7 @@ class ReviewReadMoreActivity : AppCompatActivity() {
 
         binding = ActivityReviewReadMoreBinding.inflate(layoutInflater)
 
+        //testcode
         // 왼쪽 상단 x 버튼 클릭 시 이전 화면(manifest에 parent)
         binding.btnReviewClose.setOnClickListener {
             val intent = Intent(this,TermsActivity::class.java)
