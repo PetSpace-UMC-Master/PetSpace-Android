@@ -14,6 +14,7 @@ class GifActivity:AppCompatActivity() {
         setContentView(binding.root)
 
         //testcode
+        //testcode12
         Glide.with(this).load(R.raw.petgif).override(560, 560).into(binding.imgGif)
 
     }
