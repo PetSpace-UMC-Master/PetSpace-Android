@@ -86,4 +86,5 @@ fun foo() = 1        // good
 
 val isEmpty: Boolean get() = size == 0
 
+넵!!
 
