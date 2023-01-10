@@ -73,6 +73,7 @@
             />
 
         <TextView
+            android:id="@+id/text_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="사용 가능한 이메일입니다."
@@ -115,6 +116,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
+            android:id="@+id/text_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="사용 가능한 비밀번호입니다."
