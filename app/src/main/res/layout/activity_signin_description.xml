@@ -95,7 +95,8 @@
             android:hint="생일 (예: 20230101)"
             android:paddingLeft="20dp"
             android:textColor="#7F7F7F"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:inputType="number"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
