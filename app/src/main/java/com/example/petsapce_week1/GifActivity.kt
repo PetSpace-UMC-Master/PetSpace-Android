@@ -14,6 +14,7 @@ class GifActivity:AppCompatActivity() {
         setContentView(binding.root)
 
         //gif를 한프레임이 아닌 계속된 프레임으로 움직이게 하는 코드.
+        //서버에서 내려받는 이미지 데이터에도 활용.
         Glide.with(this).load(R.raw.petgif).override(560, 560).into(binding.imgGif)
 
     }
