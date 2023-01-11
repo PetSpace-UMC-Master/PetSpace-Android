@@ -27,6 +27,32 @@ class Signin2Activity : AppCompatActivity() {
 
     }
 
+    fun checkEmail(): Boolean {
+        binding.apply {
+
+            var email = editTextEmail.text.toString().trim() //공백제거
+            val pattern: Pattern = Patterns.EMAIL_ADDRESS
+//                val p = Pattern.matches(emailValidation, email) // 서로 패턴이 맞닝?
+            if (pattern.matcher(email).matches()) {
+
+                editTextEmail.setBackgroundResource(R.drawable.btn_custom)
+                textEmail.text = "사용 가능한 이메일 형식입니다."
+                textEmail.setTextColor(ContextCompat.getColor(applicationContext!!,R.color.main_green))
+
+                //이메일 형태가 정상일 경우
+//                    editTextEmail.setTextColor(R.color.black.toInt())
+                return true
+            } else {
+                editTextEmail.setBackgroundResource(R.drawable.btn_custom_red)
+                textEmail.text = "맞는 이메일 형식을 입력하세요"
+                textEmail.setTextColor(ContextCompat.getColor(applicationContext!!,R.color.red))
+                //또는 questionEmail.setTextColor(R.color.red.toInt())
+                return false
+            }
+        }
+    }
+
+
     private fun inintEmailCheck() {
 //        val email = "aaa@naver.com"
         val emailValidation =
@@ -41,31 +67,8 @@ class Signin2Activity : AppCompatActivity() {
 
               }*/
 
-        fun checkEmail(): Boolean {
-            binding.apply {
 
-                var email = editTextEmail.text.toString().trim() //공백제거
-                val pattern: Pattern = Patterns.EMAIL_ADDRESS
-                val p = Pattern.matches(emailValidation, email) // 서로 패턴이 맞닝?
-                if (pattern.matcher(email).matches()) {
-
-                    editTextEmail.setBackgroundResource(R.drawable.btn_custom)
-                    textEmail.text = "사용 가능한 이메일 형식입니다."
-                    textEmail.setTextColor(ContextCompat.getColor(applicationContext!!,R.color.red))
-
-                    //이메일 형태가 정상일 경우
-//                    editTextEmail.setTextColor(R.color.black.toInt())
-                    return true
-                } else {
-                    editTextEmail.setBackgroundResource(R.drawable.btn_custom_red)
-                    textEmail.text = "맞는 이메일 형식을 입력하세요"
-                    textEmail.setTextColor(ContextCompat.getColor(applicationContext!!,R.color.red))
-                    //또는 questionEmail.setTextColor(R.color.red.toInt())
-                    return false
-                }
-            }
-        }
-
+        //textwathcher
         binding.apply {
 
             editTextEmail.addTextChangedListener(object : TextWatcher {
