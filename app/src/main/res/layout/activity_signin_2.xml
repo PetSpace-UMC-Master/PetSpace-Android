@@ -73,9 +73,10 @@
             />
 
         <TextView
+            android:id="@+id/text_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="사용 가능한 이메일입니다."
+            android:text=""
             android:layout_marginTop="5dp"
             android:textSize="12sp"
             android:textColor="#40A196"
@@ -115,9 +116,10 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
+            android:id="@+id/text_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="사용 가능한 비밀번호입니다."
+            android:text="특수문자 포함 7자 이상을 입력해주세요."
             android:layout_marginTop="5dp"
             android:textSize="12sp"
             android:textColor="#40A196"
@@ -147,6 +149,16 @@
             android:inputType="textPassword"
             />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/text_passwordAgain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_marginTop="5dp"
+            android:textSize="12sp"
+            android:textColor="#40A196"
+            />
 
 
 
