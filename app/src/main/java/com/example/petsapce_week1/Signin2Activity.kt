@@ -18,6 +18,8 @@ class Signin2Activity : AppCompatActivity() {
 
     }
 
+
+
     private fun initNext() {
         binding.apply {
             btnContinue.setOnClickListener {
