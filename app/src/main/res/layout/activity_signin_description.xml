@@ -69,7 +69,10 @@
             android:hint="이름 (예: 홍길동)"
             android:paddingLeft="20dp"
             android:textColor="#7F7F7F"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:digits="ㅂㅈㄷㄱㅅㅛㅕㅑㅐㅔㅁㄴㅇㄹㅎㅗㅓㅏㅣㅋㅌㅊㅍㅜㅜㅡ"
+            android:maxLength="16"
+            />
 
 
         <EditText

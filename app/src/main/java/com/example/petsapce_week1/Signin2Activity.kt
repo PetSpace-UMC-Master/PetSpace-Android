@@ -7,6 +7,8 @@ import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.Patterns
+import android.view.View
+import android.widget.EditText
 import androidx.core.content.ContextCompat
 import com.example.petsapce_week1.databinding.ActivitySignin2Binding
 import java.util.regex.Pattern
@@ -30,7 +32,31 @@ import java.util.regex.Pattern
                 binding.editTextPassword.addTextChangedListener(passwordListener)
                 binding.editTextPasswordAgain.addTextChangedListener(passwordAgainListener)
 
+
+                //이메일 형식 맞으면 중복 확인 버튼 활성화
+
+                if (checkEmail()) {
+                    binding.emailDuplicationAfter.visibility = View.VISIBLE
+                }
+                else {
+                    binding.emailDuplicationAfter.visibility = View.INVISIBLE
+                }
+
+                //중복 아님 확인되면 버튼 비활성화 + 입력된 이메일 고정
+/*                binding.emailDuplicationAfter.setOnClickListener {
+                    binding.emailDuplicationAfter.visibility = View.INVISIBLE
+                    binding.editTextEmail.focusable(false)
+                    binding.textEmail.text = "사용 가능한 이메일입니다."
+                    binding.textEmail.setTextColor(
+                        ContextCompat.getColor(
+                            applicationContext!!,
+                            R.color.main_green))
+                    emailFlag=true
+                }*/
             }
+
+            var emailFlag = false
+
 
             fun checkEmail(): Boolean {
                 binding.apply {
@@ -40,7 +66,7 @@ import java.util.regex.Pattern
 //                val p = Pattern.matches(emailValidation, email) // 서로 패턴이 맞닝?
                     if (pattern.matcher(email).matches()) {
 
-                        editTextEmail.setBackgroundResource(R.drawable.btn_custom)
+                        editTextEmail.setBackgroundResource(R.drawable.btn_emailbox)
                         textEmail.text = "사용 가능한 이메일 형식입니다."
                         textEmail.setTextColor(
                             ContextCompat.getColor(
@@ -48,12 +74,27 @@ import java.util.regex.Pattern
                                 R.color.main_green
                             )
                         )
+                        emailDuplicationAfter.visibility = View.VISIBLE
+
+                        //중복 아님 확인되면 버튼 비활성화 + 입력된 이메일 고정
+                        emailDuplicationAfter.setOnClickListener {
+                            emailDuplicationAfter.visibility = View.INVISIBLE
+                            editTextEmail.focusable(false)
+                            textEmail.text = "사용 가능한 이메일입니다."
+                            textEmail.setTextColor(
+                                ContextCompat.getColor(
+                                    applicationContext!!,
+                                    R.color.main_green
+                                )
+                            )
+                            emailFlag = true
+                        }
 
                         //이메일 형태가 정상일 경우
 //                    editTextEmail.setTextColor(R.color.black.toInt())
                         return true
                     } else {
-                        editTextEmail.setBackgroundResource(R.drawable.btn_custom_red)
+                        editTextEmail.setBackgroundResource(R.drawable.btn_emailbox_error)
                         textEmail.text = "올바른 이메일 형식을 입력하세요"
                         textEmail.setTextColor(
                             ContextCompat.getColor(
@@ -61,11 +102,13 @@ import java.util.regex.Pattern
                                 R.color.red
                             )
                         )
+                        emailDuplicationAfter.visibility = View.INVISIBLE
                         //또는 questionEmail.setTextColor(R.color.red.toInt())
                         return false
                     }
                 }
             }
+
 
             private fun initEmailCheck() {
 //        val email = "aaa@naver.com"
@@ -111,6 +154,7 @@ import java.util.regex.Pattern
                             // text가 바뀔 때마다 호출된다.
                             // 우린 이 함수를 사용한다.
                             checkEmail()
+
                         }
                     })
 
@@ -120,10 +164,13 @@ import java.util.regex.Pattern
 
             private fun initNext() {
                 binding.apply {
-                    btnContinue.setOnClickListener {
-                        val intent =
-                            Intent(this@Signin2Activity, SigninDescriptionActivity::class.java)
-                        startActivity(intent)
+                    if (passwordFlag && passwordAgainFlag) {
+                        btnContinueAfter.visibility = View.VISIBLE
+                        btnContinueAfter.setOnClickListener {
+                            val intent =
+                                Intent(this@Signin2Activity, SigninDescriptionActivity::class.java)
+                            startActivity(intent)
+                        }
                     }
                 }
             }
@@ -140,20 +187,19 @@ import java.util.regex.Pattern
 
             // 비밀번호 조건 체크 (특수문자 반드시 포함, 7자리 이상)
             fun passwordRegex(password: String): Boolean {
-                return password.matches("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&])[A-Za-z[0-9]$@$!%*#?&]{7,}$".toRegex())
+                return password.matches("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&])[A-Za-z[0-9]$@$!%*#?&]{8,}$".toRegex())
             }
 
 
             var passwordFlag = false
             var passwordAgainFlag = false
 
-            fun flagCheck() {
+/*            fun flagCheck() {
                 binding.apply {
-                    btnContinue.isEnabled = passwordFlag && passwordAgainFlag
+                    btnContinue.isEnabled = passwordFlag && passwordAgainFlag && emailFlag
                 }
-                //binding.btnContinue.isEnabled =passwordFlag
-                //binding.btnContinue.isEnabled = emailFlag && passwordFlag && passwordCheckFlag
-            }
+
+            }*/
 
             private val passwordListener = object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -168,7 +214,7 @@ import java.util.regex.Pattern
                             s.isEmpty() || !passwordRegex(s.toString()) -> {
                                 binding.apply {
                                     editTextPassword.setBackgroundResource(R.drawable.btn_custom_red)
-                                    textPassword.text = "영문, 숫자, 특수문자 포함 7자 이상을 입력해주세요"
+                                    textPassword.text = "영문, 숫자, 특수문자 포함 8자 이상을 입력해주세요"
                                     textPassword.setTextColor(
                                         ContextCompat.getColor(
                                             applicationContext!!,
@@ -203,6 +249,21 @@ import java.util.regex.Pattern
                 }
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+                    binding.apply {
+
+                        if(editTextPassword.text.toString() == editTextPasswordAgain.text.toString()){
+                            editTextPasswordAgain.setBackgroundResource(R.drawable.btn_custom)
+                            textPasswordAgain.text = null
+                            passwordAgainFlag = true
+                        }
+                        else{
+                            editTextPasswordAgain.setBackgroundResource(R.drawable.btn_custom_red)
+                            textPasswordAgain.text = "비밀번호와 일치하지 않습니다. 다시 확인해주세요"
+                            textPasswordAgain.setTextColor(ContextCompat.getColor(applicationContext!!, R.color.red))
+                            passwordAgainFlag = false
+                        }
+                    }
                 }
 
                 override fun afterTextChanged(s: Editable?) {
@@ -212,11 +273,12 @@ import java.util.regex.Pattern
                                 binding.apply {
                                     editTextPasswordAgain.setBackgroundResource(R.drawable.btn_custom_red)
                                     textPasswordAgain.text = "비밀번호와 일치하지 않습니다. 다시 확인해주세요."
+                                    textPasswordAgain.setTextColor(ContextCompat.getColor(applicationContext!!, R.color.red))
                                 }
                                 passwordAgainFlag = false
                             }
                             s.isNotEmpty() -> {
-                                when {
+/*                                when {
                                     binding.editTextPassword.toString() != binding.editTextPasswordAgain.toString() -> {
                                         binding.apply {
                                             editTextPasswordAgain.setBackgroundResource(R.drawable.btn_custom_red)
@@ -233,14 +295,32 @@ import java.util.regex.Pattern
                                         }
                                         passwordAgainFlag = true
                                     }
+                                }*/
+                                binding.apply {
+
+                                    if(editTextPassword.text.toString() == editTextPasswordAgain.text.toString()){
+                                        editTextPasswordAgain.setBackgroundResource(R.drawable.btn_custom)
+                                        textPasswordAgain.text = null
+                                        passwordAgainFlag = true
+                                    }
+                                    else{
+                                        editTextPasswordAgain.setBackgroundResource(R.drawable.btn_custom_red)
+                                        textPasswordAgain.text = "비밀번호와 일치하지 않습니다. 다시 확인해주세요"
+                                        textPasswordAgain.setTextColor(ContextCompat.getColor(applicationContext!!, R.color.red))
+                                        passwordAgainFlag = false
+                                    }
                                 }
                             }
                         }
-                        flagCheck()
                     }
                 }
             }
         }
+
+
+private fun EditText.focusable(b: Boolean) {
+
+}
 
 
 //    void checkPwd(String password) {
