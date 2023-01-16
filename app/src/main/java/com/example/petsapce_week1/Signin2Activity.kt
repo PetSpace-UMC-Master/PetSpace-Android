@@ -153,10 +153,18 @@ class Signin2Activity : AppCompatActivity() {
                                 )
                             )
                             editTextPassword.setBackgroundResource(R.drawable.btn_custom)
+
                         }
+                    }*/
+                    btnContinueAfter.visibility = View.VISIBLE
+                    btnContinueAfter.setOnClickListener {
+                        val intent =
+                            Intent(this@Signin2Activity, SigninDescriptionActivity::class.java)
+                        startActivity(intent)
                     }
                 }
             }
+
         }
     }
 
