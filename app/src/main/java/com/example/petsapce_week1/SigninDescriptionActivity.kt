@@ -47,7 +47,7 @@ class SigninDescriptionActivity : AppCompatActivity() {
     private fun initPrevious() {
         binding.apply {
             btnBack.setOnClickListener {
-                val intent = Intent(this@SigninDescriptionActivity, LoginActivity::class.java)
+                val intent = Intent(this@SigninDescriptionActivity, Signin2Activity::class.java)
                 startActivity(intent)
             }
         }
