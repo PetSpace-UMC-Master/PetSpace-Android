@@ -25,7 +25,7 @@ interface LoginService {
     ): Call<LoginBackendResponse>
 
     //General Login
-    @POST("/front")
+    @POST("/app/login")
     fun userLogin(
         @Body jsonParams : UserModel_General,
     ): Call<LoginBackendResponse>
