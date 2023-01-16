@@ -16,22 +16,18 @@ Call: 서버로부터 데이터를 PolicyResponse 타입으로 받아온다.
  */
 interface LoginService {
 
-/*
-    @GET("/test")
-    fun getAccessToken(
-        @Header("access_token") token : String
-    ): Call<Property>
-
- */
-//@Body parameters: HashMap<String, Any>
-    //@Body userModel: UserModel
-    //@Field("username") email:String,
-
+    //Kakao Login
     @POST("/oauth/kakao/")
     fun postAccessToken(
         //@Header("access_token") token: String
-        @Body jsonParams : UserModel
+        @Body jsonParams : UserModel_Kakao
 
+    ): Call<LoginBackendResponse>
+
+    //General Login
+    @POST("/front")
+    fun userLogin(
+        @Body jsonParams : UserModel_General,
     ): Call<LoginBackendResponse>
 
     /*

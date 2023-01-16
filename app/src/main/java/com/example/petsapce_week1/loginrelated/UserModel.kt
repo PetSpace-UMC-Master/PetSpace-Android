@@ -2,10 +2,15 @@ package com.example.petsapce_week1.loginrelated
 
 //JSON data를 받아올 데이터 클래스
 
-data class UserModel(
-    //@SerializedName("status") val status: Int
-    // => 코드상 변수명과 api에 정의된 이름을 다르게 할 때 사용
+data class UserModel_Kakao(
+    //카카오 로그인에서 백엔드로 보내는 데이터
     val accessToken : String ?= null
+)
+
+data class UserModel_General(
+    //일반 로그인에서 백엔드로 보내는 데이터
+    var id : String ?= null,
+    var pw : String ?= null
 )
 
 data class LoginBackendResponse(
