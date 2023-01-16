@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.petsapce_week1.GifActivity
 import com.example.petsapce_week1.R
+import com.example.petsapce_week1.ReviewReadMoreActivity
 import com.example.petsapce_week1.Signin2Activity
 import com.example.petsapce_week1.databinding.ActivityLoginBinding
 import com.kakao.sdk.auth.model.OAuthToken
@@ -37,8 +38,8 @@ class LoginActivity : AppCompatActivity() {
 
 //        initData()
         //id password 임의로 설정
-        val id: String = "a"
-        val password: String = "a"
+        val id: String = "wjddus@naver.com"
+        val password: String = "1234567!"
 
         //id, password check
         initFlag(id, password)
@@ -48,10 +49,11 @@ class LoginActivity : AppCompatActivity() {
 
         // == kakao login ==
         retrofit = Retrofit.Builder()
-            .baseUrl("https://8e27-211-106-114-186.jp.ngrok.io/")
+            .baseUrl("https://99f0-211-106-114-186.jp.ngrok.io/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
+        /* 지우지 말것!!!!
         //로그인 정보 확인
         UserApiClient.instance.accessTokenInfo{ tokenInfo, error ->
             if(error != null){
@@ -61,6 +63,7 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "토큰 정보 보기 성공", Toast.LENGTH_SHORT).show()
             }
         }
+         */
 
         /* Click_listener */
         binding.btnKakao.setOnClickListener {
@@ -184,13 +187,42 @@ class LoginActivity : AppCompatActivity() {
         binding.apply {
 
             btnEmail.setOnClickListener {
+
                 //edittext에서 값을 받아옴
                 val inputEmail = editTextEmail.text.toString()
                 val inputPassword = editTextPassword.text.toString()
                 //저장된 id와 비번 맞는지 체크
                 //맞으면 gif화면으로 이동(홈화면 넘어가야하는데 없어서 gif로 넘어감)
+                // == 백엔드 통신 부분 ==
+                val data = UserModel_General(inputEmail, inputPassword)
+
                 if (severId == inputEmail && severPswd == inputPassword) {
-                    val intent = Intent(this@LoginActivity, GifActivity::class.java)
+                    api.userLogin(data).enqueue(object : Callback<LoginBackendResponse> {
+                        override fun onResponse(
+                            call: Call<LoginBackendResponse>,
+                            response: Response<LoginBackendResponse>
+                        ) {
+                            Log.d("로그인 통신 성공",response.toString())
+                            Log.d("로그인 HTTP 코드", response.code().toString())
+                            Log.d("로그인 통신 성공", response.body().toString())
+
+                            when (response.code()) {
+                                200 -> {
+                                    // == 기기 db (shared preference) 로 저장
+                                    saveData(inputEmail, inputPassword)
+                                }
+                                400 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 아이디나 비번이 올바르지 않습니다", Toast.LENGTH_LONG).show()
+                                500 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 서버 오류", Toast.LENGTH_LONG).show()
+                            }
+                        }
+
+                        override fun onFailure(call: Call<LoginBackendResponse>, t: Throwable) {
+                            // 실패
+                            Log.d("로그인 통신 실패",t.message.toString())
+                            Log.d("로그인 통신 실패","fail")
+                        }
+                    })
+                    val intent = Intent(this@LoginActivity, ReviewReadMoreActivity::class.java)
                     startActivity(intent)
 //                    flag = true
 
@@ -205,35 +237,33 @@ class LoginActivity : AppCompatActivity() {
                     editTextEmailRed.visibility = View.VISIBLE
                     editTextPasswordRed2.visibility = View.VISIBLE*/
 
-                }
+                    api.userLogin(data).enqueue(object : Callback<LoginBackendResponse> {
+                        override fun onResponse(
+                            call: Call<LoginBackendResponse>,
+                            response: Response<LoginBackendResponse>
+                        ) {
+                            Log.d("로그인 통신 성공",response.toString())
+                            Log.d("로그인 HTTP 코드", response.code().toString())
+                            Log.d("로그인 통신 성공", response.body().toString())
 
-                // == 백엔드 통신 부분 ==
-                val data = UserModel_General(inputEmail, inputPassword)
-
-                api.userLogin(data).enqueue(object : Callback<LoginBackendResponse> {
-                    override fun onResponse(
-                        call: Call<LoginBackendResponse>,
-                        response: Response<LoginBackendResponse>
-                    ) {
-                        Log.d("로그인 통신 성공",response.toString())
-                        Log.d("로그인 통신 성공", response.body().toString())
-
-                        when (response.code()) {
-                            200 -> {
-                                // == 기기 db (shared preference) 로 저장
-                                saveData(inputEmail, inputPassword)
+                            when (response.code()) {
+                                200 -> {
+                                    // == 기기 db (shared preference) 로 저장
+                                    saveData(inputEmail, inputPassword)
+                                }
+                                400 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 아이디나 비번이 올바르지 않습니다", Toast.LENGTH_LONG).show()
+                                500 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 서버 오류", Toast.LENGTH_LONG).show()
                             }
-                            405 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 아이디나 비번이 올바르지 않습니다", Toast.LENGTH_LONG).show()
-                            500 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 서버 오류", Toast.LENGTH_LONG).show()
                         }
-                    }
 
-                    override fun onFailure(call: Call<LoginBackendResponse>, t: Throwable) {
-                        // 실패
-                        Log.d("로그인 통신 실패",t.message.toString())
-                        Log.d("로그인 통신 실패","fail")
-                    }
-                })
+                        override fun onFailure(call: Call<LoginBackendResponse>, t: Throwable) {
+                            // 실패
+                            Log.d("로그인 통신 실패",t.message.toString())
+                            Log.d("로그인 통신 실패","fail")
+                        }
+                    })
+
+                }
             }
         }
     }
