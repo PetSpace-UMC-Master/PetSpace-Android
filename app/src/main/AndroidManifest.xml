@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:windowSoftInputMode="stateVisible"
         android:name=".loginrelated.GlobalApplictation"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -19,6 +20,7 @@
 
         <activity android:name=".loginrelated.LoginActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,9 +33,6 @@
             android:exported="true">
 
 
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
         </activity>
 
         <activity
