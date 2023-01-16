@@ -80,20 +80,6 @@
             />
 
             <Button
-                android:id="@+id/email_duplication_before"
-                android:background="@drawable/btn_customfull_emailcheck"
-                android:backgroundTint="#D9D9D9"
-                android:fontFamily="@font/pretendard_semibold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="중복 확인"
-                android:textSize="14sp"
-                android:textColor="@color/white"
-                android:visibility="visible"
-                tools:ignore="DuplicateClickableBoundsCheck"
-            />
-
-            <Button
                 android:id="@+id/email_duplication_after"
                 android:background="@drawable/btn_customfull_emailcheck"
                 android:backgroundTint="#40A196"
@@ -103,8 +89,20 @@
                 android:text="중복 확인"
                 android:textSize="14sp"
                 android:textColor="@color/white"
-                android:visibility="invisible"
-                />
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/email_duplication_before"
+                android:background="@drawable/btn_customfull_emailcheck"
+                android:backgroundTint="#D9D9D9"
+                android:fontFamily="@font/pretendard_semibold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="중복 확인"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                tools:ignore="DuplicateClickableBoundsCheck"
+            />
 
     </LinearLayout>
         <TextView

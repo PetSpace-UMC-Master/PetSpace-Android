@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.petsapce_week1.GifActivity
 import com.example.petsapce_week1.R
+import com.example.petsapce_week1.ReviewReadMoreActivity
 import com.example.petsapce_week1.Signin2Activity
 import com.example.petsapce_week1.databinding.ActivityLoginBinding
 import com.kakao.sdk.auth.model.OAuthToken
@@ -221,7 +222,7 @@ class LoginActivity : AppCompatActivity() {
                             Log.d("로그인 통신 실패","fail")
                         }
                     })
-                    val intent = Intent(this@LoginActivity, GifActivity::class.java)
+                    val intent = Intent(this@LoginActivity, ReviewReadMoreActivity::class.java)
                     startActivity(intent)
 //                    flag = true
 
