@@ -192,6 +192,9 @@
             android:layout_height="match_parent">
 
 
+<!--            버튼 selector로 구현 -->
+<!--      android:background="@drawable/click_button"
+-->
             <androidx.appcompat.widget.AppCompatButton
 
                 android:enabled="false"
