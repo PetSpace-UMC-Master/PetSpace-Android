@@ -201,24 +201,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:backgroundTint="#D9D9D9"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="50dp"
-                android:id="@+id/btnContinue_before"
-                android:layout_width="match_parent"
-                android:layout_height="48sp"
-                android:background="@drawable/btn_continue_customfull"
-                android:fontFamily="@font/roboto_medium"
-                android:paddingLeft="20dp"
-                android:paddingRight="43dp"
-                android:text="계속하기"
-                android:textAllCaps="false"
-                android:textColor="#EEF5F5"
-                android:textSize="16dp"
-                android:visibility="visible"
-                tools:ignore="DuplicateClickableBoundsCheck"
-                tools:layout_editor_absoluteX="20dp" />
 
             <androidx.appcompat.widget.AppCompatButton
 
@@ -237,7 +219,6 @@
                 android:textSize="16dp"
                 tools:layout_editor_absoluteX="20dp"
                 android:backgroundTint="#40A196"
-                android:visibility="invisible"
 
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
