@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.petsapce_week1.databinding.ActivitySigninDescriptionBinding
+import com.example.petsapce_week1.loginrelated.LoginActivity
 
 class SigninDescriptionActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySigninDescriptionBinding
@@ -28,7 +29,7 @@ class SigninDescriptionActivity : AppCompatActivity() {
     private fun initPrevious() {
         binding.apply {
             btnBack.setOnClickListener {
-                val intent = Intent(this@SigninDescriptionActivity,LoginActivity::class.java)
+                val intent = Intent(this@SigninDescriptionActivity, LoginActivity::class.java)
                 startActivity(intent)
             }
         }

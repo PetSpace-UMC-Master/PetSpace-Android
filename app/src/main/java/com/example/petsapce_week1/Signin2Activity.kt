@@ -4,13 +4,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
-import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.Patterns
 import android.view.View
 import android.widget.EditText
 import androidx.core.content.ContextCompat
 import com.example.petsapce_week1.databinding.ActivitySignin2Binding
+import com.example.petsapce_week1.loginrelated.LoginActivity
 import java.util.regex.Pattern
 
 
