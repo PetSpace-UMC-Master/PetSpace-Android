@@ -164,13 +164,19 @@ import java.util.regex.Pattern
 
             private fun initNext() {
                 binding.apply {
-                    if (passwordFlag && passwordAgainFlag) {
+/*                    if (passwordFlag && passwordAgainFlag) {
                         btnContinueAfter.visibility = View.VISIBLE
                         btnContinueAfter.setOnClickListener {
                             val intent =
                                 Intent(this@Signin2Activity, SigninDescriptionActivity::class.java)
                             startActivity(intent)
                         }
+                    }*/
+                    btnContinueAfter.visibility = View.VISIBLE
+                    btnContinueAfter.setOnClickListener {
+                        val intent =
+                            Intent(this@Signin2Activity, SigninDescriptionActivity::class.java)
+                        startActivity(intent)
                     }
                 }
             }
@@ -185,7 +191,7 @@ import java.util.regex.Pattern
             }
 
 
-            // 비밀번호 조건 체크 (특수문자 반드시 포함, 7자리 이상)
+            // 비밀번호 조건 체크 (특수문자 반드시 포함, 8자리 이상)
             fun passwordRegex(password: String): Boolean {
                 return password.matches("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&])[A-Za-z[0-9]$@$!%*#?&]{8,}$".toRegex())
             }
