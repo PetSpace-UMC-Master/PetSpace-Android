@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/btn_review_close"
+            android:id="@+id/btn_host_close"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginStart="20dp"
@@ -23,16 +23,12 @@
             android:background="#00000000"
             app:srcCompat="@drawable/closesvg" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="15dp"
-            android:paddingLeft="35dp"
-            android:paddingBottom="15dp">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:paddingLeft="35dp"
+                android:paddingBottom="15dp"
                 android:fontFamily="@font/bmjua"
                 android:gravity="start"
                 android:lineHeight="16dp"
@@ -40,8 +36,6 @@
                 android:textColor="#0C201E"
                 android:textSize="16sp" />
 
-
-        </LinearLayout>
     </LinearLayout>
 
     <ScrollView
