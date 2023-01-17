@@ -14,9 +14,9 @@ import java.util.regex.Pattern
 
 class Signin2Activity : AppCompatActivity() {
     lateinit var binding: ActivitySignin2Binding
+    lateinit var passwordInput:String
 
     //비밀번호 입력 담는 지역 변수(올바른 형식으로 초기화 안할시 처음 화면에서 빨간불 들어옴)
-    var passwordInput = ""
 
 
     //flag(함수 반환 값으로 대체 본문에서 사용하지 않지만 혹시몰라 선언)
@@ -104,7 +104,7 @@ class Signin2Activity : AppCompatActivity() {
                 checkEmail()
 
                 //다음화면 넘어가기(사용자가 비밀번호까지 입력하고 변심하여 이메일을 바꿀수도 있기에 체크해야함)
-                if (checkEmail() && checkPasswordEqual() && checkPassword()) {
+                if (flagEmail ==1 && flagEqual ==1 && flagPassword==1) {
                     binding.btnContinueAfter.isEnabled = true
 
                     initNext()
@@ -146,7 +146,7 @@ class Signin2Activity : AppCompatActivity() {
                 passwordInput = binding.editTextPassword.text.toString()
 
                 //다음화면 넘어가기(사용자가 비밀번호까지 입력하고 변심 바꿀수도 있기에 체크해야함)
-                if (checkEmail() && checkPasswordEqual() && checkPassword()) {
+                if (flagEmail ==1 && flagEqual ==1 && flagPassword==1) {
                     binding.btnContinueAfter.isEnabled = true
 
                     initNext()
@@ -191,13 +191,13 @@ class Signin2Activity : AppCompatActivity() {
                      Log.d("flag3", flagEqual.toString())
  */
                     //다음화면 넘어가기
-                    if (checkEmail() && checkPasswordEqual() && checkPassword()) {
-                        btnContinueAfter.isEnabled = true
+                    if (flagEmail ==1 && flagEqual ==1 && flagPassword==1) {
+                        binding.btnContinueAfter.isEnabled = true
 
                         initNext()
 
                     } else {
-                        btnContinueAfter.isEnabled = false
+                        binding.btnContinueAfter.isEnabled = false
 
                     }
                 }
