@@ -8,6 +8,7 @@ import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.petsapce_week1.databinding.ActivitySignin2Binding
+import com.example.petsapce_week1.loginrelated.LoginActivity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.regex.Pattern
@@ -46,6 +47,7 @@ class Signin2Activity : AppCompatActivity() {
 
         }
 
+        initPrevious()
     }
 
     //중복 확인(코드 수정 필요..textwather에 넣어야 할듯 이것도...)
@@ -301,6 +303,15 @@ class Signin2Activity : AppCompatActivity() {
         }
     }
 
+
+    private fun initPrevious() {
+        binding.apply {
+            btnBack.setOnClickListener {
+                val intent = Intent(this@Signin2Activity,LoginActivity::class.java)
+                startActivity(intent)
+            }
+        }
+    }
     private fun initNext() {
         binding.apply {
 
