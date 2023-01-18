@@ -6,24 +6,22 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ReviewAdapter(val itemList: ArrayList<ReviewItem>) : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>(){
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewViewHolder {
+class HostAdapter(val itemList: ArrayList<HostItem>) : RecyclerView.Adapter<HostAdapter.HostViewHolder>(){
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HostViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.review_item_list,parent,false)
-        return ReviewViewHolder(view)
+        return HostViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ReviewViewHolder, position: Int) {
-        holder.tv_name.text = itemList[position].nickName
-        holder.tv_content.text = itemList[position].content
-        holder.tv_time.text = itemList[position].time
+    override fun onBindViewHolder(holder: HostViewHolder, position: Int) {
+        holder.tv_loc.text = itemList[position].loc
+        holder.tv_date.text = itemList[position].date
+        holder.tv_price.text = itemList[position].price
     }
 
-    override fun getItemCount(): Int {
-        return itemList.count()
-    }
-    class ReviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tv_time = itemView.findViewById<TextView>(R.id.tv_review_date)
-        val tv_name = itemView.findViewById<TextView>(R.id.tv_user_nickname)
-        val tv_content = itemView.findViewById<TextView>(R.id.readmoreTV_review_content)
+
+    class HostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val tv_loc = itemView.findViewById<TextView>(R.id.tv_review_date)
+        val tv_date = itemView.findViewById<TextView>(R.id.tv_user_nickname)
+        val tv_price = itemView.findViewById<TextView>(R.id.readmoreTV_review_content)
     }
 }
