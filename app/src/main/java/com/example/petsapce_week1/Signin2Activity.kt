@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -23,6 +24,7 @@ class Signin2Activity : AppCompatActivity() {
     var flagEmail = 0
     var flagPassword = 0
     var flagEqual = 0
+    var flagButton = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,21 +39,23 @@ class Signin2Activity : AppCompatActivity() {
             //1-1 이메일 중복 체크
             //임의의 이메일 선언
             val email = "aaa@naver.com"
-            initEmailCheck(email)
+            initButtonCheck(email)
 
             //2번 패스워드 체크
             initPasswordCheck()
             //3번 패스워드 동일 체크
             initPasswordEqual()
+            Log.d("flbutton",flagButton.toString())
 
         }
 
     }
 
     //중복 확인(코드 수정 필요..textwather에 넣어야 할듯 이것도...)
-    private fun initEmailCheck(email: String) {
+    private fun initButtonCheck(email: String) :Int{
         binding.apply {
             emailDuplicationAfter.setOnClickListener {
+                flagButton = 1
                 if (email == editTextEmail.text.toString()) {
                     emailDuplicationAfter.isEnabled = false
                     textEmail.setTextColor(
@@ -77,6 +81,7 @@ class Signin2Activity : AppCompatActivity() {
                 emailDuplicationAfter.isEnabled = true
             }
         }
+        return flagButton
     }
 
     //1. 이메일
@@ -104,7 +109,7 @@ class Signin2Activity : AppCompatActivity() {
                 checkEmail()
 
                 //다음화면 넘어가기(사용자가 비밀번호까지 입력하고 변심하여 이메일을 바꿀수도 있기에 체크해야함)
-                if (flagEmail ==1 && flagEqual ==1 && flagPassword==1) {
+                if (checkEmail() && checkPassword() && checkPasswordEqual()) {
                     binding.btnContinueAfter.isEnabled = true
 
                     initNext()
@@ -146,7 +151,7 @@ class Signin2Activity : AppCompatActivity() {
                 passwordInput = binding.editTextPassword.text.toString()
 
                 //다음화면 넘어가기(사용자가 비밀번호까지 입력하고 변심 바꿀수도 있기에 체크해야함)
-                if (flagEmail ==1 && flagEqual ==1 && flagPassword==1) {
+                if (checkEmail() && checkPassword() && checkPasswordEqual()) {
                     binding.btnContinueAfter.isEnabled = true
 
                     initNext()
@@ -191,7 +196,7 @@ class Signin2Activity : AppCompatActivity() {
                      Log.d("flag3", flagEqual.toString())
  */
                     //다음화면 넘어가기
-                    if (flagEmail ==1 && flagEqual ==1 && flagPassword==1) {
+                    if (checkEmail() && checkPassword() && checkPasswordEqual()) {
                         binding.btnContinueAfter.isEnabled = true
 
                         initNext()

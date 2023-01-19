@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <!-- 인터넷 사용 권한 설정-->
+    <!-- 인터넷 사용 권한 설정 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:windowSoftInputMode="stateVisible"
         android:name=".loginrelated.GlobalApplictation"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,72 +15,77 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PetSapce_week1"
+        android:windowSoftInputMode="stateVisible"
         tools:targetApi="31">
-
-        <activity android:name=".loginrelated.LoginActivity"
+        <activity
+            android:name=".accomodation.scroll.AccHostActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".accomodation.AccMainActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".loginrelated.LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".Signin2Activity"
-            android:exported="true">
-
-
-        </activity>
-
+            android:exported="true" />
         <activity
             android:name=".SigninDescriptionActivity"
             android:exported="true">
-
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".GifActivity"
-            android:exported="true">
-
-        </activity>
+        <activity
+            android:name=".GifActivity"
+            android:exported="true" />
         <activity
             android:name=".TermsActivity"
             android:exported="true">
-
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".TermsContentActivity1"
-            android:parentActivityName=".TermsActivity">
-        </activity>
-        <activity android:name=".TermsContentActivity2"
-            android:parentActivityName=".TermsActivity">
-        </activity>
-        <activity android:name=".ReviewReadMoreActivity"/>
-
-        <!--카카오 로그인 화면 뜨는거 -->
+        <activity
+            android:name=".TermsContentActivity1"
+            android:parentActivityName=".TermsActivity" />
+        <activity
+            android:name=".TermsContentActivity2"
+            android:parentActivityName=".TermsActivity" />
+        <activity android:name=".ReviewReadMoreActivity" /> <!-- 카카오 로그인 화면 뜨는거 -->
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
-            android:launchMode="singleTask"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <!-- Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" -->
-                <data android:host="oauth"
+                <data
+                    android:host="oauth"
                     android:scheme="@string/kakao_oauth_host"
                     tools:ignore="AppLinkUrlError" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
