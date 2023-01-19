@@ -1,10 +1,7 @@
 package com.example.petsapce_week1.accomodation.scroll
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.petsapce_week1.GifActivity
-import com.example.petsapce_week1.R
+import androidx.appcompat.app.AppCompatActivity
 import com.example.petsapce_week1.databinding.ActivityAccHostBinding
 
 class AccHostActivity : AppCompatActivity() {
@@ -15,9 +12,6 @@ class AccHostActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-       /* binding.button.setOnClickListener {
-            val intent = Intent(this,GifActivity::class.java)
-            startActivity(intent)
-        }*/
+
     }
 }

@@ -2,4 +2,6 @@
     <string name="app_name">PetSapce_week4</string>
     <string name="createId"><u>계정 새로 만들기</u></string>
     <string name="more"><u>더보기</u></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
