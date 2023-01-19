@@ -3,6 +3,7 @@
     <font
 
         android:font="@font/bmjua"
+        android:fontWeight="500"
         />
 
     <font

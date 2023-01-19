@@ -1,36 +1,25 @@
 package com.example.petsapce_week1.accomodation
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.bumptech.glide.Glide
-import com.example.petsapce_week1.GifActivity
-import com.example.petsapce_week1.R
+import androidx.appcompat.app.AppCompatActivity
 import com.example.petsapce_week1.databinding.ActivityAccHostBinding
 import com.example.petsapce_week1.databinding.ActivityAccMainBinding
-import com.example.petsapce_week1.databinding.ActivityGifBinding
 
 class AccMainActivity : AppCompatActivity() {
     lateinit var binding:ActivityAccMainBinding
-
-
-
-
-    lateinit var binding2:ActivityGifBinding
-
-    lateinit var accHostBinding: ActivityAccHostBinding
+    lateinit var bindingHostBinding: ActivityAccHostBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAccMainBinding.inflate(layoutInflater)
 
 
-//        val includeView: View = binding.frame1.root
-//        binding2 = ActivityGifBinding.bind(includeView)
+        val includeView: View = binding.frameHost.root
+        bindingHostBinding = ActivityAccHostBinding.bind(includeView)
 
 
-//        accHostBinding = ActivityAccHostBinding.bind(binding.frame2.root)
+//        bindingHostBinding = ActivityAccHostBinding.bind(binding.frameHost.root)
 
 
         setContentView(binding.root)

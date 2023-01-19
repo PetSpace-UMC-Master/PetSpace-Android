@@ -18,6 +18,13 @@
         android:windowSoftInputMode="stateVisible"
         tools:targetApi="31">
         <activity
+            android:name=".accomodation.scroll.AccFacultyActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".accomodation.scroll.AccHostActivity"
             android:exported="false">
             <meta-data
