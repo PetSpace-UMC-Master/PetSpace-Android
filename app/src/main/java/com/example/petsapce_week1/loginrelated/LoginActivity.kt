@@ -7,9 +7,8 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.petsapce_week1.GifActivity
 import com.example.petsapce_week1.R
-import com.example.petsapce_week1.ReviewReadMoreActivity
+import com.example.petsapce_week1.reviewrelated.ReviewReadMoreActivity
 import com.example.petsapce_week1.Signin2Activity
 import com.example.petsapce_week1.databinding.ActivityLoginBinding
 import com.kakao.sdk.auth.model.OAuthToken
@@ -36,7 +35,6 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        initData()
         //id password 임의로 설정
         val id: String = "wjddus@naver.com"
         val password: String = "1234567!"
@@ -73,7 +71,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun kakaoLogin() {
-
         // 카카오계정으로 로그인 공통 callback 구성
         // 카카오톡으로 로그인 할 수 없어 카카오계정으로 로그인할 경우 사용됨
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
@@ -115,7 +112,7 @@ class LoginActivity : AppCompatActivity() {
                 //data = UserModel(accessToken = authToken)
                 //saveData(id, pw)
                 Log.d("access_token2", "$authToken")
-                api.postAccessToken(UserModel_Kakao(accessToken = authToken)).enqueue(object : retrofit2.Callback<LoginBackendResponse>{
+                api.postAccessToken(UserModelKakao(accessToken = authToken)).enqueue(object : Callback<LoginBackendResponse>{
                     override fun onResponse(call: Call<LoginBackendResponse>, response: Response<LoginBackendResponse>) {
                         Log.d("로그인 통신 성공", response.toString())
                         Log.d("로그인 통신 성공", response.body().toString())
@@ -194,7 +191,7 @@ class LoginActivity : AppCompatActivity() {
                 //저장된 id와 비번 맞는지 체크
                 //맞으면 gif화면으로 이동(홈화면 넘어가야하는데 없어서 gif로 넘어감)
                 // == 백엔드 통신 부분 ==
-                val data = UserModel_General(inputEmail, inputPassword)
+                val data = UserModelGeneral(inputEmail, inputPassword)
 
                 if (severId == inputEmail && severPswd == inputPassword) {
                     api.userLogin(data).enqueue(object : Callback<LoginBackendResponse> {

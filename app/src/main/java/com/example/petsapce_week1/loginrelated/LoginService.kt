@@ -1,10 +1,10 @@
 package com.example.petsapce_week1.loginrelated
 
-import com.google.gson.GsonBuilder
 import retrofit2.Call
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 //서버 주소로부터 데이터 GET, POST, ...
@@ -15,19 +15,17 @@ import retrofit2.http.POST
 Call: 서버로부터 데이터를 PolicyResponse 타입으로 받아온다.
  */
 interface LoginService {
-
     //Kakao Login
     @POST("/oauth/kakao/")
     fun postAccessToken(
-        //@Header("access_token") token: String
-        @Body jsonParams : UserModel_Kakao
-
+        //@Header("access_token") token: String,
+        @Body jsonParams : UserModelKakao
     ): Call<LoginBackendResponse>
 
     //General Login
     @POST("/app/login")
     fun userLogin(
-        @Body jsonParams : UserModel_General,
+        @Body jsonParams : UserModelGeneral
     ): Call<LoginBackendResponse>
 
     /*

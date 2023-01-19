@@ -68,7 +68,8 @@
         <activity android:name=".TermsContentActivity2"
             android:parentActivityName=".TermsActivity">
         </activity>
-        <activity android:name=".ReviewReadMoreActivity"/>
+        <activity android:name=".reviewrelated.ReviewReadMoreActivity"/>
+        <activity android:name=".reviewrelated.ReviewPhotosActivity"/>
 
         <!--카카오 로그인 화면 뜨는거 -->
         <activity
