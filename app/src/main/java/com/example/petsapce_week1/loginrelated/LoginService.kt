@@ -28,6 +28,17 @@ interface LoginService {
         @Body jsonParams : UserModelGeneral
     ): Call<LoginBackendResponse>
 
+    //2 -> idx
+    @POST("/app/users/2")
+    fun PostUserToken(
+        @Header("Authorization") accessToken : UserToken,
+    ):Call<LoginBackendResponse>
+
+    @GET("/app/users/2")
+    fun GetUserInfo(
+        @Header("Authorization") accessToken: String,
+    ):Call<UserDetailResponse>
+
     /*
     companion object {
         private val gson = GsonBuilder().setLenient().create()

@@ -16,6 +16,10 @@ data class UserModelGeneral(
     var password : String ?= null
 )
 
+data class UserToken(
+    var accessToken : String,
+)
+
 data class LoginBackendResponse(
     val isSuccess : Boolean ?= null,
     //200: 성공, 300,400: 에러'
@@ -26,9 +30,10 @@ data class LoginBackendResponse(
     data class Result(
         val email : String ?= null,
         val accessToken: String ?= null,
-        val refreshToken : String ?= null
+        val refreshToken: String ?= null
     )
 }
+
 
 // [GET] /app/users/{id}
 data class UserDetailResponse(
@@ -45,7 +50,6 @@ data class UserDetailResponse(
         val birth : String ?= null
     )
 }
-
 
 /* 이렇게도 쓸 수 있음
 data class DataclassEx(

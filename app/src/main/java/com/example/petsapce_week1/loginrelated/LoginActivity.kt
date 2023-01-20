@@ -26,7 +26,11 @@ class LoginActivity : AppCompatActivity() {
 
     private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance() // RetrofitClient의 instance 불러오기
     private var authToken : String ?= null
-    //    private var data: UserModel? = null
+
+    //백엔드에서 전달받는 토큰(access , refresh)
+    var token_value : String ?= null
+    val bearer = "Bearer "
+    var usertoken: String ?= null
     var api : LoginService = retrofit.create(LoginService::class.java)
     private lateinit var binding: ActivityLoginBinding
 
@@ -117,6 +121,16 @@ class LoginActivity : AppCompatActivity() {
                         Log.d("로그인 통신 성공", response.toString())
                         Log.d("로그인 통신 성공", response.body().toString())
 
+                        val body = response.body();
+                        if (body != null) {
+                            token_value = body.result?.accessToken
+                            Log.d("로그인--- 토큰 타입", "{${token_value.toString()}}")
+                        }
+                        //Log.d("로그인 통신 성공", "{${token_value}}")
+                        //Log.d("로그인 토큰 벨류", "$token_value")
+                        usertoken = bearer + token_value
+                        Log.d("로그인 내가 보낸거", usertoken!!)
+
                         when (response.code()) {
                             200 -> {
                                 Log.d("로그인 성공" , "ggg")
@@ -165,9 +179,6 @@ class LoginActivity : AppCompatActivity() {
             UserApiClient.instance.loginWithKakaoAccount(this@LoginActivity, callback = callback)
         }
     }
-
-
-
 
 /* private fun initData() {
      val id:String = "cw"
