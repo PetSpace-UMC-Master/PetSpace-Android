@@ -9,6 +9,7 @@
     android:layout_marginTop="15dp"
     android:layout_marginBottom="15dp">
 
+
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,10 +20,10 @@
             android:layout_height="wrap_content"
             android:src="@drawable/host_item1"/>
 
-<!--        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/host_item2"/>-->
+        <!--        <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/host_item2"/>-->
 
     </HorizontalScrollView>
 
@@ -75,15 +76,15 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/location"/>
 
-        <TextView
-            android:id="@+id/date"
-            app:layout_constraintTop_toBottomOf="@+id/location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1월 2일 ~ 1월 8일"
-            android:fontFamily="@font/pretendard_regular"
-            android:textColor="@color/black"
-            />
+    <TextView
+        android:id="@+id/date"
+        app:layout_constraintTop_toBottomOf="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1월 2일 ~ 1월 8일"
+        android:fontFamily="@font/pretendard_regular"
+        android:textColor="@color/black"
+        />
 
 
     <TextView
@@ -93,12 +94,6 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:text="₩50,000 / 박"/>
-
-
-</LinearLayout>
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

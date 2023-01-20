@@ -26,9 +26,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="15dp"
+            android:paddingTop="30dp"
             android:paddingLeft="35dp"
-            android:paddingBottom="15dp"
             android:fontFamily="@font/bmjua"
             android:gravity="start"
             android:lineHeight="16dp"
@@ -40,14 +39,14 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:paddingTop="30dp"
         app:layout_constraintTop_toBottomOf="@id/facilities_fixed_upper_bar">
 
         <LinearLayout
             android:id="@+id/facilities_scrollview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:paddingLeft="35dp"
             android:orientation="vertical">
 
             <TextView
@@ -58,11 +57,12 @@
                 android:text="침실 및 세탁 시설"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="35dp"
-                />
+                tools:listitem="@layout/facilities_item_list" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -90,7 +90,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="35dp"
-                />
+                tools:listitem="@layout/facilities_item_list" />
+            />
 
             <TextView
                 android:layout_width="wrap_content"

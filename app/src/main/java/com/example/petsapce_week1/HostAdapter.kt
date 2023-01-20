@@ -24,4 +24,8 @@ class HostAdapter(val itemList: ArrayList<HostItem>) : RecyclerView.Adapter<Host
         val tv_date = itemView.findViewById<TextView>(R.id.tv_user_nickname)
         val tv_price = itemView.findViewById<TextView>(R.id.readmoreTV_review_content)
     }
+
+    override fun getItemCount(): Int {
+        TODO("Not yet implemented")
+    }
 }
