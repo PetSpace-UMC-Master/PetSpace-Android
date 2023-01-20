@@ -40,8 +40,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //id password 임의로 설정
-        val id: String = "wjddus@naver.com"
-        val password: String = "1234567!"
+        val id = "wjddus@naver.com"
+        val password = "1234567!"
 
         //id, password check
         initFlag(id, password)

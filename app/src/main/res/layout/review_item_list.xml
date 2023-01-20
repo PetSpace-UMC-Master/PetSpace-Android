@@ -41,6 +41,55 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/review_linear2_rating_invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="7dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/review_linear1">
+
+        <ImageView
+            android:id="@+id/img_start1_half"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/star_half"
+            android:visibility="invisible"/>
+
+        <ImageView
+            android:id="@+id/img_start2_half"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/star_half"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/img_star3_half"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/star_half"
+            android:visibility="invisible"/>
+
+        <ImageView
+            android:id="@+id/img_star4_half"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/star_half"
+            android:visibility="invisible"/>
+
+        <ImageView
+            android:id="@+id/img_star5_half"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/material_symbols_star_rate_rounded"
+            android:visibility="invisible"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/review_linear2_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
