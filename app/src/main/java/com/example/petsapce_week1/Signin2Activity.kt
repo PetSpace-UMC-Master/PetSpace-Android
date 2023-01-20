@@ -76,6 +76,7 @@ class Signin2Activity : AppCompatActivity() {
 
                 }
 
+<<<<<<< HEAD
                 emailDuplicationAfter.isEnabled = true
             }
         }
@@ -174,6 +175,8 @@ class Signin2Activity : AppCompatActivity() {
 
                 }
 
+=======
+>>>>>>> 2260acad866db2f5652525d5c0e72a1053b89a3c
                 override fun beforeTextChanged(
                     s: CharSequence?,
                     start: Int,
@@ -184,6 +187,7 @@ class Signin2Activity : AppCompatActivity() {
                     // s에는 변경 전 문자열이 담겨 있다.
                 }
 
+<<<<<<< HEAD
                 // text가 바뀔 때마다 호출된다.
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     //비밀번화 일치 true false로 반환
@@ -202,6 +206,15 @@ class Signin2Activity : AppCompatActivity() {
                         binding.btnContinueAfter.isEnabled = false
 
                     }
+=======
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int
+                ) {
+                    initEmailCheck()
+>>>>>>> 2260acad866db2f5652525d5c0e72a1053b89a3c
                 }
             })
         }
@@ -212,6 +225,7 @@ class Signin2Activity : AppCompatActivity() {
     fun checkEmail(): Boolean {
         binding.apply {
 
+<<<<<<< HEAD
             var email = editTextEmail.text.toString().trim()
             val pattern: Pattern = Patterns.EMAIL_ADDRESS
             if (pattern.matcher(email).matches()) {
@@ -219,11 +233,24 @@ class Signin2Activity : AppCompatActivity() {
                 editTextEmail.setBackgroundResource(R.drawable.btn_emailbox)
                 textEmail.text = "사용 가능한 이메일 형식 입니다."
                 textEmail.setTextColor(
+=======
+        // == 이메일 중복 확인 버튼 ==
+        if (emailFlag) {
+            binding.emailDuplicationAfter.visibility = View.VISIBLE
+            Log.d("text", "중복 버튼 떠야지")
+            //중복 아님 확인되면 버튼 비활성화 + 입력된 이메일 고정
+            binding.emailDuplicationAfter.setOnClickListener {
+                //emailDuplicationAfter.visibility = View.INVISIBLE
+                //editTextEmail.focusable(false)
+                binding.textEmail.text = "사용 가능한 이메일입니다."
+                binding.textEmail.setTextColor(
+>>>>>>> 2260acad866db2f5652525d5c0e72a1053b89a3c
                     ContextCompat.getColor(
                         applicationContext!!,
                         R.color.main_green
                     )
                 )
+<<<<<<< HEAD
 
                 flagEmail = 1
                 return true
@@ -234,6 +261,19 @@ class Signin2Activity : AppCompatActivity() {
                 //또는 questionEmail.setTextColor(R.color.red.toInt())
                 flagEmail = 0
                 return false
+=======
+            }
+        }
+        binding.apply {
+            if (passwordFlag && passwordAgainFlag && emailFlag) {
+                Log.d("text", "깃발 다 올려짐 버튼 떠야지")
+                btnContinueAfter.visibility = View.VISIBLE
+                btnContinueAfter.setOnClickListener {
+                    val intent =
+                        Intent(this@Signin2Activity, SigninDescriptionActivity::class.java)
+                    startActivity(intent)
+                }
+>>>>>>> 2260acad866db2f5652525d5c0e72a1053b89a3c
             }
         }
     }
@@ -257,9 +297,16 @@ class Signin2Activity : AppCompatActivity() {
                         R.color.main_green
                     )
                 )
+<<<<<<< HEAD
 
                 flagPassword = 1
                 return true
+=======
+                emailFlag = true
+                Log.d("text", "이메일 같음, ${emailFlag}")
+                //이메일 형태가 정상일 경우
+//                    editTextEmail.setTextColor(R.color.black.toInt())
+>>>>>>> 2260acad866db2f5652525d5c0e72a1053b89a3c
             } else {
                 editTextPassword.setBackgroundResource(R.drawable.btn_custom_red)
                 textPassword.text = "특수문자 포함 8자 이상 입력해야 합니다."
@@ -298,12 +345,63 @@ class Signin2Activity : AppCompatActivity() {
                         R.color.red
                     )
                 )
+<<<<<<< HEAD
                 return false
+=======
+                //emailDuplicationAfter.visibility = View.INVISIBLE
+                //또는 questionEmail.setTextColor(R.color.red.toInt())
+            }
+        }
+    }
+
+    fun passwordRegex(password: String): Boolean {
+        return password.matches("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&])[A-Za-z[0-9]$@$!%*#?&]{8,}$".toRegex())
+    }
+
+    private val passwordListener = object : TextWatcher {
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            if (s != null) {
+                when {
+                    s.isEmpty() || !passwordRegex(s.toString()) -> {
+                        passwordFlag = false
+                        binding.apply {
+                            editTextPassword.setBackgroundResource(R.drawable.btn_custom_red)
+                            textPassword.text = "영문, 숫자, 특수문자 포함 8자 이상을 입력해주세요"
+                            textPassword.setTextColor(
+                                ContextCompat.getColor(
+                                    applicationContext!!,
+                                    R.color.red
+                                )
+                            )
+                        }
+                    }
+
+                    else -> {
+                        binding.apply {
+                            textPassword.text = "사용 가능한 비밀번호입니다"
+                            textPassword.setTextColor(
+                                ContextCompat.getColor(
+                                    applicationContext!!,
+                                    R.color.main_green
+                                )
+                            )
+                            editTextPassword.setBackgroundResource(R.drawable.btn_custom)
+                        }
+                    }
+                }
+>>>>>>> 2260acad866db2f5652525d5c0e72a1053b89a3c
             }
         }
     }
 
 
+<<<<<<< HEAD
     private fun initPrevious() {
         binding.apply {
             btnBack.setOnClickListener {
@@ -320,6 +418,78 @@ class Signin2Activity : AppCompatActivity() {
                 val intent = Intent(this@Signin2Activity, SigninDescriptionActivity::class.java)
                 startActivity(intent)
 
+=======
+
+    private val passwordAgainListener = object : TextWatcher {
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            binding.apply {
+
+                if(editTextPassword.text.toString() == editTextPasswordAgain.text.toString()){
+                    editTextPasswordAgain.setBackgroundResource(R.drawable.btn_custom)
+                    textPasswordAgain.text = null
+                    passwordAgainFlag = true
+                }
+                else{
+                    editTextPasswordAgain.setBackgroundResource(R.drawable.btn_custom_red)
+                    textPasswordAgain.text = "비밀번호와 일치하지 않습니다. 다시 확인해주세요"
+                    textPasswordAgain.setTextColor(ContextCompat.getColor(applicationContext!!, R.color.red))
+                    passwordAgainFlag = false
+                }
+            }
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            if (s != null) {
+                when {
+                    s.isEmpty() -> {
+                        passwordAgainFlag = false
+                        binding.apply {
+                            editTextPasswordAgain.setBackgroundResource(R.drawable.btn_custom_red)
+                            textPasswordAgain.text = "비밀번호와 일치하지 않습니다. 다시 확인해주세요."
+                            textPasswordAgain.setTextColor(ContextCompat.getColor(applicationContext!!, R.color.red))
+                        }
+                    }
+                    s.isNotEmpty() -> {
+/*                                when {
+                                    binding.editTextPassword.toString() != binding.editTextPasswordAgain.toString() -> {
+                                        binding.apply {
+                                            editTextPasswordAgain.setBackgroundResource(R.drawable.btn_custom_red)
+                                            textPasswordAgain.text = "비밀번호와 일치하지 않습니다. 다시 확인해주세요"
+                                            textPasswordAgain.setTextColor(ContextCompat.getColor(applicationContext!!, R.color.red))
+                                        }
+                                        passwordAgainFlag = false
+                                    }
+
+                                    else -> {
+                                        binding.apply {
+                                            editTextPasswordAgain.setBackgroundResource(R.drawable.btn_custom)
+                                            textPasswordAgain.text = null
+                                        }
+                                        passwordAgainFlag = true
+                                    }
+                                }*/
+                        binding.apply {
+
+                            if(editTextPassword.text.toString() == editTextPasswordAgain.text.toString()){
+                                editTextPasswordAgain.setBackgroundResource(R.drawable.btn_custom)
+                                textPasswordAgain.text = null
+                                passwordAgainFlag = true
+
+                            }
+                            else{
+                                passwordAgainFlag = false
+                                editTextPasswordAgain.setBackgroundResource(R.drawable.btn_custom_red)
+                                textPasswordAgain.text = "비밀번호와 일치하지 않습니다. 다시 확인해주세요"
+                                textPasswordAgain.setTextColor(ContextCompat.getColor(applicationContext!!, R.color.red))
+                            }
+                        }
+                    }
+                }
+>>>>>>> 2260acad866db2f5652525d5c0e72a1053b89a3c
             }
         }
     }
