@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    tools:context=".accomodation.scroll.AccHostActivity">
+
+
+    <LinearLayout
+        android:id="@+id/top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/text_host"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bmjua"
+            android:text="호스트:"
+            android:textColor="@color/textForBlack"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="김현아"
+            android:textColor="#2662BB"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:text="님"
+            android:textColor="@color/textForBlack"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/more"
+        android:textColor="@color/textForBlack"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/top"
+        tools:layout_editor_absoluteX="20dp">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="최대 인원 4명 · 최대 반려동물 10마리"
+            android:textColor="@color/textForBlack"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="정원 있음 · 침실 1개 · 화장실 2개"
+            android:textColor="@color/textForBlack"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="수영장 있음"
+            android:textColor="@color/textForBlack"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/text_about"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:lineSpacingExtra="1.3dp"
+            android:text="품고 기관과 있으며, 만물은 곳으로 운다. 사랑의 그들은 같이, 청춘에 서만 되려니와, 방지하는 있는가? 그들을 실현에 유소년에게서 봄바 람이다. 따뜻한 바로 영원히 우리 커다란 그들은 위하여 없으면, 이상 을 봄바람이다. 불어 구하기 같이, 사막이다. 가진 작고 바이며, 약동 하다. 방황하였으며, 위하여서, 천고에 되는 피부가 희망의 봄바람이 다. 있음으로써 동산에는 그들은 남는 그들의 더운지라 그들의 이것이 다. 곳으로 같으며, 자신과 노년에게서 없으면 긴지라 날카로우나 그들을 옷을 황금시대다. 하는 곧 그러므로 뼈 되려니와, 청춘의 행복 스럽고 얼마나 것이다. 주는 가진 놀이 싹이 따뜻한 소금이라 꽃이..."
+            android:textColor="@color/textForBlack"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
