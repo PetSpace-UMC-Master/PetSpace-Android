@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:windowSoftInputMode="stateVisible"
         android:name=".loginrelated.GlobalApplictation"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -53,15 +52,12 @@
         </activity>
         <activity
             android:name=".Signin2Activity"
-<<<<<<< HEAD
+
             android:exported="true">
 
 
         </activity>
 
-=======
-            android:exported="true" />
->>>>>>> 2260acad866db2f5652525d5c0e72a1053b89a3c
         <activity
             android:name=".SigninDescriptionActivity"
             android:exported="true">
@@ -75,11 +71,6 @@
         <activity
             android:name=".TermsActivity"
             android:exported="true">
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 2260acad866db2f5652525d5c0e72a1053b89a3c
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

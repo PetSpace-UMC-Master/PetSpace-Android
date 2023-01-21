@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.util.Patterns
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.petsapce_week1.databinding.ActivitySignin2Binding
@@ -76,7 +78,6 @@ class Signin2Activity : AppCompatActivity() {
 
                 }
 
-<<<<<<< HEAD
                 emailDuplicationAfter.isEnabled = true
             }
         }
@@ -175,8 +176,6 @@ class Signin2Activity : AppCompatActivity() {
 
                 }
 
-=======
->>>>>>> 2260acad866db2f5652525d5c0e72a1053b89a3c
                 override fun beforeTextChanged(
                     s: CharSequence?,
                     start: Int,
@@ -187,7 +186,7 @@ class Signin2Activity : AppCompatActivity() {
                     // s에는 변경 전 문자열이 담겨 있다.
                 }
 
-<<<<<<< HEAD
+
                 // text가 바뀔 때마다 호출된다.
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     //비밀번화 일치 true false로 반환
@@ -206,7 +205,7 @@ class Signin2Activity : AppCompatActivity() {
                         binding.btnContinueAfter.isEnabled = false
 
                     }
-=======
+
                 override fun onTextChanged(
                     s: CharSequence?,
                     start: Int,
@@ -214,7 +213,6 @@ class Signin2Activity : AppCompatActivity() {
                     count: Int
                 ) {
                     initEmailCheck()
->>>>>>> 2260acad866db2f5652525d5c0e72a1053b89a3c
                 }
             })
         }
@@ -225,7 +223,7 @@ class Signin2Activity : AppCompatActivity() {
     fun checkEmail(): Boolean {
         binding.apply {
 
-<<<<<<< HEAD
+
             var email = editTextEmail.text.toString().trim()
             val pattern: Pattern = Patterns.EMAIL_ADDRESS
             if (pattern.matcher(email).matches()) {
@@ -233,7 +231,7 @@ class Signin2Activity : AppCompatActivity() {
                 editTextEmail.setBackgroundResource(R.drawable.btn_emailbox)
                 textEmail.text = "사용 가능한 이메일 형식 입니다."
                 textEmail.setTextColor(
-=======
+
         // == 이메일 중복 확인 버튼 ==
         if (emailFlag) {
             binding.emailDuplicationAfter.visibility = View.VISIBLE
@@ -244,13 +242,12 @@ class Signin2Activity : AppCompatActivity() {
                 //editTextEmail.focusable(false)
                 binding.textEmail.text = "사용 가능한 이메일입니다."
                 binding.textEmail.setTextColor(
->>>>>>> 2260acad866db2f5652525d5c0e72a1053b89a3c
+
                     ContextCompat.getColor(
                         applicationContext!!,
                         R.color.main_green
                     )
-                )
-<<<<<<< HEAD
+
 
                 flagEmail = 1
                 return true
@@ -261,7 +258,7 @@ class Signin2Activity : AppCompatActivity() {
                 //또는 questionEmail.setTextColor(R.color.red.toInt())
                 flagEmail = 0
                 return false
-=======
+
             }
         }
         binding.apply {
@@ -273,7 +270,7 @@ class Signin2Activity : AppCompatActivity() {
                         Intent(this@Signin2Activity, SigninDescriptionActivity::class.java)
                     startActivity(intent)
                 }
->>>>>>> 2260acad866db2f5652525d5c0e72a1053b89a3c
+
             }
         }
     }
@@ -297,16 +294,16 @@ class Signin2Activity : AppCompatActivity() {
                         R.color.main_green
                     )
                 )
-<<<<<<< HEAD
+
 
                 flagPassword = 1
                 return true
-=======
+
                 emailFlag = true
                 Log.d("text", "이메일 같음, ${emailFlag}")
                 //이메일 형태가 정상일 경우
 //                    editTextEmail.setTextColor(R.color.black.toInt())
->>>>>>> 2260acad866db2f5652525d5c0e72a1053b89a3c
+
             } else {
                 editTextPassword.setBackgroundResource(R.drawable.btn_custom_red)
                 textPassword.text = "특수문자 포함 8자 이상 입력해야 합니다."
@@ -345,9 +342,9 @@ class Signin2Activity : AppCompatActivity() {
                         R.color.red
                     )
                 )
-<<<<<<< HEAD
+
                 return false
-=======
+
                 //emailDuplicationAfter.visibility = View.INVISIBLE
                 //또는 questionEmail.setTextColor(R.color.red.toInt())
             }
@@ -395,13 +392,13 @@ class Signin2Activity : AppCompatActivity() {
                         }
                     }
                 }
->>>>>>> 2260acad866db2f5652525d5c0e72a1053b89a3c
+
             }
         }
     }
 
 
-<<<<<<< HEAD
+
     private fun initPrevious() {
         binding.apply {
             btnBack.setOnClickListener {
@@ -418,7 +415,7 @@ class Signin2Activity : AppCompatActivity() {
                 val intent = Intent(this@Signin2Activity, SigninDescriptionActivity::class.java)
                 startActivity(intent)
 
-=======
+
 
     private val passwordAgainListener = object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -489,7 +486,7 @@ class Signin2Activity : AppCompatActivity() {
                         }
                     }
                 }
->>>>>>> 2260acad866db2f5652525d5c0e72a1053b89a3c
+
             }
         }
     }
