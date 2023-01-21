@@ -92,8 +92,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-    <View
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="20dp"/>
+        android:layout_height="40dp"
+        android:background="#D9D9D9">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="⊙ 숙소 신고하기"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="12sp"
+
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
