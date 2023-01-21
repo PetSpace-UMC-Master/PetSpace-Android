@@ -71,7 +71,7 @@
             android:paddingLeft="20dp"
             android:background="@drawable/btn_emailbox"
             android:id="@+id/editText_email"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:hint="이메일"
             android:textSize="16sp"
             android:fontFamily="@font/pretendard_regular"
@@ -80,29 +80,19 @@
             />
 
             <Button
+                android:enabled="true"
+                android:layout_marginLeft="5dp"
                 android:id="@+id/email_duplication_after"
-                android:background="@drawable/btn_customfull_emailcheck"
-                android:backgroundTint="#40A196"
-                android:fontFamily="@font/pretendard_semibold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="중복 확인"
-                android:textSize="14sp"
-                android:textColor="@color/white"
-                android:visibility="invisible" />
-
-            <Button
-                android:id="@+id/email_duplication_before"
-                android:background="@drawable/btn_customfull_emailcheck"
-                android:backgroundTint="#D9D9D9"
+                android:background="@drawable/click_button"
                 android:fontFamily="@font/pretendard_semibold"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="중복 확인"
                 android:textSize="14sp"
                 android:textColor="@color/white"
-                tools:ignore="DuplicateClickableBoundsCheck"
-            />
+                 />
+
+
 
     </LinearLayout>
         <TextView
@@ -201,33 +191,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:backgroundTint="#D9D9D9"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="50dp"
-                android:id="@+id/btnContinue_before"
-                android:layout_width="match_parent"
-                android:layout_height="48sp"
-                android:background="@drawable/btn_continue_customfull"
-                android:fontFamily="@font/roboto_medium"
-                android:paddingLeft="20dp"
-                android:paddingRight="43dp"
-                android:text="계속하기"
-                android:textAllCaps="false"
-                android:textColor="#EEF5F5"
-                android:textSize="16dp"
-                android:visibility="visible"
-                tools:ignore="DuplicateClickableBoundsCheck"
-                tools:layout_editor_absoluteX="20dp" />
 
+<!--            버튼 selector로 구현 -->
+<!--      android:background="@drawable/click_button"
+-->
             <androidx.appcompat.widget.AppCompatButton
 
+                android:enabled="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginBottom="50dp"
                 android:id="@+id/btnContinue_after"
                 android:layout_width="match_parent"
                 android:layout_height="48sp"
-                android:background="@drawable/btn_continue_customfull"
+                android:background="@drawable/click_button"
                 android:fontFamily="@font/roboto_medium"
                 android:paddingLeft="20dp"
                 android:paddingRight="43dp"
@@ -236,8 +212,6 @@
                 android:textColor="#EEF5F5"
                 android:textSize="16dp"
                 tools:layout_editor_absoluteX="20dp"
-                android:backgroundTint="#40A196"
-                android:visibility="invisible"
 
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
