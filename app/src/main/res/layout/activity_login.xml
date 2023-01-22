@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -44,173 +45,174 @@
         android:layout_height="1dp"
         android:background="#D9D9D9" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingHorizontal="20dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_marginTop="32dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:fontFamily="@font/pretendard_regular"
-            android:text="이메일 로그인"/>
-
-        <EditText
-
-            android:background="@drawable/btn_custom"
-            android:id="@+id/editText_email"
-            android:paddingLeft="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
-            android:hint="이메일을 입력하세요"
-            android:textSize="16sp"
-            android:fontFamily="@font/pretendard_regular"
-            android:layout_height="48sp"/>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:hintEnabled="false"
-            android:layout_marginTop="20dp"
-            app:endIconDrawable="@drawable/custom_password_eye"
-            app:endIconMode="password_toggle"
-            >
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextPassword"
-                android:layout_width="match_parent"
-                android:layout_height="48sp"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/btn_custom"
-                android:fontFamily="@font/pretendard_regular"
-                android:hint="비밀번호를 입력하세요"
-                android:paddingLeft="20dp"
-                android:textSize="16sp"
-                android:visibility="visible"
-                android:inputType="textPassword"
-                />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/textView_warningRed"
-            android:textSize="12dp"
-            android:visibility="invisible"
-            android:textColor="#BB2649"
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="이메일 혹은 비밀번호가 올바르지 않습니다."/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:textStyle="bold"
-            android:id="@+id/btn_email"
-            android:background="@drawable/btn_customfull"
-            android:backgroundTint="@color/main_green"
-            android:layout_marginTop="30dp"
-            android:text="이메일로 로그인"
-            android:textSize="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="48sp"
-            android:textColor="#EEF5F5"
-
-            />
-
-        <ImageView
-            android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/line1"
-            />
-
-
-        <TextView
-            android:layout_marginTop="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:fontFamily="@font/pretendard_regular"
-            android:text="간편 로그인"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-           android:paddingLeft="20dp"
-            android:paddingRight="40dp"
-            android:drawableLeft="@drawable/icons8_kakaotalk"
-            android:textStyle="bold"
-            android:id="@+id/btn_kakao"
-            android:textSize="16dp"
-            android:textColor="@color/textForBlack"
-            android:layout_marginTop="33dp"
-            android:layout_width="match_parent"
-            android:layout_height="48sp"
-            android:backgroundTint="@color/kakao"
-            android:background="@drawable/btn_customfull"
-            android:text="카카오로 로그인"
-            />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:drawableLeft="@drawable/icons8_google"
-            android:paddingLeft="20dp"
-            android:paddingRight="43dp"
-            android:id="@+id/btn_google"
-            android:fontFamily="@font/roboto_medium"
-            android:textSize="16dp"
-            android:textColor="@color/textForBlack"
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="48sp"
-            android:background="@drawable/btn_google"
-            android:text="Google로 로그인"
-            android:textAllCaps="false"
-
-            />
-
-
-
+        android:layout_height="match_parent">
 
 
         <LinearLayout
-            android:layout_marginTop="67dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            >
-            <TextView
-                android:id="@+id/btn_newAccount"
-                android:textSize="16sp"
-                android:textColor="@color/textForBlack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="회원가입"
-                />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp">
 
             <TextView
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="|"
-                android:textSize="16sp"
-                />
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="이메일 로그인"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <EditText
+
+                android:id="@+id/editText_email"
+                android:layout_width="match_parent"
+                android:layout_height="48sp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/btn_custom"
+                android:fontFamily="@font/pretendard_regular"
+                android:hint="이메일을 입력하세요"
+                android:paddingLeft="20dp"
+                android:textSize="16sp" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:endIconDrawable="@drawable/custom_password_eye"
+                app:endIconMode="password_toggle"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="48sp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/btn_custom"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:hint="비밀번호를 입력하세요"
+                    android:inputType="textPassword"
+                    android:paddingLeft="20dp"
+                    android:textSize="16sp"
+                    android:visibility="visible" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/btn_newPwd"
-                android:textSize="16sp"
-                android:textColor="@color/textForBlack"
+                android:id="@+id/textView_warningRed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="이메일 혹은 비밀번호가 올바르지 않습니다."
+                android:textColor="#BB2649"
+                android:textSize="12dp"
+                android:visibility="invisible" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_email"
+                android:layout_width="match_parent"
+                android:layout_height="48sp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/btn_customfull"
+                android:backgroundTint="@color/main_green"
+                android:text="이메일로 로그인"
+                android:textColor="#EEF5F5"
+                android:textSize="16dp"
+                android:textStyle="bold"
+
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/line1" />
+
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="비밀번호 재설정"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="간편 로그인"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_kakao"
+                android:layout_width="match_parent"
+                android:layout_height="48sp"
+                android:layout_marginTop="33dp"
+                android:background="@drawable/btn_customfull"
+                android:backgroundTint="@color/kakao"
+                android:drawableLeft="@drawable/icons8_kakaotalk"
+                android:paddingLeft="20dp"
+                android:paddingRight="40dp"
+                android:text="카카오로 로그인"
+                android:textColor="@color/textForBlack"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_google"
+                android:layout_width="match_parent"
+                android:layout_height="48sp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/btn_google"
+                android:drawableLeft="@drawable/icons8_google"
+                android:fontFamily="@font/roboto_medium"
+                android:paddingLeft="20dp"
+                android:paddingRight="43dp"
+                android:text="Google로 로그인"
+                android:textAllCaps="false"
+                android:textColor="@color/textForBlack"
+                android:textSize="16dp"
+
                 />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="67dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/btn_newAccount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="회원가입"
+                    android:textColor="@color/textForBlack"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="|"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/btn_newPwd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="비밀번호 재설정"
+                    android:textColor="@color/textForBlack"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"/>
 
         </LinearLayout>
+    </ScrollView>
 
-    </LinearLayout>
 
 
 </LinearLayout>

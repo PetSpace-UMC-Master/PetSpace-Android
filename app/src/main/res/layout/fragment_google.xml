@@ -50,6 +50,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
+        android:id="@+id/img_google"
         android:layout_marginTop="20dp"
         android:scaleType="fitXY"
         android:layout_width="match_parent"
