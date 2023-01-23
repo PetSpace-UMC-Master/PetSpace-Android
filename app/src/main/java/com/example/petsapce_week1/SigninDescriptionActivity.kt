@@ -7,7 +7,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.core.content.ContextCompat
 import com.example.petsapce_week1.databinding.ActivitySigninDescriptionBinding
-import com.example.petsapce_week1.loginrelated.LoginActivity
 
 class SigninDescriptionActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySigninDescriptionBinding
@@ -47,7 +46,7 @@ class SigninDescriptionActivity : AppCompatActivity() {
     private fun initPrevious() {
         binding.apply {
             btnBack.setOnClickListener {
-                val intent = Intent(this@SigninDescriptionActivity, Signin2Activity::class.java)
+                val intent = Intent(this@SigninDescriptionActivity, Signin4Activity::class.java)
                 startActivity(intent)
             }
         }
