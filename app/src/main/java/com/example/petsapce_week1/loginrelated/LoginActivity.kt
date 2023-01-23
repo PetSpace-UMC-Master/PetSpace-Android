@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.petsapce_week1.*
 import com.example.petsapce_week1.databinding.ActivityLoginBinding
+import com.example.petsapce_week1.network.LoginService
+import com.example.petsapce_week1.network.RetrofitHelper
 import com.example.petsapce_week1.reviewrelated.ReviewReadMoreActivity
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause
@@ -113,7 +115,7 @@ class LoginActivity : AppCompatActivity() {
                 //data = UserModel(accessToken = authToken)
                 //saveData(id, pw)
                 Log.d("access_token2", "$authToken")
-                api.postAccessToken(UserModel_Kakao(accessToken = authToken)).enqueue(object : retrofit2.Callback<LoginBackendResponse>{
+                api.postAccessToken(UserModelKakao(accessToken = authToken)).enqueue(object : retrofit2.Callback<LoginBackendResponse>{
                     override fun onResponse(call: Call<LoginBackendResponse>, response: Response<LoginBackendResponse>) {
                         Log.d("로그인 통신 성공", response.toString())
                         Log.d("로그인 통신 성공", response.body().toString())
@@ -192,7 +194,7 @@ class LoginActivity : AppCompatActivity() {
                 //저장된 id와 비번 맞는지 체크
                 //맞으면 gif화면으로 이동(홈화면 넘어가야하는데 없어서 gif로 넘어감)
                 // == 백엔드 통신 부분 ==
-                val data = UserModel_General(inputEmail, inputPassword)
+                val data = UserModelGeneral(inputEmail, inputPassword)
 
                 if (severId == inputEmail && severPswd == inputPassword) {
                     api.userLogin(data).enqueue(object : Callback<LoginBackendResponse> {
