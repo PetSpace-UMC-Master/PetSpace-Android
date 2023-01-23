@@ -1,10 +1,11 @@
-package com.example.petsapce_week1
+package com.example.petsapce_week1.reviewrelated
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.petsapce_week1.R
 
 class ReviewAdapter(val itemList: ArrayList<ReviewItem>) : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewViewHolder {

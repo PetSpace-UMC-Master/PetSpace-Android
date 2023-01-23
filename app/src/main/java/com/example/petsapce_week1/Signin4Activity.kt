@@ -281,7 +281,7 @@ class Signin4Activity : AppCompatActivity() {
             if (passwordEqual == editTextPasswordAgain.text.toString()) {
 
                 editTextPasswordAgain.setBackgroundResource(R.drawable.btn_custom)
-//                textPasswordAgain.text = " 비밀번호가 일치합니다."
+                textPasswordAgain.text = " 비밀번호가 일치합니다."
                 textPasswordAgain.setTextColor(
                     ContextCompat.getColor(
                         applicationContext!!,
