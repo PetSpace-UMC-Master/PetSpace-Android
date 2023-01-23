@@ -16,7 +16,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PetSapce_week1"
-        android:windowSoftInputMode="stateVisible"
         tools:targetApi="31">
         <activity
             android:name=".accomodation.scroll.AccFacultyActivity"
@@ -53,15 +52,8 @@
         </activity>
         <activity
             android:name=".Signin2Activity"
-<<<<<<< HEAD
-            android:exported="true">
 
-
-        </activity>
-
-=======
             android:exported="true" />
->>>>>>> 2260acad866db2f5652525d5c0e72a1053b89a3c
         <activity
             android:name=".SigninDescriptionActivity"
             android:exported="true">
@@ -75,11 +67,7 @@
         <activity
             android:name=".TermsActivity"
             android:exported="true">
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 2260acad866db2f5652525d5c0e72a1053b89a3c
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
