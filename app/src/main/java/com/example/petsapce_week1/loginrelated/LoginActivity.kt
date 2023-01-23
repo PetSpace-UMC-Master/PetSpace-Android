@@ -7,10 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.petsapce_week1.GifActivity
-import com.example.petsapce_week1.R
-import com.example.petsapce_week1.ReviewReadMoreActivity
-import com.example.petsapce_week1.Signin2Activity
+import com.example.petsapce_week1.*
 import com.example.petsapce_week1.databinding.ActivityLoginBinding
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause
@@ -271,7 +268,7 @@ class LoginActivity : AppCompatActivity() {
     private fun initNext() {
         binding.apply {
             btnNewAccount.setOnClickListener {
-                val intent = Intent(this@LoginActivity, Signin2Activity::class.java)
+                val intent = Intent(this@LoginActivity, Signin4Activity::class.java)
                 startActivity(intent)
             }
         }
