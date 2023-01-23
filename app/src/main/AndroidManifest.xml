@@ -15,7 +15,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PetSapce_week1"
-        android:windowSoftInputMode="stateVisible"
         tools:targetApi="31">
         <activity
             android:name=".accomodation.scroll.AccFacultyActivity"
@@ -34,11 +33,12 @@
         <activity
             android:name=".accomodation.AccMainActivity"
             android:exported="true">
-            <intent-filter>
+
+      <!--      <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
         <activity
             android:name=".loginrelated.LoginActivity"
@@ -50,8 +50,13 @@
             </intent-filter>-->
         </activity>
         <activity
-            android:name=".Signin2Activity"
-            android:exported="true" />
+
+            android:name=".Signin4Activity"
+
+            android:exported="true">
+
+        </activity>
+
         <activity
             android:name=".SigninDescriptionActivity"
             android:exported="true">
@@ -65,6 +70,7 @@
         <activity
             android:name=".TermsActivity"
             android:exported="true">
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
