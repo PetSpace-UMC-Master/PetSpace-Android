@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:windowSoftInputMode="stateVisible"
         android:name=".loginrelated.GlobalApplictation"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -34,11 +35,11 @@
             android:name=".accomodation.AccMainActivity"
             android:exported="true">
 
-      <!--      <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
         </activity>
         <activity
             android:name=".loginrelated.LoginActivity"
@@ -50,13 +51,8 @@
             </intent-filter>
         </activity>
         <activity
-
-            android:name=".Signin4Activity"
-
-            android:exported="true">
-
-        </activity>
-
+            android:name=".Signin2Activity"
+            android:exported="true" />
         <activity
             android:name=".SigninDescriptionActivity"
             android:exported="true">
