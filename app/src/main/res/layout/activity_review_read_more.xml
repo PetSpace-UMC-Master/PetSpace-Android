@@ -8,7 +8,7 @@
     <LinearLayout
         android:id="@+id/review_fixed_upper_bar"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,15 +20,16 @@
             android:layout_height="20dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:background="#00000000"
             app:srcCompat="@drawable/closesvg"
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="15dp"
-            android:paddingLeft="35dp"
+            android:paddingTop="13dp"
+            android:paddingLeft="20dp"
             android:paddingBottom="15dp">
 
             <TextView
@@ -37,7 +38,7 @@
                 android:fontFamily="@font/bmjua"
                 android:gravity="start"
                 android:lineHeight="16dp"
-                android:text="1,596개의 후기"
+                android:text="\t1,596개의 리뷰"
                 android:textColor="#0C201E"
                 android:textSize="16sp" />
 
@@ -55,21 +56,14 @@
         </LinearLayout>
     </LinearLayout>
 
-    <ScrollView
-        android:id="@+id/review_scrollview"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_review"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        tools:listitem="@layout/review_item_list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/review_fixed_upper_bar">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_review"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/review_item_list" />
-
-    </ScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/review_fixed_upper_bar"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

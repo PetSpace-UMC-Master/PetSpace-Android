@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetSapce_week1"
         tools:targetApi="31">
+
+
+        <!--         숙소 상세보기 액티비티-->
         <activity
             android:name=".accomodation.scroll.AccFacultyActivity"
             android:exported="false">
@@ -34,20 +37,21 @@
             android:name=".accomodation.AccMainActivity"
             android:exported="true">
 
-      <!--      <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--      <intent-filter>
+                      <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+                      <category android:name="android.intent.category.LAUNCHER" />
+                  </intent-filter>-->
         </activity>
+
+        <!--       숙소 상세보기 끝 =====================================================================================-->
+
+        <!--         로그인 액티비티-->
+
         <activity
             android:name=".loginrelated.LoginActivity"
             android:exported="true">
-          <!--  <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
         </activity>
         <activity
 
@@ -81,7 +85,32 @@
         <activity
             android:name=".TermsContentActivity2"
             android:parentActivityName=".TermsActivity" />
-        <activity android:name=".ReviewReadMoreActivity" /> <!-- 카카오 로그인 화면 뜨는거 -->
+
+        <activity
+            android:name=".reviewrelated.ReviewReadMoreActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
+        <!--      로그인 액티비티 끝 =====================================================================================-->
+
+
+        <activity
+            android:name=".TestMainActivity"
+            android:exported="true">
+            <!-- <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>-->
+        </activity>
+
+        <!-- 카카오 로그인 화면 뜨는거 -->
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true"

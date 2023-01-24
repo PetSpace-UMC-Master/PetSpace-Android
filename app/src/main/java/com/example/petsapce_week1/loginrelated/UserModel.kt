@@ -26,7 +26,8 @@ data class LoginBackendResponse(
     data class Result(
         val email : String ?= null,
         val accessToken: String ?= null,
-        val refreshToken : String ?= null
+        val refreshToken : String ?= null,
+        @SerializedName("서울") val country:String
     )
 }
 
