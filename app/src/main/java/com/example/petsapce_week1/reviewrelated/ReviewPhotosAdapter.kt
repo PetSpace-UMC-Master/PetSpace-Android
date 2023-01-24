@@ -23,11 +23,6 @@ class ReviewPhotosAdapter(
         }
     }
 
-    interface OnItemClickListener {
-        fun OnItemClick(data: reviewData)
-    }
-
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -36,20 +31,6 @@ class ReviewPhotosAdapter(
             .inflate(R.layout.activity_review_read_more_photos, parent, false)
         return ViewPagerViewHolder(view)
     }
-
-   /* inner class ViewHolder(val binding: AccReviewRowBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        init {
-            binding.accReview.setOnClickListener {
-                itemClickListener?.OnItemClick(items[adapterPosition]) //?는 null일 수 도 있다고 알려주는 역할
-                *//* val intent = Intent(this,detailPageActivity::class.java)
-                 startActivity(intent)*//*
-
-            }
-
-        }
-
-    }*/
 
     override fun onBindViewHolder(holder: ReviewPhotosAdapter.ViewPagerViewHolder, position: Int) {
         holder.onBind(slideItems[position])

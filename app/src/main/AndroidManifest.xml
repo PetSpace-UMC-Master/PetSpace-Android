@@ -37,11 +37,11 @@
             android:name=".accomodation.AccMainActivity"
             android:exported="true">
 
-            <!--      <intent-filter>
+                  <intent-filter>
                       <action android:name="android.intent.action.MAIN" />
 
                       <category android:name="android.intent.category.LAUNCHER" />
-                  </intent-filter>-->
+                  </intent-filter>
         </activity>
 
         <!--       숙소 상세보기 끝 =====================================================================================-->
@@ -89,11 +89,7 @@
         <activity
             android:name=".reviewrelated.ReviewReadMoreActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
 

@@ -39,12 +39,5 @@ class AccMainActivity : AppCompatActivity() {
             .commitAllowingStateLoss()
 
 
-     /*   Glide.with(this).load(R.raw.petgif).override(560, 560).into(binding2.imgGif)
-        binding2.hello.text = "테스트테스트"
-        accHostBinding.button.setOnClickListener {
-            var intent = Intent(this,GifActivity::class.java)
-            startActivity(intent)
-        }*/
-
     }
 }
