@@ -1,4 +1,4 @@
-package com.example.petsapce_week1.accomodation.scroll
+package com.example.petsapce_week1.accomodation
 
 import android.annotation.SuppressLint
 import android.nfc.tech.IsoDep.get
@@ -6,20 +6,22 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.petsapce_week1.accomodation.scroll.reviewData
+import com.example.petsapce_week1.databinding.AccMainImageslideBinding
 import com.example.petsapce_week1.databinding.AccReviewRowBinding
 
-class reviewAdapter(val items: ArrayList<reviewData>) : RecyclerView.Adapter<reviewAdapter.ViewHolder>() {
+class accImgaeSlideAdapter(val items: ArrayList<imageSlideData>) : RecyclerView.Adapter<accImgaeSlideAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
-        fun OnItemClick(data: reviewData)
+        fun OnItemClick(data: imageSlideData)
     }
 
     var itemClickListener: OnItemClickListener? = null //초기값 null값
 
-    inner class ViewHolder(val binding: AccReviewRowBinding) :
+    inner class ViewHolder(val binding: AccMainImageslideBinding) :
         RecyclerView.ViewHolder(binding.root) {
         init {
-            binding.accReview.setOnClickListener {
+            binding.imgMain.setOnClickListener {
                 itemClickListener?.OnItemClick(items[adapterPosition]) //?는 null일 수 도 있다고 알려주는 역할
                 /* val intent = Intent(this,detailPageActivity::class.java)
                  startActivity(intent)*/
@@ -33,7 +35,7 @@ class reviewAdapter(val items: ArrayList<reviewData>) : RecyclerView.Adapter<rev
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
-            AccReviewRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            AccMainImageslideBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -42,10 +44,10 @@ class reviewAdapter(val items: ArrayList<reviewData>) : RecyclerView.Adapter<rev
 
         holder.binding.apply {
             //이미지는 이런식으로 담아야함.
-            imgFace.setImageResource(items[position].img)
-            textName.text = items[position].name
+            imgMain.setImageResource(items[position].imgSlide)
+          /*  textName.text = items[position].name
             textDate.text = items[position].date.toString()+"주 전"
-            textDetail.text = items[position].text
+            textDetail.text = items[position].text*/
 //            textViewDifficulty.text= "난이도 ${position+1}"
         }
 

@@ -60,7 +60,7 @@
  -->
             <androidx.viewpager2.widget.ViewPager2
                 android:scaleType="fitXY"
-                android:id="@+id/viewPager_accMain"
+                android:id="@+id/viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="200dp" />
 
