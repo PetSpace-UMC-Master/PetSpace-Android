@@ -20,7 +20,7 @@
 
         <!--       숙소 상세보기 액티비티 =====================================================================================-->
         <activity
-            android:name=".accomodation.scroll.AccFacultyActivity"
+            android:name=".accomodation.scroll.AccFacilityActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -36,8 +36,9 @@
         <activity
             android:name=".accomodation.AccMainActivity"
             android:exported="true">
-
         </activity>
+        <activity android:name=".accomodation.scroll.AccFacilityMoreActivity"/>
+
 
         <!--       숙소 상세보기 끝 =====================================================================================-->
 
