@@ -12,11 +12,13 @@ import com.example.petsapce_week1.R
 import com.example.petsapce_week1.databinding.AccReviewRowBinding
 import com.example.petsapce_week1.databinding.ReviewItemListBinding
 import com.example.petsapce_week1.databinding.ReviewReadMorePhotolistBinding
+import com.example.petsapce_week1.accomodation.scroll.reviewData
+
 
 class ReviewPhotosAdapter(
-    private val slideItems : MutableList<Int>,
+    private val slideItems: MutableList<Int>,
     private val viewPager2: ViewPager2
-): RecyclerView.Adapter<ReviewPhotosAdapter.ViewPagerViewHolder>() {
+) : RecyclerView.Adapter<ReviewPhotosAdapter.ViewPagerViewHolder>() {
     private val runnable = Runnable { slideItems.addAll(slideItems) }
 
     interface OnItemClickListener {
