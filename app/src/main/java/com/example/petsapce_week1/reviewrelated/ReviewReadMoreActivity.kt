@@ -37,6 +37,8 @@ class ReviewReadMoreActivity : AppCompatActivity() {
         itemList.add(ReviewItem("6주 전","집사", "너무 좋아요"))
         itemList.add(ReviewItem("10주 전","댕댕", "너무 좋아요 너무 좋아요 Google 지도에서 방문한 장소에 대한 리뷰를 작성할 수 있습니다."))
 
+
+
         //변경됨을 어댑터에 알림
         //rvAdapter.notifyDataSetChanged()
 

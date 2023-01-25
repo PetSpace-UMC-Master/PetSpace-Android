@@ -1,16 +1,13 @@
 package com.example.petsapce_week1.loginrelated
 
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
-
 //JSON data를 받아올 데이터 클래스
 
-data class UserModel_Kakao(
+data class UserModelKakao(
     //카카오 로그인에서 백엔드로 보내는 데이터
     val accessToken : String ?= null
 )
 
-data class UserModel_General(
+data class UserModelGeneral(
     //일반 로그인에서 백엔드로 보내는 데이터
     var email : String ?= null,
     var password : String ?= null
@@ -29,24 +26,3 @@ data class LoginBackendResponse(
         val refreshToken : String ?= null
     )
 }
-
-
-
-
-/* 이렇게도 쓸 수 있음
-data class DataclassEx(
-    val `data`: List<Data>,
-    val message: String,
-    val status: Int,
-    val isLogin: Boolean
-)
-{
-    data class Data(
-        val id: Int,
-        val image: String,
-        val user_id: Int,
-        val user_img: String,
-        val user_name: String
-    )
-}
- */

@@ -1,8 +1,9 @@
-package com.example.petsapce_week1.loginrelated
+package com.example.petsapce_week1.network
 
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 object RetrofitHelper {
 
