@@ -9,7 +9,9 @@
     tools:context=".accomodation.AccMainActivity">
 
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
+
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -24,6 +26,12 @@
             android:orientation="vertical">
 
 
+            <!-- <View
+                 android:layout_width="match_parent"
+                 android:layout_height="1dp"
+                 android:background="#D9D9D9"
+                 app:layout_constraintTop_toBottomOf="@id/loginTop" />
+ -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/loginTop"
                 android:layout_width="match_parent"
@@ -35,7 +43,7 @@
                     android:id="@+id/btn_back"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/closesvg"
+                    android:src="@drawable/arrow_back"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -52,13 +60,8 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- <View
-                 android:layout_width="match_parent"
-                 android:layout_height="1dp"
-                 android:background="#D9D9D9"
-                 app:layout_constraintTop_toBottomOf="@id/loginTop" />
- -->
             <androidx.viewpager2.widget.ViewPager2
+                android:nestedScrollingEnabled="false"
                 android:scaleType="fitXY"
                 android:id="@+id/viewpager"
                 android:layout_width="match_parent"
@@ -225,7 +228,7 @@
         </LinearLayout>
 
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <View
         android:layout_width="match_parent"

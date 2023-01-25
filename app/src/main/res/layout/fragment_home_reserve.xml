@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".home.homefragment.ReserveFragment">
 
     <TextView
@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="113dp"
-        android:layout_marginTop="111dp"
+        android:layout_marginTop="200dp"
         android:layout_marginEnd="113dp"
         android:text="홈화면 대체할 테스트 화면입니다!"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,8 +23,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="270dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="300dp"
         android:layout_marginEnd="37dp"
+        android:clickable="true"
         android:text="버튼 숙소 상세 보기"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -36,8 +37,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="39dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="300dp"
         android:layout_marginEnd="143dp"
+        android:clickable="true"
         android:text="버튼 로그인 화면"
         app:layout_constraintEnd_toStartOf="@+id/btn_accomo"
         app:layout_constraintHorizontal_bias="0.0"

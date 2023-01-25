@@ -38,6 +38,8 @@ class AccMainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
+        binding.scrollView.isNestedScrollingEnabled = false
+
         initViewPager()
         initData()
 
@@ -66,6 +68,7 @@ class AccMainActivity : AppCompatActivity() {
     private fun initViewPager() {
 
         binding.viewpager.adapter = accImgaeSlideAdapter(imgdataList)
+
 
         val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.pageMargin) // dimen 파일 안에 크기를 정의해두었다.
         val pagerWidth = resources.getDimensionPixelOffset(R.dimen.pageWidth) // dimen 파일이 없으면 생성해야함

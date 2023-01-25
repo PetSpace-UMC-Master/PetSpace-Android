@@ -15,7 +15,10 @@ import com.example.petsapce_week1.databinding.FragmentReviewBinding
 
 class reviewFragment : Fragment() {
 
-    private lateinit var binding:FragmentReviewBinding
+    private var _binding: FragmentReviewBinding? = null
+    private val binding get() = _binding!!
+
+//    private lateinit var binding:FragmentReviewBinding
     lateinit var adapter: reviewAdapter
     var dataList = ArrayList<reviewData>()
 
@@ -23,14 +26,26 @@ class reviewFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentReviewBinding.inflate(layoutInflater)
+//        binding = FragmentReviewBinding.inflate(layoutInflater)
+        _binding = FragmentReviewBinding.inflate(inflater, container, false)
+      /*  initRecyclerView()
 
-        initRecyclerView()
-
-        initAddData()
+        initAddData()*/
 
         // Inflate the layout for this fragment
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding!!.apply {
+
+            initRecyclerView()
+
+            initAddData()
+
+        }
+
     }
 
     private fun initAddData() {
@@ -50,6 +65,7 @@ class reviewFragment : Fragment() {
         )
         adapter = reviewAdapter(dataList)
         binding.recyclerview.adapter = adapter
+        binding.recyclerview.isNestedScrollingEnabled = false
 
 
         adapter.itemClickListener = object : reviewAdapter.OnItemClickListener {
@@ -65,4 +81,8 @@ class reviewFragment : Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
