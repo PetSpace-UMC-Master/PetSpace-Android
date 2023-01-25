@@ -33,12 +33,8 @@ class AccMainActivity : AppCompatActivity() {
         val includeView: View = binding.frameHost.root
         bindingHostBinding = ActivityAccHostBinding.bind(includeView)
 
-
-
-
         // 이런식으로 간략하게 쳐도됨
-//        bindingHostBinding = ActivityAccHostBinding.bind(binding.frameHost.root)
-
+        // bindingHostBinding = ActivityAccHostBinding.bind(binding.frameHost.root)
 
         setContentView(binding.root)
 
@@ -54,8 +50,6 @@ class AccMainActivity : AppCompatActivity() {
             .beginTransaction()
             .add(binding.frameReview.id, reviewFragment())
             .commitAllowingStateLoss()
-
-
     }
 
     private fun initData() {
