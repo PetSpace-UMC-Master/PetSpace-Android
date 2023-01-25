@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.petsapce_week1.R
 
 class ReviewAdapter(val itemList: ArrayList<ReviewItem>) : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>(){
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.review_item_list,parent,false)
         return ReviewViewHolder(view)

@@ -78,6 +78,7 @@
             android:parentActivityName=".TermsActivity" />
 
         <activity android:name=".reviewrelated.ReviewReadMoreActivity" />
+        <activity android:name=".reviewrelated.ReviewPhotosActivity"/>
 
         <activity android:name=".TestMainActivity"
             android:exported="true">
