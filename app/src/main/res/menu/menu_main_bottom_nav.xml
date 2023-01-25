@@ -11,7 +11,7 @@
         android:title="@string/main_btm_nav_home_title" />
 
     <item
-        android:id="@+id/menu_main_btm_nav_townLife"
+        android:id="@+id/menu_main_btm_nav_heart"
         android:icon="@drawable/navheart4x"
         app:showAsAction="always"
         android:enabled="true"
@@ -19,7 +19,7 @@
         android:title="@string/main_btm_nav_townLife_title" />
 
     <item
-        android:id="@+id/menu_main_btm_nav_chat"
+        android:id="@+id/menu_main_btm_nav_reserve"
         android:icon="@drawable/navreserve5x"
         app:showAsAction="always"
         android:enabled="true"
@@ -29,7 +29,7 @@
 
 
     <item
-        android:id="@+id/menu_main_btm_nav_my_page"
+        android:id="@+id/menu_main_btm_nav_profile"
         android:icon="@drawable/navprofile3x"
         app:showAsAction="always"
         android:enabled="true"

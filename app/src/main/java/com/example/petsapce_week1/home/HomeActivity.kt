@@ -26,19 +26,19 @@ class HomeActivity : AppCompatActivity() {
                             .replace(R.id.main_frm, HomeFragment())
                             .commitAllowingStateLoss()
                     }
-                    R.id.menu_main_btm_nav_townLife -> {
+                    R.id.menu_main_btm_nav_heart -> {
                         supportFragmentManager.beginTransaction()
                             .replace(R.id.main_frm, GoFragment())
                             .commitAllowingStateLoss()
                     }
-                    R.id.menu_main_btm_nav_chat -> {
-                        supportFragmentManager.beginTransaction()
-                            .replace(R.id.main_frm, ProfileFragment())
-                            .commitAllowingStateLoss()
-                    }
-                    R.id.menu_main_btm_nav_my_page -> {
+                    R.id.menu_main_btm_nav_reserve -> {
                         supportFragmentManager.beginTransaction()
                             .replace(R.id.main_frm, ReserveFragment())
+                            .commitAllowingStateLoss()
+                    }
+                    R.id.menu_main_btm_nav_profile -> {
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.main_frm, ProfileFragment())
                             .commitAllowingStateLoss()
                     }
                 }
