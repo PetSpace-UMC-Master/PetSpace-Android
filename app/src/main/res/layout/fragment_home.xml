@@ -30,11 +30,76 @@
 
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/dogface"
             android:layout_marginStart="5dp"
-            app:layout_constraintStart_toEndOf="@+id/text_pet"
+            android:src="@drawable/dogface"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/text_pet"
             app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <EditText
+
+        android:clickable="true"
+        android:id="@+id/editText_mainTop"
+        android:layout_width="match_parent"
+        android:layout_height="48sp"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/edittext_main"
+        android:drawableLeft="@drawable/searchsvg"
+        android:fontFamily="@font/pretendard_regular"
+        android:hint="반려동물과 어디로 여행가세요?"
+        android:paddingHorizontal="20dp"
+        android:drawablePadding="10dp"
+        android:drawableRight="@drawable/tune1x"
+        android:textColorHint="#7F7F7F"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bannerTop" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+       android:id="@+id/btn_edittext"
+        android:clickable="true"
+        android:paddingHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittext_main"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_mainTop"
+        android:layout_width="match_parent"
+        android:layout_height="46sp">
+
+        <ImageView
+            android:id="@+id/img_search"
+            android:src="@drawable/searchicon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="24dp"
+            android:layout_height="24dp"/>
+
+        <TextView
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toEndOf="@+id/img_search"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="반려동물과 어디로 여행가세요?"
+            android:textColor="#7F7F7F"
+            android:textSize="16sp"
+
+            />
+        <ImageView
+            android:id="@+id/img_filter"
+            android:src="@drawable/tune1x"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="20dp"
+            android:layout_height="20dp"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
