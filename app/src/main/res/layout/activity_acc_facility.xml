@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="20dp"
-    tools:context=".accomodation.scroll.AccFacultyActivity">
+    tools:context=".accomodation.scroll.AccFacilityActivity">
 
 
     <TextView
@@ -21,7 +21,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <TextView
+    <Button
+        android:id="@+id/btn_viewmore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/more"
