@@ -262,7 +262,6 @@ class LoginActivity : AppCompatActivity() {
                             Log.d("로그인 통신 실패","fail")
                         }
                     })
-
                 }
             }
         }
