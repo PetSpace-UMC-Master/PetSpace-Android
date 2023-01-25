@@ -4,6 +4,7 @@ import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
 object RetrofitHelper {
 
     val BASE_URL: String = "https://99f0-211-106-114-186.jp.ngrok.io/"

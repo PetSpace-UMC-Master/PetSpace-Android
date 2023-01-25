@@ -83,12 +83,9 @@
             android:name=".TermsContentActivity2"
             android:parentActivityName=".TermsActivity" />
 
-        <activity
-            android:name=".reviewrelated.ReviewReadMoreActivity"
-            android:exported="true">
-        </activity>
-
-        <!--      로그인 액티비티 끝 =====================================================================================-->
+        <activity android:name=".reviewrelated.ReviewReadMoreActivity"
+        android:exported="true"/>
+        <activity android:name=".reviewrelated.ReviewPhotosActivity"/>
 
 
         <activity
