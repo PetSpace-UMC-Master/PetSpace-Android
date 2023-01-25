@@ -21,5 +21,4 @@ interface LoginService {
     fun userLogin(
         @Body jsonParams : UserModelGeneral,
     ): Call<LoginBackendResponse>
-
 }
