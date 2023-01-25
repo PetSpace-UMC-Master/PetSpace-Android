@@ -9,16 +9,13 @@ import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.petsapce_week1.databinding.ActivitySignin2Binding
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import java.util.regex.Pattern
 
 class Signin4Activity : AppCompatActivity() {
     lateinit var binding: ActivitySignin2Binding
+
     //비밀번호 입력 담는 지역 변수(올바른 형식으로 초기화 안할시 처음 화면에서 빨간불 들어옴)
-    lateinit var passwordInput:String
-
-
+    lateinit var passwordInput: String
 
     var flagEmail = 0
     var flagPassword = 0
@@ -32,26 +29,25 @@ class Signin4Activity : AppCompatActivity() {
 
         //순서대로 실행(별 상관없는듯함)
 
-            //1번 이메일 체크
-            inintEmailCheck()
+        //1번 이메일 체크
+        inintEmailCheck()
 
-            //1-1 이메일 중복 체크
-            //임의의 이메일 선언
-            val email = "aaa@naver.com"
-            initButtonCheck(email)
+        //1-1 이메일 중복 체크
+        //임의의 이메일 선언
+        val email = "aaa@naver.com"
+        initButtonCheck(email)
 
-            //2번 패스워드 체크
-            initPasswordCheck()
-            //3번 패스워드 동일 체크
-            initPasswordEqual()
-            Log.d("flbutton",flagButton.toString())
-
+        //2번 패스워드 체크
+        initPasswordCheck()
+        //3번 패스워드 동일 체크
+        initPasswordEqual()
+        Log.d("flbutton", flagButton.toString())
 
 
     }
 
     //중복 확인(코드 수정 필요..textwather에 넣어야 할듯 이것도...)
-    private fun initButtonCheck(email: String) :Int{
+    private fun initButtonCheck(email: String): Int {
         binding.apply {
             emailDuplicationAfter.setOnClickListener {
                 flagButton = 1
@@ -107,8 +103,13 @@ class Signin4Activity : AppCompatActivity() {
                 // text가 바뀔 때마다 호출된다.
                 checkEmail()
 
+
                 //다음화면 넘어가기(사용자가 비밀번호까지 입력하고 변심하여 이메일을 바꿀수도 있기에 체크해야함)
+//                if (flagEmail ==1 && flagEqual==1 && flagButton==1) {
                 if (checkEmail() && checkPassword() && checkPasswordEqual()) {
+                    Log.d("flagEmail", flagEmail.toString())
+                    Log.d("flagPassword", flagPassword.toString())
+                    Log.d("flagEqual", flagEqual.toString())
                     binding.btnContinueAfter.isEnabled = true
 
                     initNext()
@@ -149,9 +150,14 @@ class Signin4Activity : AppCompatActivity() {
                 //현재까지 입력된 패스워드 저장
                 passwordInput = binding.editTextPassword.text.toString()
 
+
+
                 //다음화면 넘어가기(사용자가 비밀번호까지 입력하고 변심 바꿀수도 있기에 체크해야함)
                 if (checkEmail() && checkPassword() && checkPasswordEqual()) {
                     binding.btnContinueAfter.isEnabled = true
+                    Log.d("flagEmail", flagEmail.toString())
+                    Log.d("flagPassword", flagPassword.toString())
+                    Log.d("flagEqual", flagEqual.toString())
 
                     initNext()
 
@@ -190,6 +196,7 @@ class Signin4Activity : AppCompatActivity() {
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     //비밀번화 일치 true false로 반환
                     checkPasswordEqual()
+
                     /* Log.d("flag1", flagEmail.toString())
                      Log.d("flag2", flagPassword.toString())
                      Log.d("flag3", flagEqual.toString())
@@ -197,6 +204,9 @@ class Signin4Activity : AppCompatActivity() {
                     //다음화면 넘어가기
                     if (checkEmail() && checkPassword() && checkPasswordEqual()) {
                         binding.btnContinueAfter.isEnabled = true
+                        Log.d("flagEmail", flagEmail.toString())
+                        Log.d("flagPassword", flagPassword.toString())
+                        Log.d("flagEqual", flagEqual.toString())
 
                         initNext()
 
@@ -281,7 +291,7 @@ class Signin4Activity : AppCompatActivity() {
             if (passwordEqual == editTextPasswordAgain.text.toString()) {
 
                 editTextPasswordAgain.setBackgroundResource(R.drawable.btn_custom)
-                textPasswordAgain.text = " 비밀번호가 일치합니다."
+                textPasswordAgain.text = "비밀번호와 일치합니다."
                 textPasswordAgain.setTextColor(
                     ContextCompat.getColor(
                         applicationContext!!,

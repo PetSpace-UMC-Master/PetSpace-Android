@@ -7,11 +7,13 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.petsapce_week1.R
+import com.example.petsapce_week1.accomodation.scroll.reviewData
+import com.example.petsapce_week1.databinding.AccReviewRowBinding
 
 class ReviewPhotosAdapter(
-    private val slideItems : MutableList<Int>,
+    private val slideItems: MutableList<Int>,
     private val viewPager2: ViewPager2
-): RecyclerView.Adapter<ReviewPhotosAdapter.ViewPagerViewHolder>() {
+) : RecyclerView.Adapter<ReviewPhotosAdapter.ViewPagerViewHolder>() {
     private val runnable = Runnable { slideItems.addAll(slideItems) }
 
     class ViewPagerViewHolder(view: View) : RecyclerView.ViewHolder(view) {

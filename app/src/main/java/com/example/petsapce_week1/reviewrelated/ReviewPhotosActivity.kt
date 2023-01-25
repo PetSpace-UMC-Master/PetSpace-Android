@@ -46,6 +46,7 @@ class ReviewPhotosActivity : AppCompatActivity() {
                 page.translationX = position * -offsetPx
             }
         }
+        binding.tvPhotoOrder
     }
     override fun onResume() {
         super.onResume()
