@@ -19,25 +19,25 @@
 
 
         <!--       숙소 상세보기 액티비티 =====================================================================================-->
+
         <activity
-            android:name=".accomodation.scroll.AccFacilityActivity"
+            android:name=".accommodation.scroll.AccFacilityActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".accomodation.scroll.AccHostActivity"
+            android:name=".accommodation.scroll.AccHostActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".accomodation.AccMainActivity"
+            android:name=".accommodation.AccMainActivity"
             android:exported="true">
         </activity>
-        <activity android:name=".accomodation.scroll.AccFacilityMoreActivity"/>
 
 
         <!--       숙소 상세보기 끝 =====================================================================================-->
@@ -88,13 +88,13 @@
         android:exported="true"/>
         <activity android:name=".reviewrelated.ReviewPhotosActivity"/>
 
+        <!--테스트옹 홈 화면 ================================-->
 
         <activity
             android:name=".TestMainActivity"
             android:exported="true">
              <intent-filter>
                  <action android:name="android.intent.action.MAIN" />
-
                  <category android:name="android.intent.category.LAUNCHER" />
              </intent-filter>
         </activity>

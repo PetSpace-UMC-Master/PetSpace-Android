@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:id="@+id/activity_acc_main"
     app:layout_constraintHorizontal_chainStyle="spread_inside"
-    tools:context=".accomodation.AccMainActivity">
+    tools:context=".accommodation.AccMainActivity">
 
 
     <ScrollView
+        android:id="@+id/acc_scrollview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -19,6 +21,7 @@
         tools:layout_editor_absoluteY="0dp">
 
         <LinearLayout
+            android:id="@+id/acc_linear"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -183,9 +186,9 @@
                 android:background="#D9D9D9" />
 
             <include
-                android:id="@+id/frameFaculty"
-                layout="@layout/activity_acc_facility"
+                android:id="@+id/frameFacility"
                 android:layout_width="match_parent"
+                layout="@layout/activity_acc_facility"
                 android:layout_height="wrap_content" />
 
             <View
@@ -202,10 +205,7 @@
             <FrameLayout
                 android:id="@+id/frame_google"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-
-                />
+                android:layout_height="wrap_content" />
 
             <View
                 android:layout_width="match_parent"
@@ -215,16 +215,8 @@
             <FrameLayout
                 android:id="@+id/frame_review"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                />
-
-
-
-
+                android:layout_height="wrap_content" />
         </LinearLayout>
-
-
     </ScrollView>
 
     <View
@@ -236,7 +228,6 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/butonBottm"
-
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:background="@color/white"
@@ -260,7 +251,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_reserve"
             android:layout_width="94dp"
-            android:layout_height="32dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/btn_small"
             android:text="예약하기"
             android:textColor="#EEF5F5"
@@ -269,7 +260,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
 
-            />
+            tools:ignore="TouchTargetSizeCheck" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

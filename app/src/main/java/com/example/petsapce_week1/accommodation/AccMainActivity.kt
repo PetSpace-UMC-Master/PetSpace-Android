@@ -1,26 +1,32 @@
-package com.example.petsapce_week1.accomodation
+package com.example.petsapce_week1.accommodation
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
-import com.example.petsapce_week1.GifActivity
 import com.example.petsapce_week1.R
-import com.example.petsapce_week1.accomodation.scroll.googleFragment
-import com.example.petsapce_week1.accomodation.scroll.reviewAdapter
-import com.example.petsapce_week1.accomodation.scroll.reviewData
-import com.example.petsapce_week1.accomodation.scroll.reviewFragment
+import com.example.petsapce_week1.accommodation.scroll.*
 import com.example.petsapce_week1.databinding.ActivityAccHostBinding
 import com.example.petsapce_week1.databinding.ActivityAccMainBinding
+import com.example.petsapce_week1.network.AccomoService
+import com.example.petsapce_week1.network.RetrofitHelper
+import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationData
+import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationRoomData
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
 
 class AccMainActivity : AppCompatActivity() {
     lateinit var binding:ActivityAccMainBinding
     lateinit var bindingHostBinding: ActivityAccHostBinding
     lateinit var adapter: accImgaeSlideAdapter
     var imgdataList = ArrayList<imageSlideData>()
+
+    private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
+    var api : AccomoService = retrofit.create(AccomoService::class.java)
+
 
     private val MIN_SCALE = 0.85f // 뷰가 몇퍼센트로 줄어들 것인지
     private val MIN_ALPHA = 0.5f // 어두워지는 정도를 나타낸 듯 하다.
@@ -40,6 +46,29 @@ class AccMainActivity : AppCompatActivity() {
 
         initViewPager()
         initData()
+        val data = AccomodationRoomData(roomId = null)
+
+        api.getRoomDetail(1).enqueue(object : Callback<AccomodationData> {
+            override fun onResponse(
+                call: Call<AccomodationData>,
+                response: Response<AccomodationData>
+            ) {
+
+                Log.d("숙소 세부 정보 통신 성공",response.toString())
+                Log.d("숙소 세부 정보 통신 성공", response.body().toString())
+
+                val body = response.body()
+                if (body != null) {
+                    binding.frameHost.textName.text = body.result.hostName
+                    binding.frameHost.tvMaxpet.text = body.result.maxPet.toString()
+                    binding.frameHost.tvMaxguest.text = body.result.maxGuest.toString()
+                    binding.frameHost.textAbout.text = body.result.roomDecription
+                }
+            }
+            override fun onFailure(call: Call<AccomodationData>, t: Throwable) {
+                Log.d("숙소 세부 정보", "failed")
+            }
+        })
 
         supportFragmentManager
             .beginTransaction()
@@ -142,5 +171,18 @@ class AccMainActivity : AppCompatActivity() {
         }
     }
 
+    //fragment -> fragment 화면 전환
+    fun changeFragment(index : Int){
+        when(index){
+            // 편의시설 더보기 클릭 시 호출할 것
+            1 -> {
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.acc_scrollview, AccFacilityMoreFragment())
+                    .commitAllowingStateLoss()
+            }
+        }
+    }
 
 }
+

@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".accomodation.scroll.googleFragment">
+    tools:context=".accommodation.scroll.googleFragment">
 
     <TextView
         android:layout_width="wrap_content"

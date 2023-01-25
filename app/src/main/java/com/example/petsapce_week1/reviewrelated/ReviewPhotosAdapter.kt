@@ -2,17 +2,10 @@ package com.example.petsapce_week1.reviewrelated
 
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.example.petsapce_week1.R
-import com.example.petsapce_week1.databinding.AccReviewRowBinding
-import com.example.petsapce_week1.databinding.ReviewItemListBinding
 import com.example.petsapce_week1.databinding.ReviewReadMorePhotolistBinding
-import com.example.petsapce_week1.accomodation.scroll.reviewData
 
 
 class ReviewPhotosAdapter(
