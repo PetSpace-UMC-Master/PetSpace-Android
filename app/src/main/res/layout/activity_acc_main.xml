@@ -184,7 +184,7 @@
 
             <include
                 android:id="@+id/frameFaculty"
-                layout="@layout/activity_acc_faculty"
+                layout="@layout/activity_acc_facility"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
