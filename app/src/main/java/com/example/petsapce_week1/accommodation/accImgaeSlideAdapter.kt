@@ -5,12 +5,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.petsapce_week1.databinding.AccMainImageslideBinding
 
-class accImgaeSlideAdapter(val items: ArrayList<imageSlideData>) : RecyclerView.Adapter<accImgaeSlideAdapter.ViewHolder>() {
+class accImgaeSlideAdapter(val items: List<imageSlideData>) : RecyclerView.Adapter<accImgaeSlideAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
-        fun OnItemClick(data: imageSlideData)
+        fun OnItemClick(data: Int)
     }
 
     var itemClickListener: OnItemClickListener? = null //초기값 null값
@@ -19,7 +20,7 @@ class accImgaeSlideAdapter(val items: ArrayList<imageSlideData>) : RecyclerView.
         RecyclerView.ViewHolder(binding.root) {
         init {
             binding.imgMain.setOnClickListener {
-                itemClickListener?.OnItemClick(items[adapterPosition]) //?는 null일 수 도 있다고 알려주는 역할
+                itemClickListener?.OnItemClick(items[adapterPosition].imgSlide) //?는 null일 수 도 있다고 알려주는 역할
                 /* val intent = Intent(this,detailPageActivity::class.java)
                  startActivity(intent)*/
                 Log.d("touch3","touch")

@@ -1,7 +1,6 @@
 package com.example.petsapce_week1.accommodation
 
 import android.annotation.SuppressLint
-import android.content.ClipData
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -16,10 +15,8 @@ import com.example.petsapce_week1.databinding.ActivityAccMainBinding
 import com.example.petsapce_week1.network.AccomoService
 import com.example.petsapce_week1.network.RetrofitHelper
 import com.example.petsapce_week1.vo.FacilityData
-import com.example.petsapce_week1.vo.ReviewData
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationData
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationRoomData
-import com.example.petsapce_week1.vo.accomo_datamodel.ReviewPreview
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -53,7 +50,7 @@ class AccMainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initViewPager()
-        initData()
+        //initData()
         val data = AccomodationRoomData(roomId = null)
 
         //                              백엔드 연동 부분
@@ -77,6 +74,11 @@ class AccMainActivity : AppCompatActivity() {
                     binding.textPrice.text = "₩ ${body.result.price}/박"
                     binding.textStarscore.text = body.result.roomAverageScore.toString()
                     binding.textReviewcount.text = "${body.result.reviewCount}개"
+
+                    //imgdataList.add(body.result.roomImageUrls)
+                    // body에서 url 저장하는 코드.....
+                    val imgUrlAdapter = accImgaeSlideAdapter(imgdataList)
+                    binding.viewpager.adapter = imgUrlAdapter
 
                     // ================= frame host 호스트 ===================
                     binding.frameHost.textName.text = body.result.hostName
@@ -152,7 +154,7 @@ class AccMainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
+/*
     private fun initData() {
         imgdataList.add(imageSlideData(R.drawable.home2))
         imgdataList.add(imageSlideData(R.drawable.map))
@@ -164,9 +166,11 @@ class AccMainActivity : AppCompatActivity() {
         imgdataList.add(imageSlideData(R.drawable.map))
     }
 
+ */
+
     private fun initViewPager() {
 
-        binding.viewpager.adapter = accImgaeSlideAdapter(imgdataList)
+        //binding.viewpager.adapter = accImgaeSlideAdapter(imgdataList)
 
         val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.pageMargin) // dimen 파일 안에 크기를 정의해두었다.
         val pagerWidth = resources.getDimensionPixelOffset(R.dimen.pageWidth) // dimen 파일이 없으면 생성해야함

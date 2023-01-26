@@ -42,6 +42,8 @@ class reviewFragment : Fragment() {
         binding = FragmentReviewBinding.inflate(layoutInflater)
 
         initRecyclerView()
+
+        // ============== 백엔드 연동 =================
         val roomId : Long = 1
         api.getRoomDetail(roomId = roomId).enqueue(object : Callback<AccomodationData> {
             @SuppressLint("SetTextI18n")
@@ -66,9 +68,7 @@ class reviewFragment : Fragment() {
                         ?.body()
                         .let {
                             if (it != null) {
-                                Log.d("숙소 here", "here")
                                 for (item in it.result.reviewPreviews) {
-                                    Log.d("숙소 리뷰 리스트으??", item.toString())
                                     reviewList.apply {
                                         add(
                                             ReviewData(
@@ -79,31 +79,21 @@ class reviewFragment : Fragment() {
                                                 score = item.score,
                                             )
                                         )
-                                        Log.d("숙소 review list", "$reviewList")
-                                        //여기가 5개 찍히면 dataList.add 하고
-                                        // 한개로 찍히면 어떻게 하징
                                     }
                                 }
-                                Log.d("숙소 아아", "아아")
                             }
                         }
-//                    for
-                    Log.d("리뷰 리스트 사이즈", "${reviewList.size}")
                     for (i in 0 until reviewList.size) {
-                        Log.d("임윤섭", "들어왔어요")
-                        Log.d("${i+1}번째 Date}", "${reviewList[i].createdAt}")
                         val new_date = reviewList[i].createdAt.substring(0, reviewList[i].createdAt.indexOf("T"))
-                        Log.d("Date", "${new_date}")
-//                        val new_date_list = new_date.delimiterOffset("-")
                         val new_date_list = new_date.split("-")
                         Log.d("Date1", "${new_date_list[0] + "년 " + new_date_list[1] + "월 " + new_date_list[2] + "일"}")
-
+                        val date = "${new_date_list[0]}년 ${new_date_list[1]}월 ${new_date_list[2]}일"
                         dataList.add (
                             reviewData(
                                 R.drawable.face,
                                 reviewList[i].score, //.score,
                                 reviewList[i].nickname,
-                                reviewList[i].createdAt,
+                                date,
                                 reviewList[i].description
                             )
                         )
