@@ -9,7 +9,7 @@ import com.example.petsapce_week1.databinding.AccReviewRowBinding
 
 class reviewAdapter(val items: ArrayList<reviewData>) : RecyclerView.Adapter<reviewAdapter.ViewHolder>() {
 
-    interface OnItemClickListener {
+    interface OnItemClickListener  {
         fun OnItemClick(data: reviewData)
     }
 
@@ -45,6 +45,7 @@ class reviewAdapter(val items: ArrayList<reviewData>) : RecyclerView.Adapter<rev
             textName.text = items[position].name
             textDate.text = items[position].date.toString()+"주 전"
             textDetail.text = items[position].text
+
 //            textViewDifficulty.text= "난이도 ${position+1}"
         }
 

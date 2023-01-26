@@ -38,6 +38,7 @@
             android:name=".accommodation.AccMainActivity"
             android:exported="true">
         </activity>
+        <activity android:name=".accommodation.scroll.AccFacilityMoreActivity"/>
 
 
         <!--       숙소 상세보기 끝 =====================================================================================-->

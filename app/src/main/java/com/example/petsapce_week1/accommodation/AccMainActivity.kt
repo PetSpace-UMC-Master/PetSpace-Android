@@ -1,5 +1,8 @@
 package com.example.petsapce_week1.accommodation
 
+import android.annotation.SuppressLint
+import android.content.ClipData
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,8 +14,10 @@ import com.example.petsapce_week1.databinding.ActivityAccHostBinding
 import com.example.petsapce_week1.databinding.ActivityAccMainBinding
 import com.example.petsapce_week1.network.AccomoService
 import com.example.petsapce_week1.network.RetrofitHelper
+import com.example.petsapce_week1.vo.ReviewData
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationData
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationRoomData
+import com.example.petsapce_week1.vo.accomo_datamodel.ReviewPreview
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -49,6 +54,7 @@ class AccMainActivity : AppCompatActivity() {
         val data = AccomodationRoomData(roomId = null)
 
         api.getRoomDetail(1).enqueue(object : Callback<AccomodationData> {
+            @SuppressLint("SetTextI18n")
             override fun onResponse(
                 call: Call<AccomodationData>,
                 response: Response<AccomodationData>
@@ -59,10 +65,23 @@ class AccMainActivity : AppCompatActivity() {
 
                 val body = response.body()
                 if (body != null) {
+                    //frame host data
                     binding.frameHost.textName.text = body.result.hostName
-                    binding.frameHost.tvMaxpet.text = body.result.maxPet.toString()
-                    binding.frameHost.tvMaxguest.text = body.result.maxGuest.toString()
+                    binding.frameHost.tvMaxpet.text = "· 최대 반려동물 ${body.result.maxPet}마리"
+                    binding.frameHost.tvMaxguest.text = "최대 인원 ${body.result.maxGuest}명 "
                     binding.frameHost.textAbout.text = body.result.roomDecription
+                    //맨 위 프레임
+                    binding.tvHousename.text = body.result.roomName
+                    binding.textAddress.text = body.result.address
+                    binding.textPrice.text = "₩ ${body.result.price}/박"
+                    binding.textStarscore.text = body.result.roomAverageScore.toString()
+                    binding.textReviewcount.text = "${body.result.reviewCount}개"
+                    //body.result.reviewPreviews.isEmpty()
+                    //Log.d("숙소", "${body.result.reviewPreviews.component1()}")
+                    //val list = mutableListOf<ReviewPreview>()
+                    Log.d("----", "${body.result.reviewPreviews.size}")
+                    //val list : List<ReviewPreview> = body.result.reviewPreviews.subList(0,5)
+
                 }
             }
             override fun onFailure(call: Call<AccomodationData>, t: Throwable) {
@@ -79,6 +98,12 @@ class AccMainActivity : AppCompatActivity() {
             .beginTransaction()
             .add(binding.frameReview.id, reviewFragment())
             .commitAllowingStateLoss()
+
+        binding.frameFacility.tvViewmore.setOnClickListener {
+            //Log.d("button", "clicked")
+            val intent = Intent(this@AccMainActivity, AccFacilityMoreActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun initData() {
@@ -170,19 +195,5 @@ class AccMainActivity : AppCompatActivity() {
             }
         }
     }
-
-    //fragment -> fragment 화면 전환
-    fun changeFragment(index : Int){
-        when(index){
-            // 편의시설 더보기 클릭 시 호출할 것
-            1 -> {
-                supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.acc_scrollview, AccFacilityMoreFragment())
-                    .commitAllowingStateLoss()
-            }
-        }
-    }
-
 }
 

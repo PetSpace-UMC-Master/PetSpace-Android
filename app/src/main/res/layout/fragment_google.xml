@@ -9,6 +9,7 @@
     tools:context=".accommodation.scroll.googleFragment">
 
     <TextView
+        android:id="@+id/house_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/bmjua"

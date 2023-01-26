@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/fragment_facilities_more"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".accommodation.scroll.AccFacilityMoreFragment">
+    tools:context=".accommodation.scroll.AccFacilityMoreActivity">
 
     <LinearLayout
         android:id="@+id/facilities_fixed_upper_bar"
