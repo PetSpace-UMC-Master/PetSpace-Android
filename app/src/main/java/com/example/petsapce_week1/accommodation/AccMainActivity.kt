@@ -8,12 +8,14 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
 import com.example.petsapce_week1.R
 import com.example.petsapce_week1.accommodation.scroll.*
 import com.example.petsapce_week1.databinding.ActivityAccHostBinding
 import com.example.petsapce_week1.databinding.ActivityAccMainBinding
 import com.example.petsapce_week1.network.AccomoService
 import com.example.petsapce_week1.network.RetrofitHelper
+import com.example.petsapce_week1.vo.FacilityData
 import com.example.petsapce_week1.vo.ReviewData
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationData
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationRoomData
@@ -28,10 +30,11 @@ class AccMainActivity : AppCompatActivity() {
     lateinit var bindingHostBinding: ActivityAccHostBinding
     lateinit var adapter: accImgaeSlideAdapter
     var imgdataList = ArrayList<imageSlideData>()
+    val reviewList = mutableListOf<FacilityData>()
 
+    // ========== 백엔드 연동 부분 ===========
     private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
     var api : AccomoService = retrofit.create(AccomoService::class.java)
-
 
     private val MIN_SCALE = 0.85f // 뷰가 몇퍼센트로 줄어들 것인지
     private val MIN_ALPHA = 0.5f // 어두워지는 정도를 나타낸 듯 하다.
@@ -53,6 +56,8 @@ class AccMainActivity : AppCompatActivity() {
         initData()
         val data = AccomodationRoomData(roomId = null)
 
+        //                              백엔드 연동 부분
+        //홈화면 연결 후 roomId 받아오면 반영!
         api.getRoomDetail(1).enqueue(object : Callback<AccomodationData> {
             @SuppressLint("SetTextI18n")
             override fun onResponse(
@@ -65,27 +70,70 @@ class AccMainActivity : AppCompatActivity() {
 
                 val body = response.body()
                 if (body != null) {
-                    //frame host data
-                    binding.frameHost.textName.text = body.result.hostName
-                    binding.frameHost.tvMaxpet.text = "· 최대 반려동물 ${body.result.maxPet}마리"
-                    binding.frameHost.tvMaxguest.text = "최대 인원 ${body.result.maxGuest}명 "
-                    binding.frameHost.textAbout.text = body.result.roomDecription
-                    //맨 위 프레임
+
+                    // ================ 맨 위 프레임 ==================
                     binding.tvHousename.text = body.result.roomName
                     binding.textAddress.text = body.result.address
                     binding.textPrice.text = "₩ ${body.result.price}/박"
                     binding.textStarscore.text = body.result.roomAverageScore.toString()
                     binding.textReviewcount.text = "${body.result.reviewCount}개"
-                    //body.result.reviewPreviews.isEmpty()
-                    //Log.d("숙소", "${body.result.reviewPreviews.component1()}")
-                    //val list = mutableListOf<ReviewPreview>()
-                    Log.d("----", "${body.result.reviewPreviews.size}")
-                    //val list : List<ReviewPreview> = body.result.reviewPreviews.subList(0,5)
+
+                    // ================= frame host 호스트 ===================
+                    binding.frameHost.textName.text = body.result.hostName
+                    binding.frameHost.tvMaxpet.text = "· 최대 반려동물 ${body.result.maxPet}마리"
+                    binding.frameHost.tvMaxguest.text = "최대 인원 ${body.result.maxGuest}명 "
+                    binding.frameHost.textAbout.text = body.result.roomDecription
 
                 }
+                // ================ facility 편의시설 프레임 =====================
+                response.takeIf { it.isSuccessful }
+                    ?.body()
+                    .let {
+                        if (it != null) {
+                            for (item in it.result.facilities) {
+                                reviewList.apply {
+                                    add(
+                                        FacilityData(
+                                            imgUrl = item.facilityImageUrl,
+                                            facname = item.facilityName
+                                        )
+                                    )
+                                }
+                            }
+                        }
+                    }
+                for (i in 0 until reviewList.size) {
+                    reviewList.add (
+                        FacilityData(
+                            reviewList[i].imgUrl,
+                            reviewList[i].facname
+                        )
+                    )
+                }
+                binding.frameFacility.tvFac1.text = reviewList[0].facname
+                Glide.with(this@AccMainActivity)
+                    .load(reviewList[0].imgUrl)
+                    .into(binding.frameFacility.imgFac1)
+                binding.frameFacility.tvFac2.text = reviewList[1].facname
+                Glide.with(this@AccMainActivity)
+                    .load(reviewList[1].imgUrl)
+                    .into(binding.frameFacility.imgFac2)
+                binding.frameFacility.tvFac3.text = reviewList[2].facname
+                Glide.with(this@AccMainActivity)
+                    .load(reviewList[2].imgUrl)
+                    .into(binding.frameFacility.imgFac3)
+                binding.frameFacility.tvFac4.text = reviewList[3].facname
+                Glide.with(this@AccMainActivity)
+                    .load(reviewList[3].imgUrl)
+                    .into(binding.frameFacility.imgFac4)
+                binding.frameFacility.tvFac5.text = reviewList[4].facname
+                Glide.with(this@AccMainActivity)
+                    .load(reviewList[4].imgUrl)
+                    .into(binding.frameFacility.imgFac5)
+
             }
             override fun onFailure(call: Call<AccomodationData>, t: Throwable) {
-                Log.d("숙소 세부 정보", "failed")
+                Log.d("숙소 시설 facility 세부 정보", "failed")
             }
         })
 
@@ -100,7 +148,6 @@ class AccMainActivity : AppCompatActivity() {
             .commitAllowingStateLoss()
 
         binding.frameFacility.tvViewmore.setOnClickListener {
-            //Log.d("button", "clicked")
             val intent = Intent(this@AccMainActivity, AccFacilityMoreActivity::class.java)
             startActivity(intent)
         }

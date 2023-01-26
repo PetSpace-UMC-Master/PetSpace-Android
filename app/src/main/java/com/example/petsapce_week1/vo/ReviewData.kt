@@ -7,3 +7,8 @@ data class ReviewData(
     val userId: Int,
     val score : Int
 )
+
+data class FacilityData(
+    val imgUrl : String,
+    val facname : String,
+)

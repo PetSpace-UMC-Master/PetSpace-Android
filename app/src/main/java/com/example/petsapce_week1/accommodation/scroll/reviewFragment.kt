@@ -113,7 +113,6 @@ class reviewFragment : Fragment() {
                     val vreviewAdapter = reviewAdapter(dataList)
                     binding.recyclerview.adapter = vreviewAdapter
                 }
-
             }
             override fun onFailure(call: Call<AccomodationData>, t: Throwable) {
                 TODO("Not yet implemented")

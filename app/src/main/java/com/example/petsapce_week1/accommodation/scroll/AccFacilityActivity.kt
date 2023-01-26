@@ -12,6 +12,7 @@ import retrofit2.Retrofit
 
 class AccFacilityActivity : AppCompatActivity() {
     private lateinit var binding : ActivityAccFacilityBinding
+
     //백엔드 서버 연동
     private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
     var api : AccomoService = retrofit.create(AccomoService::class.java)

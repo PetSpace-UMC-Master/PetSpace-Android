@@ -45,33 +45,34 @@ class reviewAdapter(val items: ArrayList<reviewData>) : RecyclerView.Adapter<rev
             //이미지는 이런식으로 담아야함.
             imgFace.setImageResource(items[position].img)
             textName.text = items[position].name
-            textDate.text = items[position].date.toString()+"주 전"
+            textDate.text = items[position].date+"주 전"
             textDetail.text = items[position].text
-            val rating = items[position].star
-            if(rating == 1){
-                imgStar1.visibility = View.VISIBLE
-            }
-            else if(rating == 2){
-                imgStar1.visibility = View.VISIBLE
-                imgStar2.visibility = View.VISIBLE
-            }
-            else if(rating == 3){
-                imgStar1.visibility = View.VISIBLE
-                imgStar2.visibility = View.VISIBLE
-                imgStar3.visibility = View.VISIBLE
-            }
-            else if(rating == 4){
-                imgStar1.visibility = View.VISIBLE
-                imgStar2.visibility = View.VISIBLE
-                imgStar3.visibility = View.VISIBLE
-                imgStar4.visibility = View.VISIBLE
-            }
-            else if(rating == 5){
-                imgStar1.visibility = View.VISIBLE
-                imgStar2.visibility = View.VISIBLE
-                imgStar3.visibility = View.VISIBLE
-                imgStar4.visibility = View.VISIBLE
-                imgStar5.visibility = View.VISIBLE
+            when (items[position].star) {
+                1 -> {
+                    imgStar1.visibility = View.VISIBLE
+                }
+                2 -> {
+                    imgStar1.visibility = View.VISIBLE
+                    imgStar2.visibility = View.VISIBLE
+                }
+                3 -> {
+                    imgStar1.visibility = View.VISIBLE
+                    imgStar2.visibility = View.VISIBLE
+                    imgStar3.visibility = View.VISIBLE
+                }
+                4 -> {
+                    imgStar1.visibility = View.VISIBLE
+                    imgStar2.visibility = View.VISIBLE
+                    imgStar3.visibility = View.VISIBLE
+                    imgStar4.visibility = View.VISIBLE
+                }
+                5 -> {
+                    imgStar1.visibility = View.VISIBLE
+                    imgStar2.visibility = View.VISIBLE
+                    imgStar3.visibility = View.VISIBLE
+                    imgStar4.visibility = View.VISIBLE
+                    imgStar5.visibility = View.VISIBLE
+                }
             }
 
 //            textViewDifficulty.text= "난이도 ${position+1}"
