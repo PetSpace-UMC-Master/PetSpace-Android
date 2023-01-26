@@ -1,8 +1,10 @@
 package com.example.petsapce_week1.accomodation.scroll
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.petsapce_week1.GifActivity
 import com.example.petsapce_week1.databinding.ActivityAccHostBinding
 import com.example.petsapce_week1.loginrelated.LoginBackendResponse
 import com.example.petsapce_week1.loginrelated.UserModelGeneral
@@ -27,6 +29,8 @@ class AccHostActivity : AppCompatActivity() {
         // == 백엔드 통신 부분 ==
         val data = AccomodationRoomData(roomId = null)
 
+
+
         api.getRoomDetail(data).enqueue(object : Callback<AccomodationData>{
             override fun onResponse(
                 call: Call<AccomodationData>,
@@ -41,6 +45,7 @@ class AccHostActivity : AppCompatActivity() {
                     binding.textName.text = body.result.hostName
                     binding.tvMaxguest.text = body.result.maxGuest.toString()
                     binding.tvMaxpet.text = body.result.maxPet.toString()
+
                 }
             }
             override fun onFailure(call: Call<AccomodationData>, t: Throwable) {

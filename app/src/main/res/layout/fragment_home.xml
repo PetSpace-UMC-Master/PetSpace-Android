@@ -91,6 +91,7 @@
             android:textSize="16sp"
 
             />
+
         <ImageView
             android:id="@+id/img_filter"
             android:src="@drawable/tune1x"
