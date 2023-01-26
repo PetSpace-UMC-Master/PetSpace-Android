@@ -1,8 +1,10 @@
 package com.example.petsapce_week1.accommodation.scroll
 
 import android.annotation.SuppressLint
+import android.opengl.Visibility
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petsapce_week1.databinding.AccReviewRowBinding
@@ -45,6 +47,32 @@ class reviewAdapter(val items: ArrayList<reviewData>) : RecyclerView.Adapter<rev
             textName.text = items[position].name
             textDate.text = items[position].date.toString()+"주 전"
             textDetail.text = items[position].text
+            val rating = items[position].star
+            if(rating == 1){
+                imgStar1.visibility = View.VISIBLE
+            }
+            else if(rating == 2){
+                imgStar1.visibility = View.VISIBLE
+                imgStar2.visibility = View.VISIBLE
+            }
+            else if(rating == 3){
+                imgStar1.visibility = View.VISIBLE
+                imgStar2.visibility = View.VISIBLE
+                imgStar3.visibility = View.VISIBLE
+            }
+            else if(rating == 4){
+                imgStar1.visibility = View.VISIBLE
+                imgStar2.visibility = View.VISIBLE
+                imgStar3.visibility = View.VISIBLE
+                imgStar4.visibility = View.VISIBLE
+            }
+            else if(rating == 5){
+                imgStar1.visibility = View.VISIBLE
+                imgStar2.visibility = View.VISIBLE
+                imgStar3.visibility = View.VISIBLE
+                imgStar4.visibility = View.VISIBLE
+                imgStar5.visibility = View.VISIBLE
+            }
 
 //            textViewDifficulty.text= "난이도 ${position+1}"
         }

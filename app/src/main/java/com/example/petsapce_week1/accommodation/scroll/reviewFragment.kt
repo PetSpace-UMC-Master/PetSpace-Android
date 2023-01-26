@@ -96,39 +96,23 @@ class reviewFragment : Fragment() {
                         Log.d("Date", "${new_date}")
 //                        val new_date_list = new_date.delimiterOffset("-")
                         val new_date_list = new_date.split("-")
-//                        new_date_list[0] + "년 " + new_date_list[1] + "월 " + new_date_list[2] + "일"
                         Log.d("Date1", "${new_date_list[0] + "년 " + new_date_list[1] + "월 " + new_date_list[2] + "일"}")
 
-//                        val formatter = DateTimeFormatter.ofPattern(new_date_list[0] + "년 " + new_date_list[1] + "월 " + new_date_list[2] + "일")
                         dataList.add (
                             reviewData(
                                 R.drawable.face,
                                 reviewList[i].score, //.score,
                                 reviewList[i].nickname,
-//                                        LocalDateTime.parse(reviewList[i].createdAt),
                                 reviewList[i].createdAt,
-//                                LocalDateTime.now(),
                                 reviewList[i].description
                             )
                         )
                     }
 
-//
-//                    dataList.add(
-//                        reviewData(
-//                            R.drawable.face,
-//                            reviewList[0].score,
-//                            reviewList[0].nickname,
-//                            reviewList[0].createdAt,
-//                            reviewList[0].description
-//                        )
-//                    )
                     Log.d("숙소 ===", dataList[0].toString())
                     val vreviewAdapter = reviewAdapter(dataList)
                     binding.recyclerview.adapter = vreviewAdapter
                 }
-
-
 
             }
             override fun onFailure(call: Call<AccomodationData>, t: Throwable) {
