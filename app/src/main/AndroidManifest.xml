@@ -101,6 +101,10 @@
              </intent-filter>
         </activity>
 
+        <!-- ================프로필 화면 & 설정 화면 =============-->
+        <activity android:name=".ProfileMenuActivity"/>
+        <activity android:name=".SettingsActivity"/>
+
         <!-- 카카오 로그인 화면 뜨는거 -->
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"

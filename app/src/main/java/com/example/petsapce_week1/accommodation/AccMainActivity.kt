@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
+import com.example.petsapce_week1.ProfileMenuActivity
 import com.example.petsapce_week1.R
 import com.example.petsapce_week1.TestMainActivity
 import com.example.petsapce_week1.accommodation.scroll.*
@@ -43,7 +44,7 @@ class AccMainActivity : AppCompatActivity() {
 
         // close btn
         binding.btnBack.setOnClickListener {
-            val intent = Intent(this, TestMainActivity::class.java)
+            val intent = Intent(this, ProfileMenuActivity::class.java)
             startActivity(intent)
         }
 

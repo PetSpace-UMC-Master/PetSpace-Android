@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btn_settings_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_round_arrow_back_ios_new" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="109dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="173dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/bmjua"
+            android:text="환경설정"
+            android:textColor="#0C201E"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_settings_back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.529" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings">
+
+        <Button
+            android:id="@+id/btn_settings1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:drawableLeft="@drawable/group_3"
+            android:drawableRight="@drawable/arrow_forward_ios"
+            android:fontFamily="@font/pretendard_regular"
+            android:gravity="left"
+            android:paddingStart="20dp"
+            android:paddingRight="20dp"
+            android:stateListAnimator="@null"
+            android:text="\t알림 설정"
+            android:textColor="#0C201E"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/btn_settings2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:drawableLeft="@drawable/bi_person_fill_gear"
+            android:drawableRight="@drawable/arrow_forward_ios"
+            android:fontFamily="@font/pretendard_regular"
+            android:gravity="left"
+            android:paddingStart="20dp"
+            android:paddingRight="20dp"
+            android:stateListAnimator="@null"
+            android:text="\t계정 설정"
+            android:textColor="#0C201E"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/btn_settings3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:drawableLeft="@drawable/mdi_bell_badge"
+            android:drawableRight="@drawable/arrow_forward_ios"
+            android:fontFamily="@font/pretendard_regular"
+            android:gravity="left"
+            android:paddingStart="20dp"
+            android:paddingRight="20dp"
+            android:stateListAnimator="@null"
+            android:text="\t공지사항"
+            android:textColor="#0C201E"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/btn_settings4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:drawableLeft="@drawable/bi_question_circle_fill"
+            android:drawableRight="@drawable/arrow_forward_ios"
+            android:fontFamily="@font/pretendard_regular"
+            android:gravity="left"
+            android:paddingStart="20dp"
+            android:paddingRight="20dp"
+            android:stateListAnimator="@null"
+            android:text="\t자주 묻는 질문"
+            android:textColor="#0C201E"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/btn_settings5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:drawableLeft="@drawable/material_symbols_key"
+            android:drawableRight="@drawable/arrow_forward_ios"
+            android:fontFamily="@font/pretendard_regular"
+            android:gravity="left"
+            android:paddingStart="20dp"
+            android:paddingRight="20dp"
+            android:stateListAnimator="@null"
+            android:text="\t프라이버시 항목"
+            android:textColor="#0C201E"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/btn_settings6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:drawableLeft="@drawable/material_symbols_lock_open"
+            android:drawableRight="@drawable/arrow_forward_ios"
+            android:fontFamily="@font/pretendard_regular"
+            android:gravity="left"
+            android:paddingStart="20dp"
+            android:paddingRight="20dp"
+            android:stateListAnimator="@null"
+            android:text="\t로그아웃"
+            android:textColor="#0C201E"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/btn_settings7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:drawableLeft="@drawable/material_symbols_logout_rounded"
+            android:drawableRight="@drawable/arrow_forward_ios"
+            android:fontFamily="@font/pretendard_regular"
+            android:gravity="left"
+            android:paddingStart="20dp"
+            android:paddingRight="20dp"
+            android:stateListAnimator="@null"
+            android:text="\t회원 탈퇴"
+            android:textColor="#0C201E"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#D9D9D9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
