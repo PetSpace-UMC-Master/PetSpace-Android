@@ -82,16 +82,20 @@ class reviewFragment : Fragment() {
                             }
                         }
                     for (i in 0 until reviewList.size) {
+                        /*
+                        // 날짜 데이터 현재시간 기준으로 계산 안할 경우
                         val new_date = reviewList[i].createdAt.substring(0, reviewList[i].createdAt.indexOf("T"))
                         val new_date_list = new_date.split("-")
                         Log.d("숙소 Date1", "${new_date_list[0] + "년 " + new_date_list[1] + "월 " + new_date_list[2] + "일"}")
                         val date = "${new_date_list[0]}년 ${new_date_list[1]}월 ${new_date_list[2]}일"
+                         */
+
                         dataList.add (
                             reviewData(
                                 R.drawable.face,
-                                reviewList[i].score, //.score,
+                                reviewList[i].score,
                                 reviewList[i].nickname,
-                                date,
+                                reviewList[i].createdAt,
                                 reviewList[i].description
                             )
                         )
@@ -106,52 +110,10 @@ class reviewFragment : Fragment() {
                 TODO("Not yet implemented")
             }
         })
-//        initAddData()
-
 
         // Inflate the layout for this fragment
         return binding.root
     }
-//
-//    private fun initAddData() {
-//
-//        dataList.add(
-//            reviewData(
-//                R.drawable.face,
-//                5,
-//                "김현아",
-//                "3",
-//                "품고 기관과 있으며, 만물은 곳으로 운다. 사랑의 그들은 같이, 청춘에 서만 되려니와, 방지하는 있는가? 품고 기관과 있으며, 만물은 곳으로 운다. 사랑의 그들은 같이, 청춘에 서만 되려니와, 방지하는 있는가?..."
-//            )
-//        )
-//        dataList.add(
-//            reviewData(
-//                R.drawable.aircon,
-//                5,
-//                "김현아",
-//                3,
-//                "서만 되려니와, 방지하는 있는가? 품고 기관과 있으며, 만물은 곳으로 운다. 사랑의 그들은 같이, 청춘에 서만 되려니와, 방지하는 있는가?..."
-//            )
-//        )
-//        dataList.add(
-//            reviewData(
-//                R.drawable.star3,
-//                5,
-//                "김현아",
-//                3,
-//                "품고 기관과 있으며, 만물은 곳으로 운다. 사랑의 그들은 같이, 청춘에 서만 되려니와, 방지하는 있는가? 품고 기관과 있으며, 만물은 곳으로 운다. 사랑의 그들은 같이, 청춘에 서만 되려니와, 방지하는 있는가?..."
-//            )
-//        )
-//        dataList.add(
-//            reviewData(
-//                R.drawable.star3,
-//                5,
-//                "김현아",
-//                3,
-//                "품고 기관과 있으며, 만물은 곳으로 운다. 사랑의 그들은 같이, 청춘에 서만 되려니와, 방지하는 있는가? 품고 기관과 있으며, 만물은 곳으로 운다. 사랑의 그들은 같이, 청춘에 서만 되려니와, 방지하는 있는가?..."
-//            )
-//        )
-//    }
 
     private fun initRecyclerView() {
 

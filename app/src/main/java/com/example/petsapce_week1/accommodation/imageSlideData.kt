@@ -1,5 +1,5 @@
 package com.example.petsapce_week1.accommodation
 
-class imageSlideData(
-    val imgSlide:Int,
+data class imageSlideData(
+    val imgSlide : String,//url
 )

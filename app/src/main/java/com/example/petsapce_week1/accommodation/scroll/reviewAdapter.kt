@@ -45,7 +45,7 @@ class reviewAdapter(val items: ArrayList<reviewData>) : RecyclerView.Adapter<rev
             //이미지는 이런식으로 담아야함.
             imgFace.setImageResource(items[position].img)
             textName.text = items[position].name
-            textDate.text = items[position].date+"주 전"
+            textDate.text = items[position].date
             textDetail.text = items[position].text
             when (items[position].star) {
                 1 -> {

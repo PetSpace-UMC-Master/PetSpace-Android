@@ -67,7 +67,7 @@ class googleFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(GoogleViewModel::class.java)
+        viewModel = ViewModelProvider(this)[GoogleViewModel::class.java]
         // TODO: Use the ViewModel
     }
 

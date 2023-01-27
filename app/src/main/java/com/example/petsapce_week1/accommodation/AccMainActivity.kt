@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
-import com.bumptech.glide.Glide
 import com.example.petsapce_week1.R
 import com.example.petsapce_week1.TestMainActivity
 import com.example.petsapce_week1.accommodation.scroll.*
@@ -15,7 +14,6 @@ import com.example.petsapce_week1.databinding.ActivityAccHostBinding
 import com.example.petsapce_week1.databinding.ActivityAccMainBinding
 import com.example.petsapce_week1.network.AccomoService
 import com.example.petsapce_week1.network.RetrofitHelper
-import com.example.petsapce_week1.reviewrelated.ReviewReadMoreActivity
 import com.example.petsapce_week1.vo.FacilityData
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationData
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationRoomData
@@ -30,6 +28,7 @@ class AccMainActivity : AppCompatActivity() {
     lateinit var adapter: accImgaeSlideAdapter
     var imgdataList = ArrayList<imageSlideData>()
     val reviewList = mutableListOf<FacilityData>()
+    var photos = mutableListOf<String>()
 
     // ========== 백엔드 연동 부분 ===========
     private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
@@ -64,7 +63,7 @@ class AccMainActivity : AppCompatActivity() {
         //                              백엔드 연동 부분
         //홈화면 연결 후 roomId 받아오면 반영!
         api.getRoomDetail(1).enqueue(object : Callback<AccomodationData> {
-            @SuppressLint("SetTextI18n")
+            @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
             override fun onResponse(
                 call: Call<AccomodationData>,
                 response: Response<AccomodationData>
@@ -83,10 +82,58 @@ class AccMainActivity : AppCompatActivity() {
                     binding.textStarscore.text = body.result.roomAverageScore.toString()
                     binding.textReviewcount.text = "${body.result.reviewCount}개"
 
-                    //imgdataList.add(body.result.roomImageUrls)
-                    // body에서 url 저장하는 코드.....
+                    /*
+                    response.takeIf { it.isSuccessful }
+                        ?.body()
+                        .let {
+                            if (it != null) {
+                                for (item in it.result.roomImageUrls) {
+                                    imgdataList.apply {
+                                        add(
+                                            imageSlideData(
+                                                imgSlide = item
+                                            )
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    for (i in 0 until imgdataList.size) {
+                        imgdataList.add (
+                            imageSlideData(
+                                imgdataList[i].imgSlide
+                            )
+                        )
+
+                     */
+
+                    for (item in body.result.roomImageUrls) {
+                        imgdataList.apply {
+                            add(
+                                imageSlideData(
+                                    imgSlide = item
+                                )
+                            )
+                        }
+                    }
+                    for (i in 0 until imgdataList.size) {
+                        imgdataList.add(
+                            imageSlideData(
+                                imgdataList[i].imgSlide
+                            )
+                        )
+                    }
+
+                    //photos.add(body.result.roomImageUrls.toString())
+
+                    Log.d("숙소","${body.result.roomImageUrls}")
+                    Log.d("숙소","$photos")
                     val imgUrlAdapter = accImgaeSlideAdapter(imgdataList)
+                    Log.d("숙소", "뭐가 문제야2")
                     binding.viewpager.adapter = imgUrlAdapter
+                    Log.d("숙소", "뭐가 문제야3")
+                    imgUrlAdapter.notifyDataSetChanged()
+                    Log.d("숙소", "뭐가 문제야4")
 
                     // ================= frame host 호스트 ===================
                     binding.frameHost.textName.text = body.result.hostName
@@ -120,8 +167,8 @@ class AccMainActivity : AppCompatActivity() {
                         )
                     )
                 }
-                Log.d("숙소 리뷰 리스트", "$reviewList")
-                /*
+                Log.d("숙소 facility 리스트", "$reviewList")
+/*
                 binding.frameFacility.tvFac1.text = reviewList[0].facname
                 Glide.with(this@AccMainActivity)
                     .load(reviewList[0].imgUrl)
@@ -142,8 +189,10 @@ class AccMainActivity : AppCompatActivity() {
                 Glide.with(this@AccMainActivity)
                     .load(reviewList[4].imgUrl)
                     .into(binding.frameFacility.imgFac5)
-                 */
+
+ */
             }
+
             override fun onFailure(call: Call<AccomodationData>, t: Throwable) {
                 Log.d("숙소 시설 facility 세부 정보", "failed")
             }
