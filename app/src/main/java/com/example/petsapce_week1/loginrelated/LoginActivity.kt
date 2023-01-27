@@ -1,6 +1,7 @@
 package com.example.petsapce_week1.loginrelated
 
 import android.content.ContentValues
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -27,7 +28,8 @@ class LoginActivity : AppCompatActivity() {
 
     private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance() // RetrofitClient의 instance 불러오기
     private var authToken : String ?= null
-    //    private var data: UserModel? = null
+    val bearer = "Bearer "
+    var token: String ?= null
     var api : LoginService = retrofit.create(LoginService::class.java)
     private lateinit var binding: ActivityLoginBinding
 
@@ -36,10 +38,9 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        initData()
         //id password 임의로 설정
-        val id: String = "wjddus@naver.com"
-        val password: String = "1234567!"
+        val id = "wjddus@naver.com"
+        val password = "1234567!"
 
         //id, password check
         initFlag(id, password)
@@ -65,13 +66,12 @@ class LoginActivity : AppCompatActivity() {
         }
          */
 
-        /* Click_listener */
         binding.btnKakao.setOnClickListener {
-            kakaoLogin() //로그인
+            kakaoLogin()
         }
 
     }
-
+    // ================ 카카오 로그인 ==================
     private fun kakaoLogin() {
 
         // 카카오계정으로 로그인 공통 callback 구성
@@ -115,7 +115,12 @@ class LoginActivity : AppCompatActivity() {
                 //data = UserModel(accessToken = authToken)
                 //saveData(id, pw)
                 Log.d("access_token2", "$authToken")
-                api.postAccessToken(UserModelKakao(accessToken = authToken)).enqueue(object : retrofit2.Callback<LoginBackendResponse>{
+
+                //bearer 붙이나??
+                //authToken = bearer + authToken
+                Log.d("로그인 내가 보낸거", token.toString())
+
+                api.postAccessToken(UserModelKakao(accessToken = authToken)).enqueue(object : Callback<LoginBackendResponse>{
                     override fun onResponse(call: Call<LoginBackendResponse>, response: Response<LoginBackendResponse>) {
                         Log.d("로그인 통신 성공", response.toString())
                         Log.d("로그인 통신 성공", response.body().toString())
@@ -135,8 +140,9 @@ class LoginActivity : AppCompatActivity() {
                                 Toast.LENGTH_LONG
                             ).show()
                         }
+                        val intent = Intent(this@LoginActivity, TestMainActivity::class.java)
+                        startActivity(intent)
                     }
-
                     override fun onFailure(call: Call<LoginBackendResponse>, t: Throwable) {
                         Log.d("통신 로그인..", "전송 실패")
                     }
@@ -169,17 +175,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-
-
-
-/* private fun initData() {
-     val id:String = "cw"
-     val password:String = "abc"
-
- }*/
-
     fun initFlag(id: String, password: String) {
-//        var flag: Boolean = false
         val severId = id
         val severPswd = password
 
@@ -188,12 +184,10 @@ class LoginActivity : AppCompatActivity() {
 
             btnEmail.setOnClickListener {
 
-                //edittext에서 값을 받아옴
                 val inputEmail = editTextEmail.text.toString()
                 val inputPassword = editTextPassword.text.toString()
-                //저장된 id와 비번 맞는지 체크
-                //맞으면 gif화면으로 이동(홈화면 넘어가야하는데 없어서 gif로 넘어감)
-                // == 백엔드 통신 부분 ==
+
+                // ==================== 일반 로그인 백엔드 통신 부분 ===================
                 val data = UserModelGeneral(inputEmail, inputPassword)
 
                 if (severId == inputEmail && severPswd == inputPassword) {
@@ -222,9 +216,8 @@ class LoginActivity : AppCompatActivity() {
                             Log.d("로그인 통신 실패","fail")
                         }
                     })
-                    val intent = Intent(this@LoginActivity, ReviewReadMoreActivity::class.java)
+                    val intent = Intent(this@LoginActivity, TestMainActivity::class.java)
                     startActivity(intent)
-//                    flag = true
 
                 }//틀리면 빨간글자 뜨게함
                 else {

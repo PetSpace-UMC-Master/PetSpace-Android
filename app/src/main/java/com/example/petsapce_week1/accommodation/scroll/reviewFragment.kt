@@ -54,12 +54,10 @@ class reviewFragment : Fragment() {
                 Log.d("숙소 세부 정보 review 통신 성공",response.toString())
                 Log.d("숙소 세부 정보 review 통신 성공", response.body().toString())
                 val body = response.body()
-                Log.d("숙소 리뷰 리스트으??",body.toString())
-//                reviewList = body.result.reviewPreviews
-
+//
                 if (body != null) {
+
                     //frame host data
-                    //binding.frameHost.textName.text = body.result.hostName
                     binding.textStarscore.text = body.result.roomAverageScore.toString()
                     binding.textReviewcount.text = body.result.reviewCount.toString()
 
@@ -86,7 +84,7 @@ class reviewFragment : Fragment() {
                     for (i in 0 until reviewList.size) {
                         val new_date = reviewList[i].createdAt.substring(0, reviewList[i].createdAt.indexOf("T"))
                         val new_date_list = new_date.split("-")
-                        Log.d("Date1", "${new_date_list[0] + "년 " + new_date_list[1] + "월 " + new_date_list[2] + "일"}")
+                        Log.d("숙소 Date1", "${new_date_list[0] + "년 " + new_date_list[1] + "월 " + new_date_list[2] + "일"}")
                         val date = "${new_date_list[0]}년 ${new_date_list[1]}월 ${new_date_list[2]}일"
                         dataList.add (
                             reviewData(
