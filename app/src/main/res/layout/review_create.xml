@@ -246,10 +246,10 @@
             </LinearLayout>
 
             <ImageButton
-                android:layout_marginStart="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/photo_input"/>
+                android:layout_marginStart="20dp"
+                android:src="@drawable/photo_input" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnReviewCreate"
