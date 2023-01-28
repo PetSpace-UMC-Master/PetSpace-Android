@@ -10,10 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal"
+        android:background="@color/white"
         >
 
         <ImageButton
-            android:id="@+id/btn_facilites_close"
+            android:id="@+id/btn_back"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginStart="20dp"
@@ -44,7 +45,8 @@
     <ScrollView
         app:layout_constraintTop_toBottomOf="@id/review_line"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_marginTop="61dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -124,7 +126,19 @@
                     android:layout_weight="1"
                     />
 
-                <LinearLayout
+                <RatingBar
+                    android:isIndicator="false"
+                    android:id="@+id/ratingBar"
+                    android:progressTint="@color/red"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:rating="0"
+                    android:stepSize="1"
+                    android:layout_marginEnd="24.12dp"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    />
+
+                <!--<LinearLayout
                     android:layout_marginRight="20dp"
                     android:id="@+id/review_rating"
                     android:layout_width="wrap_content"
@@ -163,7 +177,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/star_half" />
-                </LinearLayout>
+                </LinearLayout>-->
             </LinearLayout>
 
             <LinearLayout
@@ -247,15 +261,29 @@
                     android:textColor="@color/red"/>
             </LinearLayout>
 
-            <ImageButton
-                android:layout_marginStart="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/photo_input"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:id="@+id/open_gallery"
+                    android:layout_marginStart="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/photo_input"/>
+
+                <ImageView
+                    android:id="@+id/selected_image"
+                    android:layout_marginStart="10dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"/>
+
+
+            </LinearLayout>
+
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnReviewCreate"
-                android:enabled="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginBottom="30dp"
                 android:layout_marginTop="20dp"
@@ -266,7 +294,6 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:text="리뷰 작성하기"
-                android:textAllCaps="false"
                 android:textColor="#EEF5F5"
                 android:textSize="16dp"
                 />

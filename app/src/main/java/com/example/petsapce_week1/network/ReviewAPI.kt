@@ -1,16 +1,17 @@
-package com.example.petsapce_week1.review
+package com.example.petsapce_week1.network
 
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
+import com.example.petsapce_week1.review.ReviewData
+import com.example.petsapce_week1.vo.accomo_datamodel.ReviewDTO
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Headers
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ReviewAPI {
-    @POST("/app/reviews?reservationId=1")
+    //@Multipart
+    @POST("/app/reviews?reservationId=1/")
     fun post_reviews(
+        //@Header("")
+        //@Part jsonParams: ReviewDTO
+        //@Part images: MultipartBody.Part?
         @Body jsonParams: ReviewDTO
     ): Call<ReviewData>
 }

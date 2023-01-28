@@ -117,6 +117,10 @@
                     tools:ignore="AppLinkUrlError" />
             </intent-filter>
         </activity>
+
+
+        <activity android:name=".review.ReviewPostActivity"
+            android:exported="true"></activity>
     </application>
 
 </manifest>

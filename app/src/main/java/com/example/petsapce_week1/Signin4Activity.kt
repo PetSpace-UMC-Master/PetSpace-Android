@@ -36,15 +36,7 @@ class Signin4Activity : AppCompatActivity() {
         //임의의 이메일 선언
         val email = "aaa@naver.com"
         initButtonCheck(email)
-<<<<<<< HEAD
 
-        //2번 패스워드 체크
-        initPasswordCheck()
-        //3번 패스워드 동일 체크
-        initPasswordEqual()
-        Log.d("flbutton",flagButton.toString())
-=======
->>>>>>> 8324e8854cfa91555f155e1717c8cc009ea3a43a
 
         //2번 패스워드 체크
         initPasswordCheck()
