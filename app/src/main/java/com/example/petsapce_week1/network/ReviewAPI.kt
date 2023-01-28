@@ -6,12 +6,12 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface ReviewAPI {
-    //@Multipart
+   // @Multipart
     @POST("/app/reviews?reservationId=1/")
     fun post_reviews(
         //@Header("")
-        //@Part jsonParams: ReviewDTO
-        //@Part images: MultipartBody.Part?
+        //@Part jsonParams: ReviewDTO,
+        //@Part images: MultipartBody.Part
         @Body jsonParams: ReviewDTO
     ): Call<ReviewData>
 }

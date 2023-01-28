@@ -3,7 +3,10 @@ package com.example.petsapce_week1.review
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.petsapce_week1.TestMainActivity
 import com.example.petsapce_week1.databinding.ReviewCreateBinding
 import com.example.petsapce_week1.network.RetrofitHelper
@@ -22,8 +25,20 @@ class ReviewPostActivity : AppCompatActivity() {
     private var success_review_id: Int? = null
     private var review_rate: Int? = null
 
+    private val activityResult: ActivityResultLauncher<Intent> = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()){
+        if(it.resultCode == RESULT_OK && it.data != null) {
+            val uri = it.data!!.data
+
+            Glide.with(this)
+                .load(uri)
+                .into(binding.selectedImage)
+
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         binding = ReviewCreateBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -38,21 +53,9 @@ class ReviewPostActivity : AppCompatActivity() {
         binding.openGallery.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
-            startActivity(intent)
+            activityResult.launch(intent)
         }
 
-/*        private val activityResult: ActivityResultLauncher<Intent> = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult(){
-                if(it.resultCode == RESULT_OK && it.data != null) {
-                    val uri = it.data!!.data
-
-                    Glide.with(this)
-                        .load(uri)
-                        .into(binding.selectedImage)
-
-                }
-            }
-        )*/
 
 
         binding.btnReviewCreate.setOnClickListener {
