@@ -5,15 +5,14 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-object RetrofitHelper {
+object RetrofitHelperHome {
 
-    val BASE_URL: String = "https://99f0-211-106-114-186.jp.ngrok.io/"
+    val BASE_URL: String = "https://e7bb-59-6-94-207.jp.ngrok.io/"
     var gson = GsonBuilder().setLenient().create()
 
     fun getRetrofitInstance(): Retrofit {
         val builder: Retrofit.Builder = Retrofit.Builder()
         val retrofit = builder.baseUrl(BASE_URL)
-            //.addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
 

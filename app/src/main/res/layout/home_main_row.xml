@@ -6,6 +6,8 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottom"
         android:id="@+id/topcardview"
         android:elevation="0dp"
         android:layout_width="wrap_content"
@@ -20,6 +22,14 @@
             android:scaleType="fitXY"
             android:src="@drawable/home2" />
     </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/bottom">
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -38,8 +48,8 @@
 
         <ImageView
             android:id="@+id/img_star"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
+            android:layout_width="14sp"
+            android:layout_height="1sp"
             android:layout_marginRight="3dp"
             android:src="@drawable/star3"
             app:layout_constraintBottom_toBottomOf="parent"

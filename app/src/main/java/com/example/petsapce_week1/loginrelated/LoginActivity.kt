@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.petsapce_week1.*
 import com.example.petsapce_week1.databinding.ActivityLoginBinding
 import com.example.petsapce_week1.network.LoginService
-import com.example.petsapce_week1.network.RetrofitHelper
+import com.example.petsapce_week1.network.RetrofitHelperHome
 import com.example.petsapce_week1.reviewrelated.ReviewReadMoreActivity
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause
@@ -25,7 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class LoginActivity : AppCompatActivity() {
 
-    private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance() // RetrofitClient의 instance 불러오기
+    private var retrofit: Retrofit = RetrofitHelperHome.getRetrofitInstance() // RetrofitClient의 instance 불러오기
     private var authToken : String ?= null
     //    private var data: UserModel? = null
     var api : LoginService = retrofit.create(LoginService::class.java)

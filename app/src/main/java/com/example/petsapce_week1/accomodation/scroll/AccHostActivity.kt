@@ -1,15 +1,11 @@
 package com.example.petsapce_week1.accomodation.scroll
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.petsapce_week1.GifActivity
 import com.example.petsapce_week1.databinding.ActivityAccHostBinding
-import com.example.petsapce_week1.loginrelated.LoginBackendResponse
-import com.example.petsapce_week1.loginrelated.UserModelGeneral
 import com.example.petsapce_week1.network.AccomoService
-import com.example.petsapce_week1.network.RetrofitHelper
+import com.example.petsapce_week1.network.RetrofitHelperHome
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationData
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationRoomData
 import retrofit2.Call
@@ -19,7 +15,7 @@ import retrofit2.Retrofit
 
 class AccHostActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAccHostBinding
-    private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
+    private var retrofit: Retrofit = RetrofitHelperHome.getRetrofitInstance()
     var api : AccomoService = retrofit.create(AccomoService::class.java)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

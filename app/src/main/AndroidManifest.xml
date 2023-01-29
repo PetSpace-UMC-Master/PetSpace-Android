@@ -17,7 +17,15 @@
         android:theme="@style/Theme.PetSapce_week1"
         tools:targetApi="31">
 
+
         <!-- 홈 내비게이션 액티비티 ===================================================================================== -->
+        <activity
+            android:name=".home.Home2Activity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".home.HomeActivity"
             android:exported="true">
@@ -32,11 +40,6 @@
                 android:value="" />
         </activity>
         <!-- 홈 내비게이션 액티비티 끝 ===================================================================================== -->
-
-
-
-
-
 
         <!-- 숙소 상세보기 액티비티 ===================================================================================== -->
         <activity
@@ -55,25 +58,15 @@
         </activity>
         <activity
             android:name=".accomodation.AccMainActivity"
-            android:exported="true"></activity>
-        <activity android:name=".accomodation.scroll.AccFacilityMoreActivity" />
-        <!-- 숙소 상세보기 끝 ===================================================================================== -->
-
-
-
-
-
+            android:exported="true" />
+        <activity android:name=".accomodation.scroll.AccFacilityMoreActivity" /> <!-- 숙소 상세보기 끝 ===================================================================================== -->
         <!-- 로그인 액티비티  ===================================================================================== -->
         <activity
             android:name=".loginrelated.LoginActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Signin4Activity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".SigninDescriptionActivity"
             android:exported="true">
@@ -104,16 +97,15 @@
         <activity
             android:name=".TestMainActivity"
             android:exported="true">
-           <!-- <intent-filter>
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
-        </activity>
-
-
-
-        <!-- 카카오 로그인 화면 뜨는거 -->
+            </intent-filter>
+            -->
+        </activity> <!-- 카카오 로그인 화면 뜨는거 -->
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true"

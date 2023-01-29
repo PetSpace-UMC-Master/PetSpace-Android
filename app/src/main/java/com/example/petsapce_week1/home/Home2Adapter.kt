@@ -1,20 +1,16 @@
-package com.example.petsapce_week1.home.homefragment
+package com.example.petsapce_week1.home
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.petsapce_week1.databinding.AccReviewRowBinding
 import com.example.petsapce_week1.databinding.HomeMainRowBinding
 
-class HomeMainAdapter(var items: ArrayList<HomeMainData>) : RecyclerView.Adapter<HomeMainAdapter.ViewHolder>() {
+class Home2Adapter(val items: ArrayList<Home2Data>) : RecyclerView.Adapter<Home2Adapter.ViewHolder>() {
 
     interface OnItemClickListener {
-        fun OnItemClick(data: HomeMainData)
-//        fun onClick(v: View, position: Int)
+        fun OnItemClick(data: Home2Data)
     }
 
     var itemClickListener: OnItemClickListener? = null //초기값 null값
@@ -25,7 +21,7 @@ class HomeMainAdapter(var items: ArrayList<HomeMainData>) : RecyclerView.Adapter
             binding.root.setOnClickListener {
                 itemClickListener?.OnItemClick(items[adapterPosition]) //?는 null일 수 도 있다고 알려주는 역할
 
-                Log.d("touch3",adapterPosition.toString())
+                Log.d("touch3","touch")
 
             }
 
@@ -50,7 +46,6 @@ class HomeMainAdapter(var items: ArrayList<HomeMainData>) : RecyclerView.Adapter
             textDate.text = items[position].date.toString()
             textPrice.text = "₩"+items[position].price.toString()+" / 박"
 //            textViewDifficulty.text= "난이도 ${position+1}"
-
         }
 
 
