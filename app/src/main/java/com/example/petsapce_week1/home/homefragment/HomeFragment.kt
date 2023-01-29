@@ -25,7 +25,9 @@ import retrofit2.Retrofit
 
 
 class HomeFragment : Fragment() {
+    //레트로핏 객체 생성
     var retrofit: Retrofit = RetrofitHelperHome.getRetrofitInstance()
+    //서비스 객체 생성
     var api: homeAPI = retrofit.create(homeAPI::class.java)
 
     private lateinit var binding: FragmentHomeBinding
@@ -39,9 +41,15 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        binding = FragmentHomeBinding.inflate(layoutInflater)
+
+        //네트워크 통신
         api.get_priceDesc("C").enqueue(object : Callback<HomeResponse> {
+            //통신 성공
             override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
+                val homeDb = response.body()
                 if (response.isSuccessful) {
+
                     Log.d("PRICE_DESC", response.body().toString())
                 } else {
                     Log.d("PRICE_DESC오류", response.body().toString())
@@ -49,12 +57,12 @@ class HomeFragment : Fragment() {
                 }
             }
 
+            //통신 실패
             override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
                 Log.d("PRICE 실패", t.message.toString())
             }
 
         })
-        binding = FragmentHomeBinding.inflate(layoutInflater)
 
 
         /* api.get_reviewDesc("REVIEW_COUNT_DESC").enqueue(object :Callback<HomeResponse>{
@@ -88,7 +96,7 @@ class HomeFragment : Fragment() {
             }
         })
 
-        api.getPost2().enqueue(object : Callback<HomeResponse> {
+       /* api.getPost2().enqueue(object : Callback<HomeResponse> {
             override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
                 if (response.isSuccessful) {
                     Log.d("get", response.body().toString())
@@ -101,13 +109,11 @@ class HomeFragment : Fragment() {
                 Log.d("get 실패", t.message.toString())
             }
 
-        })
-
-
-
+        })*/
 
         initRecyclerView()
         initSpinner()
+//        initButtonSort()
 //        initAddData()
 
 
@@ -121,6 +127,10 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+  /*  private fun initButtonSort() {
+
+    }
+*/
     private fun initSpinner() {
         spinner = binding.spinner
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
