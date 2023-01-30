@@ -7,7 +7,6 @@ import retrofit2.http.*
 
 interface homeAPI {
 
-
     @GET("/app/rooms/")
     fun getSort(
         @Query("sortBy") sortBy: String
@@ -17,7 +16,5 @@ interface homeAPI {
     fun getCategory(
         @Query("categoryType") categoryType: String
     ): Call<HomeResponse>
-
-
 
 }

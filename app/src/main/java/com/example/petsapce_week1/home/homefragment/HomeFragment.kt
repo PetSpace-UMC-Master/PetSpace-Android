@@ -65,6 +65,8 @@ class HomeFragment : Fragment() {
 
         })*/
 
+
+        //낮은가격순
         val call = api.getSort("PRICE_DESC")
         call.enqueue(object : Callback<HomeResponse> {
             override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
