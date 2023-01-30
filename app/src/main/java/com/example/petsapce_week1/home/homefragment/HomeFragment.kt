@@ -92,24 +92,86 @@ class HomeFragment : Fragment() {
 
         initRecyclerView()
         initSpinner()
-//        initButtonSort()
+        initButtonSort()
 //        initAddData()
 
 
-        binding.im1.setOnClickListener {
-            val intent = Intent(context, GifActivity::class.java)
-            startActivity(intent)
-        }
+
 
 
         // Inflate the layout for this fragment
         return binding.root
     }
 
-  /*  private fun initButtonSort() {
+    private fun initButtonSort() {
+        binding.apply {
+            b1.setOnClickListener {
+                updateHouse()
+            }
+            b2.setOnClickListener {
+                updateCamp()
+            }
+            b3.setOnClickListener {
+                updateDowntown()
+            }
+            b4.setOnClickListener {
+                updateCountry()
+
+            }
+            b5.setOnClickListener {
+                updateBeach()
+            }
+
+        }
 
     }
-*/
+
+    private fun updateBeach() {
+        var dataList = ArrayList<HomeMainData>()
+        dataList.add(HomeMainData(R.drawable.map, 5, "종로구, 서울", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+
+        adapter.items = dataList
+        adapter.notifyDataSetChanged()
+    }
+
+    private fun updateCountry() {
+        var dataList = ArrayList<HomeMainData>()
+        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+
+        adapter.items = dataList
+        adapter.notifyDataSetChanged()
+    }
+
+    private fun updateDowntown() {
+        var dataList = ArrayList<HomeMainData>()
+        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+
+        adapter.items = dataList
+        adapter.notifyDataSetChanged()
+    }
+
+    private fun updateCamp() {
+        var dataList = ArrayList<HomeMainData>()
+        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+
+        adapter.items = dataList
+        adapter.notifyDataSetChanged()
+    }
+
+    private fun updateHouse() {
+        var dataList = ArrayList<HomeMainData>()
+        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+
+        adapter.items = dataList
+        adapter.notifyDataSetChanged()
+    }
+
     private fun initSpinner() {
         spinner = binding.spinner
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
