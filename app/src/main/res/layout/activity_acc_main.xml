@@ -44,11 +44,18 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-
-                    android:id="@+id/btn_heart"
+                    android:id="@+id/btn_heart_before"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/heart3"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <ImageView
+                    android:id="@+id/btn_heart_after"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ant_design_heart_filled"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
