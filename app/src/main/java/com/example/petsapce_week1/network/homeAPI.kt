@@ -17,6 +17,12 @@ interface homeAPI {
         @Query("categoryType") categoryType: String
     ): Call<HomeResponse>
 
+    @GET("/app/rooms/")
+    fun getDouble(
+        @Query("sortBy") sortBy: String,
+        @Query("categoryType") categoryType: String
+    ): Call<HomeResponse>
+
 
 
 }
