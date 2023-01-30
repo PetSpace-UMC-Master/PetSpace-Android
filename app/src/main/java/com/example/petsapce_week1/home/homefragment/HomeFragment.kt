@@ -87,6 +87,47 @@ class HomeFragment : Fragment() {
             }
         })
 
+          api.getSort("PRICE_ASC").enqueue(object : Callback<HomeResponse> {
+           //통신 성공
+           override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
+               val usersSort = response.body()
+               if(usersSort != null){
+                   Log.d("PRICE_ASC",usersSort.result.toString())
+               }
+               else{
+                   Log.d("PRICE_ASC", response.code().toString())
+               }
+
+           }
+
+           //통신 실패
+           override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
+               Log.d("연결 실패", t.message.toString())
+           }
+
+       })
+
+        api.getSort("0").enqueue(object : Callback<HomeResponse> {
+            //통신 성공
+            override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
+                val usersSort = response.body()
+                if(usersSort != null){
+                    Log.d("PRICE_ASC",usersSort.result.toString())
+                }
+                else{
+                    Log.d("PRICE_ASC", response.code().toString())
+                }
+
+            }
+
+            //통신 실패
+            override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
+                Log.d("연결 실패", t.message.toString())
+            }
+
+        })
+
+
 
 
 

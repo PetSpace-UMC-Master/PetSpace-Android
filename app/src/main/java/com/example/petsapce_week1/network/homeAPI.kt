@@ -17,4 +17,6 @@ interface homeAPI {
         @Query("categoryType") categoryType: String
     ): Call<HomeResponse>
 
+
+
 }
