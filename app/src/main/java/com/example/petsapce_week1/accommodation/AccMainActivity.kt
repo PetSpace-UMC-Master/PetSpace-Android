@@ -2,6 +2,7 @@ package com.example.petsapce_week1.accommodation
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -46,6 +47,11 @@ class AccMainActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener {
             val intent = Intent(this, ProfileMenuActivity::class.java)
             startActivity(intent)
+        }
+
+        // like btn
+        binding.btnHeartBefore.setOnClickListener {
+            binding.btnHeartAfter.visibility = View.VISIBLE
         }
 
         // .bind와 .inflate 차이 / layoutinflater , view 객체 차이

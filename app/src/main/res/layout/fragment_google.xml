@@ -31,7 +31,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-
             />
 
         <TextView
@@ -50,13 +49,14 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageView
-        android:id="@+id/img_google"
-        android:layout_marginTop="20dp"
-        android:scaleType="fitXY"
+    <com.naver.maps.map.MapView
+        android:id="@+id/navermap"
+        android:name="com.naver.maps.map.MapFragment"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:src="@drawable/map"/>
-
+        app:navermap_latitude="35.1798159"
+        app:navermap_longitude="129.0750222"
+        app:navermap_zoom="8"
+        app:navermap_mapType="Terrain" />
 
 </LinearLayout>
