@@ -18,6 +18,7 @@ import com.example.petsapce_week1.home.Home2Activity
 import com.example.petsapce_week1.network.RetrofitHelperHome
 import com.example.petsapce_week1.network.homeAPI
 import com.example.petsapce_week1.vo.HomeResponse
+import com.kakao.sdk.user.model.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -44,7 +45,7 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
         //네트워크 통신
-        api.get_priceDesc("C").enqueue(object : Callback<HomeResponse> {
+      /*  api.get_priceDesc("C").enqueue(object : Callback<HomeResponse> {
             //통신 성공
             override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
                 val homeDb = response.body()
@@ -62,54 +63,30 @@ class HomeFragment : Fragment() {
                 Log.d("PRICE 실패", t.message.toString())
             }
 
-        })
-
-
-        /* api.get_reviewDesc("REVIEW_COUNT_DESC").enqueue(object :Callback<HomeResponse>{
-             override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
-                 if (response.isSuccessful){
-                     Log.d("통신2",response.body().toString())
-                 }
-             }
-
-             override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
-                 Log.d("통신2실패",t.message.toString())
-             }
-
-         })*/
-
-
-        api.get_priceAsc("PRICE_ASC").enqueue(object : Callback<HomeResponse> {
-            override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
-                if (response.isSuccessful) {
-
-                    Log.d("PRICE_ASC성공", response.body().toString())
-
-                } else {
-                    Log.d("PRICE_ASC오류",response.code().toString())
-
-                }
-            }
-
-            override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
-                Log.d("PRICE 실패", t.message.toString())
-            }
-        })
-
-       /* api.getPost2().enqueue(object : Callback<HomeResponse> {
-            override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
-                if (response.isSuccessful) {
-                    Log.d("get", response.body().toString())
-                } else {
-                    Log.d("get오류", response.code().toString())
-                }
-            }
-
-            override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
-                Log.d("get 실패", t.message.toString())
-            }
-
         })*/
+
+        val call = api.getSort("PRICE_DESC")
+        call.enqueue(object : Callback<HomeResponse> {
+            override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
+                val usersSort = response.body()
+                if(usersSort != null){
+                    Log.d("PRICE_DESC",usersSort.result.toString())
+                }
+                else{
+                    Log.d("PRICE_DESC오류", response.code().toString())
+                }
+
+
+                // handle users
+            }
+
+            override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
+                Log.d("sort연결 실패", t.message.toString())
+            }
+        })
+
+
+
 
         initRecyclerView()
         initSpinner()
