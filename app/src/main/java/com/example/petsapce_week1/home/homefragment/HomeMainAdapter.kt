@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petsapce_week1.databinding.AccReviewRowBinding
 import com.example.petsapce_week1.databinding.HomeMainRowBinding
@@ -31,6 +32,7 @@ class HomeMainAdapter(var items: ArrayList<HomeMainData>) : RecyclerView.Adapter
 
         }
 
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -41,10 +43,14 @@ class HomeMainAdapter(var items: ArrayList<HomeMainData>) : RecyclerView.Adapter
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val childAdapter = HomeChildAdapter(items[position].imgList)
+        holder.binding.viewPagerChild.adapter = childAdapter
+        holder.binding.viewPagerChild.layoutManager = LinearLayoutManager(holder.binding.root.context, LinearLayoutManager.HORIZONTAL, false)
+
 
         holder.binding.apply {
             //이미지는 이런식으로 담아야함.
-            imgMain.setImageResource(items[position].img)
+//            imgMain.setImageResource(items[position].img)
             textLoc.text = items[position].location
             textScore.text = items[position].score.toString()
             textDate.text = items[position].date.toString()
@@ -52,6 +58,7 @@ class HomeMainAdapter(var items: ArrayList<HomeMainData>) : RecyclerView.Adapter
 //            textViewDifficulty.text= "난이도 ${position+1}"
 
         }
+
 
 
     }

@@ -11,14 +11,12 @@ import android.widget.AdapterView
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.petsapce_week1.GifActivity
 import com.example.petsapce_week1.R
 import com.example.petsapce_week1.databinding.FragmentHomeBinding
 import com.example.petsapce_week1.home.Home2Activity
 import com.example.petsapce_week1.network.RetrofitHelperHome
 import com.example.petsapce_week1.network.homeAPI
 import com.example.petsapce_week1.vo.HomeResponse
-import com.kakao.sdk.user.model.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,6 +29,8 @@ class HomeFragment : Fragment() {
     //서비스 객체 생성
     var api: homeAPI = retrofit.create(homeAPI::class.java)
 
+    //child apdater 이미지
+    var childataList = ArrayList<HomeChildData>()
     private lateinit var binding: FragmentHomeBinding
     var dataList = ArrayList<HomeMainData>()
     lateinit var adapter: HomeMainAdapter
@@ -128,10 +128,15 @@ class HomeFragment : Fragment() {
 
     private fun updateBeach() {
         var dataList = ArrayList<HomeMainData>()
-        dataList.add(HomeMainData(R.drawable.map, 5, "종로구, 서울", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+        for (i in 1..10) {
+            dataList.add(HomeMainData(listOf(HomeChildData(R.drawable.home2)),
+                    5,
+                    "종로구, 서울",
+                    11,
+                    5000
+                )
+            )
+        }
 
         adapter.items = dataList
         adapter.notifyDataSetChanged()
@@ -139,17 +144,17 @@ class HomeFragment : Fragment() {
 
     private fun updateCountry() {
         var dataList = ArrayList<HomeMainData>()
+   /*     dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
         dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
-
+*/
         adapter.items = dataList
         adapter.notifyDataSetChanged()
     }
 
     private fun updateDowntown() {
         var dataList = ArrayList<HomeMainData>()
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+     /*   dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))*/
 
         adapter.items = dataList
         adapter.notifyDataSetChanged()
@@ -157,8 +162,7 @@ class HomeFragment : Fragment() {
 
     private fun updateCamp() {
         var dataList = ArrayList<HomeMainData>()
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+
 
         adapter.items = dataList
         adapter.notifyDataSetChanged()
@@ -166,7 +170,6 @@ class HomeFragment : Fragment() {
 
     private fun updateHouse() {
         var dataList = ArrayList<HomeMainData>()
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
 
         adapter.items = dataList
         adapter.notifyDataSetChanged()
@@ -228,9 +231,7 @@ class HomeFragment : Fragment() {
 
     fun updatePriceHigh() {
         var dataList = ArrayList<HomeMainData>()
-        dataList.add(HomeMainData(R.drawable.map, 10, "종tjchrn", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+
 
 
         adapter.items = dataList
@@ -239,7 +240,7 @@ class HomeFragment : Fragment() {
 
     fun updateRecent() {
         var dataList = ArrayList<HomeMainData>()
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+
 
         adapter.items = dataList
         adapter.notifyDataSetChanged()
@@ -265,10 +266,12 @@ class HomeFragment : Fragment() {
 
 
 
+
+
         adapter.itemClickListener = object : HomeMainAdapter.OnItemClickListener {
             override fun OnItemClick(data: HomeMainData) {
                 val intent = Intent(context, Home2Activity::class.java)
-                intent.putExtra("image", data.img)
+//                intent.putExtra("image", data.img)
                 intent.putExtra("score", data.score)
                 intent.putExtra("location", data.location)
                 intent.putExtra("date", data.date)
