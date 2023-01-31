@@ -66,7 +66,7 @@ class AccMainActivity : AppCompatActivity() {
 
         val data = AccomodationRoomData(roomId = null)
 
-        //                              백엔드 연동 부분
+        // =================== 백엔드 연동 부분 =====================
         //홈화면 연결 후 roomId 받아오면 반영!
         api.getRoomDetail(1).enqueue(object : Callback<AccomodationData> {
             @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
