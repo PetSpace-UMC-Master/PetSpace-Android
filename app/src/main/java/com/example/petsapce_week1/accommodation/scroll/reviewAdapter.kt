@@ -25,11 +25,8 @@ class reviewAdapter(val items: ArrayList<reviewData>) : RecyclerView.Adapter<rev
                 /* val intent = Intent(this,detailPageActivity::class.java)
                  startActivity(intent)*/
                 Log.d("touch3","touch")
-
             }
-
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -74,17 +71,10 @@ class reviewAdapter(val items: ArrayList<reviewData>) : RecyclerView.Adapter<rev
                     imgStar5.visibility = View.VISIBLE
                 }
             }
-
-//            textViewDifficulty.text= "난이도 ${position+1}"
         }
-
-
     }
-
 
     override fun getItemCount(): Int {
         return items.size
     }
-
-
 }

@@ -53,10 +53,6 @@
         android:id="@+id/navermap"
         android:name="com.naver.maps.map.MapFragment"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:navermap_latitude="35.1798159"
-        app:navermap_longitude="129.0750222"
-        app:navermap_zoom="8"
-        app:navermap_mapType="Terrain" />
+        android:layout_height="200dp" />
 
 </LinearLayout>

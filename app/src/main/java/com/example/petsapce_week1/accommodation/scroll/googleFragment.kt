@@ -29,16 +29,18 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import kotlin.properties.Delegates
 
 class googleFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var viewModel: GoogleViewModel
     private lateinit var viewBinding:FragmentGoogleBinding
     private lateinit var mapView : MapView
-    private lateinit var naverMap : NaverMap
+    private var naverMap : NaverMap ?= null
     private lateinit var locationSource: FusedLocationSource
-    var latitude : Double = 0.0
-    var longtitude : Double = 0.0
+    private var latitude : Double = 0.0
+    private var longitude : Double = 0.0
+
     val marker = Marker()
     private val LOCATION_PERMISSION_REQUEST_CODE: Int = 1000
 
@@ -53,7 +55,7 @@ class googleFragment : Fragment(), OnMapReadyCallback {
         viewBinding = FragmentGoogleBinding.inflate(layoutInflater)
         //activity의 setcontentview가 아닌 return값을 주면된다.
 
-        val roomId : Long = 2
+        val roomId : Long = 1
         api.getRoomDetail(roomId = roomId).enqueue(object : Callback<AccomodationData> {
             @SuppressLint("SetTextI18n")
             override fun onResponse(
@@ -68,15 +70,11 @@ class googleFragment : Fragment(), OnMapReadyCallback {
                     viewBinding.textAddress.text = body.result.address
                     viewBinding.houseName.text = body.result.roomName
                     latitude = body.result.latitude.toDouble()
-                    longtitude = body.result.longitude.toDouble()
+                    longitude = body.result.longitude.toDouble()
 //                    Log.d("숙소 latitude", body.result.latitude)
 //                    Log.d("숙소 longitude", body.result.longitude)
                     Log.d("latitude", "${latitude}")
-                    Log.d("longitude", "${longtitude}")
-
-                    createNaverMap(mapView)
-                    mapView.onCreate(savedInstanceState)
-
+                    Log.d("longitude", "${longitude}")
 
                 }
             }
@@ -85,26 +83,15 @@ class googleFragment : Fragment(), OnMapReadyCallback {
             }
         })
 
-        return viewBinding.root
-    }
-
-    private fun createNaverMap(mapView: MapView) {
-        Log.d("0latitude", "${latitude}")
-        Log.d("0longitude", "${longtitude}")
         this.mapView = viewBinding.navermap
-        Log.d("1latitude", "${latitude}")
-        Log.d("1longitude", "${longtitude}")
-
-        Log.d("2latitude", "${latitude}")
-        Log.d("2longitude", "${longtitude}")
+        mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
-        Log.d("3latitude", "${latitude}")
-        Log.d("3longitude", "${longtitude}")
         locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
-        Log.d("4latitude", "${latitude}")
-        Log.d("4longitude", "${longtitude}")
-        marker.position = LatLng(latitude, longtitude)
+
+        marker.position = LatLng(latitude, longitude)
         marker.map = naverMap
+
+        return viewBinding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -115,12 +102,13 @@ class googleFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(naverMap: NaverMap) {
         this.naverMap = naverMap
+        naverMap.locationSource = locationSource
 
         val uiSettings = naverMap.uiSettings
         uiSettings.isLocationButtonEnabled = true
         //카메라 설정
         val cameraPosition = CameraPosition(
-            LatLng(latitude, longtitude),
+            LatLng(latitude, longitude),
             16.0,
             20.0,
             180.0
@@ -135,7 +123,7 @@ class googleFragment : Fragment(), OnMapReadyCallback {
             )
         }
         Log.d("Map Ready : latitude", "${latitude}")
-        Log.d("Map Ready : longitude", "${longtitude}")
+        Log.d("Map Ready : longitude", "${longitude}")
         /*
         naverMap.addOnCameraIdleListener {
             //네이버멥 중앙에 마커
@@ -145,7 +133,6 @@ class googleFragment : Fragment(), OnMapReadyCallback {
         }
 
          */
-        naverMap.locationSource = locationSource
 
     }
     override fun onStart() {

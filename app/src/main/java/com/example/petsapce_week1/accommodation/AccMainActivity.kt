@@ -2,7 +2,6 @@ package com.example.petsapce_week1.accommodation
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.petsapce_week1.ProfileMenuActivity
 import com.example.petsapce_week1.R
-import com.example.petsapce_week1.TestMainActivity
 import com.example.petsapce_week1.accommodation.scroll.*
 import com.example.petsapce_week1.databinding.ActivityAccHostBinding
 import com.example.petsapce_week1.databinding.ActivityAccMainBinding
@@ -136,11 +134,8 @@ class AccMainActivity : AppCompatActivity() {
                     Log.d("숙소","${body.result.roomImageUrls}")
                     Log.d("숙소","$photos")
                     val imgUrlAdapter = accImgaeSlideAdapter(imgdataList)
-                    Log.d("숙소", "뭐가 문제야2")
                     binding.viewpager.adapter = imgUrlAdapter
-                    Log.d("숙소", "뭐가 문제야3")
                     imgUrlAdapter.notifyDataSetChanged()
-                    Log.d("숙소", "뭐가 문제야4")
 
                     // ================= frame host 호스트 ===================
                     binding.frameHost.textName.text = body.result.hostName

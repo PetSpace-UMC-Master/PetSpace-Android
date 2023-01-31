@@ -11,10 +11,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.petsapce_week1.GifActivity
+import com.example.petsapce_week1.ProfileMenuActivity
 import com.example.petsapce_week1.R
 import com.example.petsapce_week1.databinding.FragmentReviewBinding
 import com.example.petsapce_week1.network.AccomoService
 import com.example.petsapce_week1.network.RetrofitHelper
+import com.example.petsapce_week1.reviewrelated.ReviewReadMoreActivity
 import com.example.petsapce_week1.vo.ReviewData
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationData
 import okhttp3.internal.delimiterOffset
@@ -41,6 +43,10 @@ class reviewFragment : Fragment() {
         val reviewList = mutableListOf<ReviewData>()
         binding = FragmentReviewBinding.inflate(layoutInflater)
 
+        binding.btnReviewMore.setOnClickListener {
+            val intent = Intent(activity, ReviewReadMoreActivity::class.java)
+            startActivity(intent)
+        }
         initRecyclerView()
 
         // ============== 백엔드 연동 =================
@@ -54,13 +60,11 @@ class reviewFragment : Fragment() {
                 Log.d("숙소 세부 정보 review 통신 성공",response.toString())
                 Log.d("숙소 세부 정보 review 통신 성공", response.body().toString())
                 val body = response.body()
-//
                 if (body != null) {
 
                     //frame host data
                     binding.textStarscore.text = body.result.roomAverageScore.toString()
                     binding.textReviewcount.text = body.result.reviewCount.toString()
-
 
                     response.takeIf { it.isSuccessful }
                         ?.body()
@@ -89,7 +93,6 @@ class reviewFragment : Fragment() {
                         Log.d("숙소 Date1", "${new_date_list[0] + "년 " + new_date_list[1] + "월 " + new_date_list[2] + "일"}")
                         val date = "${new_date_list[0]}년 ${new_date_list[1]}월 ${new_date_list[2]}일"
                          */
-
                         dataList.add (
                             reviewData(
                                 R.drawable.face,
