@@ -30,7 +30,11 @@ class LoginActivity : AppCompatActivity() {
     private var authToken : String ?= null
     val bearer = "Bearer "
     var token: String ?= null
+    var refreshToken_received : String ?= null
     var api : LoginService = retrofit.create(LoginService::class.java)
+
+    //토큰 재발급 시
+    var apiReissue :LoginService = retrofit.create(LoginService::class.java)
     private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //id password 임의로 설정
-        val id = "wjddus@naver.com"
+        val id = "tkdwls@naver.com"
         val password = "1234567!"
 
         //id, password check
@@ -54,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        /* 지우지 말것!!!!
+        // 지우지 말것!!!!
         //로그인 정보 확인
         UserApiClient.instance.accessTokenInfo{ tokenInfo, error ->
             if(error != null){
@@ -64,7 +68,6 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "토큰 정보 보기 성공", Toast.LENGTH_SHORT).show()
             }
         }
-         */
 
         binding.btnKakao.setOnClickListener {
             kakaoLogin()
@@ -124,6 +127,38 @@ class LoginActivity : AppCompatActivity() {
                     override fun onResponse(call: Call<LoginBackendResponse>, response: Response<LoginBackendResponse>) {
                         Log.d("로그인 통신 성공", response.toString())
                         Log.d("로그인 통신 성공", response.body().toString())
+
+                        //재발급 시
+                        refreshToken_received = response.body()?.result?.refreshToken.toString()
+                        if(response.code() == 401 && response.body()?.responseCode?.toInt() == 2003){
+
+                            api.TokenReissue(ReissueData(accessToken = authToken, refreshToken = refreshToken_received)).enqueue(object  : Callback<LoginBackendResponse>{
+                                override fun onResponse(
+                                    call: Call<LoginBackendResponse>,
+                                    response: Response<LoginBackendResponse>
+                                ) {
+                                    Log.d("로그인 토큰 재발급", response.toString())
+                                    Log.d("로그인 토큰 재발급", response.body().toString())
+
+                                    //만약에 재발급 호출해서 성공했어, 그러면 그 다음은 어떡하지?
+                                    //토큰 갱신부터 해야겟지?
+                                    refreshToken_received = response.body()?.result?.refreshToken.toString()
+                                    authToken = token.accessToken
+                                    //토큰은 기기에 저장 안하지?? 그냥 변수에만 담아두고...하나?
+                                    //기기 내에 db 에 저장하나??
+                                }
+
+                                override fun onFailure(
+                                    call: Call<LoginBackendResponse>,
+                                    t: Throwable
+                                ) {
+                                    Log.d("로그인 토큰 재발급 실패", "ㅠㅠ")
+                                }
+
+                            })
+
+
+                        }
 
                         when (response.code()) {
                             200 -> {
