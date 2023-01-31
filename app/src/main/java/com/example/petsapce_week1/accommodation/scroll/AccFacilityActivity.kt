@@ -34,6 +34,7 @@ class AccFacilityActivity : AppCompatActivity() {
             val intent = Intent(this, AccFacilityMoreActivity::class.java)
             startActivity(intent)
         }
+
         return binding.root
     }
 }

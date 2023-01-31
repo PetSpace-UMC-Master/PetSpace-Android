@@ -36,10 +36,6 @@ class googleFragment : Fragment(), OnMapReadyCallback {
     private lateinit var viewModel: GoogleViewModel
     private lateinit var viewBinding:FragmentGoogleBinding
     private lateinit var mapView : MapView
-    private var naverMap : NaverMap ?= null
-    private lateinit var locationSource: FusedLocationSource
-    private var latitude : Double = 0.0
-    private var longitude : Double = 0.0
 
     val marker = Marker()
     private val LOCATION_PERMISSION_REQUEST_CODE: Int = 1000
@@ -71,18 +67,19 @@ class googleFragment : Fragment(), OnMapReadyCallback {
                     viewBinding.houseName.text = body.result.roomName
                     latitude = body.result.latitude.toDouble()
                     longitude = body.result.longitude.toDouble()
-//                    Log.d("숙소 latitude", body.result.latitude)
-//                    Log.d("숙소 longitude", body.result.longitude)
+
                     Log.d("latitude", "${latitude}")
                     Log.d("longitude", "${longitude}")
 
+                    if(body.isSuccess){
+                        naverMap?.let { onMapReady(it) }
+                    }
                 }
             }
             override fun onFailure(call: Call<AccomodationData>, t: Throwable) {
                 Log.d("숙소 세부 정보 google 통신 실패","ㅠㅠ")
             }
         })
-
         this.mapView = viewBinding.navermap
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
@@ -93,6 +90,11 @@ class googleFragment : Fragment(), OnMapReadyCallback {
 
         return viewBinding.root
     }
+
+    private var naverMap : NaverMap ?= null
+    private lateinit var locationSource: FusedLocationSource
+    private var latitude : Double = 0.0
+    private var longitude : Double = 0.0
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -124,16 +126,13 @@ class googleFragment : Fragment(), OnMapReadyCallback {
         }
         Log.d("Map Ready : latitude", "${latitude}")
         Log.d("Map Ready : longitude", "${longitude}")
-        /*
+
         naverMap.addOnCameraIdleListener {
             //네이버멥 중앙에 마커
             marker.map = naverMap
             marker.icon = MarkerIcons.RED
             marker.iconTintColor = Color.BLUE
         }
-
-         */
-
     }
     override fun onStart() {
         super.onStart()
