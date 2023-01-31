@@ -5,7 +5,7 @@ data class HomeResponse(
     val isSuccess: Boolean?,
     val responseCode: Int?,
     val responseMessage: String?,
-    val result: List<Result?>?
+    val result: Result
 )
 
 data class Result(

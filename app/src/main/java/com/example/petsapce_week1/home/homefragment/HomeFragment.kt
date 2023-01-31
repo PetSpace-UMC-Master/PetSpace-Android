@@ -72,6 +72,7 @@ class HomeFragment : Fragment() {
             override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
                 val usersSort = response.body()
                 if(usersSort != null){
+                    var city = usersSort.result.city
                     Log.d("PRICE_DESC",usersSort.result.toString())
                 }
                 else{
