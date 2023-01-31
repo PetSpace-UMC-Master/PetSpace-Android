@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/fragment_facilities_more"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".accommodation.scroll.AccFacilityMoreActivity">
@@ -34,33 +34,22 @@
             android:paddingLeft="35dp"
             android:fontFamily="@font/bmjua"
             android:gravity="start"
+            android:textStyle="bold"
             android:lineHeight="16dp"
             android:text="편의시설"
             android:textColor="#0C201E"
             android:textSize="16sp" />
     </LinearLayout>
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_category"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:paddingLeft="30dp"
         android:paddingTop="30dp"
-        app:layout_constraintTop_toBottomOf="@id/facilities_fixed_upper_bar">
-
-        <LinearLayout
-            android:id="@+id/facilities_scrollview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="35dp"
-            android:orientation="vertical">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="35dp"
-                tools:listitem="@layout/facilities_item_list" />
-
-        </LinearLayout>
-
-    </ScrollView>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/facilities_fixed_upper_bar"
+        tools:listitem="@layout/facilities_category_list"></androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

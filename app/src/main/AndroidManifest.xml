@@ -4,6 +4,8 @@
     <!-- 인터넷 사용 권한 설정 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:usesCleartextTraffic="true"
@@ -18,7 +20,10 @@
         android:theme="@style/Theme.PetSapce_week1"
         tools:targetApi="31">
 
-
+        <!--          네이버 지도              -->
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="p11jn9hu1p" />
         <!--       숙소 상세보기 액티비티 =====================================================================================-->
 
         <activity

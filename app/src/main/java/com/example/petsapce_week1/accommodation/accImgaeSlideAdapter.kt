@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.petsapce_week1.databinding.AccMainImageslideBinding
 
 class accImgaeSlideAdapter(val items: ArrayList<imageSlideData>) : RecyclerView.Adapter<accImgaeSlideAdapter.ViewHolder>() {
@@ -38,7 +39,7 @@ class accImgaeSlideAdapter(val items: ArrayList<imageSlideData>) : RecyclerView.
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        GlideApp.with(holder.itemView)
+        Glide.with(holder.itemView)
             .load(items[position].imgSlide)
 //            .fitCenter()
             .override(200)

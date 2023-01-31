@@ -7,9 +7,9 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
 import com.example.petsapce_week1.ProfileMenuActivity
 import com.example.petsapce_week1.R
-import com.example.petsapce_week1.TestMainActivity
 import com.example.petsapce_week1.accommodation.scroll.*
 import com.example.petsapce_week1.databinding.ActivityAccHostBinding
 import com.example.petsapce_week1.databinding.ActivityAccMainBinding
@@ -46,6 +46,11 @@ class AccMainActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener {
             val intent = Intent(this, ProfileMenuActivity::class.java)
             startActivity(intent)
+        }
+
+        // like btn
+        binding.btnHeartBefore.setOnClickListener {
+            binding.btnHeartAfter.visibility = View.VISIBLE
         }
 
         // .bind와 .inflate 차이 / layoutinflater , view 객체 차이
@@ -130,11 +135,8 @@ class AccMainActivity : AppCompatActivity() {
                     Log.d("숙소","${body.result.roomImageUrls}")
                     Log.d("숙소","$photos")
                     val imgUrlAdapter = accImgaeSlideAdapter(imgdataList)
-                    Log.d("숙소", "뭐가 문제야2")
                     binding.viewpager.adapter = imgUrlAdapter
-                    Log.d("숙소", "뭐가 문제야3")
                     imgUrlAdapter.notifyDataSetChanged()
-                    Log.d("숙소", "뭐가 문제야4")
 
                     // ================= frame host 호스트 ===================
                     binding.frameHost.textName.text = body.result.hostName
@@ -169,7 +171,7 @@ class AccMainActivity : AppCompatActivity() {
                     )
                 }
                 Log.d("숙소 facility 리스트", "$reviewList")
-/*
+
                 binding.frameFacility.tvFac1.text = reviewList[0].facname
                 Glide.with(this@AccMainActivity)
                     .load(reviewList[0].imgUrl)
@@ -191,7 +193,6 @@ class AccMainActivity : AppCompatActivity() {
                     .load(reviewList[4].imgUrl)
                     .into(binding.frameFacility.imgFac5)
 
- */
             }
 
             override fun onFailure(call: Call<AccomodationData>, t: Throwable) {
