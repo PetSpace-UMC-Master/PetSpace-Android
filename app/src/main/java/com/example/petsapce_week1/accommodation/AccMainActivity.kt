@@ -171,7 +171,7 @@ class AccMainActivity : AppCompatActivity() {
                     )
                 }
                 Log.d("숙소 facility 리스트", "$reviewList")
-
+/*
                 binding.frameFacility.tvFac1.text = reviewList[0].facname
                 Glide.with(this@AccMainActivity)
                     .load(reviewList[0].imgUrl)
@@ -193,6 +193,7 @@ class AccMainActivity : AppCompatActivity() {
                     .load(reviewList[4].imgUrl)
                     .into(binding.frameFacility.imgFac5)
 
+ */
             }
 
             override fun onFailure(call: Call<AccomodationData>, t: Throwable) {
