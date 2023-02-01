@@ -45,25 +45,7 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
         //네트워크 통신
-      /*  api.get_priceDesc("C").enqueue(object : Callback<HomeResponse> {
-            //통신 성공
-            override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
-                val homeDb = response.body()
-                if (response.isSuccessful) {
 
-                    Log.d("PRICE_DESC", response.body().toString())
-                } else {
-                    Log.d("PRICE_DESC오류", response.body().toString())
-
-                }
-            }
-
-            //통신 실패
-            override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
-                Log.d("PRICE 실패", t.message.toString())
-            }
-
-        })*/
 
 
         //낮은가격순
@@ -129,8 +111,13 @@ class HomeFragment : Fragment() {
 
     private fun updateBeach() {
         var dataList = ArrayList<HomeMainData>()
+
+        for(j in 1..10){
+            childataList.add(HomeChildData(R.drawable.home2))
+        }
         for (i in 1..10) {
-            dataList.add(HomeMainData(listOf(HomeChildData(R.drawable.home2)),
+
+            dataList.add(HomeMainData(childataList,
                     5,
                     "종로구, 서울",
                     11,

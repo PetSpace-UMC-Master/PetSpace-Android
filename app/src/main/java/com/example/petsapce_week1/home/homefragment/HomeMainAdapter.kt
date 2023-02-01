@@ -43,10 +43,10 @@ class HomeMainAdapter(var items: ArrayList<HomeMainData>) : RecyclerView.Adapter
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val childAdapter = HomeChildAdapter(items[position].imgList)
-        /*holder.binding.viewPagerChild.adapter = childAdapter
-        holder.binding.viewPagerChild.layoutManager = LinearLayoutManager(holder.binding.root.context, LinearLayoutManager.HORIZONTAL, false)*/
-
+      /*  val childAdapter = HomeChildAdapter(items[position].imgList)
+        holder.binding.viewPagerChild.adapter = childAdapter
+        holder.binding.viewPagerChild.layoutManager = LinearLayoutManager(holder.binding.root.context, LinearLayoutManager.HORIZONTAL, false)
+*/
 
         holder.binding.apply {
             //이미지는 이런식으로 담아야함.
