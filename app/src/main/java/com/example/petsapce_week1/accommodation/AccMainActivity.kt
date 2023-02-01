@@ -10,6 +10,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.petsapce_week1.ProfileMenuActivity
 import com.example.petsapce_week1.R
+import com.example.petsapce_week1.TestMainActivity
 import com.example.petsapce_week1.accommodation.scroll.*
 import com.example.petsapce_week1.databinding.ActivityAccHostBinding
 import com.example.petsapce_week1.databinding.ActivityAccMainBinding
@@ -44,7 +45,7 @@ class AccMainActivity : AppCompatActivity() {
 
         // close btn
         binding.btnBack.setOnClickListener {
-            val intent = Intent(this, ProfileMenuActivity::class.java)
+            val intent = Intent(this, TestMainActivity::class.java)
             startActivity(intent)
         }
 
