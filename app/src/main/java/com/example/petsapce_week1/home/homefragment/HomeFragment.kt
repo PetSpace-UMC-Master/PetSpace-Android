@@ -13,6 +13,7 @@ import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.petsapce_week1.R
+import com.example.petsapce_week1.accommodation.AccMainActivity
 import com.example.petsapce_week1.databinding.FragmentHomeBinding
 import com.example.petsapce_week1.home.Home2Activity
 import com.example.petsapce_week1.network.RetrofitHelper
@@ -385,6 +386,7 @@ class HomeFragment : Fragment() {
 
         adapter.itemClickListener = object : HomeMainAdapter.OnItemClickListener {
             override fun OnItemClick(data: HomeMainData) {
+                //val intent = Intent(context, AccMainActivity::class.java)
                 val intent = Intent(context, Home2Activity::class.java)
                 intent.putExtra("image", data.img)
                 intent.putExtra("score", data.score)
