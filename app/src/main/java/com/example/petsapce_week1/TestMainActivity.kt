@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.petsapce_week1.accommodation.AccMainActivity
+import com.example.petsapce_week1.accommodation.GlideApp
 import com.example.petsapce_week1.databinding.ActivityHomeOnlyfortestBinding
 import com.example.petsapce_week1.loginrelated.LoginActivity
 
@@ -38,6 +39,14 @@ class TestMainActivity : AppCompatActivity() {
             val intent = Intent(this@TestMainActivity, ProfileMenuActivity::class.java)
             startActivity(intent)
         }
+
+        GlideApp.with(this)
+            .load("https://drive.google.com/uc?export=view&id=1L4aUKeQE5eBrqed764MCHOTiP97TAmMV")
+            .fitCenter()
+            .override(200)
+            .into(binding.imgfortest)
+
+
 
     }
 

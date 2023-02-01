@@ -11,10 +11,13 @@ class PlacetogoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityPlacetogoBinding.inflate(layoutInflater)
-        binding.imgJeju.setOnClickListener {
+        /*
+        binding.setOnClickListener {
             val intent = Intent(this, JejuActivity::class.java)
             startActivity(intent)
         }
+
+         */
         setContentView(binding.root)
     }
 }

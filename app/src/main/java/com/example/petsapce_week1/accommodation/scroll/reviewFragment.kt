@@ -95,7 +95,7 @@ class reviewFragment : Fragment() {
                          */
                         dataList.add (
                             reviewData(
-                                R.drawable.face,
+                                R.drawable.frame_136,
                                 reviewList[i].score,
                                 reviewList[i].nickname,
                                 reviewList[i].createdAt,

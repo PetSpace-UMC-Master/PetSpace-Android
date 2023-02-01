@@ -55,7 +55,7 @@
                     android:id="@+id/btn_heart_after"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/ant_design_heart_filled"
+                    android:src="@drawable/vector_9"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -93,7 +93,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="25dp"
                 android:fontFamily="@font/bmjua"
-                android:text="디테일한 집 설명"
+                android:text="강아지와 함께할 수 있는 모던 하우스"
                 android:textColor="@color/textForBlack"
                 android:textSize="20sp" />
 
@@ -165,7 +165,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="후기 ---개"
+                    android:text="후기 6개"
                     android:textColor="@color/textForGray"
                     android:textSize="14sp"
                     android:textStyle="bold"

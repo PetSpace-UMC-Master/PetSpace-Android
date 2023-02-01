@@ -2,6 +2,7 @@ package com.example.petsapce_week1.accommodation
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build.VERSION_CODES.P
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -50,8 +51,18 @@ class AccMainActivity : AppCompatActivity() {
         }
 
         // like btn
+        var if1Checked = 0
         binding.btnHeartBefore.setOnClickListener {
-            binding.btnHeartAfter.visibility = View.VISIBLE
+            if (if1Checked == 0 ){
+                binding.btnHeartAfter.visibility = View.VISIBLE
+                if1Checked = 1
+            }
+        }
+        binding.btnHeartAfter.setOnClickListener {
+            if(if1Checked == 1){
+                binding.btnHeartAfter.visibility = View.INVISIBLE
+                if1Checked = 0
+            }
         }
 
         // .bind와 .inflate 차이 / layoutinflater , view 객체 차이
@@ -163,6 +174,7 @@ class AccMainActivity : AppCompatActivity() {
                             }
                         }
                     }
+                Log.d("숙소", "${reviewList.size}")
                 for (i in 0 until reviewList.size) {
                     reviewList.add (
                         FacilityData(
@@ -171,30 +183,37 @@ class AccMainActivity : AppCompatActivity() {
                         )
                     )
                 }
-                Log.d("숙소 facility 리스트", "$reviewList")
-/*
-                binding.frameFacility.tvFac1.text = reviewList[0].facname
+                Log.d("숙소 facility 리스트", "${reviewList[5]}")
+
+                binding.frameFacility.tvFac0.text = reviewList[0].facname
                 Glide.with(this@AccMainActivity)
                     .load(reviewList[0].imgUrl)
-                    .into(binding.frameFacility.imgFac1)
-                binding.frameFacility.tvFac2.text = reviewList[1].facname
+                    .into(binding.frameFacility.imgFac0)
+
+                binding.frameFacility.tvFac1.text = reviewList[1].facname
                 Glide.with(this@AccMainActivity)
                     .load(reviewList[1].imgUrl)
-                    .into(binding.frameFacility.imgFac2)
-                binding.frameFacility.tvFac3.text = reviewList[2].facname
+                    .into(binding.frameFacility.imgFac1)
+
+                binding.frameFacility.tvFac2.text = reviewList[2].facname
                 Glide.with(this@AccMainActivity)
                     .load(reviewList[2].imgUrl)
-                    .into(binding.frameFacility.imgFac3)
-                binding.frameFacility.tvFac4.text = reviewList[3].facname
+                    .into(binding.frameFacility.imgFac2)
+
+                binding.frameFacility.tvFac3.text = reviewList[3].facname
                 Glide.with(this@AccMainActivity)
                     .load(reviewList[3].imgUrl)
-                    .into(binding.frameFacility.imgFac4)
-                binding.frameFacility.tvFac5.text = reviewList[4].facname
+                    .into(binding.frameFacility.imgFac3)
+
+                binding.frameFacility.tvFac4.text = reviewList[4].facname
                 Glide.with(this@AccMainActivity)
                     .load(reviewList[4].imgUrl)
-                    .into(binding.frameFacility.imgFac5)
+                    .into(binding.frameFacility.imgFac4)
 
- */
+                binding.frameFacility.tvFac5.text = reviewList[5].facname
+                Glide.with(this@AccMainActivity)
+                    .load(reviewList[5].imgUrl)
+                    .into(binding.frameFacility.imgFac5)
             }
 
             override fun onFailure(call: Call<AccomodationData>, t: Throwable) {
@@ -216,6 +235,10 @@ class AccMainActivity : AppCompatActivity() {
             val intent = Intent(this@AccMainActivity, AccFacilityMoreActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
     }
 
     private fun initViewPager() {
