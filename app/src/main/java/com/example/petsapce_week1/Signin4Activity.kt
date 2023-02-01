@@ -8,11 +8,13 @@ import android.util.Log
 import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.example.petsapce_week1.databinding.ActivitySignin2Binding
 import java.util.regex.Pattern
 
 class Signin4Activity : AppCompatActivity() {
     lateinit var binding: ActivitySignin2Binding
+    lateinit var viewModel: EmailViewModel
 
     //비밀번호 입력 담는 지역 변수(올바른 형식으로 초기화 안할시 처음 화면에서 빨간불 들어옴)
     lateinit var passwordInput: String
@@ -26,6 +28,8 @@ class Signin4Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignin2Binding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        viewModel = ViewModelProvider(this).get(EmailViewModel::class.java)
 
         //순서대로 실행(별 상관없는듯함)
 
@@ -47,12 +51,14 @@ class Signin4Activity : AppCompatActivity() {
     }
 
     //중복 확인(코드 수정 필요..textwather에 넣어야 할듯 이것도...)
-    private fun initButtonCheck(email: String): Int {
+    fun initButtonCheck(email: String){
         binding.apply {
-            emailDuplicationAfter.setOnClickListener {
-                flagButton = 1
-                if (email == editTextEmail.text.toString()) {
-                    emailDuplicationAfter.isEnabled = false
+            binding.emailDuplicationAfter.setOnClickListener {
+                if (email == editTextEmail.text.toString().trim()) {
+                    val check = false
+                    flagButton = 0
+                    viewModel.ButtonLiveFlag(check)
+                    //emailDuplicationAfter.isEnabled = false
                     textEmail.setTextColor(
                         ContextCompat.getColor(
                             applicationContext!!,
@@ -62,7 +68,10 @@ class Signin4Activity : AppCompatActivity() {
                     editTextEmail.setBackgroundResource(R.drawable.btn_emailbox_error)
                     textEmail.text = "중복된 이메일입니다. 다른 이메일을 사용해주세요."
                 } else {
-                    emailDuplicationAfter.isEnabled = true
+                    flagButton = 1
+                    val check = true
+                    viewModel.ButtonLiveFlag(check)
+                    //emailDuplicationAfter.isEnabled = true
                     textEmail.setTextColor(
                         ContextCompat.getColor(
                             applicationContext!!,
@@ -70,13 +79,9 @@ class Signin4Activity : AppCompatActivity() {
                         )
                     )
                     textEmail.text = "사용가능한 이메일 입니다."
-
                 }
-
-                emailDuplicationAfter.isEnabled = true
             }
         }
-        return flagButton
     }
 
     //1. 이메일
@@ -103,10 +108,13 @@ class Signin4Activity : AppCompatActivity() {
                 // text가 바뀔 때마다 호출된다.
                 checkEmail()
 
+                val flagCheck = viewModel.getFlag()
+                Log.d("flagcheck",flagCheck.toString())
+                Log.d("flagcheck2",flagButton.toString())
 
                 //다음화면 넘어가기(사용자가 비밀번호까지 입력하고 변심하여 이메일을 바꿀수도 있기에 체크해야함)
 //                if (flagEmail ==1 && flagEqual==1 && flagButton==1) {
-                if (checkEmail() && checkPassword() && checkPasswordEqual()) {
+                if ((flagEmail == 1) && (flagEqual == 1) && (flagPassword == 1)) {
                     Log.d("flagEmail", flagEmail.toString())
                     Log.d("flagPassword", flagPassword.toString())
                     Log.d("flagEqual", flagEqual.toString())
@@ -150,10 +158,9 @@ class Signin4Activity : AppCompatActivity() {
                 //현재까지 입력된 패스워드 저장
                 passwordInput = binding.editTextPassword.text.toString()
 
-
-
-                //다음화면 넘어가기(사용자가 비밀번호까지 입력하고 변심 바꿀수도 있기에 체크해야함)
-                if (checkEmail() && checkPassword() && checkPasswordEqual()) {
+                val flagCheck = viewModel.getFlag()
+                //다음화면 넘어가기(사용자가 비밀번호까지 입력하고 변심하여 이메일을 바꿀수도 있기에 체크해야함)
+                if ((flagEmail == 1) && (flagEqual == 1) && (flagPassword == 1)) {
                     binding.btnContinueAfter.isEnabled = true
                     Log.d("flagEmail", flagEmail.toString())
                     Log.d("flagPassword", flagPassword.toString())
@@ -196,13 +203,10 @@ class Signin4Activity : AppCompatActivity() {
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     //비밀번화 일치 true false로 반환
                     checkPasswordEqual()
-
-                    /* Log.d("flag1", flagEmail.toString())
-                     Log.d("flag2", flagPassword.toString())
-                     Log.d("flag3", flagEqual.toString())
- */
-                    //다음화면 넘어가기
-                    if (checkEmail() && checkPassword() && checkPasswordEqual()) {
+                    val flagCheck = viewModel.getFlag()
+                    Log.d("check4",flagCheck.toString())
+                    //다음화면 넘어가기(사용자가 비밀번호까지 입력하고 변심하여 이메일을 바꿀수도 있기에 체크해야함)
+                    if ((flagEmail == 1) && (flagEqual == 1) && (flagPassword == 1)) {
                         binding.btnContinueAfter.isEnabled = true
                         Log.d("flagEmail", flagEmail.toString())
                         Log.d("flagPassword", flagPassword.toString())
@@ -237,7 +241,6 @@ class Signin4Activity : AppCompatActivity() {
                     )
                 )
 
-                flagEmail = 1
                 return true
             } else {
                 editTextEmail.setBackgroundResource(R.drawable.btn_emailbox_error)
@@ -277,6 +280,7 @@ class Signin4Activity : AppCompatActivity() {
                 textPassword.text = "특수문자 포함 8자 이상 입력해야 합니다."
                 textPassword.setTextColor(ContextCompat.getColor(applicationContext!!, R.color.red))
                 //또는 questionEmail.setTextColor(R.color.red.toInt())
+                flagPassword = 0
                 return false
             }
         }
@@ -310,6 +314,7 @@ class Signin4Activity : AppCompatActivity() {
                         R.color.red
                     )
                 )
+                flagEqual = 0
                 return false
             }
         }

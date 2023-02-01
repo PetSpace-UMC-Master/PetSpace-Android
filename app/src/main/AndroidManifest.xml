@@ -19,6 +19,29 @@
         android:theme="@style/Theme.PetSapce_week1"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <!-- 홈 내비게이션 액티비티 ===================================================================================== -->
+        <activity
+            android:name=".home.Home2Activity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".home.HomeActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <!-- 홈 내비게이션 액티비티 끝 ===================================================================================== -->
+
         <activity
             android:name=".Reservation2Activity"
             android:exported="false">
@@ -56,7 +79,8 @@
         </activity> <!-- 네이버 지도 -->
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="p11jn9hu1p" /> <!-- 숙소 상세보기 액티비티 ===================================================================================== -->
+            android:value="p11jn9hu1p" />
+        <!-- 숙소 상세보기 액티비티 ===================================================================================== -->
         <activity
             android:name=".accommodation.scroll.AccFacilityActivity"
             android:exported="false">
@@ -111,9 +135,11 @@
         <activity android:name=".reviewrelated.ReviewPhotosActivity" /> <!-- 테스트옹 홈 화면 ================================ -->
         <activity
             android:name=".TestMainActivity"
-            android:exported="true" /> <!-- ================프로필 화면 & 설정 화면 ============= -->
+            android:exported="true" />
+        <!-- ================프로필 화면 & 설정 화면 ============= -->
         <activity android:name=".ProfileMenuActivity" />
-        <activity android:name=".SettingsActivity" /> <!-- - splash 화면 -->
+        <activity android:name=".SettingsActivity" />
+        <!-- - splash 화면 -->
         <activity
             android:name=".SplashActivity"
             android:exported="true">
