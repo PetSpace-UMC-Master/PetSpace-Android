@@ -117,7 +117,7 @@ class Signin4Activity : AppCompatActivity() {
                 Log.d("flagcheck2",flagButton.toString())
 
                 //다음화면 넘어가기(사용자가 비밀번호까지 입력하고 변심하여 이메일을 바꿀수도 있기에 체크해야함)
-                if ((flagEmail == 1) && (flagEqual == 1) && (flagPassword == 1) && flagCheck) {
+                if ((flagEmail == 1) && (flagEqual == 1) && (flagPassword == 1)) {
 //                if (checkEmail() && checkPassword() && checkPasswordEqual()) {
                     Log.d("flagEmail", flagEmail.toString())
                     Log.d("flagPassword", flagPassword.toString())
@@ -167,7 +167,7 @@ class Signin4Activity : AppCompatActivity() {
 
                 val flagCheck = viewModel.getFlag()
                 //다음화면 넘어가기(사용자가 비밀번호까지 입력하고 변심하여 이메일을 바꿀수도 있기에 체크해야함)
-                if ((flagEmail == 1) && (flagEqual == 1) && (flagPassword == 1) && flagCheck) {
+                if ((flagEmail == 1) && (flagEqual == 1) && (flagPassword == 1)) {
                     binding.btnContinueAfter.isEnabled = true
                     Log.d("flagEmail", flagEmail.toString())
                     Log.d("flagPassword", flagPassword.toString())
@@ -215,7 +215,7 @@ class Signin4Activity : AppCompatActivity() {
                     val flagCheck = viewModel.getFlag()
                     Log.d("check4",flagCheck.toString())
                     //다음화면 넘어가기(사용자가 비밀번호까지 입력하고 변심하여 이메일을 바꿀수도 있기에 체크해야함)
-                    if ((flagEmail == 1) && (flagEqual == 1) && (flagPassword == 1) && flagCheck) {
+                    if ((flagEmail == 1) && (flagEqual == 1) && (flagPassword == 1)) {
                         binding.btnContinueAfter.isEnabled = true
                         Log.d("flagEmail", flagEmail.toString())
                         Log.d("flagPassword", flagPassword.toString())

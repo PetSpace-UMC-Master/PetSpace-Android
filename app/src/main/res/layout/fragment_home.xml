@@ -108,6 +108,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/b1"
+                    android:clickable="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -117,13 +118,11 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/im1"
                         android:layout_width="48sp"
                         android:layout_height="48sp"
                         android:background="@drawable/btn11"
-                        android:clickable="true"
-                        android:focusable="true"
                         app:layout_constraintBottom_toTopOf="@+id/text1"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

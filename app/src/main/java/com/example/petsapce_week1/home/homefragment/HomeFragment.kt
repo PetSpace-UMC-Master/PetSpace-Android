@@ -11,7 +11,6 @@ import android.widget.AdapterView
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.petsapce_week1.GifActivity
 import com.example.petsapce_week1.R
 import com.example.petsapce_week1.databinding.FragmentHomeBinding
 import com.example.petsapce_week1.home.Home2Activity
@@ -45,25 +44,6 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
         //네트워크 통신
-        /*  api.get_priceDesc("C").enqueue(object : Callback<HomeResponse> {
-              //통신 성공
-              override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
-                  val homeDb = response.body()
-                  if (response.isSuccessful) {
-
-                      Log.d("PRICE_DESC", response.body().toString())
-                  } else {
-                      Log.d("PRICE_DESC오류", response.body().toString())
-
-                  }
-              }
-
-              //통신 실패
-              override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
-                  Log.d("PRICE 실패", t.message.toString())
-              }
-
-          })*/
 
 
         //낮은가격순
@@ -204,25 +184,87 @@ class HomeFragment : Fragment() {
 
 
         initRecyclerView()
+        initButtonSort()
         initSpinner()
-//        initButtonSort()
 //        initAddData()
-
-
-        binding.im1.setOnClickListener {
-            val intent = Intent(context, GifActivity::class.java)
-            startActivity(intent)
-        }
 
 
         // Inflate the layout for this fragment
         return binding.root
     }
 
-    /*  private fun initButtonSort() {
+    private fun initButtonSort() {
+        binding.apply {
+            b1.setOnClickListener {
+                Log.d("touch","touch")
+                updateHouse()
+            }
+            b2.setOnClickListener {
+                updateCamp()
+            }
+            b3.setOnClickListener {
+                updateDowntown()
+            }
+            b4.setOnClickListener {
+                updateCountry()
 
-      }
-  */
+            }
+            b5.setOnClickListener {
+                updateBeach()
+            }
+
+        }
+
+    }
+
+    private fun updateBeach() {
+        var dataList = ArrayList<HomeMainData>()
+        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.map, 5, "종로구, 서울", 11, 5000))
+
+        adapter.items = dataList
+        adapter.notifyDataSetChanged()
+    }
+
+    private fun updateCountry() {
+        var dataList = ArrayList<HomeMainData>()
+        dataList.add(HomeMainData(R.drawable.map, 5, "종로구, 서울", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+
+        adapter.items = dataList
+        adapter.notifyDataSetChanged()
+    }
+
+    private fun updateDowntown() {
+        var dataList = ArrayList<HomeMainData>()
+        dataList.add(HomeMainData(R.drawable.home2, 5, "종로, 서울", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.map, 5, "종로구, 서울", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+
+        adapter.items = dataList
+        adapter.notifyDataSetChanged()
+    }
+
+    private fun updateCamp() {
+        var dataList = ArrayList<HomeMainData>()
+        dataList.add(HomeMainData(R.drawable.map, 5, "종로구, ", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+
+        adapter.items = dataList
+        adapter.notifyDataSetChanged()
+    }
+
+    private fun updateHouse() {
+        var dataList = ArrayList<HomeMainData>()
+        dataList.add(HomeMainData(R.drawable.map, 3, "서초구, 서울", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.map, 5, "종dff로구, 서울", 11, 5000))
+
+        adapter.items = dataList
+        adapter.notifyDataSetChanged()
+    }
+
     private fun initSpinner() {
         spinner = binding.spinner
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -286,7 +328,8 @@ class HomeFragment : Fragment() {
 
 
         adapter.items = dataList
-        adapter.notifyDataSetChanged()    }
+        adapter.notifyDataSetChanged()
+    }
 
     private fun updatePriceRow() {
         var dataList = ArrayList<HomeMainData>()
@@ -297,7 +340,8 @@ class HomeFragment : Fragment() {
 
 
         adapter.items = dataList
-        adapter.notifyDataSetChanged()    }
+        adapter.notifyDataSetChanged()
+    }
 
     fun updatePriceHigh() {
         var dataList = ArrayList<HomeMainData>()
