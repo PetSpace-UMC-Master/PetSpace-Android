@@ -28,6 +28,13 @@ interface homeAPI {
         @Query("categoryType") categoryType: String
     ): Call<HomeResponse>
 
+    @GET("/app/rooms/")
+    fun getTripple(
+        @Query("page") page: String,
+        @Query("sortBy") sortBy: String,
+        @Query("categoryType") categoryType: String
+    ): Call<HomeResponse>
+
 
 
 

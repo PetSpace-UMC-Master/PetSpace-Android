@@ -18,7 +18,6 @@ import com.example.petsapce_week1.home.Home2Activity
 import com.example.petsapce_week1.network.RetrofitHelperHome
 import com.example.petsapce_week1.network.homeAPI
 import com.example.petsapce_week1.vo.HomeResponse
-import com.kakao.sdk.user.model.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,6 +27,7 @@ import retrofit2.Retrofit
 class HomeFragment : Fragment() {
     //레트로핏 객체 생성
     var retrofit: Retrofit = RetrofitHelperHome.getRetrofitInstance()
+
     //서비스 객체 생성
     var api: homeAPI = retrofit.create(homeAPI::class.java)
 
@@ -45,25 +45,25 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
         //네트워크 통신
-      /*  api.get_priceDesc("C").enqueue(object : Callback<HomeResponse> {
-            //통신 성공
-            override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
-                val homeDb = response.body()
-                if (response.isSuccessful) {
+        /*  api.get_priceDesc("C").enqueue(object : Callback<HomeResponse> {
+              //통신 성공
+              override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
+                  val homeDb = response.body()
+                  if (response.isSuccessful) {
 
-                    Log.d("PRICE_DESC", response.body().toString())
-                } else {
-                    Log.d("PRICE_DESC오류", response.body().toString())
+                      Log.d("PRICE_DESC", response.body().toString())
+                  } else {
+                      Log.d("PRICE_DESC오류", response.body().toString())
 
-                }
-            }
+                  }
+              }
 
-            //통신 실패
-            override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
-                Log.d("PRICE 실패", t.message.toString())
-            }
+              //통신 실패
+              override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
+                  Log.d("PRICE 실패", t.message.toString())
+              }
 
-        })*/
+          })*/
 
 
         //낮은가격순
@@ -71,10 +71,9 @@ class HomeFragment : Fragment() {
         call.enqueue(object : Callback<HomeResponse> {
             override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
                 val usersSort = response.body()
-                if(usersSort != null){
-                    Log.d("PRICE_DESC",usersSort.result.toString())
-                }
-                else{
+                if (usersSort != null) {
+                    Log.d("PRICE_DESC", usersSort.result.toString())
+                } else {
                     Log.d("PRICE_DESC오류", response.code().toString())
                 }
 
@@ -87,34 +86,32 @@ class HomeFragment : Fragment() {
             }
         })
 
-          api.getSort("PRICE_ASC").enqueue(object : Callback<HomeResponse> {
-           //통신 성공
-           override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
-               val usersSort = response.body()
-               if(usersSort != null){
-                   Log.d("PRICE_ASC",usersSort.result.toString())
-               }
-               else{
-                   Log.d("PRICE_ASC", response.code().toString())
-               }
+        api.getSort("PRICE_ASC").enqueue(object : Callback<HomeResponse> {
+            //통신 성공
+            override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
+                val usersSort = response.body()
+                if (usersSort != null) {
+                    Log.d("PRICE_ASC", usersSort.result.toString())
+                } else {
+                    Log.d("PRICE_ASC", response.code().toString())
+                }
 
-           }
+            }
 
-           //통신 실패
-           override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
-               Log.d("연결 실패", t.message.toString())
-           }
+            //통신 실패
+            override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
+                Log.d("연결 실패", t.message.toString())
+            }
 
-       })
+        })
 
         api.getSort("PRICE_ASC").enqueue(object : Callback<HomeResponse> {
             //통신 성공
             override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
                 val usersSort = response.body()
-                if(usersSort != null){
-                    Log.d("PRICE_ASC",usersSort.result.toString())
-                }
-                else{
+                if (usersSort != null) {
+                    Log.d("PRICE_ASC", usersSort.result.toString())
+                } else {
                     Log.d("PRICE_ASC", response.code().toString())
                 }
 
@@ -131,10 +128,9 @@ class HomeFragment : Fragment() {
             //통신 성공
             override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
                 val usersSort = response.body()
-                if(usersSort != null){
-                    Log.d("PRICE_HOUSE",usersSort.result.toString())
-                }
-                else{
+                if (usersSort != null) {
+                    Log.d("PRICE_HOUSE", usersSort.result.toString())
+                } else {
                     Log.d("PRICE_HOUSE", response.code().toString())
                 }
 
@@ -151,10 +147,9 @@ class HomeFragment : Fragment() {
             //통신 성공
             override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
                 val usersSort = response.body()
-                if(usersSort != null){
-                    Log.d("PRICE_CAMPSITE",usersSort.result.toString())
-                }
-                else{
+                if (usersSort != null) {
+                    Log.d("PRICE_CAMPSITE", usersSort.result.toString())
+                } else {
                     Log.d("PRICE_CAMPSITE", response.code().toString())
                 }
 
@@ -171,10 +166,9 @@ class HomeFragment : Fragment() {
             //통신 성공
             override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
                 val usersSort = response.body()
-                if(usersSort != null){
-                    Log.d("PRICE_page",usersSort.result.toString())
-                }
-                else{
+                if (usersSort != null) {
+                    Log.d("PRICE_page", usersSort.result.toString())
+                } else {
                     Log.d("PRICE_page", response.code().toString())
                 }
 
@@ -191,10 +185,9 @@ class HomeFragment : Fragment() {
             //통신 성공
             override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
                 val usersSort = response.body()
-                if(usersSort != null){
-                    Log.d("PRICE_page3",usersSort.result.toString())
-                }
-                else{
+                if (usersSort != null) {
+                    Log.d("PRICE_page3", usersSort.result.toString())
+                } else {
                     Log.d("PRICE_page3", response.code().toString())
                 }
 
@@ -206,30 +199,6 @@ class HomeFragment : Fragment() {
             }
 
         })
-
-
-
-
-      /*  api.getSort("0").enqueue(object : Callback<HomeResponse> {
-            //통신 성공
-            override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
-                val usersSort = response.body()
-                if(usersSort != null){
-                    Log.d("PRICE_ASC",usersSort.result.toString())
-                }
-                else{
-                    Log.d("PRICE_ASC", response.code().toString())
-                }
-
-            }
-
-            //통신 실패
-            override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
-                Log.d("연결 실패", t.message.toString())
-            }
-
-        })*/
-
 
 
 
@@ -250,10 +219,10 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-  /*  private fun initButtonSort() {
+    /*  private fun initButtonSort() {
 
-    }
-*/
+      }
+  */
     private fun initSpinner() {
         spinner = binding.spinner
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -297,16 +266,38 @@ class HomeFragment : Fragment() {
     }
 
     private fun updateReview() {
-        TODO("Not yet implemented")
+        var dataList = ArrayList<HomeMainData>()
+        dataList.add(HomeMainData(R.drawable.map, 10, "aaaaaa", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.map, 5, "종로구, 서울", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+
+
+        adapter.items = dataList
+        adapter.notifyDataSetChanged()
     }
 
     private fun updateScoreHigh() {
-        TODO("Not yet implemented")
-    }
+        var dataList = ArrayList<HomeMainData>()
+        dataList.add(HomeMainData(R.drawable.home2, 10, "aaaaaa", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.home2, 10, "aaaaaa", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.home2, 10, "aaaaaa", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.map, 5, "종로구, 서울", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+
+
+        adapter.items = dataList
+        adapter.notifyDataSetChanged()    }
 
     private fun updatePriceRow() {
-        TODO("Not yet implemented")
-    }
+        var dataList = ArrayList<HomeMainData>()
+        dataList.add(HomeMainData(R.drawable.map, 10, "aaaaaa", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.map, 10, "aaaaaa", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.map, 5, "종로구, 서울", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+
+
+        adapter.items = dataList
+        adapter.notifyDataSetChanged()    }
 
     fun updatePriceHigh() {
         var dataList = ArrayList<HomeMainData>()
