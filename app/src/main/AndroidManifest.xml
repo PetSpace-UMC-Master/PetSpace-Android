@@ -100,15 +100,20 @@
         <activity
             android:name=".TestMainActivity"
             android:exported="true">
-             <intent-filter>
-                 <action android:name="android.intent.action.MAIN" />
-                 <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
         </activity>
 
         <!-- ================프로필 화면 & 설정 화면 =============-->
         <activity android:name=".ProfileMenuActivity"/>
         <activity android:name=".SettingsActivity"/>
+
+        <!--- splash 화면 -->
+        <activity android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <!-- 카카오 로그인 화면 뜨는거 -->
         <activity
