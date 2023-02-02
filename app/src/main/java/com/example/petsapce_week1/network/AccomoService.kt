@@ -9,13 +9,13 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface AccomoService {
-    @GET("/app/room/{roomId}")
+    @GET("/app/rooms/{roomId}")
     fun getRoomDetail(
         @Path("roomId") roomId : Long = 1
         //@Body jsonParams : AccomodationRoomData
     ):Call<AccomodationData>
 
-    @GET("/app/room/{roomId}/facilities")
+    @GET("/app/rooms/{roomId}/facilities")
     fun getFacilities(
         @Path("roomId") roomId : Long = 1
     ): Call<AccommodationFacilityMore>
