@@ -193,7 +193,10 @@ class AccMainActivity : AppCompatActivity() {
                     )
                 }
                 //Log.d("숙소 facility 리스트", "${reviewList[5]}")
-
+//                if(reviewList.isNotEmpty()){
+//
+//                }
+                Log.d("숙소 facility 리스트", "${reviewList}")
                 binding.frameFacility.tvFac0.text = reviewList[0].facname
                 Glide.with(this@AccMainActivity)
                     .load(reviewList[0].imgUrl)
