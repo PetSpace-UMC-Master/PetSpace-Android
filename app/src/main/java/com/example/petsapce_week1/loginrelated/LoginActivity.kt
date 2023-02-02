@@ -35,8 +35,6 @@ class LoginActivity : AppCompatActivity() {
     var refreshToken_received : String ?= null
     var api : LoginService = retrofit.create(LoginService::class.java)
 
-    //토큰 재발급 시
-    var apiReissue :LoginService = retrofit.create(LoginService::class.java)
     private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

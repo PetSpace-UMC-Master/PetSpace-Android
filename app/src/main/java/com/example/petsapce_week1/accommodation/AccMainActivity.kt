@@ -2,6 +2,7 @@ package com.example.petsapce_week1.accommodation
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build.VERSION_CODES.P
 import android.os.Bundle
 import android.util.Log
@@ -16,6 +17,7 @@ import com.example.petsapce_week1.accommodation.scroll.*
 import com.example.petsapce_week1.databinding.ActivityAccHostBinding
 import com.example.petsapce_week1.databinding.ActivityAccMainBinding
 import com.example.petsapce_week1.network.AccomoService
+import com.example.petsapce_week1.network.LoginService
 import com.example.petsapce_week1.network.RetrofitHelper
 import com.example.petsapce_week1.vo.FacilityData
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationData
@@ -36,6 +38,12 @@ class AccMainActivity : AppCompatActivity() {
     // ========== 백엔드 연동 부분 ===========
     private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
     var api : AccomoService = retrofit.create(AccomoService::class.java)
+    var apiLike : AccomoService = retrofit.create(AccomoService::class.java)
+    // =========토큰==========
+    var sharedPreferences = getSharedPreferences("accessToken", MODE_PRIVATE)
+
+    //토큰 재발급
+    var apiReissue : LoginService = retrofit.create(LoginService::class.java)
 
     private val MIN_SCALE = 0.85f // 뷰가 몇퍼센트로 줄어들 것인지
     private val MIN_ALPHA = 0.5f // 어두워지는 정도를 나타낸 듯 하다.
@@ -56,6 +64,7 @@ class AccMainActivity : AppCompatActivity() {
             if (if1Checked == 0 ){
                 binding.btnHeartAfter.visibility = View.VISIBLE
                 if1Checked = 1
+                api.postLikes()
             }
         }
         binding.btnHeartAfter.setOnClickListener {

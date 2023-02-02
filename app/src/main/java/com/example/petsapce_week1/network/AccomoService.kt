@@ -6,10 +6,7 @@ import com.example.petsapce_week1.vo.AccommodationFacilityMore
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationData
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationRoomData
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface AccomoService {
     @GET("/app/room/{roomId}")
@@ -22,4 +19,9 @@ interface AccomoService {
     fun getFacilities(
         @Path("roomId") roomId : Long = 1
     ): Call<AccommodationFacilityMore>
+
+    @POST("/app/favorites?roomId=1")
+    fun postLikes(
+        @Header("Authorization") accessToken : String
+    ): Call<AccomodationData>
 }
