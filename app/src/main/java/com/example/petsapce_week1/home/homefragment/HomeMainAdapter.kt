@@ -18,11 +18,21 @@ class HomeMainAdapter(var items: ArrayList<HomeMainData>) : RecyclerView.Adapter
 //        fun onClick(v: View, position: Int)
     }
 
+
     var itemClickListener: OnItemClickListener? = null //초기값 null값
 
     inner class ViewHolder(val binding: HomeMainRowBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        private val childRecyclerView: RecyclerView = binding.childRecyclerView
+
         init {
+
+            childRecyclerView.layoutManager = LinearLayoutManager(
+                itemView.context,
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
             binding.root.setOnClickListener {
                 itemClickListener?.OnItemClick(items[adapterPosition]) //?는 null일 수 도 있다고 알려주는 역할
 
@@ -43,11 +53,8 @@ class HomeMainAdapter(var items: ArrayList<HomeMainData>) : RecyclerView.Adapter
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-      /*  val childAdapter = HomeChildAdapter(items[position].imgList)
-        holder.binding.viewPagerChild.adapter = childAdapter
-        holder.binding.viewPagerChild.layoutManager = LinearLayoutManager(holder.binding.root.context, LinearLayoutManager.HORIZONTAL, false)
-*/
 
+        holder.binding.childRecyclerView.adapter = HomeChildAdapter(items[position].imgList)
         holder.binding.apply {
             //이미지는 이런식으로 담아야함.
 //            imgMain.setImageResource(items[position].img)

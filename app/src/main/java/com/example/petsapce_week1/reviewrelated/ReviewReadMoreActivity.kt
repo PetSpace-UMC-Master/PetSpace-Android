@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.petsapce_week1.TermsActivity
+import com.example.petsapce_week1.accommodation.scroll.reviewFragment
 import com.example.petsapce_week1.databinding.ActivityReviewReadMoreBinding
 
 
@@ -19,7 +20,7 @@ class ReviewReadMoreActivity : AppCompatActivity() {
         // (manifest에 parent)
         //android:parentActivityName=""
         binding.btnReviewClose.setOnClickListener {
-            val intent = Intent(this, TermsActivity::class.java)
+            val intent = Intent(this, reviewFragment::class.java)
             startActivity(intent)
         }
 

@@ -40,7 +40,7 @@ class Home2Adapter(val items: ArrayList<Home2Data>) : RecyclerView.Adapter<Home2
 
         holder.binding.apply {
             //이미지는 이런식으로 담아야함.
-            imgMain.setImageResource(items[position].img)
+//            imgMain.setImageResource(items[position].img)
             textLoc.text = items[position].location
             textScore.text = items[position].score.toString()
             textDate.text = items[position].date.toString()

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/fragment_facilities_more"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".accommodation.scroll.AccFacilityMoreActivity">
+
+    <LinearLayout
+        android:id="@+id/facilities_fixed_upper_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btn_facilites_close"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:background="#00000000"
+            app:srcCompat="@drawable/closesvg"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="30dp"
+            android:paddingLeft="35dp"
+            android:fontFamily="@font/bmjua"
+            android:gravity="start"
+            android:textStyle="bold"
+            android:lineHeight="16dp"
+            android:text="편의시설"
+            android:textColor="#0C201E"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_category"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingLeft="30dp"
+        android:paddingTop="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/facilities_fixed_upper_bar"
+        tools:listitem="@layout/facilities_category_list"></androidx.recyclerview.widget.RecyclerView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

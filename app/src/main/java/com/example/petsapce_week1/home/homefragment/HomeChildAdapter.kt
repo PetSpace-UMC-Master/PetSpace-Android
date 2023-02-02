@@ -8,15 +8,20 @@ import com.example.petsapce_week1.databinding.HomeMainRowChildBinding
 
 class HomeChildAdapter(private val items: List<HomeChildData>) : RecyclerView.Adapter<HomeChildAdapter.ChildViewHolder>() {
 
+
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChildViewHolder {
         val binding = HomeMainRowChildBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ChildViewHolder(binding)
     }
 
+
+
     override fun onBindViewHolder(holder: ChildViewHolder, position: Int) {
         // set the adapter to the ViewPager
         holder.binding.childImg.setImageResource(items[position].childImg)
-
+//        holder.childRecyclerView.adapter = HomeChildAdapter(items[position].childImg)
     }
 
     override fun getItemCount(): Int = items.size
@@ -25,3 +30,4 @@ class HomeChildAdapter(private val items: List<HomeChildData>) : RecyclerView.Ad
 
     }
 }
+

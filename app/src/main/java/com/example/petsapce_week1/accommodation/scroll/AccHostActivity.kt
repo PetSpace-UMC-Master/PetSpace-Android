@@ -1,10 +1,11 @@
-package com.example.petsapce_week1.accomodation.scroll
+package com.example.petsapce_week1.accommodation.scroll
 
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.petsapce_week1.databinding.ActivityAccHostBinding
 import com.example.petsapce_week1.network.AccomoService
+import com.example.petsapce_week1.network.RetrofitHelper
 import com.example.petsapce_week1.network.RetrofitHelperHome
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationData
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationRoomData
@@ -15,19 +16,20 @@ import retrofit2.Retrofit
 
 class AccHostActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAccHostBinding
-    private var retrofit: Retrofit = RetrofitHelperHome.getRetrofitInstance()
+
+    private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
     var api : AccomoService = retrofit.create(AccomoService::class.java)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAccHostBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // == 백엔드 통신 부분 ==
-        val data = AccomodationRoomData(roomId = null)
+        val data = AccomodationRoomData(roomId = 1)
 
 
-
-        api.getRoomDetail(data).enqueue(object : Callback<AccomodationData>{
+        api.getRoomDetail(2).enqueue(object : Callback<AccomodationData>{
             override fun onResponse(
                 call: Call<AccomodationData>,
                 response: Response<AccomodationData>
