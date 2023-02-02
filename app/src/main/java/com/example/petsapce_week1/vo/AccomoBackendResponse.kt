@@ -27,7 +27,8 @@ data class Result(
     val roomDecription: String,
     val roomId: Int,
     val roomImageUrls: List<String>,
-    val roomName: String
+    val roomName: String,
+    val favorite : Boolean
 )
 
 data class Facility(
