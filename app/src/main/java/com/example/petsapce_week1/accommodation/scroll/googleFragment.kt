@@ -93,8 +93,8 @@ class googleFragment : Fragment(), OnMapReadyCallback {
 
     private var naverMap : NaverMap ?= null
     private lateinit var locationSource: FusedLocationSource
-    private var latitude : Double = 37.54191
-    private var longitude : Double = 127.12481
+    private var latitude : Double = 0.0
+    private var longitude : Double = 0.0
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -108,10 +108,6 @@ class googleFragment : Fragment(), OnMapReadyCallback {
 
         val uiSettings = naverMap.uiSettings
         uiSettings.isLocationButtonEnabled = true
-        uiSettings.isCompassEnabled = true; // 기본값 : true
-        uiSettings.isScaleBarEnabled = true; // 기본값 : true
-        uiSettings.isZoomControlEnabled = true; // 기본값 : true
-
         //카메라 설정
         val cameraPosition = CameraPosition(
             LatLng(latitude, longitude),

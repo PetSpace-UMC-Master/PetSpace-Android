@@ -33,10 +33,10 @@ class ReviewReadMoreActivity : AppCompatActivity() {
         binding.rvReview.adapter = rvAdapter
         binding.rvReview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-        itemList.add(ReviewItem("3주 전","매들린", "너무 좋아요 어쩌고 저쩌고"))
-        itemList.add(ReviewItem("4주 전","기현", "너무 좋아요 너무 좋아요 Google 지도에서 방문한 장소에 대한 리뷰를 작성할 수 있습니다. 너무 좋아요 Google 지도에서 너무 좋아요 Google 지도에서 너무 좋아요 너무 좋아요 Google 지도에서Google 지도에서 방문한 장소에 대한 리뷰를 작성할 수 있습니다.Google 지도에서 방문한 장소에 대한 리뷰를 작성할 수 있습니다. 블로그 체험단, 인스타그램, 유튜브, 구매리뷰, 기자단, 바이럴 마케팅, 전문 컨설팅, 채널별 최적의 인플루언서가 함께하는 리얼리뷰"))
-        itemList.add(ReviewItem("6주 전","섭섭이", "너무 좋아요"))
-        itemList.add(ReviewItem("10주 전","토마토싫어맨", "너무 좋아요 너무 좋아요 Google 지도에서 방문한 장소에 대한 리뷰를 작성할 수 있습니다."))
+        itemList.add(ReviewItem("3주 전","멍멍이", "너무 좋아요 어쩌고 저쩌고"))
+        itemList.add(ReviewItem("4주 전","야옹이", "너무 좋아요 너무 좋아요 Google 지도에서 방문한 장소에 대한 리뷰를 작성할 수 있습니다. 너무 좋아요 Google 지도에서 너무 좋아요 Google 지도에서 너무 좋아요 너무 좋아요 Google 지도에서Google 지도에서 방문한 장소에 대한 리뷰를 작성할 수 있습니다.Google 지도에서 방문한 장소에 대한 리뷰를 작성할 수 있습니다. 블로그 체험단, 인스타그램, 유튜브, 구매리뷰, 기자단, 바이럴 마케팅, 전문 컨설팅, 채널별 최적의 인플루언서가 함께하는 리얼리뷰"))
+        itemList.add(ReviewItem("6주 전","집사", "너무 좋아요"))
+        itemList.add(ReviewItem("10주 전","댕댕", "너무 좋아요 너무 좋아요 Google 지도에서 방문한 장소에 대한 리뷰를 작성할 수 있습니다."))
 
 
 
