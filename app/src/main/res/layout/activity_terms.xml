@@ -40,7 +40,7 @@
 
         <!-- 회원가입 완료하기 -->
         <TextView
-            android:id="@+id/some_id"
+            android:id="@+id/title_placetogo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -191,7 +191,7 @@
                 android:layout_width="335dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_semibold"
-                android:text="마케팅 이메일 수신에 동의합니다. (선택)\n"
+                android:text="마케팅 이메일 수신에 동의합니다. (필수)\n"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 app:layout_constraintEnd_toEndOf="parent"

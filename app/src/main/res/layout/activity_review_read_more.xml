@@ -38,7 +38,7 @@
                 android:fontFamily="@font/bmjua"
                 android:gravity="start"
                 android:lineHeight="16dp"
-                android:text="\t1,596개의 리뷰"
+                android:text="\t6개의 리뷰"
                 android:textColor="#0C201E"
                 android:textSize="16sp" />
 
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_regular"
-                android:text="4.37"
+                android:text="4.0"
                 android:textColor="#0C201E" />
         </LinearLayout>
     </LinearLayout>

@@ -10,7 +10,7 @@ import retrofit2.http.POST
 
 interface LoginService {
     //Kakao Login
-    @POST("/oauth/kakao/")
+    @POST("/app/oauth/kakao")
     fun postAccessToken(
         //@Header("access_token") token: String
         @Body jsonParams: UserModelKakao// => token
