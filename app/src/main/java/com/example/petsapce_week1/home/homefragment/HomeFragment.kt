@@ -16,6 +16,7 @@ import com.example.petsapce_week1.databinding.FragmentHomeBinding
 import com.example.petsapce_week1.home.Home2Activity
 import com.example.petsapce_week1.network.RetrofitHelperHome
 import com.example.petsapce_week1.network.homeAPI
+import com.example.petsapce_week1.vo.FacilityData
 import com.example.petsapce_week1.vo.HomeResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -26,6 +27,7 @@ import retrofit2.Retrofit
 class HomeFragment : Fragment() {
     //레트로핏 객체 생성
     var retrofit: Retrofit = RetrofitHelperHome.getRetrofitInstance()
+
     //서비스 객체 생성
     var api: homeAPI = retrofit.create(homeAPI::class.java)
 
@@ -47,17 +49,15 @@ class HomeFragment : Fragment() {
         //네트워크 통신
 
 
-
         //낮은가격순
         val call = api.getSort("PRICE_DESC")
         call.enqueue(object : Callback<HomeResponse> {
             override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
                 val usersSort = response.body()
-                if(usersSort != null){
+                if (usersSort != null) {
                     var city = usersSort.result.city
-                    Log.d("PRICE_DESC",usersSort.result.toString())
-                }
-                else{
+                    Log.d("PRICE_DESC", usersSort.result.toString())
+                } else {
                     Log.d("PRICE_DESC오류", response.code().toString())
                 }
 
@@ -77,9 +77,6 @@ class HomeFragment : Fragment() {
         initSpinner()
         initButtonSort()
 //        initAddData()
-
-
-
 
 
         // Inflate the layout for this fragment
@@ -112,18 +109,39 @@ class HomeFragment : Fragment() {
     private fun updateBeach() {
         var dataList = ArrayList<HomeMainData>()
 
-        for(j in 1..10){
-            childataList.add(HomeChildData(R.drawable.home2))
-        }
-        for (i in 1..10) {
 
-            dataList.add(HomeMainData(childataList,
+
+        for (i in 1..10) {
+            var childataList = ArrayList<HomeChildData>()
+
+            when (i) {
+
+                1 -> {
+                    childataList.add(HomeChildData(R.drawable.map))
+                    childataList.add(HomeChildData(R.drawable.map))
+                    childataList.add(HomeChildData(R.drawable.map))
+                    childataList.add(HomeChildData(R.drawable.map))
+                }
+                2 -> {
+                    childataList.add(HomeChildData(R.drawable.home2))
+                    childataList.add(HomeChildData(R.drawable.home2))
+                    childataList.add(HomeChildData(R.drawable.home2))
+                    childataList.add(HomeChildData(R.drawable.home2))
+
+                }
+
+            }
+            dataList.add(
+                HomeMainData(
+                    childataList,
                     5,
                     "종로구, 서울",
                     11,
                     5000
                 )
             )
+
+
         }
 
         adapter.items = dataList
@@ -132,17 +150,17 @@ class HomeFragment : Fragment() {
 
     private fun updateCountry() {
         var dataList = ArrayList<HomeMainData>()
-   /*     dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
-*/
+        /*     dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+             dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+     */
         adapter.items = dataList
         adapter.notifyDataSetChanged()
     }
 
     private fun updateDowntown() {
         var dataList = ArrayList<HomeMainData>()
-     /*   dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))*/
+        /*   dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+           dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))*/
 
         adapter.items = dataList
         adapter.notifyDataSetChanged()

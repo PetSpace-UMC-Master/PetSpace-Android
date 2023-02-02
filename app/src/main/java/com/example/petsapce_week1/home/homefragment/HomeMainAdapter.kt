@@ -1,17 +1,19 @@
 package com.example.petsapce_week1.home.homefragment
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.petsapce_week1.databinding.AccReviewRowBinding
+import androidx.viewpager.widget.ViewPager
 import com.example.petsapce_week1.databinding.HomeMainRowBinding
+import kotlinx.android.synthetic.main.activity_acc_main.view.*
+import kotlinx.android.synthetic.main.home_main_row.view.*
 
-class HomeMainAdapter(var items: ArrayList<HomeMainData>) : RecyclerView.Adapter<HomeMainAdapter.ViewHolder>() {
+class HomeMainAdapter(var items: ArrayList<HomeMainData>) :
+    RecyclerView.Adapter<HomeMainAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
         fun OnItemClick(data: HomeMainData)
@@ -24,25 +26,22 @@ class HomeMainAdapter(var items: ArrayList<HomeMainData>) : RecyclerView.Adapter
     inner class ViewHolder(val binding: HomeMainRowBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        private val childRecyclerView: RecyclerView = binding.childRecyclerView
+//        private val childRecyclerView: RecyclerView = binding.childRecyclerView
+//        private val childViewPager: ViewPager = binding.childViewPager
 
         init {
-
-            childRecyclerView.layoutManager = LinearLayoutManager(
+           /* childRecyclerView.layoutManager = LinearLayoutManager(
                 itemView.context,
                 LinearLayoutManager.HORIZONTAL,
                 false
-            )
+            )*/
             binding.root.setOnClickListener {
                 itemClickListener?.OnItemClick(items[adapterPosition]) //?는 null일 수 도 있다고 알려주는 역할
 
-                Log.d("touch3",adapterPosition.toString())
+                Log.d("touch3", adapterPosition.toString())
 
             }
-
         }
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -54,18 +53,24 @@ class HomeMainAdapter(var items: ArrayList<HomeMainData>) : RecyclerView.Adapter
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.binding.childRecyclerView.adapter = HomeChildAdapter(items[position].imgList)
+
+        //child recyclerview
+//        holder.binding.childRecyclerView.adapter = HomeChildAdapter(items[position].imgList)
+
+        holder.binding.childViewPager.adapter = HomeChildAdapter(items[position].imgList)
+//        holder.childViewPager.adapter = HomeChildViewPagerAdapter(items[position].imgList)
+//        holder.binding.childViewPager.visibility = View.VISIBLE
         holder.binding.apply {
+            topcardview.cardElevation = 0f
             //이미지는 이런식으로 담아야함.
 //            imgMain.setImageResource(items[position].img)
             textLoc.text = items[position].location
             textScore.text = items[position].score.toString()
             textDate.text = items[position].date.toString()
-            textPrice.text = "₩"+items[position].price.toString()+" / 박"
+            textPrice.text = "₩" + items[position].price.toString() + " / 박"
 //            textViewDifficulty.text= "난이도 ${position+1}"
 
         }
-
 
 
     }

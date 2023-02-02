@@ -9,14 +9,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/bottom"
         android:id="@+id/topcardview"
-        android:elevation="0dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="6dp">
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/childRecyclerView"
+        <androidx.viewpager2.widget.ViewPager2
+            android:nestedScrollingEnabled="true"
+            android:id="@+id/childViewPager"
             android:layout_width="match_parent"
             android:layout_height="200dp"/>
 
@@ -35,7 +35,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/text_loc"
@@ -50,7 +50,7 @@
         <ImageView
             android:id="@+id/img_star"
             android:layout_width="14sp"
-            android:layout_height="1sp"
+            android:layout_height="14sp"
             android:layout_marginRight="3dp"
             android:src="@drawable/star3"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -84,7 +84,7 @@
         android:id="@+id/text_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:text="₩50,000 / 박"
         android:textColor="@color/textForBlack"
         android:textSize="14sp"

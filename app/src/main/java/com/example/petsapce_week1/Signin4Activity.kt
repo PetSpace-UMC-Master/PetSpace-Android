@@ -249,7 +249,7 @@ class Signin4Activity : AppCompatActivity() {
                         R.color.main_green
                     )
                 )
-
+                flagEmail = 1
 
                 return true
             } else {
