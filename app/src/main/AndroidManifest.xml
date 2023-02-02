@@ -19,38 +19,7 @@
         android:theme="@style/Theme.PetSapce_week1"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <!-- 홈 내비게이션 액티비티 ===================================================================================== -->
-        <activity
-            android:name=".home.Home2Activity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".home.HomeActivity"
-            android:exported="true">
 
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <!-- 홈 내비게이션 액티비티 끝 ===================================================================================== -->
-
-        <activity
-            android:name=".Reservation2Activity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ReservationActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
         <activity
             android:name=".JejuActivity"
             android:exported="false">
@@ -65,13 +34,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".Test2Activity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity> <!-- 네이버 지도 -->
+        <!-- 네이버 지도 -->
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="p11jn9hu1p" />

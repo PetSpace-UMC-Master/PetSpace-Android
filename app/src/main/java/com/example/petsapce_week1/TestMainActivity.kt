@@ -25,16 +25,6 @@ class TestMainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.btnPlacetogo.setOnClickListener {
-            val intent = Intent(this@TestMainActivity, PlacetogoActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.btnReservation.setOnClickListener {
-            val intent = Intent(this@TestMainActivity, ReservationActivity::class.java)
-            startActivity(intent)
-        }
-
         binding.btnProfile.setOnClickListener {
             val intent = Intent(this@TestMainActivity, ProfileMenuActivity::class.java)
             startActivity(intent)

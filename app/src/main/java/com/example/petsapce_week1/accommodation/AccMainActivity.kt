@@ -40,7 +40,7 @@ class AccMainActivity : AppCompatActivity() {
     var api : AccomoService = retrofit.create(AccomoService::class.java)
     var apiLike : AccomoService = retrofit.create(AccomoService::class.java)
     // =========토큰==========
-    var sharedPreferences = getSharedPreferences("accessToken", MODE_PRIVATE)
+    //var sharedPreferences = getSharedPreferences("accessToken", MODE_PRIVATE)
 
     //토큰 재발급
     var apiReissue : LoginService = retrofit.create(LoginService::class.java)
@@ -64,7 +64,7 @@ class AccMainActivity : AppCompatActivity() {
             if (if1Checked == 0 ){
                 binding.btnHeartAfter.visibility = View.VISIBLE
                 if1Checked = 1
-                api.postLikes()
+                //api.postLikes()
             }
         }
         binding.btnHeartAfter.setOnClickListener {

@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.petsapce_week1.*
 import com.example.petsapce_week1.databinding.ActivityLoginBinding
-import com.example.petsapce_week1.home.HomeActivity
 import com.example.petsapce_week1.network.LoginService
 import com.example.petsapce_week1.network.RetrofitHelper
 import com.example.petsapce_week1.reviewrelated.ReviewReadMoreActivity
@@ -143,7 +142,7 @@ class LoginActivity : AppCompatActivity() {
 //                                Toast.LENGTH_LONG
 //                            ).show()
                         }
-                        val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+                        val intent = Intent(this@LoginActivity, TestMainActivity::class.java)
                         startActivity(intent)
                     }
                     override fun onFailure(call: Call<LoginBackendResponse>, t: Throwable) {
@@ -219,7 +218,7 @@ class LoginActivity : AppCompatActivity() {
                             Log.d("로그인 통신 실패","fail")
                         }
                     })
-                    val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+                    val intent = Intent(this@LoginActivity, TestMainActivity::class.java)
                     startActivity(intent)
 
                 }//틀리면 빨간글자 뜨게함
