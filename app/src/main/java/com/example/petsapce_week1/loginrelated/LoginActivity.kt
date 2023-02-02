@@ -1,6 +1,5 @@
 package com.example.petsapce_week1.loginrelated
 
-import android.app.ProgressDialog.show
 import android.content.ContentValues
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
@@ -42,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //id password 임의로 설정
-        val id = "tkdwls@naver.com"
+        val id = "wjddus@naver.com"
         val password = "1234567!"
 
         //id, password check
@@ -57,16 +56,17 @@ class LoginActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        // 지우지 말것!!!!
+        /* 지우지 말것!!!!
         //로그인 정보 확인
         UserApiClient.instance.accessTokenInfo{ tokenInfo, error ->
             if(error != null){
-                //Toast.makeText(this, "토큰 정보 보기 실패", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "토큰 정보 보기 실패", Toast.LENGTH_SHORT).show()
             }
             else if(tokenInfo != null) {
-                //Toast.makeText(this, "토큰 정보 보기 성공", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "토큰 정보 보기 성공", Toast.LENGTH_SHORT).show()
             }
         }
+         */
 
         binding.btnKakao.setOnClickListener {
             kakaoLogin()
@@ -80,35 +80,35 @@ class LoginActivity : AppCompatActivity() {
         // 카카오톡으로 로그인 할 수 없어 카카오계정으로 로그인할 경우 사용됨
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
-//                when {
-//                    error.toString() == AuthErrorCause.AccessDenied.toString() -> {
-//                        Toast.makeText(this, "접근이 거부 됨(동의 취소)", Toast.LENGTH_SHORT).show()
-//                    }
-//                    error.toString() == AuthErrorCause.InvalidClient.toString() -> {
-//                        Toast.makeText(this, "유효하지 않은 앱", Toast.LENGTH_SHORT).show()
-//                    }
-//                    error.toString() == AuthErrorCause.InvalidGrant.toString() -> {
-//                        Toast.makeText(this, "인증 수단이 유효하지 않아 인증할 수 없는 상태", Toast.LENGTH_SHORT).show()
-//                    }
-//                    error.toString() == AuthErrorCause.InvalidRequest.toString() -> {
-//                        Toast.makeText(this, "요청 파라미터 오류", Toast.LENGTH_SHORT).show()
-//                    }
-//                    error.toString() == AuthErrorCause.InvalidScope.toString() -> {
-//                        Toast.makeText(this, "유효하지 않은 scope ID", Toast.LENGTH_SHORT).show()
-//                    }
-//                    error.toString() == AuthErrorCause.Misconfigured.toString() -> {
-//                        Toast.makeText(this, "설정이 올바르지 않음(android key hash)", Toast.LENGTH_SHORT).show()
-//                    }
-//                    error.toString() == AuthErrorCause.ServerError.toString() -> {
-//                        Toast.makeText(this, "서버 내부 에러", Toast.LENGTH_SHORT).show()
-//                    }
-//                    error.toString() == AuthErrorCause.Unauthorized.toString() -> {
-//                        Toast.makeText(this, "앱이 요청 권한이 없음", Toast.LENGTH_SHORT).show()
-//                    }
-//                    else -> { // Unknown
-//                        Toast.makeText(this, "기타 에러", Toast.LENGTH_SHORT).show()
-//                    }
-//                }
+                when {
+                    error.toString() == AuthErrorCause.AccessDenied.toString() -> {
+                        Toast.makeText(this, "접근이 거부 됨(동의 취소)", Toast.LENGTH_SHORT).show()
+                    }
+                    error.toString() == AuthErrorCause.InvalidClient.toString() -> {
+                        Toast.makeText(this, "유효하지 않은 앱", Toast.LENGTH_SHORT).show()
+                    }
+                    error.toString() == AuthErrorCause.InvalidGrant.toString() -> {
+                        Toast.makeText(this, "인증 수단이 유효하지 않아 인증할 수 없는 상태", Toast.LENGTH_SHORT).show()
+                    }
+                    error.toString() == AuthErrorCause.InvalidRequest.toString() -> {
+                        Toast.makeText(this, "요청 파라미터 오류", Toast.LENGTH_SHORT).show()
+                    }
+                    error.toString() == AuthErrorCause.InvalidScope.toString() -> {
+                        Toast.makeText(this, "유효하지 않은 scope ID", Toast.LENGTH_SHORT).show()
+                    }
+                    error.toString() == AuthErrorCause.Misconfigured.toString() -> {
+                        Toast.makeText(this, "설정이 올바르지 않음(android key hash)", Toast.LENGTH_SHORT).show()
+                    }
+                    error.toString() == AuthErrorCause.ServerError.toString() -> {
+                        Toast.makeText(this, "서버 내부 에러", Toast.LENGTH_SHORT).show()
+                    }
+                    error.toString() == AuthErrorCause.Unauthorized.toString() -> {
+                        Toast.makeText(this, "앱이 요청 권한이 없음", Toast.LENGTH_SHORT).show()
+                    }
+                    else -> { // Unknown
+                        Toast.makeText(this, "기타 에러", Toast.LENGTH_SHORT).show()
+                    }
+                }
             } else if (token != null) {
                 Log.i(ContentValues.TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
                 authToken = token.accessToken
@@ -127,20 +127,49 @@ class LoginActivity : AppCompatActivity() {
                         Log.d("로그인 통신 성공", response.toString())
                         Log.d("로그인 통신 성공", response.body().toString())
 
+
+                        //===== token 재발급 시 ========
+                        refreshToken_received = response.body()?.result?.refreshToken.toString()
+                        if(response.code() == 401 && response.body()?.responseCode?.toInt() == 2003){
+
+                            api.TokenReissue(ReissueData(accessToken = authToken, refreshToken = refreshToken_received)).enqueue(object  : Callback<LoginBackendResponse>{
+                                override fun onResponse(
+                                    call: Call<LoginBackendResponse>,
+                                    response: Response<LoginBackendResponse>
+                                ) {
+                                    Log.d("로그인 토큰 재발급", response.toString())
+                                    Log.d("로그인 토큰 재발급", response.body().toString())
+
+                                    //만약에 재발급 호출해서 성공했어, 그러면 그 다음은 어떡하지?
+                                    //토큰 갱신부터 해야겟지?
+                                    refreshToken_received = response.body()?.result?.refreshToken.toString()
+                                    authToken = token.accessToken
+                                    saveATRT(authToken.toString(), refreshToken_received.toString())
+                                }
+
+                                override fun onFailure(
+                                    call: Call<LoginBackendResponse>,
+                                    t: Throwable
+                                ) {
+                                    Log.d("로그인 토큰 재발급 실패", "ㅠㅠ")
+                                }
+
+                            })
+                        }
                         when (response.code()) {
                             200 -> {
                                 Log.d("로그인 성공" , "ggg")
                             }
-//                            405 -> Toast.makeText(
-//                                this@LoginActivity,
-//                                "로그인 실패 : 아이디나 비번이 올바르지 않습니다",
-//                                Toast.LENGTH_LONG
-//                            ).show()
-//                            500 -> Toast.makeText(
-//                                this@LoginActivity,
-//                                "로그인 실패 : 서버 오류",
-//                                Toast.LENGTH_LONG
-//                            ).show()
+                            405 -> Toast.makeText(
+                                this@LoginActivity,
+                                "로그인 실패 : 아이디나 비번이 올바르지 않습니다",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            500 -> Toast.makeText(
+                                this@LoginActivity,
+                                "로그인 실패 : 서버 오류",
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
                         val intent = Intent(this@LoginActivity, TestMainActivity::class.java)
                         startActivity(intent)
@@ -202,13 +231,42 @@ class LoginActivity : AppCompatActivity() {
                             Log.d("로그인 HTTP 코드", response.code().toString())
                             Log.d("로그인 통신 성공", response.body().toString())
 
+                            //===== token 재발급 시 ========
+                            refreshToken_received = response.body()?.result?.refreshToken.toString()
+                            if(response.code() == 401 && response.body()?.responseCode?.toInt() == 2003){
+
+                                api.TokenReissue(ReissueData(accessToken = authToken, refreshToken = refreshToken_received)).enqueue(object  : Callback<LoginBackendResponse>{
+                                    override fun onResponse(
+                                        call: Call<LoginBackendResponse>,
+                                        response: Response<LoginBackendResponse>
+                                    ) {
+                                        Log.d("로그인 토큰 재발급", response.toString())
+                                        Log.d("로그인 토큰 재발급", response.body().toString())
+
+                                        //만약에 재발급 호출해서 성공했어, 그러면 그 다음은 어떡하지?
+                                        //토큰 갱신부터 해야겟지?
+                                        refreshToken_received = response.body()?.result?.refreshToken.toString()
+                                        authToken = response.body()?.result?.accessToken.toString()
+                                        saveATRT(authToken.toString(), refreshToken_received.toString())
+                                    }
+
+                                    override fun onFailure(
+                                        call: Call<LoginBackendResponse>,
+                                        t: Throwable
+                                    ) {
+                                        Log.d("로그인 토큰 재발급 실패", "ㅠㅠ")
+                                    }
+
+                                })
+                            }
+
                             when (response.code()) {
                                 200 -> {
                                     // == 기기 db (shared preference) 로 저장
-                                    saveData(inputEmail, inputPassword)
+                                    saveIDPW(inputEmail, inputPassword)
                                 }
-                                //400 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 아이디나 비번이 올바르지 않습니다", Toast.LENGTH_LONG).show()
-                                //500 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 서버 오류", Toast.LENGTH_LONG).show()
+                                400 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 아이디나 비번이 올바르지 않습니다", Toast.LENGTH_LONG).show()
+                                500 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 서버 오류", Toast.LENGTH_LONG).show()
                             }
                         }
 
@@ -244,10 +302,10 @@ class LoginActivity : AppCompatActivity() {
                             when (response.code()) {
                                 200 -> {
                                     // == 기기 db (shared preference) 로 저장
-                                    saveData(inputEmail, inputPassword)
+                                    saveIDPW(inputEmail, inputPassword)
                                 }
-                                //400 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 아이디나 비번이 올바르지 않습니다", Toast.LENGTH_LONG).show()
-                                //500 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 서버 오류", Toast.LENGTH_LONG).show()
+                                400 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 아이디나 비번이 올바르지 않습니다", Toast.LENGTH_LONG).show()
+                                500 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 서버 오류", Toast.LENGTH_LONG).show()
                             }
                         }
 
@@ -271,7 +329,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun saveData( id : String, pw : String){
+    fun saveIDPW( id : String, pw : String){
         val prefID = getSharedPreferences("userID", MODE_PRIVATE)
         val prefPW = getSharedPreferences("userPW", MODE_PRIVATE)
         val editID = prefID.edit()
@@ -281,5 +339,16 @@ class LoginActivity : AppCompatActivity() {
         editID.apply()//save
         editPW.apply()//save
         Log.d("로그인 데이터", "saved")
+    }
+    fun saveATRT( at: String, rt : String){
+        val prefAccessToken = getSharedPreferences("accessToken", MODE_PRIVATE)
+        val prefRefreshToken = getSharedPreferences("refreshToken", MODE_PRIVATE)
+        val editAT  = prefAccessToken.edit()
+        val editRT = prefRefreshToken.edit()
+        editAT.putString("accessToken", at)
+        editRT.putString("refreshToken", rt)
+        editAT.apply()
+        editRT.apply()
+        Log.d("로그인 tokens", "saved")
     }
 }
