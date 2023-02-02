@@ -43,7 +43,8 @@ data class UserDetailResponse(
     )
 }
 
-// 토큰 재발급 시 보내는 데이터
+
+//토큰 재발급 시 보내는 데이터
 //=> 받는건 LoginBackendResponse
 data class ReissueData(
     val accessToken: String?=null,
