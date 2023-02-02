@@ -8,6 +8,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
+import com.example.petsapce_week1.MySharedPreferences
 import com.example.petsapce_week1.ProfileMenuActivity
 import com.example.petsapce_week1.R
 import com.example.petsapce_week1.accommodation.scroll.*
@@ -35,6 +36,13 @@ class AccMainActivity : AppCompatActivity() {
     private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
     var api : AccomoService = retrofit.create(AccomoService::class.java)
 
+    // ============ token ============
+    val pref = this.getSharedPreferences("token", 0)
+    val editor = pref.edit()
+    val accessToken = pref.getString("accessToken", "default")
+    val refreshToken = pref.getString("refreshToken", "default")
+
+
     private val MIN_SCALE = 0.85f // 뷰가 몇퍼센트로 줄어들 것인지
     private val MIN_ALPHA = 0.5f // 어두워지는 정도를 나타낸 듯 하다.
 
@@ -49,9 +57,20 @@ class AccMainActivity : AppCompatActivity() {
         }
 
         // like btn
+        var if1Checked = 0
         binding.btnHeartBefore.setOnClickListener {
-            binding.btnHeartAfter.visibility = View.VISIBLE
+            if (if1Checked == 0 ){
+                binding.btnHeartAfter.visibility = View.VISIBLE
+                if1Checked = 1
+            }
         }
+        binding.btnHeartAfter.setOnClickListener {
+            if(if1Checked == 1){
+                binding.btnHeartAfter.visibility = View.INVISIBLE
+                if1Checked = 0
+            }
+        }
+
 
         // .bind와 .inflate 차이 / layoutinflater , view 객체 차이
         val includeView: View = binding.frameHost.root
