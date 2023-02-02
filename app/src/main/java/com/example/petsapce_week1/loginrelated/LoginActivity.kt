@@ -130,38 +130,6 @@ class LoginActivity : AppCompatActivity() {
                         Log.d("로그인 통신 성공", response.toString())
                         Log.d("로그인 통신 성공", response.body().toString())
 
-                        //재발급 시
-                        refreshToken_received = response.body()?.result?.refreshToken.toString()
-                        if(response.code() == 401 && response.body()?.responseCode?.toInt() == 2003){
-
-                            api.TokenReissue(ReissueData(accessToken = authToken, refreshToken = refreshToken_received)).enqueue(object  : Callback<LoginBackendResponse>{
-                                override fun onResponse(
-                                    call: Call<LoginBackendResponse>,
-                                    response: Response<LoginBackendResponse>
-                                ) {
-                                    Log.d("로그인 토큰 재발급", response.toString())
-                                    Log.d("로그인 토큰 재발급", response.body().toString())
-
-                                    //만약에 재발급 호출해서 성공했어, 그러면 그 다음은 어떡하지?
-                                    //토큰 갱신부터 해야겟지?
-                                    refreshToken_received = response.body()?.result?.refreshToken.toString()
-                                    authToken = token.accessToken
-                                    //토큰은 기기에 저장 안하지?? 그냥 변수에만 담아두고...하나?
-                                    //기기 내에 db 에 저장하나??
-                                }
-
-                                override fun onFailure(
-                                    call: Call<LoginBackendResponse>,
-                                    t: Throwable
-                                ) {
-                                    Log.d("로그인 토큰 재발급 실패", "ㅠㅠ")
-                                }
-
-                            })
-
-
-                        }
-
                         when (response.code()) {
                             200 -> {
                                 Log.d("로그인 성공" , "ggg")
@@ -177,7 +145,7 @@ class LoginActivity : AppCompatActivity() {
 //                                Toast.LENGTH_LONG
 //                            ).show()
                         }
-                        val intent = Intent(this@LoginActivity, TestMainActivity::class.java)
+                        val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                         startActivity(intent)
                     }
                     override fun onFailure(call: Call<LoginBackendResponse>, t: Throwable) {

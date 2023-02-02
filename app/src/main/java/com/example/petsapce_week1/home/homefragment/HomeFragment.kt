@@ -221,8 +221,8 @@ class HomeFragment : Fragment() {
 
     private fun updateBeach() {
         var dataList = ArrayList<HomeMainData>()
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.map, 5, "종로구, 서울", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.host_item1, 5, "종로구, 서울", "1월 2일 ~ 1월 8일", 5000))
+        dataList.add(HomeMainData(R.drawable.home2, 3, "서초구, 서울", "1월 2일 ~ 1월 8일", 15000))
 
         adapter.items = dataList
         adapter.notifyDataSetChanged()
@@ -230,8 +230,8 @@ class HomeFragment : Fragment() {
 
     private fun updateCountry() {
         var dataList = ArrayList<HomeMainData>()
-        dataList.add(HomeMainData(R.drawable.map, 5, "종로구, 서울", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.host_item1, 5, "종로구, 서울", "1월 2일 ~ 1월 8일", 5000))
+        dataList.add(HomeMainData(R.drawable.home2, 3, "서초구, 서울", "1월 2일 ~ 1월 8일", 15000))
 
         adapter.items = dataList
         adapter.notifyDataSetChanged()
@@ -239,9 +239,8 @@ class HomeFragment : Fragment() {
 
     private fun updateDowntown() {
         var dataList = ArrayList<HomeMainData>()
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로, 서울", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.map, 5, "종로구, 서울", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.host_item1, 5, "종로구, 서울", "1월 2일 ~ 1월 8일", 5000))
+        dataList.add(HomeMainData(R.drawable.home2, 3, "서초구, 서울", "1월 2일 ~ 1월 8일", 15000))
 
         adapter.items = dataList
         adapter.notifyDataSetChanged()
@@ -249,19 +248,19 @@ class HomeFragment : Fragment() {
 
     private fun updateCamp() {
         var dataList = ArrayList<HomeMainData>()
-        dataList.add(HomeMainData(R.drawable.map, 5, "종로구, ", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
-
+        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", "1월 2일 ~ 1월 8일", 5000))
+        dataList.add(HomeMainData(R.drawable.map, 3, "서초구, 서울", "1월 2일 ~ 1월 8일", 15000))
+        dataList.add(HomeMainData(R.drawable.host_item1, 3, "서초구, 서울", "1월 2일 ~ 1월 8일", 15000))
+        dataList.add(HomeMainData(R.drawable.home2, 3, "서초구, 서울", "1월 2일 ~ 1월 8일", 15000))
+        dataList.add(HomeMainData(R.drawable.home2, 3, "서초구, 서울", "1월 2일 ~ 1월 8일", 15000))
         adapter.items = dataList
         adapter.notifyDataSetChanged()
     }
 
     private fun updateHouse() {
         var dataList = ArrayList<HomeMainData>()
-        dataList.add(HomeMainData(R.drawable.map, 3, "서초구, 서울", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.map, 5, "종dff로구, 서울", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.host_item1, 5, "종로구, 서울", "1월 2일 ~ 1월 8일", 5000))
+        dataList.add(HomeMainData(R.drawable.home2, 3, "서초구, 서울", "1월 2일 ~ 1월 8일", 15000))
 
         adapter.items = dataList
         adapter.notifyDataSetChanged()
@@ -311,10 +310,8 @@ class HomeFragment : Fragment() {
 
     private fun updateReview() {
         var dataList = ArrayList<HomeMainData>()
-        dataList.add(HomeMainData(R.drawable.map, 10, "aaaaaa", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.map, 5, "종로구, 서울", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
-
+        dataList.add(HomeMainData(R.drawable.host_item1, 5, "종로구, 서울", "1월 2일 ~ 1월 8일", 5000))
+        dataList.add(HomeMainData(R.drawable.home2, 3, "서초구, 서울", "1월 2일 ~ 1월 8일", 15000))
 
         adapter.items = dataList
         adapter.notifyDataSetChanged()
@@ -322,11 +319,8 @@ class HomeFragment : Fragment() {
 
     private fun updateScoreHigh() {
         var dataList = ArrayList<HomeMainData>()
-        dataList.add(HomeMainData(R.drawable.home2, 10, "aaaaaa", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.home2, 10, "aaaaaa", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.home2, 10, "aaaaaa", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.map, 5, "종로구, 서울", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.host_item1, 5, "종로구, 서울", "1월 2일 ~ 1월 8일", 5000))
+        dataList.add(HomeMainData(R.drawable.home2, 3, "서초구, 서울", "1월 2일 ~ 1월 8일", 15000))
 
 
         adapter.items = dataList
@@ -335,10 +329,8 @@ class HomeFragment : Fragment() {
 
     private fun updatePriceRow() {
         var dataList = ArrayList<HomeMainData>()
-        dataList.add(HomeMainData(R.drawable.map, 10, "aaaaaa", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.map, 10, "aaaaaa", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.map, 5, "종로구, 서울", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.host_item1, 5, "종로구, 서울", "1월 2일 ~ 1월 8일", 5000))
+        dataList.add(HomeMainData(R.drawable.home2, 3, "서초구, 서울", "1월 2일 ~ 1월 8일", 15000))
 
 
         adapter.items = dataList
@@ -347,10 +339,10 @@ class HomeFragment : Fragment() {
 
     fun updatePriceHigh() {
         var dataList = ArrayList<HomeMainData>()
-        dataList.add(HomeMainData(R.drawable.map, 10, "종tjchrn", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
-
+        dataList.add(HomeMainData(R.drawable.host_item1, 5, "종로구, 서울", "1월 2일 ~ 1월 8일", 200000))
+        dataList.add(HomeMainData(R.drawable.home2, 3, "서초구, 서울", "1월 2일 ~ 1월 8일", 80000))
+        dataList.add(HomeMainData(R.drawable.map, 5, "종로구, 서울", "1월 2일 ~ 1월 8일", 5000))
+        dataList.add(HomeMainData(R.drawable.host_item1, 5, "종로구, 서울", "1월 2일 ~ 1월 8일", 5000))
 
         adapter.items = dataList
         adapter.notifyDataSetChanged()
@@ -358,7 +350,10 @@ class HomeFragment : Fragment() {
 
     fun updateRecent() {
         var dataList = ArrayList<HomeMainData>()
-        dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
+        dataList.add(HomeMainData(R.drawable.map, 5, "종로구, 서울", "1월 2일 ~ 1월 8일", 5000))
+        dataList.add(HomeMainData(R.drawable.host_item1, 5, "종로구, 서울", "1월 2일 ~ 1월 8일", 5000))
+        dataList.add(HomeMainData(R.drawable.home2, 3, "서초구, 서울", "1월 2일 ~ 1월 8일", 15000))
+        dataList.add(HomeMainData(R.drawable.host_item1, 5, "종로구, 서울", "1월 2일 ~ 1월 8일", 5000))
 
         adapter.items = dataList
         adapter.notifyDataSetChanged()

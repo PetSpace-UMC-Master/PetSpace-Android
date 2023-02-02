@@ -51,7 +51,7 @@ class Signin4Activity : AppCompatActivity() {
     }
 
     //중복 확인(코드 수정 필요..textwather에 넣어야 할듯 이것도...)
-    fun initButtonCheck(email: String){
+    fun initButtonCheck(email: String) {
         binding.apply {
             binding.emailDuplicationAfter.setOnClickListener {
                 if (email == editTextEmail.text.toString().trim()) {
@@ -109,12 +109,11 @@ class Signin4Activity : AppCompatActivity() {
                 checkEmail()
 
                 val flagCheck = viewModel.getFlag()
-                Log.d("flagcheck",flagCheck.toString())
-                Log.d("flagcheck2",flagButton.toString())
+                Log.d("flagcheck", flagCheck.toString())
+                Log.d("flagcheck2", flagButton.toString())
 
                 //다음화면 넘어가기(사용자가 비밀번호까지 입력하고 변심하여 이메일을 바꿀수도 있기에 체크해야함)
-//                if (flagEmail ==1 && flagEqual==1 && flagButton==1) {
-                if ((flagEmail == 1) && (flagEqual == 1) && (flagPassword == 1)) {
+                if (flagEmail == 1 && flagEqual == 1 && flagPassword == 1) {
                     Log.d("flagEmail", flagEmail.toString())
                     Log.d("flagPassword", flagPassword.toString())
                     Log.d("flagEqual", flagEqual.toString())
@@ -160,7 +159,7 @@ class Signin4Activity : AppCompatActivity() {
 
                 val flagCheck = viewModel.getFlag()
                 //다음화면 넘어가기(사용자가 비밀번호까지 입력하고 변심하여 이메일을 바꿀수도 있기에 체크해야함)
-                if ((flagEmail == 1) && (flagEqual == 1) && (flagPassword == 1)) {
+                if (flagEmail == 1 && flagEqual == 1 && flagPassword == 1) {
                     binding.btnContinueAfter.isEnabled = true
                     Log.d("flagEmail", flagEmail.toString())
                     Log.d("flagPassword", flagPassword.toString())
@@ -204,9 +203,9 @@ class Signin4Activity : AppCompatActivity() {
                     //비밀번화 일치 true false로 반환
                     checkPasswordEqual()
                     val flagCheck = viewModel.getFlag()
-                    Log.d("check4",flagCheck.toString())
+                    Log.d("check4", flagCheck.toString())
                     //다음화면 넘어가기(사용자가 비밀번호까지 입력하고 변심하여 이메일을 바꿀수도 있기에 체크해야함)
-                    if ((flagEmail == 1) && (flagEqual == 1) && (flagPassword == 1)) {
+                    if (flagEmail == 1 && flagEqual == 1 && flagPassword == 1) {
                         binding.btnContinueAfter.isEnabled = true
                         Log.d("flagEmail", flagEmail.toString())
                         Log.d("flagPassword", flagPassword.toString())
@@ -231,6 +230,7 @@ class Signin4Activity : AppCompatActivity() {
             var email = editTextEmail.text.toString().trim()
             val pattern: Pattern = Patterns.EMAIL_ADDRESS
             if (pattern.matcher(email).matches()) {
+                flagEmail = 1
 
                 editTextEmail.setBackgroundResource(R.drawable.btn_emailbox)
                 textEmail.text = "사용 가능한 이메일 형식 입니다."
