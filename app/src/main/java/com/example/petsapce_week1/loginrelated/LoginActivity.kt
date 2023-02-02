@@ -1,6 +1,5 @@
 package com.example.petsapce_week1.loginrelated
 
-import android.app.ProgressDialog.show
 import android.content.ContentValues
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
@@ -11,7 +10,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.petsapce_week1.*
 import com.example.petsapce_week1.databinding.ActivityLoginBinding
-import com.example.petsapce_week1.home.HomeActivity
 import com.example.petsapce_week1.network.LoginService
 import com.example.petsapce_week1.network.RetrofitHelper
 import com.example.petsapce_week1.reviewrelated.ReviewReadMoreActivity
@@ -45,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //id password 임의로 설정
-        val id = "tkdwls@naver.com"
+        val id = "wjddus@naver.com"
         val password = "1234567!"
 
         //id, password check
@@ -60,16 +58,17 @@ class LoginActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        // 지우지 말것!!!!
+        /* 지우지 말것!!!!
         //로그인 정보 확인
         UserApiClient.instance.accessTokenInfo{ tokenInfo, error ->
             if(error != null){
-                //Toast.makeText(this, "토큰 정보 보기 실패", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "토큰 정보 보기 실패", Toast.LENGTH_SHORT).show()
             }
             else if(tokenInfo != null) {
-                //Toast.makeText(this, "토큰 정보 보기 성공", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "토큰 정보 보기 성공", Toast.LENGTH_SHORT).show()
             }
         }
+         */
 
         binding.btnKakao.setOnClickListener {
             kakaoLogin()
@@ -83,35 +82,35 @@ class LoginActivity : AppCompatActivity() {
         // 카카오톡으로 로그인 할 수 없어 카카오계정으로 로그인할 경우 사용됨
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
-//                when {
-//                    error.toString() == AuthErrorCause.AccessDenied.toString() -> {
-//                        Toast.makeText(this, "접근이 거부 됨(동의 취소)", Toast.LENGTH_SHORT).show()
-//                    }
-//                    error.toString() == AuthErrorCause.InvalidClient.toString() -> {
-//                        Toast.makeText(this, "유효하지 않은 앱", Toast.LENGTH_SHORT).show()
-//                    }
-//                    error.toString() == AuthErrorCause.InvalidGrant.toString() -> {
-//                        Toast.makeText(this, "인증 수단이 유효하지 않아 인증할 수 없는 상태", Toast.LENGTH_SHORT).show()
-//                    }
-//                    error.toString() == AuthErrorCause.InvalidRequest.toString() -> {
-//                        Toast.makeText(this, "요청 파라미터 오류", Toast.LENGTH_SHORT).show()
-//                    }
-//                    error.toString() == AuthErrorCause.InvalidScope.toString() -> {
-//                        Toast.makeText(this, "유효하지 않은 scope ID", Toast.LENGTH_SHORT).show()
-//                    }
-//                    error.toString() == AuthErrorCause.Misconfigured.toString() -> {
-//                        Toast.makeText(this, "설정이 올바르지 않음(android key hash)", Toast.LENGTH_SHORT).show()
-//                    }
-//                    error.toString() == AuthErrorCause.ServerError.toString() -> {
-//                        Toast.makeText(this, "서버 내부 에러", Toast.LENGTH_SHORT).show()
-//                    }
-//                    error.toString() == AuthErrorCause.Unauthorized.toString() -> {
-//                        Toast.makeText(this, "앱이 요청 권한이 없음", Toast.LENGTH_SHORT).show()
-//                    }
-//                    else -> { // Unknown
-//                        Toast.makeText(this, "기타 에러", Toast.LENGTH_SHORT).show()
-//                    }
-//                }
+                when {
+                    error.toString() == AuthErrorCause.AccessDenied.toString() -> {
+                        Toast.makeText(this, "접근이 거부 됨(동의 취소)", Toast.LENGTH_SHORT).show()
+                    }
+                    error.toString() == AuthErrorCause.InvalidClient.toString() -> {
+                        Toast.makeText(this, "유효하지 않은 앱", Toast.LENGTH_SHORT).show()
+                    }
+                    error.toString() == AuthErrorCause.InvalidGrant.toString() -> {
+                        Toast.makeText(this, "인증 수단이 유효하지 않아 인증할 수 없는 상태", Toast.LENGTH_SHORT).show()
+                    }
+                    error.toString() == AuthErrorCause.InvalidRequest.toString() -> {
+                        Toast.makeText(this, "요청 파라미터 오류", Toast.LENGTH_SHORT).show()
+                    }
+                    error.toString() == AuthErrorCause.InvalidScope.toString() -> {
+                        Toast.makeText(this, "유효하지 않은 scope ID", Toast.LENGTH_SHORT).show()
+                    }
+                    error.toString() == AuthErrorCause.Misconfigured.toString() -> {
+                        Toast.makeText(this, "설정이 올바르지 않음(android key hash)", Toast.LENGTH_SHORT).show()
+                    }
+                    error.toString() == AuthErrorCause.ServerError.toString() -> {
+                        Toast.makeText(this, "서버 내부 에러", Toast.LENGTH_SHORT).show()
+                    }
+                    error.toString() == AuthErrorCause.Unauthorized.toString() -> {
+                        Toast.makeText(this, "앱이 요청 권한이 없음", Toast.LENGTH_SHORT).show()
+                    }
+                    else -> { // Unknown
+                        Toast.makeText(this, "기타 에러", Toast.LENGTH_SHORT).show()
+                    }
+                }
             } else if (token != null) {
                 Log.i(ContentValues.TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
                 authToken = token.accessToken
@@ -163,18 +162,18 @@ class LoginActivity : AppCompatActivity() {
                             200 -> {
                                 Log.d("로그인 성공" , "ggg")
                             }
-//                            405 -> Toast.makeText(
-//                                this@LoginActivity,
-//                                "로그인 실패 : 아이디나 비번이 올바르지 않습니다",
-//                                Toast.LENGTH_LONG
-//                            ).show()
-//                            500 -> Toast.makeText(
-//                                this@LoginActivity,
-//                                "로그인 실패 : 서버 오류",
-//                                Toast.LENGTH_LONG
-//                            ).show()
+                            405 -> Toast.makeText(
+                                this@LoginActivity,
+                                "로그인 실패 : 아이디나 비번이 올바르지 않습니다",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            500 -> Toast.makeText(
+                                this@LoginActivity,
+                                "로그인 실패 : 서버 오류",
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
-                        val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+                        val intent = Intent(this@LoginActivity, TestMainActivity::class.java)
                         startActivity(intent)
                     }
                     override fun onFailure(call: Call<LoginBackendResponse>, t: Throwable) {
@@ -268,8 +267,8 @@ class LoginActivity : AppCompatActivity() {
                                     // == 기기 db (shared preference) 로 저장
                                     saveIDPW(inputEmail, inputPassword)
                                 }
-                                //400 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 아이디나 비번이 올바르지 않습니다", Toast.LENGTH_LONG).show()
-                                //500 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 서버 오류", Toast.LENGTH_LONG).show()
+                                400 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 아이디나 비번이 올바르지 않습니다", Toast.LENGTH_LONG).show()
+                                500 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 서버 오류", Toast.LENGTH_LONG).show()
                             }
                         }
 
@@ -279,7 +278,7 @@ class LoginActivity : AppCompatActivity() {
                             Log.d("로그인 통신 실패","fail")
                         }
                     })
-                    val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+                    val intent = Intent(this@LoginActivity, TestMainActivity::class.java)
                     startActivity(intent)
 
                 }//틀리면 빨간글자 뜨게함
@@ -307,8 +306,8 @@ class LoginActivity : AppCompatActivity() {
                                     // == 기기 db (shared preference) 로 저장
                                     saveIDPW(inputEmail, inputPassword)
                                 }
-                                //400 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 아이디나 비번이 올바르지 않습니다", Toast.LENGTH_LONG).show()
-                                //500 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 서버 오류", Toast.LENGTH_LONG).show()
+                                400 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 아이디나 비번이 올바르지 않습니다", Toast.LENGTH_LONG).show()
+                                500 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 서버 오류", Toast.LENGTH_LONG).show()
                             }
                         }
 

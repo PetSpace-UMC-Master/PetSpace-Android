@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import com.example.petsapce_week1.home.HomeActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
@@ -16,7 +15,7 @@ class SplashActivity : AppCompatActivity() {
 
         // 일정 시간 지연 이후 실행하기 위한 코드
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent= Intent( this,HomeActivity::class.java)
+            val intent= Intent( this,TestMainActivity::class.java)
             startActivity(intent)
 
             finish()

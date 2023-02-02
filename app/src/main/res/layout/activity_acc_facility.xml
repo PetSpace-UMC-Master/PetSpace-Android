@@ -9,6 +9,7 @@
 
 
     <TextView
+
         android:id="@+id/text_host"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,18 +49,18 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/img_fac0"
+                android:id="@+id/img_fac1"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/facultyhang" />
 
             <TextView
-                android:id="@+id/tv_fac0"
+                android:id="@+id/tv_fac1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
-                android:text="옷걸이"
+                android:text="판매내역"
                 android:textColor="@color/textForBlack"
                 android:textSize="15dp" />
         </LinearLayout>
@@ -73,18 +74,18 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/imgFac1"
+                android:id="@+id/imgFac2"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/facultybed" />
 
             <TextView
-                android:id="@+id/tv_fac1"
+                android:id="@+id/tv_fac2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
-                android:text="침대"
+                android:text="판매내역"
                 android:textColor="@color/textForBlack"
                 android:textSize="15dp" />
         </LinearLayout>
@@ -108,18 +109,18 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/imgFac2"
+                android:id="@+id/imgFac3"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/facultydry" />
 
             <TextView
-                android:id="@+id/tv_fac2"
+                android:id="@+id/tv_fac3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
-                android:text="보일러"
+                android:text="판매내역"
                 android:textColor="@color/textForBlack"
                 android:textSize="15dp" />
         </LinearLayout>
@@ -129,39 +130,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/imgFac3"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/facultycloth" />
-
-            <TextView
-                android:id="@+id/tv_fac3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:text="옷장"
-                android:textColor="@color/textForBlack"
-                android:textSize="15dp" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lastLinear"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/middleLinear">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.7"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -177,10 +145,20 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
-                android:text="냉장고"
+                android:text="판매내역"
                 android:textColor="@color/textForBlack"
                 android:textSize="15dp" />
         </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/middleLinear">
 
         <LinearLayout
 
@@ -194,7 +172,7 @@
                 android:id="@+id/imgFac5"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/facultyair" />
+                android:src="@drawable/facultyhang" />
 
             <TextView
                 android:id="@+id/tv_fac5"
@@ -202,10 +180,37 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
-                android:text="인터넷"
+                android:text="판매내역"
                 android:textColor="@color/textForBlack"
                 android:textSize="15dp" />
         </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgFac6"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/facultyair" />
+
+            <TextView
+                android:id="@+id/tv_fac6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:text="판매내역"
+                android:textColor="@color/textForBlack"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+
     </LinearLayout>
 
 
