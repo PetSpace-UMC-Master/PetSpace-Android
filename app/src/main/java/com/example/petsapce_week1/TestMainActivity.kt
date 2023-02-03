@@ -7,6 +7,7 @@ import com.example.petsapce_week1.accommodation.AccMainActivity
 import com.example.petsapce_week1.databinding.ActivityHomeOnlyfortestBinding
 import com.example.petsapce_week1.loginrelated.LoginActivity
 import com.example.petsapce_week1.review.ReviewPostActivity
+import com.example.petsapce_week1.placetogo.PlaceToGoFragment
 
 class TestMainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeOnlyfortestBinding
@@ -29,6 +30,17 @@ class TestMainActivity : AppCompatActivity() {
             val intent = Intent(this@TestMainActivity, ReviewPostActivity::class.java)
             startActivity(intent)
 
+        }
+    }
+}
+
+        binding.btnPlacetogo.setOnClickListener {
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+            val placeFragment = PlaceToGoFragment()
+            //fragmentTransaction.remove(supportFragmentManager.findFragmentById(R.id.fragmentview)!!)
+            fragmentTransaction.replace(R.id.fragmentview, placeFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
         }
     }
 }

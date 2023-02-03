@@ -36,6 +36,9 @@ class reviewFragment : Fragment() {
     private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
     var api : AccomoService = retrofit.create(AccomoService::class.java)
 
+    val accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ5c2xpbTM3QG5hdmVyLmNvbSIsImlhdCI6MTY3NTMyMTY0NywiZXhwIjoxNjc1MzIzNDQ3fQ.4CDgFa2fp_b-9fEuDiiwPkTR3SC23bI23NYOEdBiSB8"
+    val accessTokenPost = "Bearer $accessToken"
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,7 +54,7 @@ class reviewFragment : Fragment() {
 
         // ============== 백엔드 연동 =================
         val roomId : Long = 1
-        api.getRoomDetail(roomId = roomId).enqueue(object : Callback<AccomodationData> {
+        api.getRoomDetail(accessToken = accessTokenPost, roomId = roomId).enqueue(object : Callback<AccomodationData> {
             @SuppressLint("SetTextI18n")
             override fun onResponse(
                 call: Call<AccomodationData>,

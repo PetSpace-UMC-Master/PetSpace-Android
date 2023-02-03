@@ -1,6 +1,7 @@
 package com.example.petsapce_week1.accommodation
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -37,19 +38,13 @@ class AccMainActivity : AppCompatActivity() {
     // ========== 백엔드 연동 부분 ===========
     private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
     var api : AccomoService = retrofit.create(AccomoService::class.java)
-    var apiLike : AccomoService = retrofit.create(AccomoService::class.java)
-    // =========토큰==========
-    //var sharedPreferences = getSharedPreferences("accessToken", MODE_PRIVATE)
 
-    //토큰 재발급
-    var apiReissue : LoginService = retrofit.create(LoginService::class.java)
+    //var apiLike : AccomoService = retrofit.create(AccomoService::class.java)
+    // ============ 토큰 재발급 ==============
+    //var apiReissue : LoginService = retrofit.create(LoginService::class.java)
 
-    // ============ token ============
-    val pref = this.getSharedPreferences("token", 0)
-    val editor = pref.edit()
-    val accessToken = pref.getString("accessToken", "default")
-    val refreshToken = pref.getString("refreshToken", "default")
-
+//    val rtpref = getSharedPreferences("refreshToken", Activity.MODE_PRIVATE)
+//    val refreshToken = rtpref.getString("refreshToken", "default")
 
     private val MIN_SCALE = 0.85f // 뷰가 몇퍼센트로 줄어들 것인지
     private val MIN_ALPHA = 0.5f // 어두워지는 정도를 나타낸 듯 하다.
@@ -57,29 +52,22 @@ class AccMainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAccMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        // ============ token ============
+        //토큰 저장 객체
+        var accessToken : String ?= null
+        val atpref = getSharedPreferences("accessToken", MODE_PRIVATE)
+        if(atpref != null){
+            accessToken = atpref.getString("accessToken", "default")
+        }
+        val accessTokenPost = "Bearer $accessToken"
 
         // close btn
         binding.btnBack.setOnClickListener {
             val intent = Intent(this, ProfileMenuActivity::class.java)
             startActivity(intent)
         }
-
-        // like btn
-        var if1Checked = 0
-        binding.btnHeartBefore.setOnClickListener {
-            if (if1Checked == 0 ){
-                binding.btnHeartAfter.visibility = View.VISIBLE
-                if1Checked = 1
-                //api.postLikes()
-            }
-        }
-        binding.btnHeartAfter.setOnClickListener {
-            if(if1Checked == 1){
-                binding.btnHeartAfter.visibility = View.INVISIBLE
-                if1Checked = 0
-            }
-        }
-
 
         // .bind와 .inflate 차이 / layoutinflater , view 객체 차이
         val includeView: View = binding.frameHost.root
@@ -88,7 +76,7 @@ class AccMainActivity : AppCompatActivity() {
         // 이런식으로 간략하게 쳐도됨
         // bindingHostBinding = ActivityAccHostBinding.bind(binding.frameHost.root)
 
-        setContentView(binding.root)
+
 
         initViewPager()
 
@@ -96,7 +84,7 @@ class AccMainActivity : AppCompatActivity() {
 
         // =================== 백엔드 연동 부분 =====================
         //홈화면 연결 후 roomId 받아오면 반영!
-        api.getRoomDetail(1).enqueue(object : Callback<AccomodationData> {
+        api.getRoomDetail( accessTokenPost, 1).enqueue(object : Callback<AccomodationData> {
             @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
             override fun onResponse(
                 call: Call<AccomodationData>,
@@ -108,6 +96,63 @@ class AccMainActivity : AppCompatActivity() {
 
                 val body = response.body()
                 if (body != null) {
+
+                    //============ 좋아요 버튼 ==========
+                    // like btn
+                    var if1Checked = 0
+                    if(response.body()!!.result.favorite){
+                        if1Checked = 1
+                        binding.btnHeartAfter.visibility = View.VISIBLE
+                    }
+                    else{
+                        if1Checked = 0
+                        binding.btnHeartAfter.visibility = View.INVISIBLE
+                    }
+
+                    binding.btnHeartBefore.setOnClickListener {
+                        //if 로그인 정보 없으면, 로그인 화면으로 화면 이동
+                        //있으면 밑에 if 문 돌리면 될듯
+
+                        if (if1Checked == 0 ){
+                            binding.btnHeartAfter.visibility = View.VISIBLE
+                            if1Checked = 1
+                            // 상진쓰랑 할것
+                            api.postLikes(accessTokenPost).enqueue(object : Callback<AccomodationData>{
+                                override fun onResponse(
+                                    call: Call<AccomodationData>,
+                                    response: Response<AccomodationData>
+                                ) {
+                                    Log.d("숙소 좋아요 표시", "했음")
+                                }
+
+                                override fun onFailure(call: Call<AccomodationData>, t: Throwable) {
+                                    Log.d("숙소 좋아요 표시", "x했음")
+                                }
+
+                            })
+                        }
+                    }
+                    binding.btnHeartAfter.setOnClickListener {
+                        if(if1Checked == 1){
+                            binding.btnHeartAfter.visibility = View.INVISIBLE
+                            if1Checked = 0
+                            // 상진쓰랑 할것
+                            api.postLikes(accessTokenPost).enqueue(object : Callback<AccomodationData>{
+                                override fun onResponse(
+                                    call: Call<AccomodationData>,
+                                    response: Response<AccomodationData>
+                                ) {
+                                    Log.d("숙소 좋아요 표시", "했음")
+                                }
+
+                                override fun onFailure(call: Call<AccomodationData>, t: Throwable) {
+                                    Log.d("숙소 좋아요 표시", "x했음")
+                                }
+
+                            })
+                        }
+                    }
+
 
                     // ================ 맨 위 프레임 ==================
                     binding.tvHousename.text = body.result.roomName
@@ -199,32 +244,34 @@ class AccMainActivity : AppCompatActivity() {
                     )
                 }
 
-//                if(reviewList.isNotEmpty()){
-//
-//                }
-                Log.d("숙소 facility 리스트", "${reviewList}")
-                //binding.frameFacility.tvFac0.text = reviewList[0].facname
-                binding.frameFacility.tvFac1.text = reviewList[0].facname
-                Glide.with(this@AccMainActivity)
-                    .load(reviewList[0].imgUrl)
-                    .into(binding.frameFacility.imgFac1)
-                binding.frameFacility.tvFac2.text = reviewList[1].facname
-                Glide.with(this@AccMainActivity)
-                    .load(reviewList[1].imgUrl)
-                    .into(binding.frameFacility.imgFac2)
-                binding.frameFacility.tvFac3.text = reviewList[2].facname
-                Glide.with(this@AccMainActivity)
-                    .load(reviewList[2].imgUrl)
-                    .into(binding.frameFacility.imgFac3)
-                binding.frameFacility.tvFac4.text = reviewList[3].facname
-                Glide.with(this@AccMainActivity)
-                    .load(reviewList[3].imgUrl)
-                    .into(binding.frameFacility.imgFac4)
-                binding.frameFacility.tvFac5.text = reviewList[4].facname
-                Glide.with(this@AccMainActivity)
-                    .load(reviewList[4].imgUrl)
-                    .into(binding.frameFacility.imgFac5)
-
+                if(reviewList.isNotEmpty()){
+                    Log.d("숙소 facility 리스트", "${reviewList}")
+                    //binding.frameFacility.tvFac0.text = reviewList[0].facname
+                    binding.frameFacility.tvFac1.text = reviewList[0].facname
+                    Glide.with(this@AccMainActivity)
+                        .load(reviewList[0].imgUrl)
+                        .into(binding.frameFacility.imgFac1)
+                    binding.frameFacility.tvFac2.text = reviewList[1].facname
+                    Glide.with(this@AccMainActivity)
+                        .load(reviewList[1].imgUrl)
+                        .into(binding.frameFacility.imgFac2)
+                    binding.frameFacility.tvFac3.text = reviewList[2].facname
+                    Glide.with(this@AccMainActivity)
+                        .load(reviewList[2].imgUrl)
+                        .into(binding.frameFacility.imgFac3)
+                    binding.frameFacility.tvFac4.text = reviewList[3].facname
+                    Glide.with(this@AccMainActivity)
+                        .load(reviewList[3].imgUrl)
+                        .into(binding.frameFacility.imgFac4)
+                    binding.frameFacility.tvFac5.text = reviewList[4].facname
+                    Glide.with(this@AccMainActivity)
+                        .load(reviewList[4].imgUrl)
+                        .into(binding.frameFacility.imgFac5)
+                    binding.frameFacility.tvFac6.text = reviewList[5].facname
+                    Glide.with(this@AccMainActivity)
+                        .load(reviewList[5].imgUrl)
+                        .into(binding.frameFacility.imgFac6)
+                }
 
             }
 
