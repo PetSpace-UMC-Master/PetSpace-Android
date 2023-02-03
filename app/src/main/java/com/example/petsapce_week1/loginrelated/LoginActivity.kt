@@ -1,8 +1,10 @@
 package com.example.petsapce_week1.loginrelated
 
+import android.app.Activity
 import android.content.ContentValues
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -41,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //id password 임의로 설정
-        val id = "wjddus@naver.com"
+        val id = "tkdwls@naver.com"
         val password = "1234567!"
 
         //id, password check
@@ -126,36 +128,12 @@ class LoginActivity : AppCompatActivity() {
                     override fun onResponse(call: Call<LoginBackendResponse>, response: Response<LoginBackendResponse>) {
                         Log.d("로그인 통신 성공", response.toString())
                         Log.d("로그인 통신 성공", response.body().toString())
+                        Log.d("로그인 통신 id", response.body()?.result?.email.toString())
+                        Log.d("로그인 통신 at", response.body()?.result?.accessToken.toString())
 
+                        saveIDPW(response.body()?.result?.email.toString(), "")
+                        saveATRT(response.body()?.result?.accessToken.toString(), response.body()?.result?.refreshToken.toString())
 
-                        //===== token 재발급 시 ========
-                        refreshToken_received = response.body()?.result?.refreshToken.toString()
-                        if(response.code() == 401 && response.body()?.responseCode?.toInt() == 2003){
-
-                            api.TokenReissue(ReissueData(accessToken = authToken, refreshToken = refreshToken_received)).enqueue(object  : Callback<LoginBackendResponse>{
-                                override fun onResponse(
-                                    call: Call<LoginBackendResponse>,
-                                    response: Response<LoginBackendResponse>
-                                ) {
-                                    Log.d("로그인 토큰 재발급", response.toString())
-                                    Log.d("로그인 토큰 재발급", response.body().toString())
-
-                                    //만약에 재발급 호출해서 성공했어, 그러면 그 다음은 어떡하지?
-                                    //토큰 갱신부터 해야겟지?
-                                    refreshToken_received = response.body()?.result?.refreshToken.toString()
-                                    authToken = token.accessToken
-                                    saveATRT(authToken.toString(), refreshToken_received.toString())
-                                }
-
-                                override fun onFailure(
-                                    call: Call<LoginBackendResponse>,
-                                    t: Throwable
-                                ) {
-                                    Log.d("로그인 토큰 재발급 실패", "ㅠㅠ")
-                                }
-
-                            })
-                        }
                         when (response.code()) {
                             200 -> {
                                 Log.d("로그인 성공" , "ggg")
@@ -231,39 +209,11 @@ class LoginActivity : AppCompatActivity() {
                             Log.d("로그인 HTTP 코드", response.code().toString())
                             Log.d("로그인 통신 성공", response.body().toString())
 
-                            //===== token 재발급 시 ========
-                            refreshToken_received = response.body()?.result?.refreshToken.toString()
-                            if(response.code() == 401 && response.body()?.responseCode?.toInt() == 2003){
-
-                                api.TokenReissue(ReissueData(accessToken = authToken, refreshToken = refreshToken_received)).enqueue(object  : Callback<LoginBackendResponse>{
-                                    override fun onResponse(
-                                        call: Call<LoginBackendResponse>,
-                                        response: Response<LoginBackendResponse>
-                                    ) {
-                                        Log.d("로그인 토큰 재발급", response.toString())
-                                        Log.d("로그인 토큰 재발급", response.body().toString())
-
-                                        //만약에 재발급 호출해서 성공했어, 그러면 그 다음은 어떡하지?
-                                        //토큰 갱신부터 해야겟지?
-                                        refreshToken_received = response.body()?.result?.refreshToken.toString()
-                                        authToken = response.body()?.result?.accessToken.toString()
-                                        saveATRT(authToken.toString(), refreshToken_received.toString())
-                                    }
-
-                                    override fun onFailure(
-                                        call: Call<LoginBackendResponse>,
-                                        t: Throwable
-                                    ) {
-                                        Log.d("로그인 토큰 재발급 실패", "ㅠㅠ")
-                                    }
-
-                                })
-                            }
-
                             when (response.code()) {
                                 200 -> {
                                     // == 기기 db (shared preference) 로 저장
                                     saveIDPW(inputEmail, inputPassword)
+                                    saveATRT(response.body()?.result?.accessToken.toString(), response.body()?.result?.refreshToken.toString())
                                 }
                                 400 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 아이디나 비번이 올바르지 않습니다", Toast.LENGTH_LONG).show()
                                 500 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 서버 오류", Toast.LENGTH_LONG).show()
@@ -303,6 +253,7 @@ class LoginActivity : AppCompatActivity() {
                                 200 -> {
                                     // == 기기 db (shared preference) 로 저장
                                     saveIDPW(inputEmail, inputPassword)
+                                    saveATRT(response.body()?.result?.accessToken.toString(), response.body()?.result?.refreshToken.toString())
                                 }
                                 400 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 아이디나 비번이 올바르지 않습니다", Toast.LENGTH_LONG).show()
                                 500 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 서버 오류", Toast.LENGTH_LONG).show()
@@ -330,25 +281,25 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun saveIDPW( id : String, pw : String){
-        val prefID = getSharedPreferences("userID", MODE_PRIVATE)
-        val prefPW = getSharedPreferences("userPW", MODE_PRIVATE)
-        val editID = prefID.edit()
-        val editPW = prefPW.edit()
-        editID.putString("id", id)
-        editPW.putString("pw", pw)
-        editID.apply()//save
-        editPW.apply()//save
+        val prefID  : SharedPreferences = getSharedPreferences("userID", MODE_PRIVATE)
+        val prefPW  : SharedPreferences= getSharedPreferences("userPW", MODE_PRIVATE)
+        val editID  : SharedPreferences.Editor = prefID.edit()
+        val editPW  : SharedPreferences.Editor = prefPW.edit()
+        editID.putString("id", id).apply()
+        editPW.putString("pw", pw).apply()
+
         Log.d("로그인 데이터", "saved")
     }
     fun saveATRT( at: String, rt : String){
-        val prefAccessToken = getSharedPreferences("accessToken", MODE_PRIVATE)
-        val prefRefreshToken = getSharedPreferences("refreshToken", MODE_PRIVATE)
-        val editAT  = prefAccessToken.edit()
-        val editRT = prefRefreshToken.edit()
-        editAT.putString("accessToken", at)
-        editRT.putString("refreshToken", rt)
-        editAT.apply()
-        editRT.apply()
+        //토큰 저장 객체
+        val prefAccessToken : SharedPreferences = getSharedPreferences("accessToken", MODE_PRIVATE)
+        val prefRefreshToken : SharedPreferences = getSharedPreferences("refreshToken", MODE_PRIVATE)
+
+        val editAT : SharedPreferences.Editor  = prefAccessToken.edit()
+        val editRT :SharedPreferences.Editor = prefRefreshToken.edit()
+        editAT.putString("accessToken", at).apply()
+        editRT.putString("refreshToken", rt).apply()
+
         Log.d("로그인 tokens", "saved")
     }
 }

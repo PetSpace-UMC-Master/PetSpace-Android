@@ -18,6 +18,8 @@ class AccHostActivity : AppCompatActivity() {
     //
     private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
     var api : AccomoService = retrofit.create(AccomoService::class.java)
+    val accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ5c2xpbTM3QG5hdmVyLmNvbSIsImlhdCI6MTY3NTMyMTY0NywiZXhwIjoxNjc1MzIzNDQ3fQ.4CDgFa2fp_b-9fEuDiiwPkTR3SC23bI23NYOEdBiSB8"
+    val accessTokenPost = "Bearer $accessToken"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +29,7 @@ class AccHostActivity : AppCompatActivity() {
         // == 백엔드 통신 부분 ==
         val data = AccomodationRoomData(roomId = 1)
 
-        api.getRoomDetail(2).enqueue(object : Callback<AccomodationData>{
+        api.getRoomDetail(accessTokenPost, 1).enqueue(object : Callback<AccomodationData>{
             override fun onResponse(
                 call: Call<AccomodationData>,
                 response: Response<AccomodationData>
