@@ -2,7 +2,6 @@ package com.example.petsapce_week1.loginrelated
 
 import android.app.Activity
 import android.content.ContentValues
-import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -10,11 +9,12 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.petsapce_week1.*
+import com.example.petsapce_week1.R
+import com.example.petsapce_week1.Signin4Activity
+import com.example.petsapce_week1.TestMainActivity
 import com.example.petsapce_week1.databinding.ActivityLoginBinding
 import com.example.petsapce_week1.network.LoginService
 import com.example.petsapce_week1.network.RetrofitHelper
-import com.example.petsapce_week1.reviewrelated.ReviewReadMoreActivity
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause
 import com.kakao.sdk.common.model.ClientError

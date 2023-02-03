@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.petsapce_week1.accommodation.AccMainActivity
 import com.example.petsapce_week1.databinding.ActivityHomeOnlyfortestBinding
 import com.example.petsapce_week1.loginrelated.LoginActivity
+import com.example.petsapce_week1.review.ReviewPostActivity
 import com.example.petsapce_week1.placetogo.PlaceToGoFragment
 
 class TestMainActivity : AppCompatActivity() {
@@ -24,6 +25,14 @@ class TestMainActivity : AppCompatActivity() {
             val intent = Intent(this@TestMainActivity, LoginActivity::class.java)
             startActivity(intent)
         }
+
+        binding.btnReviewCreate.setOnClickListener {
+            val intent = Intent(this@TestMainActivity, ReviewPostActivity::class.java)
+            startActivity(intent)
+
+        }
+    }
+}
 
         binding.btnPlacetogo.setOnClickListener {
             val fragmentTransaction = supportFragmentManager.beginTransaction()
