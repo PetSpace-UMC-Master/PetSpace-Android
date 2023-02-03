@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,7 @@ import com.example.petsapce_week1.TestMainActivity
 import com.example.petsapce_week1.databinding.ReviewCreateBinding
 import com.example.petsapce_week1.network.RetrofitHelper
 import com.example.petsapce_week1.network.ReviewAPI
+import com.example.petsapce_week1.vo.ReviewPostData
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -21,10 +23,11 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import okio.BufferedSink
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import java.io.File
-
-
 class ReviewPostActivity : AppCompatActivity() {
     private lateinit var binding: ReviewCreateBinding
     private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
@@ -32,10 +35,19 @@ class ReviewPostActivity : AppCompatActivity() {
     private var success_review_id: Int? = null
     private var review_rate: Int? = null
     private var mediaPath: String ?= null
+    private var bitmap: Bitmap? = null
 
-    val content = binding.reviewInput.text.toString()
 
 
+    // 비트맵 압축
+    inner class BitmapRequestBody(private val bitmap: Bitmap) : RequestBody() {
+        override fun contentType(): MediaType = "image/jpeg".toMediaType()
+        override fun writeTo(sink: BufferedSink) {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 99, sink.outputStream())
+        }
+    }
+
+    // 디바이스에서 사진 불러와서 띄우기
     private val activityResult: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()){
         if(it.resultCode == RESULT_OK && it.data != null) {
@@ -54,9 +66,11 @@ class ReviewPostActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
+
         super.onCreate(savedInstanceState)
         binding = ReviewCreateBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         initPrevious()
 
@@ -65,19 +79,19 @@ class ReviewPostActivity : AppCompatActivity() {
             review_rate = rating.toInt()
         }
 
+        // 디바이스 갤러리 오픈
         binding.openGallery.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             activityResult.launch(intent)
         }
 
-
-
+        // 리뷰 작성하기 버튼 누르면 통신 시작 !
         binding.btnReviewCreate.setOnClickListener {
 
             sendReviewRequest()
-            // == 백엔드 통신 부분 ==
-            /*val file: File = File(mediaPath)
+  /*          // == 백엔드 통신 부분 ==
+            *//*val file: File = File(mediaPath)
             var inputStream: InputStream? = null try {
             inputStream = getContext().getContentResolver().openInputStream(photoUri)
         } catch (e: IOException) {
@@ -88,8 +102,8 @@ class ReviewPostActivity : AppCompatActivity() {
                 ByteArrayOutputStream() bitmap.compress Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream)   var requestBody: RequestBody? = create(MediaType.parse("image/jpg"), byteArrayOutputStream.toByteArray())   var uploadFile: Part? = createFormData.createFormData("postImg", file.getName(), requestBody)
             val content = binding.reviewInput.text.toString()
 
-            val data = ReviewDTO(content, review_rate, fileToUpload())*/
-
+            val data = ReviewDTO(content, review_rate, fileToUpload())*//*
+*/
 
 /*            api.post_reviews(data, image).enqueue(object : Callback<ReviewData> {
                 override fun onResponse(
@@ -115,6 +129,7 @@ class ReviewPostActivity : AppCompatActivity() {
         }
     }
 
+    // 이전 화면
     private fun initPrevious() {
         binding.apply {
             btnBack.setOnClickListener {
@@ -123,7 +138,8 @@ class ReviewPostActivity : AppCompatActivity() {
             }
         }
     }
-
+    
+    // URI로부터 이미지 경로 추출
     private fun getRealPathFromURI(uri: Uri): String {
         val buildName = Build.MANUFACTURER
         if(buildName.equals("Xiaomi")) {
@@ -155,11 +171,22 @@ class ReviewPostActivity : AppCompatActivity() {
     }*/
 
     fun sendReviewRequest() {
+
+        //토큰 저장 객체
+        var accessToken : String ?= null
+        val atpref = getSharedPreferences("accessToken", MODE_PRIVATE)
+        if(atpref != null){
+            accessToken = atpref.getString("accessToken", "default")
+        }
+        val accessTokenPost = "Bearer $accessToken"
+        Log.d("token", "$accessTokenPost")
+
+        val content = binding.reviewInput.text.toString()
         val contentRequestBody : RequestBody = content.toPlainRequestBody()
         val reviewRateRequestBody: RequestBody = review_rate.toString().toPlainRequestBody()
         val textHashMap = hashMapOf<String, RequestBody>()
         textHashMap["content"] = contentRequestBody
-        textHashMap["review_rate"] = reviewRateRequestBody
+        textHashMap["score"] = reviewRateRequestBody
 
         val file = File(mediaPath)
         val bitmapRequestBody = bitmap?.let { BitmapRequestBody(it)}
@@ -167,22 +194,44 @@ class ReviewPostActivity : AppCompatActivity() {
             if (bitmapRequestBody == null) null
             else MultipartBody.Part.createFormData("reviewImages", file.name, bitmapRequestBody)
 
-        val response = api.addActivity(bitmapMultipartBody, textHashMap).awaitResponse()
-    }
+        val response = bitmapMultipartBody.let {
+            api.post_reviews(accessTokenPost, textHashMap, bitmapMultipartBody).enqueue(object : Callback<ReviewPostData> {
+                override fun onResponse(
+                    call: Call<ReviewPostData>,
+                    response: Response<ReviewPostData>
+                ) {
+                    Log.d("리뷰 포스트 통신 성공", response.toString())
+                    Log.d("리뷰 포스트 성공", response.body().toString())
+                    Log.d("내용", content)
+                    Log.d("점수", review_rate.toString())
 
-    inner class BitmapRequestBody(private val bitmap: Bitmap) : RequestBody() {
-        override fun contentType(): MediaType = "image/jpeg".toMediaType()
-        override fun writeTo(sink: BufferedSink) {
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 99, sink.outputStream())
+                    val body = response.body()
+                    if (body != null) {
+                        success_review_id = body.result.id
+                        Log.d("포스트 된 리뷰 아이디", "{${success_review_id.toString()}}")
+                    }
+                }
+
+                override fun onFailure(call: Call<ReviewPostData>, t: Throwable) {
+                    Log.d("리뷰 포스트", "failed")
+                }
+            })
         }
+
     }
 
     private fun String?.toPlainRequestBody() = requireNotNull(this).toRequestBody("text/plain".toMediaTypeOrNull())
 }
 
+//val response = api.addActivity(bitmapMultipartBody, textHashMap).awaitResponse()
+
+
+
+
+
 /*    private fun openGallery() {
-        val intent: Intent = Intent(Intent.ACTION_GET_CONTENT)
-        intent.type = "image/*"
-        startActivity()
-        startActivityForResult(intent, OPEN_GALLERY)
-    }*/
+val intent: Intent = Intent(Intent.ACTION_GET_CONTENT)
+intent.type = "image/*"
+startActivity()
+startActivityForResult(intent, OPEN_GALLERY)
+}*/

@@ -15,6 +15,9 @@ data class Result(
     val checkoutTime: String,
     val facilities: List<Facility>,
     val hostName: String,
+    val hostId : Int,
+    val latitude : String,
+    val longitude: String,
     val maxGuest: Int,
     val maxPet: Int,
     val price: Int,
@@ -36,5 +39,6 @@ data class ReviewPreview(
     val createdAt: String,
     val description: String,
     val nickname: String,
-    val userId: Int
+    val userId: Int,
+    val score : Int
 )

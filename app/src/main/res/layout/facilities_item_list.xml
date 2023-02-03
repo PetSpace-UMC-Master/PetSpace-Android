@@ -11,21 +11,26 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/img_fac"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/washer"/>
+            android:src="@drawable/washer" />
 
         <TextView
+            android:id="@+id/tv_fac"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="세탁기"
-            android:paddingLeft="10dp"
             android:fontFamily="@font/pretendard_regular"
-            android:textSize="14sp"
-            android:textColor="@color/black"/>
+            android:paddingLeft="10dp"
+            android:text="세탁기"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
 
     </LinearLayout>
 

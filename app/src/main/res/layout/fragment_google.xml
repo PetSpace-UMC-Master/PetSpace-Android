@@ -6,9 +6,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".accomodation.scroll.googleFragment">
+    tools:context=".accommodation.scroll.googleFragment">
 
     <TextView
+        android:id="@+id/house_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/bmjua"
@@ -30,7 +31,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-
             />
 
         <TextView
@@ -49,13 +49,10 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageView
-        android:id="@+id/img_google"
-        android:layout_marginTop="20dp"
-        android:scaleType="fitXY"
+    <com.naver.maps.map.MapView
+        android:id="@+id/navermap"
+        android:name="com.naver.maps.map.MapFragment"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@drawable/map"/>
-
+        android:layout_height="200dp" />
 
 </LinearLayout>

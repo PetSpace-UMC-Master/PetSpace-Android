@@ -7,11 +7,12 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.petsapce_week1.*
+import com.example.petsapce_week1.R
+import com.example.petsapce_week1.Signin4Activity
+import com.example.petsapce_week1.TestMainActivity
 import com.example.petsapce_week1.databinding.ActivityLoginBinding
 import com.example.petsapce_week1.network.LoginService
 import com.example.petsapce_week1.network.RetrofitHelper
-import com.example.petsapce_week1.reviewrelated.ReviewReadMoreActivity
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause
 import com.kakao.sdk.common.model.ClientError
@@ -27,8 +28,11 @@ class LoginActivity : AppCompatActivity() {
 
     private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance() // RetrofitClient의 instance 불러오기
     private var authToken : String ?= null
-    //    private var data: UserModel? = null
+    val bearer = "Bearer "
+    var token: String ?= null
+    var refreshToken_received : String ?= null
     var api : LoginService = retrofit.create(LoginService::class.java)
+
     private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,10 +40,9 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        initData()
         //id password 임의로 설정
-        val id: String = "wjddus@naver.com"
-        val password: String = "1234567!"
+        val id = "wjddus@naver.com"
+        val password = "1234567!"
 
         //id, password check
         initFlag(id, password)
@@ -65,13 +68,12 @@ class LoginActivity : AppCompatActivity() {
         }
          */
 
-        /* Click_listener */
         binding.btnKakao.setOnClickListener {
-            kakaoLogin() //로그인
+            kakaoLogin()
         }
 
     }
-
+    // ================ 카카오 로그인 ==================
     private fun kakaoLogin() {
 
         // 카카오계정으로 로그인 공통 callback 구성
@@ -115,11 +117,45 @@ class LoginActivity : AppCompatActivity() {
                 //data = UserModel(accessToken = authToken)
                 //saveData(id, pw)
                 Log.d("access_token2", "$authToken")
-                api.postAccessToken(UserModelKakao(accessToken = authToken)).enqueue(object : retrofit2.Callback<LoginBackendResponse>{
+
+                //bearer 붙이나??
+                //authToken = bearer + authToken
+                Log.d("로그인 내가 보낸거", token.toString())
+
+                api.postAccessToken(UserModelKakao(accessToken = authToken)).enqueue(object : Callback<LoginBackendResponse>{
                     override fun onResponse(call: Call<LoginBackendResponse>, response: Response<LoginBackendResponse>) {
                         Log.d("로그인 통신 성공", response.toString())
                         Log.d("로그인 통신 성공", response.body().toString())
 
+
+                        //===== token 재발급 시 ========
+                        refreshToken_received = response.body()?.result?.refreshToken.toString()
+                        if(response.code() == 401 && response.body()?.responseCode?.toInt() == 2003){
+
+                            api.TokenReissue(ReissueData(accessToken = authToken, refreshToken = refreshToken_received)).enqueue(object  : Callback<LoginBackendResponse>{
+                                override fun onResponse(
+                                    call: Call<LoginBackendResponse>,
+                                    response: Response<LoginBackendResponse>
+                                ) {
+                                    Log.d("로그인 토큰 재발급", response.toString())
+                                    Log.d("로그인 토큰 재발급", response.body().toString())
+
+                                    //만약에 재발급 호출해서 성공했어, 그러면 그 다음은 어떡하지?
+                                    //토큰 갱신부터 해야겟지?
+                                    refreshToken_received = response.body()?.result?.refreshToken.toString()
+                                    authToken = token.accessToken
+                                    saveATRT(authToken.toString(), refreshToken_received.toString())
+                                }
+
+                                override fun onFailure(
+                                    call: Call<LoginBackendResponse>,
+                                    t: Throwable
+                                ) {
+                                    Log.d("로그인 토큰 재발급 실패", "ㅠㅠ")
+                                }
+
+                            })
+                        }
                         when (response.code()) {
                             200 -> {
                                 Log.d("로그인 성공" , "ggg")
@@ -135,8 +171,9 @@ class LoginActivity : AppCompatActivity() {
                                 Toast.LENGTH_LONG
                             ).show()
                         }
+                        val intent = Intent(this@LoginActivity, TestMainActivity::class.java)
+                        startActivity(intent)
                     }
-
                     override fun onFailure(call: Call<LoginBackendResponse>, t: Throwable) {
                         Log.d("통신 로그인..", "전송 실패")
                     }
@@ -169,17 +206,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-
-
-
-/* private fun initData() {
-     val id:String = "cw"
-     val password:String = "abc"
-
- }*/
-
     fun initFlag(id: String, password: String) {
-//        var flag: Boolean = false
         val severId = id
         val severPswd = password
 
@@ -188,12 +215,10 @@ class LoginActivity : AppCompatActivity() {
 
             btnEmail.setOnClickListener {
 
-                //edittext에서 값을 받아옴
                 val inputEmail = editTextEmail.text.toString()
                 val inputPassword = editTextPassword.text.toString()
-                //저장된 id와 비번 맞는지 체크
-                //맞으면 gif화면으로 이동(홈화면 넘어가야하는데 없어서 gif로 넘어감)
-                // == 백엔드 통신 부분 ==
+
+                // ==================== 일반 로그인 백엔드 통신 부분 ===================
                 val data = UserModelGeneral(inputEmail, inputPassword)
 
                 if (severId == inputEmail && severPswd == inputPassword) {
@@ -206,10 +231,39 @@ class LoginActivity : AppCompatActivity() {
                             Log.d("로그인 HTTP 코드", response.code().toString())
                             Log.d("로그인 통신 성공", response.body().toString())
 
+                            //===== token 재발급 시 ========
+                            refreshToken_received = response.body()?.result?.refreshToken.toString()
+                            if(response.code() == 401 && response.body()?.responseCode?.toInt() == 2003){
+
+                                api.TokenReissue(ReissueData(accessToken = authToken, refreshToken = refreshToken_received)).enqueue(object  : Callback<LoginBackendResponse>{
+                                    override fun onResponse(
+                                        call: Call<LoginBackendResponse>,
+                                        response: Response<LoginBackendResponse>
+                                    ) {
+                                        Log.d("로그인 토큰 재발급", response.toString())
+                                        Log.d("로그인 토큰 재발급", response.body().toString())
+
+                                        //만약에 재발급 호출해서 성공했어, 그러면 그 다음은 어떡하지?
+                                        //토큰 갱신부터 해야겟지?
+                                        refreshToken_received = response.body()?.result?.refreshToken.toString()
+                                        authToken = response.body()?.result?.accessToken.toString()
+                                        saveATRT(authToken.toString(), refreshToken_received.toString())
+                                    }
+
+                                    override fun onFailure(
+                                        call: Call<LoginBackendResponse>,
+                                        t: Throwable
+                                    ) {
+                                        Log.d("로그인 토큰 재발급 실패", "ㅠㅠ")
+                                    }
+
+                                })
+                            }
+
                             when (response.code()) {
                                 200 -> {
                                     // == 기기 db (shared preference) 로 저장
-                                    saveData(inputEmail, inputPassword)
+                                    saveIDPW(inputEmail, inputPassword)
                                 }
                                 400 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 아이디나 비번이 올바르지 않습니다", Toast.LENGTH_LONG).show()
                                 500 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 서버 오류", Toast.LENGTH_LONG).show()
@@ -222,9 +276,8 @@ class LoginActivity : AppCompatActivity() {
                             Log.d("로그인 통신 실패","fail")
                         }
                     })
-                    val intent = Intent(this@LoginActivity, ReviewReadMoreActivity::class.java)
+                    val intent = Intent(this@LoginActivity, TestMainActivity::class.java)
                     startActivity(intent)
-//                    flag = true
 
                 }//틀리면 빨간글자 뜨게함
                 else {
@@ -249,7 +302,7 @@ class LoginActivity : AppCompatActivity() {
                             when (response.code()) {
                                 200 -> {
                                     // == 기기 db (shared preference) 로 저장
-                                    saveData(inputEmail, inputPassword)
+                                    saveIDPW(inputEmail, inputPassword)
                                 }
                                 400 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 아이디나 비번이 올바르지 않습니다", Toast.LENGTH_LONG).show()
                                 500 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 서버 오류", Toast.LENGTH_LONG).show()
@@ -276,7 +329,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun saveData( id : String, pw : String){
+    fun saveIDPW( id : String, pw : String){
         val prefID = getSharedPreferences("userID", MODE_PRIVATE)
         val prefPW = getSharedPreferences("userPW", MODE_PRIVATE)
         val editID = prefID.edit()
@@ -286,5 +339,16 @@ class LoginActivity : AppCompatActivity() {
         editID.apply()//save
         editPW.apply()//save
         Log.d("로그인 데이터", "saved")
+    }
+    fun saveATRT( at: String, rt : String){
+        val prefAccessToken = getSharedPreferences("accessToken", MODE_PRIVATE)
+        val prefRefreshToken = getSharedPreferences("refreshToken", MODE_PRIVATE)
+        val editAT  = prefAccessToken.edit()
+        val editRT = prefRefreshToken.edit()
+        editAT.putString("accessToken", at)
+        editRT.putString("refreshToken", rt)
+        editAT.apply()
+        editRT.apply()
+        Log.d("로그인 tokens", "saved")
     }
 }

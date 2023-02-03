@@ -4,8 +4,11 @@
     <!-- 인터넷 사용 권한 설정 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
+        android:usesCleartextTraffic="true"
         android:name=".loginrelated.GlobalApplictation"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -17,27 +20,32 @@
         android:theme="@style/Theme.PetSapce_week1"
         tools:targetApi="31">
 
+        <!--          네이버 지도              -->
 
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="p11jn9hu1p" />
         <!--       숙소 상세보기 액티비티 =====================================================================================-->
+
         <activity
-            android:name=".accomodation.scroll.AccFacilityActivity"
+            android:name=".accommodation.scroll.AccFacilityActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".accomodation.scroll.AccHostActivity"
+            android:name=".accommodation.scroll.AccHostActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".accomodation.AccMainActivity"
+            android:name=".accommodation.AccMainActivity"
             android:exported="true">
         </activity>
-        <activity android:name=".accomodation.scroll.AccFacilityMoreActivity"/>
+        <activity android:name=".accommodation.scroll.AccFacilityMoreActivity"/>
 
 
         <!--       숙소 상세보기 끝 =====================================================================================-->
@@ -88,15 +96,24 @@
         android:exported="true"/>
         <activity android:name=".reviewrelated.ReviewPhotosActivity"/>
 
+        <!--테스트옹 홈 화면 ================================-->
 
         <activity
             android:name=".TestMainActivity"
             android:exported="true">
-             <intent-filter>
-                 <action android:name="android.intent.action.MAIN" />
+        </activity>
 
-                 <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+        <!-- ================프로필 화면 & 설정 화면 =============-->
+        <activity android:name=".ProfileMenuActivity"/>
+        <activity android:name=".SettingsActivity"/>
+
+        <!--- splash 화면 -->
+        <activity android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <!-- 카카오 로그인 화면 뜨는거 -->

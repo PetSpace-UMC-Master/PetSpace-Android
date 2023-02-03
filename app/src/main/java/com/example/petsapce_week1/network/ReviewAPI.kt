@@ -1,6 +1,6 @@
 package com.example.petsapce_week1.network
 
-import com.example.petsapce_week1.review.ReviewData
+import com.example.petsapce_week1.vo.ReviewPostData
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -10,12 +10,12 @@ interface ReviewAPI {
    @Multipart
     @POST("/app/reviews?reservationId=1/")
     fun post_reviews(
-        //@Header("")
+       @Header("Authorization") accessToken: String,
         //@Part jsonParams: ReviewDTO,
        @PartMap data: HashMap<String, RequestBody>,
-        @Part image: MultipartBody.Part?
+       @Part image: MultipartBody.Part?
         //@Body jsonParams: ReviewDTO
-    ): Call<ReviewData>
+    ): Call<ReviewPostData>
 
   //  abstract fun post_reviews(jsonParams: ReviewDTO): Call<ReviewData>
 }

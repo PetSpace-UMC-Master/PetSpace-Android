@@ -3,7 +3,7 @@ package com.example.petsapce_week1
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.petsapce_week1.accomodation.AccMainActivity
+import com.example.petsapce_week1.accommodation.AccMainActivity
 import com.example.petsapce_week1.databinding.ActivityHomeOnlyfortestBinding
 import com.example.petsapce_week1.loginrelated.LoginActivity
 import com.example.petsapce_week1.review.ReviewPostActivity

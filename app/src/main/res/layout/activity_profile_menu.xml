@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/activity_profile">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/bmjua"
+            android:text="프로필"
+            android:textColor="#0C201E"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#D9D9D9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view">
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            app:srcCompat="@drawable/frame_293" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingTop="13dp"
+            android:paddingBottom="13dp">
+
+            <TextView
+                android:id="@+id/tv_profile_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="닉네임"
+                android:textColor="#0C201E"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_profile_signupdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_regular"
+                android:paddingTop="5dp"
+                android:text="2022년 가입"
+                android:textColor="#0C201E"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="@font/pretendard_semibold"
+        android:text="계정관리"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+        <Button
+            android:id="@+id/btn_profile1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:paddingStart="20dp"
+            android:paddingRight="20dp"
+            android:drawableLeft="@drawable/vector_2"
+            android:drawableRight="@drawable/arrow_forward_ios"
+            android:gravity="left"
+            android:stateListAnimator="@null"
+            android:text="\t프로필 변경"
+            android:textColor="#0C201E"
+            android:fontFamily="@font/pretendard_regular"
+            android:textSize="16dp" />
+        <Button
+            android:id="@+id/btn_profile2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:paddingStart="20dp"
+            android:paddingRight="20dp"
+            android:drawableLeft="@drawable/group"
+            android:drawableRight="@drawable/arrow_forward_ios"
+            android:gravity="left"
+            android:stateListAnimator="@null"
+            android:text="\t개인정보"
+            android:textColor="#0C201E"
+            android:fontFamily="@font/pretendard_regular"
+            android:textSize="16dp" />
+        <Button
+            android:id="@+id/btn_profile3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingRight="20dp"
+            android:backgroundTint="@color/white"
+            android:drawableLeft="@drawable/material_symbols_lock_person"
+            android:drawableRight="@drawable/arrow_forward_ios"
+            android:gravity="left"
+            android:stateListAnimator="@null"
+            android:text="\t개인정보 처리방침"
+            android:textColor="#0C201E"
+            android:fontFamily="@font/pretendard_regular"
+            android:textSize="16dp" />
+        <Button
+            android:id="@+id/btn_profile4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingRight="20dp"
+            android:backgroundTint="@color/white"
+            android:drawableLeft="@drawable/mdi_paper_2"
+            android:drawableRight="@drawable/arrow_forward_ios"
+            android:gravity="left"
+            android:stateListAnimator="@null"
+            android:text="\t이용약관"
+            android:textColor="#0C201E"
+            android:fontFamily="@font/pretendard_regular"
+            android:textSize="16dp" />
+        <Button
+            android:id="@+id/btn_settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:paddingStart="20dp"
+            android:paddingRight="20dp"
+            android:drawableLeft="@drawable/uiw_setting"
+            android:drawableRight="@drawable/arrow_forward_ios"
+            android:gravity="left"
+            android:stateListAnimator="@null"
+            android:text="\t환경설정"
+            android:textColor="#0C201E"
+            android:fontFamily="@font/pretendard_regular"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
