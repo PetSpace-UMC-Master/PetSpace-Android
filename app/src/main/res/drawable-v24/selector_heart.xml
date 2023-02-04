@@ -2,6 +2,6 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
 <!--    selector 구현-->
-    <item android:state_enabled="true" android:drawable="@drawable/btn_continue"/>
-    <item android:state_enabled="false" android:drawable="@drawable/btn_continue_grey"/>
+    <item android:state_selected="false" android:drawable="@drawable/heartwhite4x"/>
+    <item android:state_selected="true" android:drawable="@drawable/heartwhitefull4x"/>
 </selector>

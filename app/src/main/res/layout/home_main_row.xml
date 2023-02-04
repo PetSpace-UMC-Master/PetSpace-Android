@@ -18,17 +18,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageButton
-                android:clickable="true"
+            <Button
+                android:id="@+id/btn_heart"
                 android:translationZ="1dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="15dp"
-                android:background="@drawable/heart3"
+                android:background="@drawable/selector_heart"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:focusable="true" />
+               />
 
 
             <androidx.viewpager2.widget.ViewPager2

@@ -58,6 +58,7 @@ dependencies {
     implementation "com.kakao.sdk:v2-friend:2.12.0" // 카카오톡 소셜 피커, 리소스 번들 파일 포함
 
     //retrofit
+
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.okhttp3:okhttp:4.8.0'

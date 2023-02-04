@@ -20,6 +20,9 @@ class Home2Activity : AppCompatActivity() {
 
         initRecyclerView()
 
+        val intent2 = intent
+        val name = intent2.getStringExtra("score2")
+        Log.d("score3",name.toString())
 
     }
 

@@ -139,10 +139,10 @@
         <activity
             android:name=".SplashActivity"
             android:exported="true">
-            <intent-filter>
+         <!--   <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
 
         <!-- 카카오 로그인 화면 뜨는거 -->

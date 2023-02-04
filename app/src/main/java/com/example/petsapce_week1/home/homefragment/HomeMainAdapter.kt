@@ -1,6 +1,7 @@
 package com.example.petsapce_week1.home.homefragment
 
 import android.annotation.SuppressLint
+import android.content.ClipData
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -73,10 +74,14 @@ class HomeMainAdapter(var items: ArrayList<HomeMainData>) :
         springDotsIndicator.attachTo(viewPager)
 
 
+
 //        holder.childViewPager.adapter = HomeChildViewPagerAdapter(items[position].imgList)
 //        holder.binding.childViewPager.visibility = View.VISIBLE
         holder.binding.apply {
             topcardview.cardElevation = 0f
+            btnHeart.setOnClickListener {
+                btnHeart.isSelected = btnHeart.isSelected != true
+            }
             //이미지는 이런식으로 담아야함.
 //            imgMain.setImageResource(items[position].img)
             textLoc.text = items[position].location
@@ -86,6 +91,7 @@ class HomeMainAdapter(var items: ArrayList<HomeMainData>) :
 //            textViewDifficulty.text= "난이도 ${position+1}"
 
         }
+
 
 
     }

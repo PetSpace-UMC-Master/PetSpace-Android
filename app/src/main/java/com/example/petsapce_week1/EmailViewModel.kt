@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 
 class EmailViewModel:ViewModel() {
 
+
     //flag값을 받을 변수 초기는 false
     private var flag:Boolean = false
 

@@ -119,13 +119,11 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/im1"
                         android:layout_width="48sp"
                         android:layout_height="48sp"
                         android:background="@drawable/btn11"
-                        android:clickable="true"
-                        android:focusable="true"
                         app:layout_constraintBottom_toTopOf="@+id/text1"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -345,7 +343,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_main"
-
+                tools:listitem="@layout/home_main_row"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingHorizontal="20dp">
