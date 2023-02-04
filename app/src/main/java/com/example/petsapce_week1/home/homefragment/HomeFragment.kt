@@ -18,6 +18,7 @@ import com.example.petsapce_week1.network.RetrofitHelperHome
 import com.example.petsapce_week1.network.homeAPI
 import com.example.petsapce_week1.vo.FacilityData
 import com.example.petsapce_week1.vo.HomeResponse
+import kotlinx.android.synthetic.main.home_main_row.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -121,6 +122,9 @@ class HomeFragment : Fragment() {
                     childataList.add(HomeChildData(R.drawable.map))
                     childataList.add(HomeChildData(R.drawable.map))
                     childataList.add(HomeChildData(R.drawable.map))
+                    childataList.add(HomeChildData(R.drawable.map))
+                    childataList.add(HomeChildData(R.drawable.map))
+                    childataList.add(HomeChildData(R.drawable.map))
                 }
                 2 -> {
                     childataList.add(HomeChildData(R.drawable.home2))
@@ -168,7 +172,6 @@ class HomeFragment : Fragment() {
 
     private fun updateCamp() {
         var dataList = ArrayList<HomeMainData>()
-
 
         adapter.items = dataList
         adapter.notifyDataSetChanged()
@@ -268,8 +271,7 @@ class HomeFragment : Fragment() {
         )
         adapter = HomeMainAdapter(dataList)
         binding.recyclerviewMain.adapter = adapter
-        binding.recyclerviewMain.isNestedScrollingEnabled = false
-
+        binding.recyclerviewMain.isNestedScrollingEnabled = true
 
 
 
@@ -282,7 +284,7 @@ class HomeFragment : Fragment() {
                 intent.putExtra("location", data.location)
                 intent.putExtra("date", data.date)
                 intent.putExtra("price", data.price)
-                intent.putExtra("data", data)
+//                intent.putExtra("data", data)
 
 
 

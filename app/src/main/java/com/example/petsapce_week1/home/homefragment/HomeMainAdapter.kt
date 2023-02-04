@@ -3,12 +3,14 @@ package com.example.petsapce_week1.home.homefragment
 import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
+import com.example.petsapce_week1.R
 import com.example.petsapce_week1.databinding.HomeMainRowBinding
+import com.example.petsapce_week1.databinding.HomeMainRowChildBinding
+import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+import com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
 import kotlinx.android.synthetic.main.activity_acc_main.view.*
 import kotlinx.android.synthetic.main.home_main_row.view.*
 
@@ -23,18 +25,20 @@ class HomeMainAdapter(var items: ArrayList<HomeMainData>) :
 
     var itemClickListener: OnItemClickListener? = null //초기값 null값
 
+
     inner class ViewHolder(val binding: HomeMainRowBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-//        private val childRecyclerView: RecyclerView = binding.childRecyclerView
+
+        //        private val childRecyclerView: RecyclerView = binding.childRecyclerView
 //        private val childViewPager: ViewPager = binding.childViewPager
 
         init {
-           /* childRecyclerView.layoutManager = LinearLayoutManager(
-                itemView.context,
-                LinearLayoutManager.HORIZONTAL,
-                false
-            )*/
+            /* childRecyclerView.layoutManager = LinearLayoutManager(
+                 itemView.context,
+                 LinearLayoutManager.HORIZONTAL,
+                 false
+             )*/
             binding.root.setOnClickListener {
                 itemClickListener?.OnItemClick(items[adapterPosition]) //?는 null일 수 도 있다고 알려주는 역할
 
@@ -53,11 +57,22 @@ class HomeMainAdapter(var items: ArrayList<HomeMainData>) :
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-
         //child recyclerview
 //        holder.binding.childRecyclerView.adapter = HomeChildAdapter(items[position].imgList)
 
-        holder.binding.childViewPager.adapter = HomeChildAdapter(items[position].imgList)
+     /*   val restadapter = HomeChildAdapter(items[position].imgList)
+        holder.binding.childViewPager.adapter = restadapter
+
+
+        holder.binding.childViewPager.adapter = HomeChildAdapter(items[position].imgList)*/
+
+        val springDotsIndicator = holder.binding.dotsIndicator
+        val viewPager = holder.binding.childViewPager
+        val adapter = HomeChildAdapter(items[position].imgList)
+        viewPager.adapter = adapter
+        springDotsIndicator.attachTo(viewPager)
+
+
 //        holder.childViewPager.adapter = HomeChildViewPagerAdapter(items[position].imgList)
 //        holder.binding.childViewPager.visibility = View.VISIBLE
         holder.binding.apply {
@@ -82,3 +97,6 @@ class HomeMainAdapter(var items: ArrayList<HomeMainData>) :
 
 
 }
+
+
+
