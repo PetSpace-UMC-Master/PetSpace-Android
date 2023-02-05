@@ -2,7 +2,6 @@ package com.example.petsapce_week1.home.homefragment
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.os.Build.VERSION_CODES.P
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,15 +11,13 @@ import android.widget.AdapterView
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.petsapce_week1.EmailViewModel
 import com.example.petsapce_week1.R
 import com.example.petsapce_week1.databinding.FragmentHomeBinding
+import com.example.petsapce_week1.databinding.FragmentReviewBinding
 import com.example.petsapce_week1.home.Home2Activity
 import com.example.petsapce_week1.network.RetrofitHelperHome
 import com.example.petsapce_week1.network.homeAPI
-import com.example.petsapce_week1.vo.FacilityData
 import com.example.petsapce_week1.vo.HomeResponse
-import com.example.petsapce_week1.vo.ReviewData
 import kotlinx.android.synthetic.main.home_main_row.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -44,7 +41,6 @@ class HomeFragment : Fragment() {
     lateinit var viewModel: SortViewModel
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -61,8 +57,42 @@ class HomeFragment : Fragment() {
                 val usersSort = response.body()
 
                 if (usersSort != null) {
-//                    var city = usersSort.result.city
                     Log.d("PRICE_DESC", usersSort.result.toString())
+                    val resultSize = usersSort.result.size
+                    var dataList2 = ArrayList<HomeMainData>()
+
+
+                    for (i in 0..resultSize) {
+                        val availDaysList = usersSort.result[i].availableDays.size
+                        var childataList = ArrayList<HomeChildData>()
+
+//                        childataList.add(HomeChildData(R.drawable.map))
+
+                        dataList2.add(
+                            HomeMainData(
+                                childataList,
+                                usersSort.result[i].averageReviewScore,
+                                usersSort.result[i].city + ", " + usersSort.result[i].district,
+                                usersSort.result[i].availableDays[0] + " ~ " + usersSort.result[i].availableDays[availDaysList],
+                                usersSort.result[i].price,
+                                usersSort.result[i].numberOfReview
+                            )
+
+                        )
+                    }
+
+                    /*  response.takeIf { it.isSuccessful }
+                          ?.body()
+                          .let {
+                              if (it != null) {
+                                  for (item in it.result.get(it).siz) {
+
+                                  }
+                              }
+                          }
+
+
+                      usersSort.result.city*/
                 } else {
                     Log.d("PRICE_DESC오류", response.code().toString())
                 }
@@ -81,10 +111,10 @@ class HomeFragment : Fragment() {
             ) {
                 val body = response.body()
                 if (body != null) {
+
                     Log.d("PRICE_DESC", body.result.toString())
 
-                }
-                else{
+                } else {
                     Log.d("PRICE_DESC", response.code().toString())
 
                 }
@@ -146,7 +176,8 @@ class HomeFragment : Fragment() {
                             }
                         }
                     }
-                }            }
+                }
+            }
             b2.setOnClickListener {
                 updateCamp()
             }
@@ -172,7 +203,7 @@ class HomeFragment : Fragment() {
         for (i in 1..10) {
             var childataList = ArrayList<HomeChildData>()
 
-            when (i) {
+         /*   when (i) {
 
                 1 -> {
                     childataList.add(HomeChildData(R.drawable.map))
@@ -191,20 +222,19 @@ class HomeFragment : Fragment() {
 
                 }
 
-            }
-            dataList.add(
-                HomeMainData(
-                    childataList,
-                    5,
-                    "종로구, 서울",
-                    11,
-                    5000
-                )
-            )
+            }*/
+            /*   dataList.add(
+                   HomeMainData(
+                       childataList,
+                       5.00000,
+                       "종로구, 서울",
+                       11,
+                       5000, 136
+                   )
+               )*/
 
         }
     }
-
 
 
     private fun updateBeach() {
@@ -213,35 +243,6 @@ class HomeFragment : Fragment() {
         for (i in 1..10) {
             var childataList = ArrayList<HomeChildData>()
 
-            when (i) {
-
-                1 -> {
-                    childataList.add(HomeChildData(R.drawable.map))
-                    childataList.add(HomeChildData(R.drawable.map))
-                    childataList.add(HomeChildData(R.drawable.map))
-                    childataList.add(HomeChildData(R.drawable.map))
-                    childataList.add(HomeChildData(R.drawable.map))
-                    childataList.add(HomeChildData(R.drawable.map))
-                    childataList.add(HomeChildData(R.drawable.map))
-                }
-                2 -> {
-                    childataList.add(HomeChildData(R.drawable.home2))
-                    childataList.add(HomeChildData(R.drawable.home2))
-                    childataList.add(HomeChildData(R.drawable.home2))
-                    childataList.add(HomeChildData(R.drawable.home2))
-
-                }
-
-            }
-            dataList.add(
-                HomeMainData(
-                    childataList,
-                    5,
-                    "종로구, 서울",
-                    11,
-                    5000
-                )
-            )
 
 
         }
@@ -252,10 +253,67 @@ class HomeFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun updateCountry() {
-        var dataList = ArrayList<HomeMainData>()
-        /*     dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
-             dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
-     */
+        //낮은가격순
+        val call = api.getCategory("HOUSE")
+        call.enqueue(object : Callback<HomeResponse> {
+            override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
+                val usersSort = response.body()
+
+                if (usersSort != null) {
+                    Log.d("PRICE_DESC", usersSort.result.toString())
+                    val resultSize = usersSort.result.size
+                    var dataList2 = ArrayList<HomeMainData>()
+
+
+                    for (i in 0..resultSize) {
+                        val availDaysList = usersSort.result[i].availableDays.size
+                        val availImageSize = usersSort.result[i].roomImages.size
+
+                        var childataList = ArrayList<HomeChildData>()
+                        for (j in 0..availImageSize ){
+                            childataList.add(HomeChildData(usersSort.result[i].roomImages[j]))
+
+                        }
+
+
+
+//                        childataList.add(HomeChildData(R.drawable.map))
+
+                        dataList2.add(
+                            HomeMainData(
+                                childataList,
+                                usersSort.result[i].averageReviewScore,
+                                usersSort.result[i].city + ", " + usersSort.result[i].district,
+                                usersSort.result[i].availableDays[0] + " ~ " + usersSort.result[i].availableDays[availDaysList],
+                                usersSort.result[i].price,
+                                usersSort.result[i].numberOfReview
+                            )
+
+                        )
+                    }
+
+                    /*  response.takeIf { it.isSuccessful }
+                          ?.body()
+                          .let {
+                              if (it != null) {
+                                  for (item in it.result.get(it).siz) {
+
+                                  }
+                              }
+                          }
+
+
+                      usersSort.result.city*/
+                } else {
+                    Log.d("PRICE_DESC오류", response.code().toString())
+                }
+                // handle users
+            }
+
+            override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
+                Log.d("PRICE 연결 실패", t.message.toString())
+            }
+        })
         adapter.items = dataList
         adapter.notifyDataSetChanged()
     }
@@ -279,16 +337,14 @@ class HomeFragment : Fragment() {
 
     private fun updateHouse() {
         var dataList = ArrayList<HomeMainData>()
-        for (i in 1..10) {
+       /* for (i in 1..10) {
             var childataList = ArrayList<HomeChildData>()
 
             when (i) {
 
                 1 -> {
                     childataList.add(HomeChildData(R.drawable.map))
-                    childataList.add(HomeChildData(R.drawable.map))
-                    childataList.add(HomeChildData(R.drawable.map))
-                    childataList.add(HomeChildData(R.drawable.map))
+
 
                 }
                 2 -> {
@@ -298,18 +354,18 @@ class HomeFragment : Fragment() {
                 }
 
             }
-            dataList.add(
-                HomeMainData(
-                    childataList,
-                    5,
-                    "종로구, 서울",
-                    11,
-                    5000
+            *//*    dataList.add(
+                    HomeMainData(
+                        childataList,
+                        5.00000,
+                        "종로구, 서울",
+                        11,
+                        5000, 136
+                    )
                 )
-            )
+    *//*
 
-
-        }
+        }*/
 
 
 
@@ -379,11 +435,11 @@ class HomeFragment : Fragment() {
         call.enqueue(object : Callback<HomeResponse> {
             override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
                 val usersSort = response.body()
-            /*    usersSort?.let {
-//                    setAdapter(it.result)
+                /*    usersSort?.let {
+    //                    setAdapter(it.result)
 
-                }
-*/
+                    }
+    */
                 if (usersSort != null) {
 
 //                    var city = usersSort.result.city
@@ -401,36 +457,6 @@ class HomeFragment : Fragment() {
             }
         })
 
-        for (i in 1..10) {
-            var childataList = ArrayList<HomeChildData>()
-
-            when (i) {
-
-                1 -> {
-                    childataList.add(HomeChildData(R.drawable.map))
-
-                }
-                2 -> {
-                    childataList.add(HomeChildData(R.drawable.home2))
-                    childataList.add(HomeChildData(R.drawable.home2))
-                    childataList.add(HomeChildData(R.drawable.home2))
-                    childataList.add(HomeChildData(R.drawable.home2))
-
-                }
-
-            }
-            dataList.add(
-                HomeMainData(
-                    childataList,
-                    5,
-                    "종로구, 서울",
-                    11,
-                    5000
-                )
-            )
-
-
-        }
 
 
 
@@ -472,12 +498,11 @@ class HomeFragment : Fragment() {
                 val intent = Intent(context, Home2Activity::class.java)
 //                intent.putExtra("image", data.img)
                 intent.putExtra("score", data.price)
-                Log.d("score2",data.price.toString())
+                Log.d("score2", data.price.toString())
                 intent.putExtra("location", data.location)
                 intent.putExtra("date", data.date)
                 intent.putExtra("price", data.price)
 //                intent.putExtra("data", data)
-
 
 
                 startActivity(intent)

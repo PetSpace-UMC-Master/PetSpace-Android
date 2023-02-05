@@ -10,10 +10,12 @@ import androidx.viewpager.widget.ViewPager
 import com.example.petsapce_week1.R
 import com.example.petsapce_week1.databinding.HomeMainRowBinding
 import com.example.petsapce_week1.databinding.HomeMainRowChildBinding
+import com.example.petsapce_week1.vo.HomeResponse
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 import com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
 import kotlinx.android.synthetic.main.activity_acc_main.view.*
 import kotlinx.android.synthetic.main.home_main_row.view.*
+import java.text.DecimalFormat
 
 class HomeMainAdapter(var items: ArrayList<HomeMainData>) :
     RecyclerView.Adapter<HomeMainAdapter.ViewHolder>() {
@@ -46,7 +48,37 @@ class HomeMainAdapter(var items: ArrayList<HomeMainData>) :
                 Log.d("touch3", adapterPosition.toString())
 
             }
+
         }
+        @SuppressLint("SetTextI18n")
+        fun bind(data: HomeMainData) {
+            val cut = String.format("%.2f", data.score)
+            val priceCut = DecimalFormat("#,###")
+            var price = priceCut.format(data.price)
+
+            val springDotsIndicator = binding.dotsIndicator
+            val viewPager = binding.childViewPager
+            val adapter = HomeChildAdapter(data.imgList)
+            viewPager.adapter = adapter
+            springDotsIndicator.attachTo(viewPager)
+
+
+            binding.apply {
+                textPrice.text = "₩${price} / 박"
+                textDate.text = data.date.toString()
+                textLoc.text = data.location
+                textScore.text = cut
+                textReview.text = "("+data.review.toString()+")"
+
+            }
+      /*      val springDotsIndicator = binding.dotsIndicator
+            val viewPager = binding.childViewPager
+            val adapter = HomeChildAdapter(items[position].imgList)
+            viewPager.adapter = adapter
+            springDotsIndicator.attachTo(viewPager)*/
+
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -64,14 +96,13 @@ class HomeMainAdapter(var items: ArrayList<HomeMainData>) :
      /*   val restadapter = HomeChildAdapter(items[position].imgList)
         holder.binding.childViewPager.adapter = restadapter
 
-
         holder.binding.childViewPager.adapter = HomeChildAdapter(items[position].imgList)*/
 
-        val springDotsIndicator = holder.binding.dotsIndicator
+     /*   val springDotsIndicator = holder.binding.dotsIndicator
         val viewPager = holder.binding.childViewPager
         val adapter = HomeChildAdapter(items[position].imgList)
         viewPager.adapter = adapter
-        springDotsIndicator.attachTo(viewPager)
+        springDotsIndicator.attachTo(viewPager)*/
 
 
 
@@ -82,15 +113,18 @@ class HomeMainAdapter(var items: ArrayList<HomeMainData>) :
             btnHeart.setOnClickListener {
                 btnHeart.isSelected = btnHeart.isSelected != true
             }
+
+
             //이미지는 이런식으로 담아야함.
 //            imgMain.setImageResource(items[position].img)
-            textLoc.text = items[position].location
+          /*  textLoc.text = items[position].location
             textScore.text = items[position].score.toString()
             textDate.text = items[position].date.toString()
-            textPrice.text = "₩" + items[position].price.toString() + " / 박"
+            textPrice.text = "₩" + items[position].price.toString() + " / 박"*/
 //            textViewDifficulty.text= "난이도 ${position+1}"
 
         }
+        holder.bind(items[position])
 
 
 
@@ -100,6 +134,12 @@ class HomeMainAdapter(var items: ArrayList<HomeMainData>) :
     override fun getItemCount(): Int {
         return items.size
     }
+
+   /* fun updateItems(newItems: HomeResponse) {
+        items.clear()
+        items.addAll(newItems)
+        notifyDataSetChanged()
+    }*/
 
 
 }

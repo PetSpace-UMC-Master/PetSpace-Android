@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.petsapce_week1.databinding.HomeMainRowChildBinding
 
 class HomeChildAdapter(private val items: List<HomeChildData>) : RecyclerView.Adapter<HomeChildAdapter.ChildViewHolder>() {
@@ -20,7 +21,13 @@ class HomeChildAdapter(private val items: List<HomeChildData>) : RecyclerView.Ad
 
     override fun onBindViewHolder(holder: ChildViewHolder, position: Int) {
         // set the adapter to the ViewPager
-        holder.binding.childImg.setImageResource(items[position].childImg)
+//        holder.binding.childImg.setImageResource(items[position].childImg)
+
+        Glide.with(holder.itemView)
+            .load(items[position].childImg)
+//            .fitCenter()
+            .override(200)
+            .into(holder.binding.childImg)
 //        holder.childRecyclerView.adapter = HomeChildAdapter(items[position].childImg)
     }
 

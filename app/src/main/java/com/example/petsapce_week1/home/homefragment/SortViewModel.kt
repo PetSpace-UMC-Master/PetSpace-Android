@@ -1,7 +1,6 @@
 package com.example.petsapce_week1.home.homefragment
 
 import android.util.Log
-import android.view.View
 import androidx.lifecycle.ViewModel
 import com.example.petsapce_week1.R
 import com.example.petsapce_week1.network.RetrofitHelperHome
@@ -45,6 +44,7 @@ class SortViewModel:ViewModel() {
 
 
 
+/*
         for (i in 1..10) {
             var childataList = ArrayList<HomeChildData>()
 
@@ -68,18 +68,21 @@ class SortViewModel:ViewModel() {
                 }
 
             }
-            dataList.add(
+         */
+/*   dataList.add(
                 HomeMainData(
                     childataList,
-                    5,
+                    5.00000,
                     "종로구, 서울",
                     11,
-                    5000
+                    5000,136
                 )
-            )
+            )*//*
+
 
 
         }
+*/
 
         adapter.items = dataList
         adapter.notifyDataSetChanged()
