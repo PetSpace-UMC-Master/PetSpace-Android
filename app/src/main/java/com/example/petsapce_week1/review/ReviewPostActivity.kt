@@ -188,6 +188,10 @@ class ReviewPostActivity : AppCompatActivity() {
         textHashMap["content"] = contentRequestBody
         textHashMap["score"] = reviewRateRequestBody
 
+        val textRequest = RequestBody.create("text/plain".toMediaTypeOrNull(), content)
+        val textBody = MultipartBody.Part.createFormData("text", "text.txt", textRequest)
+
+
         val file = File(mediaPath)
         val bitmapRequestBody = bitmap?.let { BitmapRequestBody(it)}
         val bitmapMultipartBody: MultipartBody.Part? =

@@ -5,56 +5,43 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.GridView
 import com.example.petsapce_week1.R
+import com.example.petsapce_week1.databinding.FragmentPlaceToGoBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [PlaceToGoFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PlaceToGoFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    lateinit var binding : FragmentPlaceToGoBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_place_to_go, container, false)
+
+        val view = inflater.inflate(R.layout.fragment_place_to_go, container, false)
+
+        val img = arrayOf(
+            R.drawable.menu1,
+            R.drawable.menu2,
+            R.drawable.menu5,
+            R.drawable.menu4,
+            R.drawable.menu6,
+            R.drawable.menu7,
+            R.drawable.menu8,
+            R.drawable.menu9,
+        )
+
+        val gridView = view.findViewById<GridView>(R.id.place_gridview)
+        gridView.adapter = PlaceGridAdapter(requireContext(), img)
+
+        binding = FragmentPlaceToGoBinding.inflate(layoutInflater)
+
+
+//        val gridViewAdapter = context?.let { PlaceGridAdapter(it, img) }
+//        binding.placeRecyvlerview.adapter = gridViewAdapter
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PlaceToGoFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PlaceToGoFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }
