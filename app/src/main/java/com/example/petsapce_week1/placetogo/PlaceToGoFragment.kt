@@ -38,6 +38,7 @@ class PlaceToGoFragment : Fragment() {
         binding = FragmentPlaceToGoBinding.inflate(layoutInflater)
 
 
+
 //        val gridViewAdapter = context?.let { PlaceGridAdapter(it, img) }
 //        binding.placeRecyvlerview.adapter = gridViewAdapter
 
