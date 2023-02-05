@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.petsapce_week1.R
 import com.example.petsapce_week1.databinding.FragmentHomeBinding
-import com.example.petsapce_week1.databinding.FragmentReviewBinding
 import com.example.petsapce_week1.home.Home2Activity
 import com.example.petsapce_week1.network.RetrofitHelperHome
 import com.example.petsapce_week1.network.homeAPI
@@ -26,6 +25,19 @@ import retrofit2.Retrofit
 
 
 class HomeFragment : Fragment() {
+
+    val btn1House = "HOUSE"
+    val btn2Campsite = "CAMPSITE"
+    val btn3Downtown = "DOWNTOWN"
+    val btn4Country = "COUNTRY"
+    val btn5Beach = "BEACH"
+
+    val sortPriceDesc = "PRICE_DESC"
+    val sortPriceAsc = "PRICE_ASC"
+    val sortReviewCount = "REVIEW_COUNT_DESC"
+    val sortReviewScore = "AVERAGE_REVIEW_SCORE_DESC"
+
+
     //레트로핏 객체 생성
     var retrofit: Retrofit = RetrofitHelperHome.getRetrofitInstance()
 
@@ -39,6 +51,7 @@ class HomeFragment : Fragment() {
     lateinit var adapter: HomeMainAdapter
     lateinit var spinner: Spinner
     lateinit var viewModel: SortViewModel
+    lateinit var roomId: String
 
 
     override fun onCreateView(
@@ -49,82 +62,6 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
         //네트워크 통신
-
-        //낮은가격순
-        val call = api.getCategory("HOUSE")
-        call.enqueue(object : Callback<HomeResponse> {
-            override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
-                val usersSort = response.body()
-
-                if (usersSort != null) {
-                    Log.d("PRICE_DESC", usersSort.result.toString())
-                    val resultSize = usersSort.result.size
-                    var dataList2 = ArrayList<HomeMainData>()
-
-
-                    for (i in 0..resultSize) {
-                        val availDaysList = usersSort.result[i].availableDays.size
-                        var childataList = ArrayList<HomeChildData>()
-
-//                        childataList.add(HomeChildData(R.drawable.map))
-
-                        dataList2.add(
-                            HomeMainData(
-                                childataList,
-                                usersSort.result[i].averageReviewScore,
-                                usersSort.result[i].city + ", " + usersSort.result[i].district,
-                                usersSort.result[i].availableDays[0] + " ~ " + usersSort.result[i].availableDays[availDaysList],
-                                usersSort.result[i].price,
-                                usersSort.result[i].numberOfReview
-                            )
-
-                        )
-                    }
-
-                    /*  response.takeIf { it.isSuccessful }
-                          ?.body()
-                          .let {
-                              if (it != null) {
-                                  for (item in it.result.get(it).siz) {
-
-                                  }
-                              }
-                          }
-
-
-                      usersSort.result.city*/
-                } else {
-                    Log.d("PRICE_DESC오류", response.code().toString())
-                }
-                // handle users
-            }
-
-            override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
-                Log.d("PRICE 연결 실패", t.message.toString())
-            }
-        })
-
-        api.getSort("PRICE_DESC").enqueue(object : Callback<HomeResponse> {
-            override fun onResponse(
-                call: Call<HomeResponse>,
-                response: Response<HomeResponse>
-            ) {
-                val body = response.body()
-                if (body != null) {
-
-                    Log.d("PRICE_DESC", body.result.toString())
-
-                } else {
-                    Log.d("PRICE_DESC", response.code().toString())
-
-                }
-            }
-
-            override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
-                Log.d("PRICE_DESC", t.message.toString())
-            }
-        })
-
 
 
         initRecyclerView()
@@ -139,7 +76,7 @@ class HomeFragment : Fragment() {
     private fun initButtonSort() {
         binding.apply {
             b1.setOnClickListener {
-                updateHouse()
+                updateCategory(btn1House)
                 spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                     override fun onNothingSelected(parent: AdapterView<*>?) {
                     }
@@ -157,134 +94,88 @@ class HomeFragment : Fragment() {
                         )
                         when (spinner.getItemAtPosition(position)) {
                             "최근등록순" -> {
-                                updateHouseRcent()
+                                updateTripple(3, sortPriceAsc, btn1House)
                             }
                             "높은가격순" -> {
-                                updatePriceHigh()
+                                updateTripple(3, sortPriceAsc, btn1House)
                             }
                             "낮은가격순" -> {
-                                updatePriceRow()
+                                updateTripple(3, sortPriceDesc, btn1House)
                             }
                             "평점높은순" -> {
-                                updateScoreHigh()
+                                updateTripple(3, sortReviewScore, btn1House)
                             }
                             "리뷰많은순" -> {
-                                updateReview()
+                                updateTripple(3, sortReviewCount, btn1House)
                             }
                             else -> {
-                                updateRecent()
+                                updateTripple(3, sortPriceAsc, btn1House)
                             }
                         }
                     }
                 }
             }
             b2.setOnClickListener {
-                updateCamp()
+                updateCategory(btn2Campsite)
             }
             b3.setOnClickListener {
-                updateDowntown()
+                updateCategory(btn3Downtown)
             }
             b4.setOnClickListener {
-                updateCountry()
+                updateCategory(btn4Country)
+
             }
             b5.setOnClickListener {
-                updateBeach()
+                updateCategory(btn5Beach)
             }
 
         }
 
     }
 
-    private fun updateHouseRcent() {
-        var dataList = ArrayList<HomeMainData>()
+    fun updateTripple(page: Int, sort: String, category: String) {
+        ArrayList<HomeMainData>()
 
-
-
-        for (i in 1..10) {
-            var childataList = ArrayList<HomeChildData>()
-
-         /*   when (i) {
-
-                1 -> {
-                    childataList.add(HomeChildData(R.drawable.map))
-                    childataList.add(HomeChildData(R.drawable.map))
-                    childataList.add(HomeChildData(R.drawable.map))
-                    childataList.add(HomeChildData(R.drawable.map))
-                    childataList.add(HomeChildData(R.drawable.map))
-                    childataList.add(HomeChildData(R.drawable.map))
-                    childataList.add(HomeChildData(R.drawable.map))
-                }
-                2 -> {
-                    childataList.add(HomeChildData(R.drawable.home2))
-                    childataList.add(HomeChildData(R.drawable.home2))
-                    childataList.add(HomeChildData(R.drawable.home2))
-                    childataList.add(HomeChildData(R.drawable.home2))
-
-                }
-
-            }*/
-            /*   dataList.add(
-                   HomeMainData(
-                       childataList,
-                       5.00000,
-                       "종로구, 서울",
-                       11,
-                       5000, 136
-                   )
-               )*/
-
-        }
-    }
-
-
-    private fun updateBeach() {
-        var dataList = ArrayList<HomeMainData>()
-
-        for (i in 1..10) {
-            var childataList = ArrayList<HomeChildData>()
-
-
-
-        }
-
-        adapter.items = dataList
-        adapter.notifyDataSetChanged()
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    private fun updateCountry() {
-        //낮은가격순
-        val call = api.getCategory("HOUSE")
-        call.enqueue(object : Callback<HomeResponse> {
-            override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
+        api.getTriple(page, sort, category).enqueue(object : Callback<HomeResponse> {
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onResponse(
+                call: Call<HomeResponse>,
+                response: Response<HomeResponse>
+            ) {
                 val usersSort = response.body()
-
                 if (usersSort != null) {
-                    Log.d("PRICE_DESC", usersSort.result.toString())
+                    Log.d("tripple", usersSort.result.toString())
                     val resultSize = usersSort.result.size
-                    var dataList2 = ArrayList<HomeMainData>()
+                    val dataList = ArrayList<HomeMainData>()
+//                    var dateList = arrayListOf(1,2,3)
+                    var statdate = ""
+                    var endDate = ""
 
 
-                    for (i in 0..resultSize) {
+                    for (i in 0 until resultSize) {
+                        roomId = usersSort.result[i].roomId.toString()
                         val availDaysList = usersSort.result[i].availableDays.size
                         val availImageSize = usersSort.result[i].roomImages.size
 
                         var childataList = ArrayList<HomeChildData>()
-                        for (j in 0..availImageSize ){
-                            childataList.add(HomeChildData(usersSort.result[i].roomImages[j]))
+                        for (j in 0 until availImageSize) {
+                            childataList.add(HomeChildData(R.drawable.map))
+//                            Log.d("childataList",usersSort.result[i].roomImages[j])
 
                         }
 
+                        if (availDaysList != 0) {
+                            statdate = usersSort.result[i].availableDays[0]
+                            endDate = usersSort.result[i].availableDays[availDaysList - 1]
+                        }
 
 
-//                        childataList.add(HomeChildData(R.drawable.map))
-
-                        dataList2.add(
+                        dataList.add(
                             HomeMainData(
                                 childataList,
                                 usersSort.result[i].averageReviewScore,
                                 usersSort.result[i].city + ", " + usersSort.result[i].district,
-                                usersSort.result[i].availableDays[0] + " ~ " + usersSort.result[i].availableDays[availDaysList],
+                                "$statdate~$endDate",
                                 usersSort.result[i].price,
                                 usersSort.result[i].numberOfReview
                             )
@@ -292,18 +183,77 @@ class HomeFragment : Fragment() {
                         )
                     }
 
-                    /*  response.takeIf { it.isSuccessful }
-                          ?.body()
-                          .let {
-                              if (it != null) {
-                                  for (item in it.result.get(it).siz) {
-
-                                  }
-                              }
-                          }
+                    adapter.items = dataList
+                    adapter.notifyDataSetChanged()
 
 
-                      usersSort.result.city*/
+                } else {
+                    Log.d("PRICE_DESC", response.code().toString())
+
+                }
+            }
+
+            override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
+                Log.d("PRICE_DESC", t.message.toString())
+            }
+        })
+
+    }
+
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun updateCategory(category: String) {
+        val call = api.getCategory(category)
+        call.enqueue(object : Callback<HomeResponse> {
+            override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
+                val usersSort = response.body()
+
+                if (usersSort != null) {
+                    Log.d("PRICE_DESC", usersSort.result.toString())
+                    val resultSize = usersSort.result.size
+                    var dataList = ArrayList<HomeMainData>()
+//                    var dateList = arrayListOf(1,2,3)
+                    var statdate = ""
+                    var endDate = ""
+
+
+                    for (i in 0 until resultSize) {
+                        roomId = usersSort.result[i].roomId.toString()
+                        val availDaysList = usersSort.result[i].availableDays.size
+                        val availImageSize = usersSort.result[i].roomImages.size
+
+                        var childataList = ArrayList<HomeChildData>()
+                        for (j in 0 until 5) {
+                            childataList.add(HomeChildData(R.drawable.map))
+//                            Log.d("childataList",usersSort.result[i].roomImages[j])
+
+                        }
+
+                        if (availDaysList != 0) {
+                            statdate = usersSort.result[i].availableDays[0]
+                            endDate = usersSort.result[i].availableDays[availDaysList - 1]
+                        }
+
+
+                        val add = dataList.add(
+                            HomeMainData(
+                                childataList,
+                                usersSort.result[i].averageReviewScore,
+                                usersSort.result[i].city + ", " + usersSort.result[i].district,
+                                "$statdate~$endDate",
+                                usersSort.result[i].price,
+                                usersSort.result[i].numberOfReview
+                            )
+
+                        )
+                    }
+
+//                        childataList.add(HomeChildData(R.drawable.map))
+
+
+                    adapter.items = dataList
+                    adapter.notifyDataSetChanged()
+
                 } else {
                     Log.d("PRICE_DESC오류", response.code().toString())
                 }
@@ -314,64 +264,9 @@ class HomeFragment : Fragment() {
                 Log.d("PRICE 연결 실패", t.message.toString())
             }
         })
-        adapter.items = dataList
-        adapter.notifyDataSetChanged()
+
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    private fun updateDowntown() {
-        var dataList = ArrayList<HomeMainData>()
-        /*   dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
-           dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))*/
-
-        adapter.items = dataList
-        adapter.notifyDataSetChanged()
-    }
-
-    private fun updateCamp() {
-        var dataList = ArrayList<HomeMainData>()
-
-        adapter.items = dataList
-        adapter.notifyDataSetChanged()
-    }
-
-    private fun updateHouse() {
-        var dataList = ArrayList<HomeMainData>()
-       /* for (i in 1..10) {
-            var childataList = ArrayList<HomeChildData>()
-
-            when (i) {
-
-                1 -> {
-                    childataList.add(HomeChildData(R.drawable.map))
-
-
-                }
-                2 -> {
-                    childataList.add(HomeChildData(R.drawable.home2))
-                    childataList.add(HomeChildData(R.drawable.home2))
-
-                }
-
-            }
-            *//*    dataList.add(
-                    HomeMainData(
-                        childataList,
-                        5.00000,
-                        "종로구, 서울",
-                        11,
-                        5000, 136
-                    )
-                )
-    *//*
-
-        }*/
-
-
-
-        adapter.items = dataList
-        adapter.notifyDataSetChanged()
-    }
 
     private fun initSpinner() {
         spinner = binding.spinner
@@ -392,22 +287,22 @@ class HomeFragment : Fragment() {
                 )
                 when (spinner.getItemAtPosition(position)) {
                     "최근등록순" -> {
-                        updateRecent()
+                        updateSort(sortPriceAsc)
                     }
                     "높은가격순" -> {
-                        updatePriceHigh()
+                        updateSort(sortPriceAsc)
                     }
                     "낮은가격순" -> {
-                        updatePriceRow()
+                        updateSort(sortPriceDesc)
                     }
                     "평점높은순" -> {
-                        updateScoreHigh()
+                        updateSort(sortReviewScore)
                     }
                     "리뷰많은순" -> {
-                        updateReview()
+                        updateSort(sortReviewCount)
                     }
                     else -> {
-                        updateRecent()
+                        updateSort(sortPriceAsc)
                     }
                 }
             }
@@ -415,70 +310,73 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun updateReview() {
-        TODO("Not yet implemented")
-    }
-
-    private fun updateScoreHigh() {
-        TODO("Not yet implemented")
-    }
-
-    private fun updatePriceRow() {
-        TODO("Not yet implemented")
-    }
-
-    fun updatePriceHigh() {
-        var dataList = ArrayList<HomeMainData>()
-
-        //낮은가격순
-        val call = api.getSort("PRICE_DESC")
+    fun updateSort(sort: String) {
+        val call = api.getSort(sort)
         call.enqueue(object : Callback<HomeResponse> {
+            @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
                 val usersSort = response.body()
-                /*    usersSort?.let {
-    //                    setAdapter(it.result)
 
-                    }
-    */
                 if (usersSort != null) {
-
-//                    var city = usersSort.result.city
                     Log.d("PRICE_DESC", usersSort.result.toString())
+                    val resultSize = usersSort.result.size
+                    val dataList = ArrayList<HomeMainData>()
+//                    var dateList = arrayListOf(1,2,3)
+                    var statdate = ""
+                    var endDate = ""
+
+
+                    for (i in 0 until resultSize) {
+                        roomId = usersSort.result[i].roomId.toString()
+                        val availDaysList = usersSort.result[i].availableDays.size
+                        val availImageSize = usersSort.result[i].roomImages.size
+
+                        //이미지 입력
+                        val childataList = ArrayList<HomeChildData>()
+                        for (j in 0 until 5) {
+                            childataList.add(HomeChildData(R.drawable.map))
+//                            childataList.add(HomeChildData(usersSort.result[i].roomImages[j])
+//                            Log.d("childataList",usersSort.result[i].roomImages[j])
+                        }
+
+                        //가용날짜 체크
+                        if (availDaysList != 0) {
+                            statdate = usersSort.result[i].availableDays[0]
+                            endDate = usersSort.result[i].availableDays[availDaysList - 1]
+                        }
+
+
+                        dataList.add(
+                            HomeMainData(
+                                childataList,
+                                usersSort.result[i].averageReviewScore,
+                                usersSort.result[i].city + ", " + usersSort.result[i].district,
+                                "$statdate~$endDate",
+                                usersSort.result[i].price,
+                                usersSort.result[i].numberOfReview
+                            )
+
+                        )
+                    }
+
+
+
+                    adapter.items = dataList
+                    adapter.notifyDataSetChanged()
+
                 } else {
                     Log.d("PRICE_DESC오류", response.code().toString())
                 }
-
-
                 // handle users
             }
 
             override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
-                Log.d("sort연결 실패", t.message.toString())
+                Log.d("PRICE 연결 실패", t.message.toString())
             }
         })
 
-
-
-
-        adapter.items = dataList
-        adapter.notifyDataSetChanged()
     }
 
-    fun updateRecent() {
-        var dataList = ArrayList<HomeMainData>()
-
-
-        adapter.items = dataList
-        adapter.notifyDataSetChanged()
-    }
-
-    /* private fun initAddData() {
-         dataList.add(HomeMainData(R.drawable.home2, 5, "종로구, 서울", 11, 5000))
-         dataList.add(HomeMainData(R.drawable.home2, 5, "서초구", 11, 5000))
-         dataList.add(HomeMainData(R.drawable.home2, 5, "서초구", 11, 1))
-         dataList.add(HomeMainData(R.drawable.home2, 5, "서초구", 11, 5000))
-         dataList.add(HomeMainData(R.drawable.home2, 5, "서초구", 11, 5000))
-     }*/
 
     private fun initRecyclerView() {
 
@@ -497,7 +395,7 @@ class HomeFragment : Fragment() {
             override fun OnItemClick(data: HomeMainData) {
                 val intent = Intent(context, Home2Activity::class.java)
 //                intent.putExtra("image", data.img)
-                intent.putExtra("score", data.price)
+                intent.putExtra("score", roomId)
                 Log.d("score2", data.price.toString())
                 intent.putExtra("location", data.location)
                 intent.putExtra("date", data.date)
@@ -513,19 +411,6 @@ class HomeFragment : Fragment() {
 
         }
 
-
-        /*    adapter.itemClickListener = object : HomeMainAdapter.OnItemClickListener {
-                override fun OnItemClick(data: HomeMainData) {
-                    *//*  Toast.makeText(getActivity(),"show", Toast.LENGTH_SHORT).show()
-                   val intent = packageManager.getLaunchIntentForPackage(data.appackname)
-                   startActivity(intent)*//*
-                val intent = Intent(context, Home2Activity::class.java)
-                intent.putExtra("image",data.img)
-                startActivity(intent)
-
-                Log.d("test", "test")
-            }
-        }*/
     }
 
 

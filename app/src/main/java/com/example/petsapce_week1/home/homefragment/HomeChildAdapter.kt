@@ -26,7 +26,7 @@ class HomeChildAdapter(private val items: List<HomeChildData>) : RecyclerView.Ad
         Glide.with(holder.itemView)
             .load(items[position].childImg)
 //            .fitCenter()
-            .override(200)
+//            .override(200)
             .into(holder.binding.childImg)
 //        holder.childRecyclerView.adapter = HomeChildAdapter(items[position].childImg)
     }
