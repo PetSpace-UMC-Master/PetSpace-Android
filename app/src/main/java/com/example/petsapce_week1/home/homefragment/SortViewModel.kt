@@ -11,15 +11,15 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 
-class SortViewModel:ViewModel() {
+class SortViewModel : ViewModel() {
     var retrofit: Retrofit = RetrofitHelperHome.getRetrofitInstance()
     var api: homeAPI = retrofit.create(homeAPI::class.java)
     var dataList = ArrayList<HomeMainData>()
     lateinit var adapter: HomeMainAdapter
 
 
-    fun HouseRecent(){
-        api.getDouble("PRICE_DESC","HOUSE").enqueue(object : Callback<HomeResponse> {
+    fun HouseRecent() {
+        api.getDouble("PRICE_DESC", "HOUSE").enqueue(object : Callback<HomeResponse> {
             override fun onResponse(
                 call: Call<HomeResponse>,
                 response: Response<HomeResponse>
@@ -28,8 +28,7 @@ class SortViewModel:ViewModel() {
                 if (body != null) {
                     Log.d("Sort", body.result.toString())
 
-                }
-                else{
+                } else {
                     Log.d("PRICE_DESC", response.code().toString())
 
                 }
@@ -44,9 +43,15 @@ class SortViewModel:ViewModel() {
 
 
 
-/*
+        adapter.items = dataList
+        adapter.notifyDataSetChanged()
+    }
+
+    fun update(): ArrayList<HomeMainData> {
+        var dataList3 = ArrayList<HomeMainData>()
+
+        var childataList = ArrayList<HomeChildData>()
         for (i in 1..10) {
-            var childataList = ArrayList<HomeChildData>()
 
             when (i) {
 
@@ -68,27 +73,21 @@ class SortViewModel:ViewModel() {
                 }
 
             }
-         */
-/*   dataList.add(
+            dataList.add(
                 HomeMainData(
                     childataList,
-                    5.00000,
+                    5.0000.toFloat(),
                     "종로구, 서울",
-                    11,
-                    5000,136
+                    "123",
+                    5000, 136
                 )
-            )*//*
-
+            )
 
 
         }
-*/
+        return dataList3
 
-        adapter.items = dataList
-        adapter.notifyDataSetChanged()
     }
-
-
 
 
 }

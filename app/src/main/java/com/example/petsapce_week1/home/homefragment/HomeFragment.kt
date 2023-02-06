@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.petsapce_week1.R
 import com.example.petsapce_week1.databinding.FragmentHomeBinding
@@ -44,13 +45,14 @@ class HomeFragment : Fragment() {
     //서비스 객체 생성
     var api: homeAPI = retrofit.create(homeAPI::class.java)
 
+    lateinit var viewModel: SortViewModel
+
     //child apdater 이미지
-    var childataList = ArrayList<HomeChildData>()
     private lateinit var binding: FragmentHomeBinding
+
     var dataList = ArrayList<HomeMainData>()
     lateinit var adapter: HomeMainAdapter
     lateinit var spinner: Spinner
-    lateinit var viewModel: SortViewModel
     lateinit var roomId: String
 
 
@@ -60,6 +62,20 @@ class HomeFragment : Fragment() {
     ): View? {
 
         binding = FragmentHomeBinding.inflate(layoutInflater)
+        viewModel = ViewModelProvider(this).get(SortViewModel::class.java)
+
+
+        var dataList3 = ArrayList<HomeMainData>()
+
+        dataList3 = viewModel.update()
+        for (i in 0 until dataList3.size) {
+
+            Log.d("tag", dataList3[i].toString())
+        }
+
+        Log.d("tag", dataList3.size.toString())
+
+
 
         //네트워크 통신
 
@@ -127,6 +143,7 @@ class HomeFragment : Fragment() {
             }
             b5.setOnClickListener {
                 updateCategory(btn5Beach)
+
             }
 
         }
@@ -202,7 +219,7 @@ class HomeFragment : Fragment() {
 
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun updateCategory(category: String) {
+    fun updateCategory(category: String) {
         val call = api.getCategory(category)
         call.enqueue(object : Callback<HomeResponse> {
             override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
@@ -361,6 +378,7 @@ class HomeFragment : Fragment() {
 
 
 
+
                     adapter.items = dataList
                     adapter.notifyDataSetChanged()
 
@@ -384,6 +402,7 @@ class HomeFragment : Fragment() {
         binding.recyclerviewMain.layoutManager = LinearLayoutManager(
             context, LinearLayoutManager.VERTICAL, false
         )
+
         adapter = HomeMainAdapter(dataList)
         binding.recyclerviewMain.adapter = adapter
         binding.recyclerviewMain.isNestedScrollingEnabled = true
