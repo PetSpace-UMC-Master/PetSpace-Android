@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.placetogo_grid_itemlist.view.*
 import okhttp3.*
 import retrofit2.Retrofit
 import java.io.IOException
+import java.lang.reflect.Array.newInstance
 
 
 class PlaceGridAdapter(val context: Context, var img_list: Array<Int>, val accessToken : String) : BaseAdapter() {
@@ -72,7 +73,7 @@ class PlaceGridAdapter(val context: Context, var img_list: Array<Int>, val acces
                 ) {
                     Log.d(" 함께 갈 곳에서 서울 버튼 누름", "ㅇㅇ")
                     Log.d("함께 갈 곳", response.body().toString())
-                    val intent = Intent(context, AccMainActivity::class.java)
+                    val intent = Intent(context, TestSeoulAccommosFragment::class.java)
                     context.startActivity(intent)
                 }
 
