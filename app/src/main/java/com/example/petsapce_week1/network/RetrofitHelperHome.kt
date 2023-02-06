@@ -5,11 +5,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 //retrofit 객체 생성
+object RetrofitHelperHome {
 
-object RetrofitHelper {
-
-    val BASE_URL: String = "https://a2e4-115-94-178-52.jp.ngrok.io"
-
+    //base_url 애들 마다 다 다름 얘들아 테섭 하나 만들어죠
+    val BASE_URL: String = "http://3.38.242.232:8080"
     var gson = GsonBuilder().setLenient().create()
 
     fun getRetrofitInstance(): Retrofit {

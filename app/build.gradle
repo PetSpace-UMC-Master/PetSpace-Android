@@ -47,6 +47,7 @@ android {
         viewBinding true
     }
 
+
 }
 
 dependencies {
@@ -60,6 +61,7 @@ dependencies {
     implementation "com.kakao.sdk:v2-friend:2.12.0" // 카카오톡 소셜 피커, 리소스 번들 파일 포함
 
     //retrofit
+
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.okhttp3:okhttp:4.8.0'
@@ -86,6 +88,10 @@ dependencies {
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
     implementation 'com.google.android.material:material:1.3.0-alpha01'
 
+
+    //indicator
+    implementation("com.tbuonomo:dotsindicator:4.3")
+
     // 네이버 지도 SDK
     implementation 'com.naver.maps:map-sdk:3.16.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
@@ -95,6 +101,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'kr.co.prnd:readmore-textview:1.0.0'
+
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'

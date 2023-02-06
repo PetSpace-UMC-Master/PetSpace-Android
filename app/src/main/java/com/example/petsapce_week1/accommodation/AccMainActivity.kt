@@ -19,6 +19,7 @@ import com.example.petsapce_week1.databinding.ActivityAccMainBinding
 import com.example.petsapce_week1.network.AccomoService
 import com.example.petsapce_week1.network.LoginService
 import com.example.petsapce_week1.network.RetrofitHelper
+import com.example.petsapce_week1.network.RetrofitHelperHome
 import com.example.petsapce_week1.vo.FacilityData
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationData
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationRoomData
@@ -212,6 +213,7 @@ class AccMainActivity : AppCompatActivity() {
                         )
                     )
                 }
+
 
                 if(reviewList.isNotEmpty()){
                     Log.d("숙소 facility 리스트", "${reviewList}")
