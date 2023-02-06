@@ -42,13 +42,13 @@
         android:id="@+id/place_gridview"
         tools:listitem="@layout/placetogo_grid_itemlist"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:numColumns="2"
-
         android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/constraintLayout" />
+        app:layout_constraintTop_toBottomOf="@id/constraintLayout"
+        android:paddingBottom="50dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
