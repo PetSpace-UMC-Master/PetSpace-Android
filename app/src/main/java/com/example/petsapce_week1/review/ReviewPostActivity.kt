@@ -30,6 +30,7 @@ import retrofit2.Retrofit
 import java.io.File
 class ReviewPostActivity : AppCompatActivity() {
     private lateinit var binding: ReviewCreateBinding
+
     private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
     var api: ReviewAPI = retrofit.create(ReviewAPI::class.java)
     private var success_review_id: Int? = null
@@ -187,6 +188,10 @@ class ReviewPostActivity : AppCompatActivity() {
         val textHashMap = hashMapOf<String, RequestBody>()
         textHashMap["content"] = contentRequestBody
         textHashMap["score"] = reviewRateRequestBody
+
+        val textRequest = RequestBody.create("text/plain".toMediaTypeOrNull(), content)
+        val textBody = MultipartBody.Part.createFormData("text", "text.txt", textRequest)
+
 
         val file = File(mediaPath)
         val bitmapRequestBody = bitmap?.let { BitmapRequestBody(it)}
