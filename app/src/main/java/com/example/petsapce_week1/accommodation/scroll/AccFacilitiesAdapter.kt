@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.petsapce_week1.accommodation.GlideApp
+import com.bumptech.glide.Glide
 import com.example.petsapce_week1.databinding.FacilitiesItemListBinding
 import com.example.petsapce_week1.vo.accomo_datamodel.Facility
 
@@ -24,7 +24,7 @@ class AccFacilitiesAdapter(val item: List<Facility>) : RecyclerView.Adapter<AccF
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Log.d("${position+1} 번째 편의시설", "${item[position]}")
-        GlideApp.with(holder.itemView)
+        Glide.with(holder.itemView)
             .load(item[position].facilityImageUrl)
             .fitCenter()
             .override(200)

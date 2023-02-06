@@ -75,13 +75,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="200sp" />
 
-       <!--     <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/home2"
+            <!--     <ImageView
+                     android:layout_width="match_parent"
+                     android:layout_height="200dp"
+                     android:scaleType="fitXY"
+                     android:src="@drawable/home2"
 
-                />-->
+                     />-->
 
 
 

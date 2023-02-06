@@ -7,12 +7,12 @@ data class AccommodationFacilityMore(
     val responseCode: Int,
     val responseMessage: String,
     val result: Result
-)
-
-data class Result(
-    val allFacilityInfos: List<AllFacilityInfo>
-    //val allFacilityInfos: List<FacilityReceived>
-)
+) {
+    data class Result(
+        val allFacilityInfos: List<AllFacilityInfo>
+        //val allFacilityInfos: List<FacilityReceived>
+    )
+}
 
 data class AllFacilityInfo(
     val category: String,

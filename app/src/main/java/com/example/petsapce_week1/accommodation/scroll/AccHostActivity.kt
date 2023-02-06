@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.petsapce_week1.databinding.ActivityAccHostBinding
 import com.example.petsapce_week1.network.AccomoService
 import com.example.petsapce_week1.network.RetrofitHelper
+import com.example.petsapce_week1.network.RetrofitHelperHome
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationData
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationRoomData
 import retrofit2.Call
@@ -15,7 +16,7 @@ import retrofit2.Retrofit
 
 class AccHostActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAccHostBinding
-    //
+
     private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
     var api : AccomoService = retrofit.create(AccomoService::class.java)
     val accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ5c2xpbTM3QG5hdmVyLmNvbSIsImlhdCI6MTY3NTMyMTY0NywiZXhwIjoxNjc1MzIzNDQ3fQ.4CDgFa2fp_b-9fEuDiiwPkTR3SC23bI23NYOEdBiSB8"
@@ -28,6 +29,7 @@ class AccHostActivity : AppCompatActivity() {
 
         // == 백엔드 통신 부분 ==
         val data = AccomodationRoomData(roomId = 1)
+
 
         api.getRoomDetail(accessTokenPost, 1).enqueue(object : Callback<AccomodationData>{
             override fun onResponse(
@@ -43,6 +45,7 @@ class AccHostActivity : AppCompatActivity() {
                     binding.textName.text = body.result.hostName
                     binding.tvMaxguest.text = body.result.maxGuest.toString()
                     binding.tvMaxpet.text = body.result.maxPet.toString()
+
                 }
             }
             override fun onFailure(call: Call<AccomodationData>, t: Throwable) {

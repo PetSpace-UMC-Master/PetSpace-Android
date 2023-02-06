@@ -67,6 +67,8 @@
             android:orientation="horizontal">
 
         <EditText
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:layout_marginRight="5dp"
             android:paddingLeft="20dp"
             android:background="@drawable/btn_emailbox"
@@ -79,11 +81,12 @@
             android:textColor="#7F7F7F"
             />
 
-            <Button
-                android:enabled="true"
+            <androidx.appcompat.widget.AppCompatButton
+                android:clickable="true"
                 android:layout_marginLeft="5dp"
                 android:id="@+id/email_duplication_after"
-                android:background="@drawable/click_button"
+                android:backgroundTint="@color/main_green"
+                android:background="@drawable/btn_customfull"
                 android:fontFamily="@font/pretendard_semibold"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -125,6 +128,8 @@
             >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:paddingLeft="20dp"
             android:background="@drawable/btn_custom"
             android:textSize="16sp"
@@ -159,6 +164,8 @@
             >
 
         <EditText
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:paddingLeft="20dp"
             android:background="@drawable/btn_custom"
             android:textSize="16sp"
@@ -197,6 +204,7 @@
 -->
             <androidx.appcompat.widget.AppCompatButton
 
+                android:clickable="true"
                 android:enabled="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginBottom="50dp"

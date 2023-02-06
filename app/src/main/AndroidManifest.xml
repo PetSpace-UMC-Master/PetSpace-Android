@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:name=".loginrelated.GlobalApplictation"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -18,15 +17,40 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PetSapce_week1"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".HomeResearchActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <!-- 홈 내비게이션 액티비티 ===================================================================================== -->
+        <activity
+            android:name=".home.Home2Activity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".home.HomeActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <!--          네이버 지도              -->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity> <!-- 홈 내비게이션 액티비티 끝 ========================================================================== -->
+        <!-- 네이버 지도 -->
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="p11jn9hu1p" />
-        <!--       숙소 상세보기 액티비티 =====================================================================================-->
-
+            android:value="p11jn9hu1p" /> <!-- 숙소 상세보기 액티비티 ===================================================================================== -->
         <activity
             android:name=".accommodation.scroll.AccFacilityActivity"
             android:exported="false">
@@ -43,27 +67,15 @@
         </activity>
         <activity
             android:name=".accommodation.AccMainActivity"
-            android:exported="true">
-        </activity>
-        <activity android:name=".accommodation.scroll.AccFacilityMoreActivity"/>
-
-
-        <!--       숙소 상세보기 끝 =====================================================================================-->
-
-
-
-        <!--      로그인 액티비티  =====================================================================================-->
-
+            android:exported="true" />
+        <activity android:name=".accommodation.scroll.AccFacilityMoreActivity" /> <!-- 숙소 상세보기 끝 ===================================================================================== -->
+        <!-- 로그인 액티비티  ===================================================================================== -->
         <activity
             android:name=".loginrelated.LoginActivity"
-            android:exported="true">
-        </activity>
-
+            android:exported="true" />
         <activity
             android:name=".Signin4Activity"
-            android:exported="true">
-        </activity>
-
+            android:exported="true" />
         <activity
             android:name=".SigninDescriptionActivity"
             android:exported="true">
@@ -71,11 +83,9 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
             android:name=".GifActivity"
             android:exported="true" />
-
         <activity
             android:name=".TermsActivity"
             android:exported="true">
@@ -83,40 +93,32 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
             android:name=".TermsContentActivity1"
             android:parentActivityName=".TermsActivity" />
-
         <activity
             android:name=".TermsContentActivity2"
             android:parentActivityName=".TermsActivity" />
-
-        <activity android:name=".reviewrelated.ReviewReadMoreActivity"
-        android:exported="true"/>
-        <activity android:name=".reviewrelated.ReviewPhotosActivity"/>
-
-        <!--테스트옹 홈 화면 ================================-->
-
+        <activity
+            android:name=".reviewrelated.ReviewReadMoreActivity"
+            android:exported="true" />
+        <activity android:name=".reviewrelated.ReviewPhotosActivity" /> <!-- 테스트옹 홈 화면 ================================ -->
         <activity
             android:name=".TestMainActivity"
+            android:exported="true" /> <!-- ================프로필 화면 & 설정 화면 ============= -->
+        <activity android:name=".ProfileMenuActivity" />
+        <activity android:name=".SettingsActivity" /> <!-- - splash 화면 -->
+        <activity
+            android:name=".SplashActivity"
             android:exported="true">
-        </activity>
 
-        <!-- ================프로필 화면 & 설정 화면 =============-->
-        <activity android:name=".ProfileMenuActivity"/>
-        <activity android:name=".SettingsActivity"/>
-
-        <!--- splash 화면 -->
-        <activity android:name=".SplashActivity"
-            android:exported="true">
+            <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- 카카오 로그인 화면 뜨는거 -->
+            -->
+        </activity> <!-- 카카오 로그인 화면 뜨는거 -->
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true"
