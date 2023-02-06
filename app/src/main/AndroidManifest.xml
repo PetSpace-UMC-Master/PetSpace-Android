@@ -20,7 +20,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".HomeResearchActivity"
+            android:name=".home.HomeResearchActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -39,11 +39,13 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity> <!-- 홈 내비게이션 액티비티 끝 ========================================================================== -->
+        </activity>
+        <!-- 홈 내비게이션 액티비티 끝 ========================================================================== -->
         <!-- 네이버 지도 -->
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
