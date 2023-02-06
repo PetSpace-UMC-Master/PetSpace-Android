@@ -6,17 +6,17 @@ data class HomeResponse(
     val responseCode: Int,
     val responseMessage: String,
     val result: List<Result>
-)
-
-data class Result(
-    val availableDays: List<String>,
-    val averageReviewScore: Float,
-    val city: String,
-    val district: String,
-    val numberOfReview: Int,
-    val price: Int,
-    val roomId: Int,
-    val roomImages: List<String>
-)
+) {
+    data class Result(
+        val availableDays: List<String>,
+        val averageReviewScore: Float,
+        val city: String,
+        val district: String,
+        val numberOfReview: Int,
+        val price: Int,
+        val roomId: Int,
+        val roomImages: List<String>
+    )
+}
 
 

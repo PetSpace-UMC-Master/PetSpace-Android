@@ -47,6 +47,7 @@ class ReviewPostActivity : AppCompatActivity() {
         }
     }
 
+
     // 디바이스에서 사진 불러와서 띄우기
     private val activityResult: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()){
@@ -57,41 +58,38 @@ class ReviewPostActivity : AppCompatActivity() {
             Glide.with(this)
                 .load(uri)
                 .into(binding.selectedImage)
-            //val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), file)
-            //val body: MultipartBody.Part = MultipartBody.Part.createFormData("photo", "photo", requestFile)
+            //val file = File(mediaPath)
+            //val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+            //val body: MultipartBody.Part = MultipartBody.Part.createFormData("reviewImages", file.name, requestFile)
+            //MultipartBody.Part.createFormData("reviewImages", file.name, requestFile)
+
 
             //fileToUpload()
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
         super.onCreate(savedInstanceState)
         binding = ReviewCreateBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
+        // 이전 버튼
         initPrevious()
-
-        binding.ratingBar.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
+        // 별점 정수로 환산
+        binding.ratingBar.setOnRatingBarChangeListener { ratingBar, rating, _ ->
             ratingBar.rating = rating
             review_rate = rating.toInt()
         }
-
         // 디바이스 갤러리 오픈
         binding.openGallery.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             activityResult.launch(intent)
         }
-
         // 리뷰 작성하기 버튼 누르면 통신 시작 !
         binding.btnReviewCreate.setOnClickListener {
-
             sendReviewRequest()
   /*          // == 백엔드 통신 부분 ==
-            *//*val file: File = File(mediaPath)
+            val file: File = File(mediaPath)
             var inputStream: InputStream? = null try {
             inputStream = getContext().getContentResolver().openInputStream(photoUri)
         } catch (e: IOException) {
@@ -145,15 +143,12 @@ class ReviewPostActivity : AppCompatActivity() {
         if(buildName.equals("Xiaomi")) {
             return uri.path.toString()
         }
-
         var columnIndex = 0
         val proj = arrayOf(MediaStore.Images.Media.DATA)
         var cursor = contentResolver.query(uri, proj, null, null, null)
-
         if(cursor!!.moveToFirst()) {
             columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
         }
-
         return cursor.getString(columnIndex)
     }
 
@@ -170,35 +165,47 @@ class ReviewPostActivity : AppCompatActivity() {
         }
     }*/
 
-    fun sendReviewRequest() {
-
-        //토큰 저장 객체
+    // 작성하기 클릭 시 서버에 데이터 보내는 함수
+    private fun sendReviewRequest() {
+        // 토큰 저장 객체
         var accessToken : String ?= null
         val atpref = getSharedPreferences("accessToken", MODE_PRIVATE)
         if(atpref != null){
             accessToken = atpref.getString("accessToken", "default")
         }
+
         val accessTokenPost = "Bearer $accessToken"
         Log.d("token", "$accessTokenPost")
 
+        // 리뷰 내용
         val content = binding.reviewInput.text.toString()
         val contentRequestBody : RequestBody = content.toPlainRequestBody()
+        Log.d("contentRequestBody", "$contentRequestBody")
+
+        // 리뷰 별점
         val reviewRateRequestBody: RequestBody = review_rate.toString().toPlainRequestBody()
+        Log.d("reviewRateRequestBody", "$reviewRateRequestBody")
+
         val textHashMap = hashMapOf<String, RequestBody>()
         textHashMap["content"] = contentRequestBody
         textHashMap["score"] = reviewRateRequestBody
 
-        val textRequest = RequestBody.create("text/plain".toMediaTypeOrNull(), content)
-        val textBody = MultipartBody.Part.createFormData("text", "text.txt", textRequest)
 
+        // 리뷰 사진
 
         val file = File(mediaPath)
+        Log.d("Path", "$mediaPath")
+        //val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+        //MultipartBody.Part.createFormData("reviewImages", file.name, requestFile)
+
+
         val bitmapRequestBody = bitmap?.let { BitmapRequestBody(it)}
         val bitmapMultipartBody: MultipartBody.Part? =
             if (bitmapRequestBody == null) null
             else MultipartBody.Part.createFormData("reviewImages", file.name, bitmapRequestBody)
 
-        val response = bitmapMultipartBody.let {
+        // 서버에 보내기
+        //val response = requestFile.let {
             api.post_reviews(accessTokenPost, textHashMap, bitmapMultipartBody).enqueue(object : Callback<ReviewPostData> {
                 override fun onResponse(
                     call: Call<ReviewPostData>,
@@ -206,23 +213,20 @@ class ReviewPostActivity : AppCompatActivity() {
                 ) {
                     Log.d("리뷰 포스트 통신 성공", response.toString())
                     Log.d("리뷰 포스트 성공", response.body().toString())
-                    Log.d("내용", content)
-                    Log.d("점수", review_rate.toString())
+                    Log.d("해쉬맵 내용", textHashMap.toMap().toString())
+                    //Log.d("점수", bitmapMultipartBody.toString())
 
                     val body = response.body()
                     if (body != null) {
                         success_review_id = body.result.id
-                        Log.d("포스트 된 리뷰 아이디", "{${success_review_id.toString()}}")
+                        Log.d("응답 받은 리뷰ID (포스트 된 리뷰ID)", "{${success_review_id.toString()}}")
                     }
                 }
-
                 override fun onFailure(call: Call<ReviewPostData>, t: Throwable) {
                     Log.d("리뷰 포스트", "failed")
                 }
             })
         }
-
-    }
 
     private fun String?.toPlainRequestBody() = requireNotNull(this).toRequestBody("text/plain".toMediaTypeOrNull())
 }
