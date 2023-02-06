@@ -44,6 +44,7 @@ class Signin4Activity : AppCompatActivity() {
         val email = "aaa@naver.com"
         initButtonCheck(email)
 
+
         //2번 패스워드 체크
         initPasswordCheck()
         //3번 패스워드 동일 체크

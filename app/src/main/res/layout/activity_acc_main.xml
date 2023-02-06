@@ -55,7 +55,7 @@
                     android:id="@+id/btn_heart_after"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/ant_design_heart_filled"
+                    android:src="@drawable/heartfull"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"

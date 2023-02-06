@@ -11,6 +11,7 @@ import retrofit2.http.*
 interface AccomoService {
     @GET("/app/rooms/{roomId}")
     fun getRoomDetail(
+        @Header("Authorization") accessToken: String,
         @Path("roomId") roomId : Long = 1
         //@Body jsonParams : AccomodationRoomData
     ):Call<AccomodationData>
