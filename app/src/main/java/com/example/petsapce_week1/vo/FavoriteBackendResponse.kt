@@ -4,7 +4,7 @@ data class FavoriteBackendResponse(
     val isSuccess: Boolean,
     val responseCode: Int,
     val responseMessage: String,
-    val result: Result
+    val result: Result3
 )
 
 data class Favorite(
@@ -17,7 +17,7 @@ data class Favorite(
     val roomImages: List<String>
 )
 
-data class Result(
+data class Result3(
     val favorites: List<Favorite>,
     val isLast: Boolean,
     val page: Int

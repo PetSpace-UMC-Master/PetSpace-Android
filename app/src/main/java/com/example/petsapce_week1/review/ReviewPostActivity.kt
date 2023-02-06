@@ -56,7 +56,7 @@ class ReviewPostActivity : AppCompatActivity() {
 
             Glide.with(this)
                 .load(uri)
-                .into(binding.selectedImage)
+                //.into(binding.selectedImage)
             //val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), file)
             //val body: MultipartBody.Part = MultipartBody.Part.createFormData("photo", "photo", requestFile)
 
@@ -74,17 +74,17 @@ class ReviewPostActivity : AppCompatActivity() {
 
         initPrevious()
 
-        binding.ratingBar.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
-            ratingBar.rating = rating
-            review_rate = rating.toInt()
-        }
-
-        // 디바이스 갤러리 오픈
-        binding.openGallery.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK)
-            intent.type = "image/*"
-            activityResult.launch(intent)
-        }
+//        binding.ratingBar.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
+//            ratingBar.rating = rating
+//            review_rate = rating.toInt()
+//        }
+//
+//        // 디바이스 갤러리 오픈
+//        binding.openGallery.setOnClickListener {
+//            val intent = Intent(Intent.ACTION_PICK)
+//            intent.type = "image/*"
+//            activityResult.launch(intent)
+//        }
 
         // 리뷰 작성하기 버튼 누르면 통신 시작 !
         binding.btnReviewCreate.setOnClickListener {
@@ -131,12 +131,12 @@ class ReviewPostActivity : AppCompatActivity() {
 
     // 이전 화면
     private fun initPrevious() {
-        binding.apply {
-            btnBack.setOnClickListener {
-                val intent = Intent(this@ReviewPostActivity, TestMainActivity::class.java)
-                startActivity(intent)
-            }
-        }
+//        binding.apply {
+//            btnBack.setOnClickListener {
+//                val intent = Intent(this@ReviewPostActivity, TestMainActivity::class.java)
+//                startActivity(intent)
+//            }
+//        }
     }
     
     // URI로부터 이미지 경로 추출
