@@ -34,13 +34,12 @@ class TestMainActivity : AppCompatActivity() {
     }
 }
 
-        binding.btnPlacetogo.setOnClickListener {
+      /*  binding.btnPlacetogo.setOnClickListener {
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             val placeFragment = PlaceToGoFragment()
             //fragmentTransaction.remove(supportFragmentManager.findFragmentById(R.id.fragmentview)!!)
             fragmentTransaction.replace(R.id.fragmentview, placeFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
-        }
-    }
-}
+            }
+       */
