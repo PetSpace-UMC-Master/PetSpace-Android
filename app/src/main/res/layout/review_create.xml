@@ -127,57 +127,15 @@
                     />
 
                 <RatingBar
-                    android:isIndicator="false"
                     android:id="@+id/ratingBar"
-                    android:progressTint="@color/red"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:rating="0"
-                    android:stepSize="1"
                     android:layout_marginEnd="24.12dp"
-                    style="@style/Widget.AppCompat.RatingBar.Small"
-                    />
-
-                <!--<LinearLayout
-                    android:layout_marginRight="20dp"
-                    android:id="@+id/review_rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/img_start1"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/material_symbols_star_rate_rounded" />
-
-                    <ImageView
-                        android:id="@+id/img_start2"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/material_symbols_star_rate_rounded" />
-
-                    <ImageView
-                        android:id="@+id/img_star3"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/material_symbols_star_rate_rounded" />
-
-                    <ImageView
-                        android:id="@+id/img_star4"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/material_symbols_star_rate_rounded" />
-
-                    <ImageView
-                        android:id="@+id/img_star5"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/star_half" />
-                </LinearLayout>-->
+                    android:isIndicator="false"
+                    android:progressTint="@color/red"
+                    android:rating="0"
+                    android:stepSize="1" />
             </LinearLayout>
 
             <LinearLayout

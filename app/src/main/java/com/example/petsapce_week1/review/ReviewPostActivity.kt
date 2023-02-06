@@ -190,7 +190,9 @@ class ReviewPostActivity : AppCompatActivity() {
         textHashMap["content"] = contentRequestBody
         textHashMap["score"] = reviewRateRequestBody
 
+
         // 리뷰 사진
+
         val file = File(mediaPath)
         Log.d("Path", "$mediaPath")
         //val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())

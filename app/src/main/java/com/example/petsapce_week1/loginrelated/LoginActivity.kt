@@ -1,5 +1,6 @@
 package com.example.petsapce_week1.loginrelated
 
+import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
 import android.content.SharedPreferences
@@ -210,7 +211,7 @@ class LoginActivity : AppCompatActivity() {
 
                             when (response.code()) {
                                 200 -> {
-                                    // == 기기 db (shared preference) 로 저장
+                                    // == 기기 db (shared preference가) 로 저장
                                     saveIDPW(inputEmail, inputPassword)
                                     saveATRT(response.body()?.result?.accessToken.toString(), response.body()?.result?.refreshToken.toString())
                                 }

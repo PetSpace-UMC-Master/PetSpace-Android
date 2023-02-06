@@ -5,4 +5,12 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+
+    <!-- Main -->
+    <string name="main_btm_nav_home_title">홈</string>
+    <string name="main_btm_nav_townLife_title">함께갈곳</string>
+    <string name="main_btm_nav_chat_title">예약</string>
+    <string name="main_btm_nav_my_page_title">프로필</string>
+
+
 </resources>

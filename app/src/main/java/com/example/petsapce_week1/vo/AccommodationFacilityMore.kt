@@ -6,10 +6,10 @@ data class AccommodationFacilityMore(
     val isSuccess: Boolean,
     val responseCode: Int,
     val responseMessage: String,
-    val result: Result
+    val result: Result2
 )
 
-data class Result(
+data class Result2(
     val allFacilityInfos: List<AllFacilityInfo>
     //val allFacilityInfos: List<FacilityReceived>
 )

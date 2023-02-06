@@ -19,6 +19,7 @@ import com.example.petsapce_week1.databinding.ActivityAccMainBinding
 import com.example.petsapce_week1.network.AccomoService
 import com.example.petsapce_week1.network.LoginService
 import com.example.petsapce_week1.network.RetrofitHelper
+import com.example.petsapce_week1.network.RetrofitHelperHome
 import com.example.petsapce_week1.vo.FacilityData
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationData
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationRoomData
@@ -37,14 +38,14 @@ class AccMainActivity : AppCompatActivity() {
 
     // ========== 백엔드 연동 부분 ===========
     private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
+    // 기본 숙소 정보 불러올때 호출
     var api : AccomoService = retrofit.create(AccomoService::class.java)
 
-    //var apiLike : AccomoService = retrofit.create(AccomoService::class.java)
-    // ============ 토큰 재발급 ==============
-    //var apiReissue : LoginService = retrofit.create(LoginService::class.java)
+    // 좋아요 버튼 눌렀을 때 호출
+    var apiLike : AccomoService = retrofit.create(AccomoService::class.java)
+    //============ 토큰 재발급 ==============
+    var apiReissue : LoginService = retrofit.create(LoginService::class.java)
 
-//    val rtpref = getSharedPreferences("refreshToken", Activity.MODE_PRIVATE)
-//    val refreshToken = rtpref.getString("refreshToken", "default")
 
     private val MIN_SCALE = 0.85f // 뷰가 몇퍼센트로 줄어들 것인지
     private val MIN_ALPHA = 0.5f // 어두워지는 정도를 나타낸 듯 하다.
@@ -75,7 +76,6 @@ class AccMainActivity : AppCompatActivity() {
 
         // 이런식으로 간략하게 쳐도됨
         // bindingHostBinding = ActivityAccHostBinding.bind(binding.frameHost.root)
-
 
 
         initViewPager()
@@ -161,31 +161,6 @@ class AccMainActivity : AppCompatActivity() {
                     binding.textStarscore.text = body.result.roomAverageScore.toString()
                     binding.textReviewcount.text = "${body.result.reviewCount}개"
 
-                    /*
-                    response.takeIf { it.isSuccessful }
-                        ?.body()
-                        .let {
-                            if (it != null) {
-                                for (item in it.result.roomImageUrls) {
-                                    imgdataList.apply {
-                                        add(
-                                            imageSlideData(
-                                                imgSlide = item
-                                            )
-                                        )
-                                    }
-                                }
-                            }
-                        }
-                    for (i in 0 until imgdataList.size) {
-                        imgdataList.add (
-                            imageSlideData(
-                                imgdataList[i].imgSlide
-                            )
-                        )
-
-                     */
-
                     for (item in body.result.roomImageUrls) {
                         imgdataList.apply {
                             add(
@@ -202,8 +177,6 @@ class AccMainActivity : AppCompatActivity() {
                             )
                         )
                     }
-
-                    //photos.add(body.result.roomImageUrls.toString())
 
                     Log.d("숙소","${body.result.roomImageUrls}")
                     Log.d("숙소","$photos")
@@ -243,6 +216,7 @@ class AccMainActivity : AppCompatActivity() {
                         )
                     )
                 }
+
 
                 if(reviewList.isNotEmpty()){
                     Log.d("숙소 facility 리스트", "${reviewList}")
