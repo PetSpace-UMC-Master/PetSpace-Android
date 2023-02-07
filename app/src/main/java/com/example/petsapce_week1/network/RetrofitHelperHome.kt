@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitHelperHome {
 
     //base_url 애들 마다 다 다름 얘들아 테섭 하나 만들어죠
-    val BASE_URL: String = "http://3.38.242.232:8080"
+    val BASE_URL: String = "https://a760-59-6-94-207.jp.ngrok.io"
     var gson = GsonBuilder().setLenient().create()
 
     fun getRetrofitInstance(): Retrofit {

@@ -1,5 +1,6 @@
 package com.example.petsapce_week1.placetogo
 
+
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
 import android.widget.ArrayAdapter
 import android.widget.GridView
 import androidx.appcompat.app.AppCompatActivity

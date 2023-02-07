@@ -8,21 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.Button
 import android.widget.ImageButton
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatButton
 import com.example.petsapce_week1.R
-import com.example.petsapce_week1.accommodation.AccMainActivity
 import com.example.petsapce_week1.network.AccomoService
 import com.example.petsapce_week1.network.RetrofitHelper
 import com.example.petsapce_week1.vo.FavoriteBackendResponse
-import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationData
 import kotlinx.android.synthetic.main.placetogo_grid_itemlist.view.*
-import okhttp3.*
 import retrofit2.Retrofit
-import java.io.IOException
-import java.lang.reflect.Array.newInstance
 
 
 class PlaceGridAdapter(val context: Context, var img_list: Array<Int>, val accessToken : String) : BaseAdapter() {

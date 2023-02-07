@@ -1,12 +1,10 @@
 package com.example.petsapce_week1.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.petsapce_week1.databinding.ActivityHome2Binding
-import com.example.petsapce_week1.home.homefragment.HomeMainData
 
 class Home2Activity : AppCompatActivity() {
     private lateinit var binding: ActivityHome2Binding
