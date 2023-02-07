@@ -47,11 +47,11 @@ class SortViewModel : ViewModel() {
         adapter.notifyDataSetChanged()
     }
 
-    fun update(): ArrayList<HomeMainData> {
+  /*  fun update(): ArrayList<HomeMainData> {
         var dataList3 = ArrayList<HomeMainData>()
 
         var childataList = ArrayList<HomeChildData>()
-        for (i in 1..10) {
+       *//* for (i in 1..10) {
 
             when (i) {
 
@@ -82,12 +82,12 @@ class SortViewModel : ViewModel() {
                     5000, 136
                 )
             )
-
+*//*
 
         }
         return dataList3
 
-    }
+    }*/
 
 
 }
