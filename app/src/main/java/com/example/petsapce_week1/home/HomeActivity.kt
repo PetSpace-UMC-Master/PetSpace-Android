@@ -27,7 +27,7 @@ class HomeActivity : AppCompatActivity() {
                 when (item.itemId) {
                     R.id.menu_main_btm_nav_home -> {
                         supportFragmentManager.beginTransaction()
-                            //.replace(R.id.main_frm, HomeFragment())
+                            .replace(R.id.main_frm, HomeFragment())
                             .commitAllowingStateLoss()
                     }
                     R.id.menu_main_btm_nav_heart -> {

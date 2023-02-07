@@ -20,5 +20,3 @@ data class HomeResponse(
     )
 }
 
-
-
