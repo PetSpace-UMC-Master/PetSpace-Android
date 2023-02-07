@@ -6,6 +6,7 @@ data class HomeResponse(
     val responseCode: Int,
     val responseMessage: String,
     val result: List<Result>
+
 ) {
     data class Result(
         val availableDays: List<String>,

@@ -27,9 +27,6 @@ import retrofit2.Retrofit
 
 class HomeFragment : Fragment() {
 
-
-
-
     val btn1House = "HOUSE"
     val btn2Campsite = "CAMPSITE"
     val btn3Downtown = "DOWNTOWN"
@@ -37,8 +34,8 @@ class HomeFragment : Fragment() {
     val btn5Beach = "BEACH"
 
     val sortDefault = "ID_DESC"
-    val sortPriceDesc = "PRICE_DESC"
-    val sortPriceAsc = "PRICE_ASC"
+    val sortPriceDesc = "PRICE_ASC"
+    val sortPriceAsc = "PRICE_DESC"
     val sortReviewCount = "REVIEW_COUNT_DESC"
     val sortReviewScore = "AVERAGE_REVIEW_SCORE_DESC"
 
