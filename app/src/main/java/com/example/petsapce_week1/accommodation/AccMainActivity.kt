@@ -55,6 +55,11 @@ class AccMainActivity : AppCompatActivity() {
         binding = ActivityAccMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //홈화면 리사이클러뷰에서 넘어감
+        val roomBeforeID  = intent.getIntExtra("content",-1)
+        Log.d("roomBeforeID",roomBeforeID.toString())
+
+
         // ============ token ============
         //토큰 저장 객체
         var accessToken : String ?= null
