@@ -40,7 +40,7 @@ class PlaceToGoFragment : Fragment() {
         val atpref = requireContext().getSharedPreferences("accessToken", MODE_PRIVATE)
         accessToken = atpref.getString("accessToken", "default")
         Log.d("accessToken11","$accessToken")
-        postaccessToken = accessToken.toString()
+        postaccessToken = "Bearer " + accessToken.toString()
         Log.d("함께 갈 곳 토큰 받아와11", "$postaccessToken")
     }
 

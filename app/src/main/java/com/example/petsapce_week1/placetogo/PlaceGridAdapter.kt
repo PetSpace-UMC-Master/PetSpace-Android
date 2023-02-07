@@ -64,6 +64,7 @@ class PlaceGridAdapter(val context: Context, var img_list: Array<Int>, val acces
                     response: retrofit2.Response<FavoriteBackendResponse>
                 ) {
                     Log.d(" 함께 갈 곳에서 서울 버튼 누름", "ㅇㅇ")
+                    Log.d("함께 갈 곳 성공", response.toString())
                     Log.d("함께 갈 곳", response.body().toString())
                     val intent = Intent(context, TestSeoulAccommosFragment::class.java)
                     context.startActivity(intent)
@@ -76,7 +77,6 @@ class PlaceGridAdapter(val context: Context, var img_list: Array<Int>, val acces
                     Log.d(" 함께 갈 곳 호출 실패", "ㅠㅠ")
                 }
             })
-//
 
 //      프래그먼트로 이동 시
 //            val newFragment = NewFragment.newInstance(getItem(position) as String)
