@@ -2,12 +2,15 @@ package com.example.petsapce_week1.home.homefragment
 
 import android.annotation.SuppressLint
 import android.content.ClipData
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.petsapce_week1.R
+import com.example.petsapce_week1.accommodation.AccMainActivity
 import com.example.petsapce_week1.databinding.HomeMainRowBinding
 import com.example.petsapce_week1.databinding.HomeMainRowChildBinding
 import com.example.petsapce_week1.vo.HomeResponse
@@ -36,20 +39,20 @@ class HomeMainAdapter(var items: ArrayList<HomeMainData>) :
         //        private val childRecyclerView: RecyclerView = binding.childRecyclerView
 //        private val childViewPager: ViewPager = binding.childViewPager
 
-        init {
-            /* childRecyclerView.layoutManager = LinearLayoutManager(
+     /*   init {
+            *//* childRecyclerView.layoutManager = LinearLayoutManager(
                  itemView.context,
                  LinearLayoutManager.HORIZONTAL,
                  false
-             )*/
+             )*//*
             binding.root.setOnClickListener {
                 itemClickListener?.OnItemClick(items[adapterPosition]) //?는 null일 수 도 있다고 알려주는 역할
 
-                Log.d("touch3", adapterPosition.toString())
 
+                Log.d("touch3", adapterPosition.toString())
             }
 
-        }
+        }*/
         @SuppressLint("SetTextI18n")
         fun bind(data: HomeMainData) {
             val cut = String.format("%.2f", data.score)
@@ -104,6 +107,12 @@ class HomeMainAdapter(var items: ArrayList<HomeMainData>) :
         viewPager.adapter = adapter
         springDotsIndicator.attachTo(viewPager)*/
 
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView?.context,AccMainActivity::class.java)
+            intent.putExtra("content","data1")
+            ContextCompat.startActivity(holder.itemView.context,intent,null)
+            Log.d("content",position.toString())
+        }
 
 
 //        holder.childViewPager.adapter = HomeChildViewPagerAdapter(items[position].imgList)
