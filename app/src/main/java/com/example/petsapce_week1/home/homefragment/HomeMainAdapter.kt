@@ -107,11 +107,13 @@ class HomeMainAdapter(var items: ArrayList<HomeMainData>) :
         viewPager.adapter = adapter
         springDotsIndicator.attachTo(viewPager)*/
 
+        val roomIDNext = items[position].roomID
+
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView?.context,AccMainActivity::class.java)
-            intent.putExtra("content","data1")
+            intent.putExtra("content",roomIDNext)
             ContextCompat.startActivity(holder.itemView.context,intent,null)
-            Log.d("content",position.toString())
+            Log.d("content",roomIDNext.toString())
         }
 
 

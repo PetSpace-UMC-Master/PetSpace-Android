@@ -234,7 +234,8 @@ class HomeFragment : Fragment() {
                                 usersSort.result[i].city + ", " + usersSort.result[i].district,
                                 "$statdate~$endDate",
                                 usersSort.result[i].price,
-                                usersSort.result[i].numberOfReview
+                                usersSort.result[i].numberOfReview,
+                                usersSort.result[i].roomId
                             )
 
                         )
@@ -303,7 +304,9 @@ class HomeFragment : Fragment() {
                                 usersSort.result[i].city + ", " + usersSort.result[i].district,
                                 "$statdate~$endDate",
                                 usersSort.result[i].price,
-                                usersSort.result[i].numberOfReview
+                                usersSort.result[i].numberOfReview,
+                                usersSort.result[i].roomId
+
                             )
 
                         )
@@ -370,7 +373,9 @@ class HomeFragment : Fragment() {
                                 usersSort.result[i].city + ", " + usersSort.result[i].district,
                                 "$statdate~$endDate",
                                 usersSort.result[i].price,
-                                usersSort.result[i].numberOfReview
+                                usersSort.result[i].numberOfReview,
+                                usersSort.result[i].roomId
+
                             )
 
                         )
@@ -485,7 +490,9 @@ class HomeFragment : Fragment() {
                                 usersSort.result[i].city + ", " + usersSort.result[i].district,
                                 "$statdate~$endDate",
                                 usersSort.result[i].price,
-                                usersSort.result[i].numberOfReview
+                                usersSort.result[i].numberOfReview,
+                                usersSort.result[i].roomId
+
                             )
 
                         )
