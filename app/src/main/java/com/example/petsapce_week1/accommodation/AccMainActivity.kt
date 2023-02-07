@@ -1,7 +1,6 @@
 package com.example.petsapce_week1.accommodation
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +8,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
-import com.example.petsapce_week1.ProfileMenuActivity
+import com.example.petsapce_week1.ProfileMenuFragment
 import com.example.petsapce_week1.R
 import com.example.petsapce_week1.accommodation.scroll.AccFacilityMoreActivity
 import com.example.petsapce_week1.accommodation.scroll.googleFragment
@@ -19,7 +18,6 @@ import com.example.petsapce_week1.databinding.ActivityAccMainBinding
 import com.example.petsapce_week1.network.AccomoService
 import com.example.petsapce_week1.network.LoginService
 import com.example.petsapce_week1.network.RetrofitHelper
-import com.example.petsapce_week1.network.RetrofitHelperHome
 import com.example.petsapce_week1.vo.FacilityData
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationData
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationRoomData
@@ -71,7 +69,7 @@ class AccMainActivity : AppCompatActivity() {
 
         // close btn
         binding.btnBack.setOnClickListener {
-            val intent = Intent(this, ProfileMenuActivity::class.java)
+            val intent = Intent(this, ProfileMenuFragment::class.java)
             startActivity(intent)
         }
 

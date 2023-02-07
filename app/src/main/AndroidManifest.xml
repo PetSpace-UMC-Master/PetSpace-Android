@@ -105,7 +105,7 @@
         <activity
             android:name=".TestMainActivity"
             android:exported="true" /> <!-- ================프로필 화면 & 설정 화면 ============= -->
-        <activity android:name=".ProfileMenuActivity" />
+        <activity android:name=".ProfileMenuFragment" />
         <activity android:name=".SettingsActivity" /> <!-- - splash 화면 -->
         <activity
             android:name=".SplashActivity"

@@ -14,7 +14,7 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnSettingsBack.setOnClickListener {
-            val intent = Intent(this, ProfileFragment::class.java)
+            val intent = Intent(this, ProfileMenuFragment::class.java)
             startActivity(intent)
         }
 
