@@ -63,7 +63,6 @@ class ReviewPostActivity : AppCompatActivity() {
             //val body: MultipartBody.Part = MultipartBody.Part.createFormData("reviewImages", file.name, requestFile)
             //MultipartBody.Part.createFormData("reviewImages", file.name, requestFile)
 
-
             //fileToUpload()
         }
     }
@@ -85,6 +84,7 @@ class ReviewPostActivity : AppCompatActivity() {
             intent.type = "image/*"
             activityResult.launch(intent)
         }
+
         // 리뷰 작성하기 버튼 누르면 통신 시작 !
         binding.btnReviewCreate.setOnClickListener {
             sendReviewRequest()
@@ -129,12 +129,12 @@ class ReviewPostActivity : AppCompatActivity() {
 
     // 이전 화면
     private fun initPrevious() {
-        binding.apply {
-            btnBack.setOnClickListener {
-                val intent = Intent(this@ReviewPostActivity, TestMainActivity::class.java)
-                startActivity(intent)
-            }
-        }
+//        binding.apply {
+//            btnBack.setOnClickListener {
+//                val intent = Intent(this@ReviewPostActivity, TestMainActivity::class.java)
+//                startActivity(intent)
+//            }
+//        }
     }
     
     // URI로부터 이미지 경로 추출

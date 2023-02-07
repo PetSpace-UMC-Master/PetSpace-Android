@@ -10,8 +10,7 @@ import com.example.petsapce_week1.loginrelated.LoginActivity
 import com.example.petsapce_week1.network.AccomoService
 import com.example.petsapce_week1.network.RetrofitHelper
 import com.example.petsapce_week1.placetogo.NoLoginPlacetogoFragment
-
-import com.example.petsapce_week1.review.ReviewPostActivity
+//import com.example.petsapce_week1.review.ReviewPostActivity
 import com.example.petsapce_week1.placetogo.PlaceToGoFragment
 import kotlinx.android.synthetic.main.activity_home_onlyfortest.*
 import okhttp3.FormBody
@@ -42,10 +41,10 @@ class TestMainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.btnReviewCreate.setOnClickListener {
-            val intent = Intent(this@TestMainActivity, ReviewPostActivity::class.java)
-            startActivity(intent)
-        }
+//        binding.btnReviewCreate.setOnClickListener {
+//            val intent = Intent(this@TestMainActivity, ReviewPostActivity::class.java)
+//            startActivity(intent)
+//        }
         binding.btnPlacetogo.setOnClickListener {
             supportFragmentManager.popBackStack()
             val fragmentTransaction = supportFragmentManager.beginTransaction()

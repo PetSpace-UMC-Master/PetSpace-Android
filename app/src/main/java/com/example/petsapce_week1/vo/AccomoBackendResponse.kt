@@ -7,39 +7,39 @@ data class AccomodationData(
     val responseCode: Int,
     val responseMessage: String,
     val result: Result
-)
+){
+    data class Result(
+        val address: String,
+        val checkinTime: String,
+        val checkoutTime: String,
+        val facilities: List<Facility>,
+        val hostName: String,
+        val hostId : Int,
+        val latitude : String,
+        val longitude: String,
+        val maxGuest: Int,
+        val maxPet: Int,
+        val price: Int,
+        val reviewCount: Int,
+        val reviewPreviews: List<ReviewPreview>,
+        val roomAverageScore: Double,
+        val roomDecription: String,
+        val roomId: Int,
+        val roomImageUrls: List<String>,
+        val roomName: String,
+        val favorite : Boolean
+    )
 
-data class Result(
-    val address: String,
-    val checkinTime: String,
-    val checkoutTime: String,
-    val facilities: List<Facility>,
-    val hostName: String,
-    val hostId : Int,
-    val latitude : String,
-    val longitude: String,
-    val maxGuest: Int,
-    val maxPet: Int,
-    val price: Int,
-    val reviewCount: Int,
-    val reviewPreviews: List<ReviewPreview>,
-    val roomAverageScore: Double,
-    val roomDecription: String,
-    val roomId: Int,
-    val roomImageUrls: List<String>,
-    val roomName: String,
-    val favorite : Boolean
-)
+    data class Facility(
+        val facilityImageUrl: String,
+        val facilityName: String
+    )
 
-data class Facility(
-    val facilityImageUrl: String,
-    val facilityName: String
-)
-
-data class ReviewPreview(
-    val createdAt: String,
-    val description: String,
-    val nickname: String,
-    val userId: Int,
-    val score : Int
-)
+    data class ReviewPreview(
+        val createdAt: String,
+        val description: String,
+        val nickname: String,
+        val userId: Int,
+        val score : Int
+    )
+}

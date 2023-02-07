@@ -24,9 +24,7 @@ class Home2Adapter(val items: ArrayList<Home2Data>) : RecyclerView.Adapter<Home2
                 Log.d("touch3","touch")
 
             }
-
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
