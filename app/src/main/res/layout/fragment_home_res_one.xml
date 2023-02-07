@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingHorizontal="20dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".home.HomeResOneFragment">
 
@@ -17,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_chainStyle="spread"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -29,15 +28,15 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/b2"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/im1"
-            android:layout_width="93sp"
-            android:layout_height="93sp"
+            android:layout_width="93dp"
+            android:layout_height="93dp"
             android:src="@drawable/seoul"
             app:layout_constraintBottom_toTopOf="@+id/text1"
             app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +52,7 @@
             android:layout_marginTop="10dp"
             android:text="단독주택"
             android:textColor="@color/textForBlack"
-            android:textSize="16sp"
+            android:textSize="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/im1" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -73,8 +72,8 @@
 
         <ImageView
             android:id="@+id/im2"
-            android:layout_width="93sp"
-            android:layout_height="93sp"
+            android:layout_width="93dp"
+            android:layout_height="93dp"
             android:src="@drawable/seoul"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +88,7 @@
             android:layout_marginTop="10dp"
             android:text="단독주택"
             android:textColor="@color/textForBlack"
-            android:textSize="16sp"
+            android:textSize="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/im2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -109,8 +108,8 @@
 
         <ImageView
             android:id="@+id/im3"
-            android:layout_width="93sp"
-            android:layout_height="93sp"
+            android:layout_width="93dp"
+            android:layout_height="93dp"
             android:src="@drawable/seoul"
             app:layout_constraintBottom_toTopOf="@+id/text3"
             app:layout_constraintEnd_toEndOf="parent"
@@ -126,7 +125,7 @@
             android:layout_marginTop="10dp"
             android:text="단독주택"
             android:textColor="@color/textForBlack"
-            android:textSize="16sp"
+            android:textSize="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/im3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -150,15 +149,15 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/b5"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/im4"
-                android:layout_width="93sp"
-                android:layout_height="93sp"
+                android:layout_width="93dp"
+                android:layout_height="93dp"
                 android:src="@drawable/seoul"
                 app:layout_constraintBottom_toTopOf="@+id/text4"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -174,7 +173,7 @@
                 android:layout_marginTop="10dp"
                 android:text="단독주택"
                 android:textColor="@color/textForBlack"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/im4" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -194,8 +193,8 @@
 
             <ImageView
                 android:id="@+id/im5"
-                android:layout_width="93sp"
-                android:layout_height="93sp"
+                android:layout_width="93dp"
+                android:layout_height="93dp"
                 android:src="@drawable/seoul"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -210,7 +209,7 @@
                 android:layout_marginTop="10dp"
                 android:text="단독주택"
                 android:textColor="@color/textForBlack"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/im5" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -230,8 +229,8 @@
 
             <ImageView
                 android:id="@+id/im6"
-                android:layout_width="93sp"
-                android:layout_height="93sp"
+                android:layout_width="93dp"
+                android:layout_height="93dp"
                 android:src="@drawable/seoul"
                 app:layout_constraintBottom_toTopOf="@+id/text6"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -247,7 +246,7 @@
                 android:layout_marginTop="10dp"
                 android:text="단독주택"
                 android:textColor="@color/textForBlack"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/im6" />
         </androidx.constraintlayout.widget.ConstraintLayout>

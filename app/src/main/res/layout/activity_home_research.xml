@@ -107,7 +107,7 @@
         app:selectedDotColor="@color/main_green" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:paddingHorizontal="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -181,6 +181,69 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginTop="40dp"
+        android:paddingHorizontal="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:background="?attr/selectableItemBackground"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="전체 초기화"
+            android:textColor="@color/textForBlack"
+            android:textSize="14sp"
+            />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:paddingHorizontal="20dp"
+            android:id="@+id/btn_search"
+            android:layout_width="wrap_content"
+            android:layout_height="32sp"
+            android:background="@drawable/btn_small16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+
+           >
+
+            <ImageView
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="16sp"
+                android:layout_height="16sp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toStartOf="@+id/search"
+                android:src="@drawable/searchtbtn4x"
+
+                />
+
+            <TextView
+                android:id="@+id/search"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="검색하기"
+                android:fontFamily="@font/bmjua"
+                android:textColor="#EEF5F5"
+                android:textSize="16sp"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 

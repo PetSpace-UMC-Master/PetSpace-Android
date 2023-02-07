@@ -27,7 +27,7 @@ class HomeResearchAdapter(var items: ArrayList<HomeResearchData>) :
         fun bind(data: HomeResearchData) {
             binding.apply {
                 imgLoc.setImageResource(data.imgList)
-                textLoc.text = data.location
+//                textLoc.text = data.location
             }
         }
 
@@ -49,7 +49,7 @@ class HomeResearchAdapter(var items: ArrayList<HomeResearchData>) :
                 Log.d("content", roomIDNext.toString())
             }*/
 
-        holder.binding.topcardview.cardElevation = 0f
+//        holder.binding.topcardview.cardElevation = 0f
         holder.bind(items[position])
 
     }
