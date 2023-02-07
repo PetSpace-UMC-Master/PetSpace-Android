@@ -8,10 +8,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.petsapce_week1.databinding.FacilitiesItemListBinding
-import com.example.petsapce_week1.vo.accomo_datamodel.Facility
+import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationData
+//import com.example.petsapce_week1.vo.accomo_datamodel.Facility
 
 //class AccFacilityMoreAdapter(val items: MutableList<FacilityData>) : RecyclerView.Adapter<AccFacilityMoreAdapter.ViewHolder>() {
-class AccFacilitiesAdapter(val item: List<Facility>) : RecyclerView.Adapter<AccFacilitiesAdapter.ViewHolder>() {
+class AccFacilitiesAdapter(val item: List<AccomodationData.Facility>) : RecyclerView.Adapter<AccFacilitiesAdapter.ViewHolder>() {
 
     inner class ViewHolder (val binding : FacilitiesItemListBinding):RecyclerView.ViewHolder(binding.root){
 
