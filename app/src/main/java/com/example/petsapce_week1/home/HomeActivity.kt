@@ -6,6 +6,7 @@ import com.example.petsapce_week1.R
 import com.example.petsapce_week1.databinding.ActivityHomeBinding
 
 import com.example.petsapce_week1.home.homefragment.GoFragment
+import com.example.petsapce_week1.home.homefragment.HomeFragment
 //import com.example.petsapce_week1.home.homefragment.HomeFragment
 
 import com.example.petsapce_week1.home.homefragment.ProfileFragment
@@ -19,7 +20,7 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment()).commitAllowingStateLoss()
+        supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment()).commitAllowingStateLoss()
 
         binding.mainBtmNav.run {
             setOnItemSelectedListener { item ->
