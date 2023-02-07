@@ -29,7 +29,7 @@
             android:fontFamily="@font/bmjua"
             android:gravity="center_horizontal"
             android:lineHeight="16dp"
-            android:text="리뷰 작성"
+            android:text="리뷰 수정"
             android:textColor="#0C201E"
             android:textSize="20sp" />
     </LinearLayout>
@@ -127,15 +127,57 @@
                     />
 
                 <RatingBar
+                    android:isIndicator="false"
                     android:id="@+id/ratingBar"
-                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:progressTint="@color/red"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="24.12dp"
-                    android:isIndicator="false"
-                    android:progressTint="@color/red"
                     android:rating="0"
-                    android:stepSize="1" />
+                    android:stepSize="1"
+                    android:layout_marginEnd="24.12dp"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    />
+
+                <!--<LinearLayout
+                    android:layout_marginRight="20dp"
+                    android:id="@+id/review_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/img_start1"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/material_symbols_star_rate_rounded" />
+
+                    <ImageView
+                        android:id="@+id/img_start2"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/material_symbols_star_rate_rounded" />
+
+                    <ImageView
+                        android:id="@+id/img_star3"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/material_symbols_star_rate_rounded" />
+
+                    <ImageView
+                        android:id="@+id/img_star4"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/material_symbols_star_rate_rounded" />
+
+                    <ImageView
+                        android:id="@+id/img_star5"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/star_half" />
+                </LinearLayout>-->
             </LinearLayout>
 
             <LinearLayout
@@ -251,7 +293,7 @@
                 android:fontFamily="@font/roboto_medium"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:text="리뷰 작성하기"
+                android:text="리뷰 수정하기"
                 android:textColor="#EEF5F5"
                 android:textSize="16dp"
                 />

@@ -8,12 +8,12 @@ import retrofit2.http.*
 
 interface ReviewAPI {
    @Multipart
-    @POST("/app/reviews?reservationId=1/")
+    @POST("/app/reviews?reservationId=1")
     fun post_reviews(
        @Header("Authorization") accessToken: String,
         //@Part jsonParams: ReviewDTO,
        @PartMap data: HashMap<String, RequestBody>,
-       @Part image: MultipartBody.Part?
+       @Part reviewImages: MultipartBody.Part?
         //@Body jsonParams: ReviewDTO
     ): Call<ReviewPostData>
 

@@ -10,6 +10,7 @@ object RetrofitHelper {
 
     val BASE_URL: String = "https://a2e4-115-94-178-52.jp.ngrok.io"
 
+
     var gson = GsonBuilder().setLenient().create()
 
     fun getRetrofitInstance(): Retrofit {

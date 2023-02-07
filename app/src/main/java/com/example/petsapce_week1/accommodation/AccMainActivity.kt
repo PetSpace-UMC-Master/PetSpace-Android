@@ -40,10 +40,12 @@ class AccMainActivity : AppCompatActivity() {
     private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
     // 기본 숙소 정보 불러올때 호출
     var api : AccomoService = retrofit.create(AccomoService::class.java)
+
     // 좋아요 버튼 눌렀을 때 호출
     var apiLike : AccomoService = retrofit.create(AccomoService::class.java)
     //============ 토큰 재발급 ==============
     var apiReissue : LoginService = retrofit.create(LoginService::class.java)
+
 
     private val MIN_SCALE = 0.85f // 뷰가 몇퍼센트로 줄어들 것인지
     private val MIN_ALPHA = 0.5f // 어두워지는 정도를 나타낸 듯 하다.
@@ -74,6 +76,7 @@ class AccMainActivity : AppCompatActivity() {
 
         // 이런식으로 간략하게 쳐도됨
         // bindingHostBinding = ActivityAccHostBinding.bind(binding.frameHost.root)
+
 
         initViewPager()
 
