@@ -2,6 +2,7 @@ package com.example.petsapce_week1.home
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.petsapce_week1.ProfileMenuFragment
 import com.example.petsapce_week1.R
 import com.example.petsapce_week1.databinding.ActivityHomeBinding
 
@@ -42,7 +43,7 @@ class HomeActivity : AppCompatActivity() {
                     }
                     R.id.menu_main_btm_nav_profile -> {
                         supportFragmentManager.beginTransaction()
-                            .replace(R.id.main_frm, ProfileFragment())
+                            .replace(R.id.main_frm, ProfileMenuFragment())
                             .commitAllowingStateLoss()
                     }
                 }
@@ -50,8 +51,6 @@ class HomeActivity : AppCompatActivity() {
             }
             selectedItemId = R.id.menu_main_btm_nav_home
         }
-
-
 
     }
 }

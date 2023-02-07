@@ -2,7 +2,6 @@ package com.example.petsapce_week1.accommodation.scroll
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,7 +10,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.petsapce_week1.GifActivity
-import com.example.petsapce_week1.ProfileMenuActivity
 import com.example.petsapce_week1.R
 import com.example.petsapce_week1.databinding.FragmentReviewBinding
 import com.example.petsapce_week1.network.AccomoService
@@ -19,12 +17,10 @@ import com.example.petsapce_week1.network.RetrofitHelper
 import com.example.petsapce_week1.reviewrelated.ReviewReadMoreActivity
 import com.example.petsapce_week1.vo.ReviewData
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationData
-import okhttp3.internal.delimiterOffset
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
-import java.time.format.DateTimeFormatter
 
 
 class reviewFragment : Fragment() {

@@ -13,6 +13,7 @@ import com.example.petsapce_week1.R
 import com.example.petsapce_week1.Signin4Activity
 import com.example.petsapce_week1.TestMainActivity
 import com.example.petsapce_week1.databinding.ActivityLoginBinding
+import com.example.petsapce_week1.home.HomeActivity
 import com.example.petsapce_week1.network.LoginService
 import com.example.petsapce_week1.network.RetrofitHelper
 import com.kakao.sdk.auth.model.OAuthToken
@@ -149,7 +150,7 @@ class LoginActivity : AppCompatActivity() {
                                 Toast.LENGTH_LONG
                             ).show()
                         }
-                        val intent = Intent(this@LoginActivity, TestMainActivity::class.java)
+                        val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                         startActivity(intent)
                     }
                     override fun onFailure(call: Call<LoginBackendResponse>, t: Throwable) {
@@ -226,7 +227,7 @@ class LoginActivity : AppCompatActivity() {
                             Log.d("로그인 통신 실패","fail")
                         }
                     })
-                    val intent = Intent(this@LoginActivity, TestMainActivity::class.java)
+                    val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                     startActivity(intent)
 
                 }//틀리면 빨간글자 뜨게함
