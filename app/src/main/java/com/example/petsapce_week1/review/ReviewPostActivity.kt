@@ -30,6 +30,7 @@ import retrofit2.Retrofit
 import java.io.File
 class ReviewPostActivity : AppCompatActivity() {
     private lateinit var binding: ReviewCreateBinding
+
     private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
     var api: ReviewAPI = retrofit.create(ReviewAPI::class.java)
     private var success_review_id: Int? = null
