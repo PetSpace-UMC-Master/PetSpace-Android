@@ -12,9 +12,8 @@ import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.petsapce_week1.R
 import com.example.petsapce_week1.databinding.FragmentHomeBinding
-import com.example.petsapce_week1.home.Home2Activity
+import com.example.petsapce_week1.home.HomeResearchActivity
 import com.example.petsapce_week1.network.RetrofitHelperHome
 import com.example.petsapce_week1.network.homeAPI
 import com.example.petsapce_week1.vo.HomeResponse
@@ -66,16 +65,16 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(SortViewModel::class.java)
 
 
-      /*  var dataList3 = ArrayList<HomeMainData>()
+        /*  var dataList3 = ArrayList<HomeMainData>()
 
-        dataList3 = viewModel.update()
-        for (i in 0 until dataList3.size) {
+          dataList3 = viewModel.update()
+          for (i in 0 until dataList3.size) {
 
-            Log.d("tag", dataList3[i].toString())
-        }
+              Log.d("tag", dataList3[i].toString())
+          }
 
-        Log.d("tag", dataList3.size.toString())
-*/
+          Log.d("tag", dataList3.size.toString())
+  */
 
         //네트워크 통신
 
@@ -83,10 +82,18 @@ class HomeFragment : Fragment() {
         initRecyclerView()
         initSpinner()
         initButtonSort()
+        initNext()
 //        initAddData()
 
         // Inflate the layout for this fragment
         return binding.root
+    }
+
+    private fun initNext() {
+        binding.btnEdittext.setOnClickListener {
+            val intent = Intent(context,HomeResearchActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun initButtonSort() {
@@ -473,7 +480,7 @@ class HomeFragment : Fragment() {
                         for (j in 0 until availImageSize) {
 //                            childataList.add(HomeChildData(R.drawable.map))
                             childataList.add(HomeChildData(usersSort.result[i].roomImages[j]))
-                            Log.d("childataList",usersSort.result[i].roomImages[j])
+                            Log.d("childataList", usersSort.result[i].roomImages[j])
                         }
 
                         //가용날짜 체크
@@ -530,27 +537,18 @@ class HomeFragment : Fragment() {
         binding.recyclerviewMain.isNestedScrollingEnabled = true
 
 
+        /*    adapter.itemClickListener = object : HomeMainAdapter.OnItemClickListener {
+                override fun OnItemClick(data: HomeMainData) {
+                    val intent = Intent(context, Home2Activity::class.java)
+                    intent.putExtra("price", data.price)
+    //                intent.putExtra("data", data)
+                    startActivity(intent)
+
+                    Log.d("test", "test")
+                }
 
 
-        adapter.itemClickListener = object : HomeMainAdapter.OnItemClickListener {
-            override fun OnItemClick(data: HomeMainData) {
-                val intent = Intent(context, Home2Activity::class.java)
-//                intent.putExtra("image", data.img)
-                intent.putExtra("score", roomId)
-                Log.d("score2", data.price.toString())
-                intent.putExtra("location", data.location)
-                intent.putExtra("date", data.date)
-                intent.putExtra("price", data.price)
-//                intent.putExtra("data", data)
-
-
-                startActivity(intent)
-
-                Log.d("test", "test")
-            }
-
-
-        }
+            }*/
 
     }
 

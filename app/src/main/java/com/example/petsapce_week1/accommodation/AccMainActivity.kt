@@ -44,7 +44,6 @@ class AccMainActivity : AppCompatActivity() {
     //============ 토큰 재발급 ==============
     var apiReissue : LoginService = retrofit.create(LoginService::class.java)
 
-
     private val MIN_SCALE = 0.85f // 뷰가 몇퍼센트로 줄어들 것인지
     private val MIN_ALPHA = 0.5f // 어두워지는 정도를 나타낸 듯 하다.
 
