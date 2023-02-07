@@ -196,7 +196,7 @@ class ReviewPostActivity : AppCompatActivity() {
         val file = File(mediaPath)
         Log.d("Path", "$mediaPath")
         //val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
-        //MultipartBody.Part.createFormData("reviewImages", file.name, requestFile)
+        //val images=MultipartBody.Part.createFormData("reviewImages", file.name, requestFile)
 
 
         val bitmapRequestBody = bitmap?.let { BitmapRequestBody(it)}

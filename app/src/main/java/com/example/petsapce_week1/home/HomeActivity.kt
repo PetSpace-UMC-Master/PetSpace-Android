@@ -4,8 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.petsapce_week1.R
 import com.example.petsapce_week1.databinding.ActivityHomeBinding
+
 import com.example.petsapce_week1.home.homefragment.GoFragment
 //import com.example.petsapce_week1.home.homefragment.HomeFragment
+
 import com.example.petsapce_week1.home.homefragment.ProfileFragment
 import com.example.petsapce_week1.home.homefragment.ReserveFragment
 import com.example.petsapce_week1.placetogo.PlaceToGoFragment
