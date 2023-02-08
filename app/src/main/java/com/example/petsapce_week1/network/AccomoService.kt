@@ -42,7 +42,8 @@ interface AccomoService {
     fun getFavorites(
         @Header("Authorization") accessToken : String,
         @Query("region") region : String,
-        @Query("page") page : Int
+        @Query("page") page : Int,
+        @Query("size") size : Int
     ): Call<FavoriteBackendResponse>
 
 }

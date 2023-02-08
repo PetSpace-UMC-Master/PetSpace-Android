@@ -30,7 +30,7 @@ class PlaceToGoFragment : Fragment() {
 //    //토큰 저장 객체
 //    val atpref = context?.getSharedPreferences("accessToken", MODE_PRIVATE)
     var accessToken : String ?= null
-    lateinit var postaccessToken : String
+
 
     override fun onResume() {
         super.onResume()
@@ -40,8 +40,7 @@ class PlaceToGoFragment : Fragment() {
         val atpref = requireContext().getSharedPreferences("accessToken", MODE_PRIVATE)
         accessToken = atpref.getString("accessToken", "default")
         Log.d("accessToken11","$accessToken")
-        postaccessToken = "Bearer " + accessToken.toString()
-        Log.d("함께 갈 곳 토큰 받아와11", "$postaccessToken")
+
     }
 
     override fun onCreateView(
@@ -64,12 +63,12 @@ class PlaceToGoFragment : Fragment() {
 //        gridView.adapter = accessToken?.let { PlaceGridAdapter(requireContext(), img, it) }
 
         getAccessToken()
-        Log.d("함께 갈 곳 토큰 받아와", "$accessToken")
+        Log.d("함께 갈 곳 토큰 받아와큰22", "$accessToken")
 
         binding = FragmentPlaceToGoBinding.inflate(layoutInflater)
         if(accessToken != null){
             binding.placeGridview.adapter =
-                context?.let { PlaceGridAdapter(context = requireContext(), accessToken = postaccessToken, img_list = img) }
+                context?.let { PlaceGridAdapter(context = requireContext(), accessToken = accessToken!!, img_list = img) }
         }
         else{
             Log.d("함께 갈 곳", "비었음")
