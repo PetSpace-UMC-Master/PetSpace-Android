@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petsapce_week1.accommodation.AccMainActivity
 import com.example.petsapce_week1.databinding.HomeMainRowBinding
+import com.example.petsapce_week1.databinding.PlacetogoItemsBinding
 import com.example.petsapce_week1.vo.FavoriteBackendResponse
 import com.example.petsapce_week1.vo.FavoriteData
 import java.text.DecimalFormat
@@ -21,7 +22,7 @@ class PlaceToGoRegionAdapter(var items: MutableList<FavoriteBackendResponse.Favo
     }
     var itemClickListener: OnItemClickListener? = null //초기값 null값
 
-    inner class ViewHolder(val binding: HomeMainRowBinding) :
+    inner class ViewHolder(val binding: PlacetogoItemsBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(data: FavoriteBackendResponse.Favorite) {
@@ -53,7 +54,7 @@ class PlaceToGoRegionAdapter(var items: MutableList<FavoriteBackendResponse.Favo
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
-            HomeMainRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            PlacetogoItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
