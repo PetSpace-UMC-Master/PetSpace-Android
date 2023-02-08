@@ -10,19 +10,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageButton
+import androidx.core.content.ContextCompat.startActivity
 import com.example.petsapce_week1.R
-import com.example.petsapce_week1.home.homefragment.HomeMainData
 import com.example.petsapce_week1.network.AccomoService
 import com.example.petsapce_week1.network.RetrofitHelper
-import com.example.petsapce_week1.vo.FacilityData
 import com.example.petsapce_week1.vo.FavoriteBackendResponse
-import com.example.petsapce_week1.vo.FavoriteData
 import kotlinx.android.synthetic.main.placetogo_grid_itemlist.view.*
 import retrofit2.Retrofit
 import java.io.Serializable
 
 
-class PlaceGridAdapter(val context: Context, var img_list: Array<Int>, val accessToken : String) : BaseAdapter() {
+class PlaceGridAdapter(val context: Context, var img_list:  Array<Int>, val accessToken: String) : BaseAdapter() {
 
     override fun getCount(): Int {
         return img_list.size
@@ -43,7 +41,7 @@ class PlaceGridAdapter(val context: Context, var img_list: Array<Int>, val acces
 
     lateinit var postaccessToken : String
 
-    val accommoList = mutableListOf<FavoriteData>()
+    var accommoList = mutableListOf<FavoriteBackendResponse.Favorite>()
 
     @SuppressLint("ViewHolder", "InflateParams")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -54,25 +52,12 @@ class PlaceGridAdapter(val context: Context, var img_list: Array<Int>, val acces
         val button = view.findViewById<ImageButton>(R.id.menu_seoul)
         button.setOnClickListener {
 
-//            api.postLikes(accessTokenPost).enqueue(object : retrofit2.Callback<AccomodationData> {
-//                override fun onResponse(
-//                    call: retrofit2.Call<AccomodationData>,
-//                    response: retrofit2.Response<AccomodationData>
-//                ) {
-//                    Log.d("숙소 좋아요 표시", "했음")
-//                }
-//
-//                override fun onFailure(call: retrofit2.Call<AccomodationData>, t: Throwable) {
-//                    Log.d("숙소 좋아요 표시", "x했음")
-//                }
-//
-//            })
             Log.d("함께 갈 곳 토큰 받아와55", accessToken)
             postaccessToken = "Bearer $accessToken"
             Log.d("함께 갈 곳 토큰 받아와11", postaccessToken)
 
 
-            api.getFavorites(postaccessToken, "SEOUL", 1,3).enqueue(object : retrofit2.Callback<FavoriteBackendResponse>{
+            api.getFavorites(postaccessToken, "SEOUL", 0,4).enqueue(object : retrofit2.Callback<FavoriteBackendResponse>{
                 override fun onResponse(
                     call: retrofit2.Call<FavoriteBackendResponse>,
                     response: retrofit2.Response<FavoriteBackendResponse>
@@ -80,37 +65,59 @@ class PlaceGridAdapter(val context: Context, var img_list: Array<Int>, val acces
                     Log.d(" 함께 갈 곳에서 서울 버튼 누름", "ㅇㅇ")
                     Log.d("함께 갈 곳 성공", response.toString())
                     Log.d("함께 갈 곳", response.body().toString())
+                    accommoList = response.body()?.result?.favorites?.toMutableList()!!
+//                    response.takeIf { it.isSuccessful }
+//                        ?.body()
+//                        .let {
+//                            if(it != null) {
+//                                for (item in it.result.favorites) {
+//                                    accommoList.apply {
+//                                        add(
+//                                            FavoriteData(
+//                                                availableDays = item.availableDays,
+//                                                averageReviewScore = item.averageReviewScore,
+//                                                id = item.id,
+//                                                numberOfReview = item.numberOfReview,
+//                                                price = item.price,
+//                                                roomAddress = item.roomAddress,
+//                                                roomImages = item.roomImages.subList(
+//                                                    0,
+//                                                    item.roomImages.size
+//                                                )
+//                                            )
+//                                        )
+//                                    }
+//                                }
+//                                Log.d("함께 갈 곳 데이터1", "$accommoList")
+//                            }
+//                        }
+                    Log.d("함께 갈 곳 데이터2", "$accommoList")
+                    if(response.body()?.result  != null){
 
-                    val intent = Intent(context, TestSeoulAccommosFragment::class.java)
-
-                    response.takeIf { it.isSuccessful }
-                        ?.body()
-                        .let {
-                            if(it != null){
-                                for(item in it.result.favorites){
-                                    accommoList.apply {
-                                        add(
-                                            FavoriteData(
-                                                availableDays = item.availableDays,
-                                                averageReviewScore = item.averageReviewScore,
-                                                id = item.id,
-                                                numberOfReview = item.numberOfReview,
-                                                price = item.price,
-                                                roomAddress = item.roomAddress,
-                                                roomImages = item.roomImages.subList(0, item.roomImages.size)
-                                            )
-                                        )
-                                    }
-                                }
-                            }
+                        val nextScreenIntent = Intent(context, SeoulAccommoActivity::class.java).apply {
+                            putExtra("accommoList", accommoList as Serializable)
+                            Log.d("함께 갈 곳 인텐t", "ㅇㅇ")
                         }
-                    //intent.putExtra("accommoList", accommoList[position])
-                    //val list = listOf("item1", "item2", "item3")
-//                    val bundle = Bundle()
-//                    bundle.putStringArrayList("list_data", accommoList)
-                    //val intent = Intent(this, SecondActivity::class.java)
-                    //intent.putExtra(accommoList)
-                    context.startActivity(intent)
+                        context.startActivity(nextScreenIntent)
+//                        val fragmentTransaction = fragmentManager
+//                            .beginTransaction()
+//                            .replace(R.id.placetogoLayout, newFragment)
+//                            .addToBackStack(null)
+//                            .commit()
+//                        val intent = Intent(context, TestSeoulAccommosFragment::class.java)
+//                        Log.d("함께 갈 곳 인텐t", "ㅇㅇ")
+//                        context.startActivity(intent)
+//                        Log.d("함께 갈 곳 start", "ㅇㅇ")
+                    }
+                    else{
+//                        val newFragment = NoPlaceToGoFragment.newInstance(getItem(position) as String)
+//                        fragment.parentFragmentManager
+//                            .beginTransaction()
+//                            .replace(R.id.placetogoLayout, newFragment)
+//                            .addToBackStack(null)
+//                            .commit()
+                    }
+
                 }
 
                 override fun onFailure(
@@ -119,6 +126,8 @@ class PlaceGridAdapter(val context: Context, var img_list: Array<Int>, val acces
                 ) {
                     Log.d(" 함께 갈 곳 호출 실패", "ㅠㅠ")
                     Log.d("함께 에러 메시지", t.toString())
+                    val intent = Intent(context, NoPlaceToGoFragment::class.java)
+                    context.startActivity(intent)
                 }
             })
 

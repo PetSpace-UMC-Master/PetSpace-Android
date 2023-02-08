@@ -9,12 +9,11 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petsapce_week1.accommodation.AccMainActivity
 import com.example.petsapce_week1.databinding.HomeMainRowBinding
-import com.example.petsapce_week1.home.homefragment.HomeChildAdapter
-import com.example.petsapce_week1.home.homefragment.HomeMainData
+import com.example.petsapce_week1.vo.FavoriteBackendResponse
 import com.example.petsapce_week1.vo.FavoriteData
 import java.text.DecimalFormat
 
-class PlaceToGoRegionAdapter(var items: FavoriteData) : RecyclerView.Adapter<PlaceToGoRegionAdapter.ViewHolder>() {
+class PlaceToGoRegionAdapter(var items: MutableList<FavoriteBackendResponse.Favorite>) : RecyclerView.Adapter<PlaceToGoRegionAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
         fun OnItemClick(data: FavoriteData)
@@ -25,7 +24,7 @@ class PlaceToGoRegionAdapter(var items: FavoriteData) : RecyclerView.Adapter<Pla
     inner class ViewHolder(val binding: HomeMainRowBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(data: FavoriteData) {
+        fun bind(data: FavoriteBackendResponse.Favorite) {
             val cut = String.format("%.2f", data.averageReviewScore)
             val priceCut = DecimalFormat("#,###")
             var price = priceCut.format(data.price)
@@ -75,7 +74,7 @@ class PlaceToGoRegionAdapter(var items: FavoriteData) : RecyclerView.Adapter<Pla
            viewPager.adapter = adapter
            springDotsIndicator.attachTo(viewPager)*/
 
-        val roomIDNext = items.id
+        val roomIDNext = items[position].id
 
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView?.context, AccMainActivity::class.java)
@@ -103,13 +102,13 @@ class PlaceToGoRegionAdapter(var items: FavoriteData) : RecyclerView.Adapter<Pla
 //            textViewDifficulty.text= "난이도 ${position+1}"
 
         }
-        holder.bind(items)
+        holder.bind(items[position])
 
     }
 
 
     override fun getItemCount(): Int {
-        return items.id
+        return items.size
     }
 
     /* fun updateItems(newItems: HomeResponse) {
