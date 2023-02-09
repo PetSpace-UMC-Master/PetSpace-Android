@@ -24,7 +24,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), View.OnClickListener {
 
     val btn1House = "HOUSE"
     val btn2Campsite = "CAMPSITE"
@@ -79,9 +79,10 @@ class HomeFragment : Fragment() {
         //네트워크 통신
 
 
+        initButton()
         initRecyclerView()
         initSpinner()
-        initButtonSort()
+//        initButtonSort()
         initNext()
 //        initAddData()
 
@@ -96,6 +97,7 @@ class HomeFragment : Fragment() {
         }
     }
 
+/*
     private fun initButtonSort() {
         binding.apply {
             b1.setOnClickListener {
@@ -195,6 +197,7 @@ class HomeFragment : Fragment() {
         }
 
     }
+*/
 
     fun updateDouble(sort: String, category: String) {
         ArrayList<HomeMainData>()
@@ -549,6 +552,112 @@ class HomeFragment : Fragment() {
 
 
             }*/
+
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            binding.b1.id -> {
+                updateCategory(btn1House)
+                spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                    }
+
+                    @SuppressLint("NotifyDataSetChanged")
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        Log.d(
+                            "MainActivity",
+                            "onItemSelected : $position, ${spinner.getItemAtPosition(position)}"
+                        )
+                        when (spinner.getItemAtPosition(position)) {
+                            "최근등록순" -> {
+                                updateDouble(sortDefault, btn1House)
+                            }
+                            "높은가격순" -> {
+                                updateDouble(sortPriceAsc, btn1House)
+                            }
+                            "낮은가격순" -> {
+                                updateDouble(sortPriceDesc, btn1House)
+                            }
+                            "평점높은순" -> {
+                                updateDouble(sortReviewScore, btn1House)
+                            }
+                            "리뷰많은순" -> {
+                                updateDouble(sortReviewCount, btn1House)
+                            }
+                            else -> {
+                                updateDouble(sortDefault, btn1House)
+                            }
+                        }
+                    }
+                }
+
+            }
+            binding.b2.id -> {
+                updateCategory(btn2Campsite)
+
+            }
+            binding.b3.id -> {
+                updateCategory(btn3Downtown)
+
+            }
+            binding.b4.id -> {
+                updateCategory(btn4Country)
+                spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                    }
+
+                    @SuppressLint("NotifyDataSetChanged")
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        Log.d(
+                            "MainActivity",
+                            "onItemSelected : $position, ${spinner.getItemAtPosition(position)}"
+                        )
+                        when (spinner.getItemAtPosition(position)) {
+                            "최근등록순" -> {
+                                updateDouble(sortDefault, btn4Country)
+                            }
+                            "높은가격순" -> {
+                                updateDouble(sortPriceAsc, btn4Country)
+                            }
+                            "낮은가격순" -> {
+                                updateDouble(sortPriceDesc, btn4Country)
+                            }
+                            "평점높은순" -> {
+                                updateDouble(sortReviewScore, btn4Country)
+                            }
+                            "리뷰많은순" -> {
+                                updateDouble(sortReviewCount, btn4Country)
+                            }
+                            else -> {
+                                updateDouble(sortDefault, btn4Country)
+                            }
+                        }
+                    }
+                }
+            }
+            binding.b5.id -> {
+                updateCategory(btn5Beach)
+            }
+        }
+    }
+
+    fun initButton() {
+        binding.b1.setOnClickListener(this)
+        binding.b2.setOnClickListener(this)
+        binding.b3.setOnClickListener(this)
+        binding.b4.setOnClickListener(this)
+        binding.b5.setOnClickListener(this)
 
     }
 

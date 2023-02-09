@@ -38,12 +38,7 @@ class HomeResearchActivity : AppCompatActivity() {
         viewPager.adapter = mainVPAdapter
         dotsIndicator.attachTo(viewPager)
 
-
-
-
-
         initReset()
-
 
     }
 
