@@ -1,20 +1,15 @@
 package com.example.petsapce_week1.home
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewpager.widget.ViewPager
-import com.example.petsapce_week1.R
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.petsapce_week1.databinding.ActivityHomeResearchBinding
-import com.example.petsapce_week1.home.homefragment.HomeMainAdapter
-import com.example.petsapce_week1.home.homefragment.HomeMainData
-import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 
 class HomeResearchActivity : AppCompatActivity() {
 
-    private lateinit var binding:ActivityHomeResearchBinding
-    lateinit var adapter:HomeResearchAdapter
+    private lateinit var binding: ActivityHomeResearchBinding
+    lateinit var viewModel: ResViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,11 +18,22 @@ class HomeResearchActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
+        //viewmodel $$ observer
+        viewModel = ViewModelProvider(this).get(ResViewModel::class.java)
+//        viewModel.currentValue.observe(this, this)
 
+
+        val nameObserver = Observer<String> { it ->
+            binding.textWhere.text = it.toString()
+        }
+        viewModel.currentValue.observe(this,nameObserver)
+       /* binding.DataBindingU
+        binding.textWhere = viewModel*/
+
+
+        // viewpager && adapter
         val mainVPAdapter = HomeResVPAdapter(this)
         val viewPager = binding.viewpager
-//        initRecyclerView()
-
         val dotsIndicator = binding.dotsIndicator
         viewPager.adapter = mainVPAdapter
         dotsIndicator.attachTo(viewPager)
@@ -35,39 +41,24 @@ class HomeResearchActivity : AppCompatActivity() {
 
 
 
+
+        initReset()
+
+
     }
 
-
+    private fun initReset() {
+        binding.apply {
+            reset.setOnClickListener {
+                textWhere.text = "어느 지역으로 가시나요?"
+            }
+        }
+    }
 /*
-    private fun initRecyclerView() {
+    override fun onChanged(t: String?) {
+//        val text2 = viewModel.minusValue()
+        binding.textWhere.text = viewModel.currentValue.value
+    }*/
 
-        //기존 adapter(recyclerview adpater)
-
-        val gridLayoutManager = GridLayoutManager(this,  3)
-        gridLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
-        binding.recyclerview.layoutManager = gridLayoutManager
-
-
-        adapter = HomeResearchAdapter(dataList)
-        binding.recyclerview.adapter = adapter
-
-
-        */
-/*    adapter.itemClickListener = object : HomeMainAdapter.OnItemClickListener {
-                override fun OnItemClick(data: HomeMainData) {
-                    val intent = Intent(context, Home2Activity::class.java)
-                    intent.putExtra("price", data.price)
-    //                intent.putExtra("data", data)
-                    startActivity(intent)
-
-                    Log.d("test", "test")
-                }
-
-
-            }*//*
-
-
-    }
-*/
 
 }

@@ -61,6 +61,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/text_where"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -84,6 +85,7 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewpager"
@@ -126,6 +128,8 @@
             />
 
         <TextView
+            android:clickable="true"
+            android:focusable="true"
             android:background="?attr/selectableItemBackground"
             android:paddingVertical="8dp"
             android:paddingHorizontal="16dp"
@@ -165,6 +169,8 @@
             />
 
         <TextView
+            android:clickable="true"
+            android:focusable="true"
             android:background="?attr/selectableItemBackground"
             android:paddingVertical="8dp"
             android:paddingHorizontal="16dp"
@@ -191,6 +197,9 @@
         >
 
         <TextView
+            android:id="@+id/reset"
+            android:clickable="true"
+            android:focusable="true"
             android:background="?attr/selectableItemBackground"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -204,6 +213,8 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:clickable="true"
+            android:focusable="true"
             android:paddingHorizontal="20dp"
             android:id="@+id/btn_search"
             android:layout_width="wrap_content"
@@ -243,12 +254,6 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-
-
 
 
 </LinearLayout>

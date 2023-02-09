@@ -14,4 +14,6 @@ class HomeResVPAdapter(fragmentActivity:FragmentActivity):FragmentStateAdapter(f
             else -> HomeResOneFragment()
         }
     }
+
+
 }
