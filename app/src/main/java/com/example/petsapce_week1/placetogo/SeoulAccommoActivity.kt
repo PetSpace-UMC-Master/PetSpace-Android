@@ -36,9 +36,12 @@ class SeoulAccommoActivity : AppCompatActivity() {
 
         Log.d("함께 서울", "$accommoList")
         //initRecyclerView()
+
         adapter = PlaceToGoRegionAdapter(accommoList)
+        binding.recyclerviewMain.layoutManager = LinearLayoutManager(this)
         binding.recyclerviewMain.adapter = adapter
         binding.recyclerviewMain.isNestedScrollingEnabled = true
+        Log.d("함께 어답터 실행됨", "ㅐㅐ")
 
         binding.btnBack.setOnClickListener {
             val intent = Intent(this, PlaceToGoFragment::class.java)

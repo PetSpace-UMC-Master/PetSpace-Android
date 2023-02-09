@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petsapce_week1.accommodation.AccMainActivity
-import com.example.petsapce_week1.databinding.HomeMainRowBinding
 import com.example.petsapce_week1.databinding.PlacetogoItemsBinding
 import com.example.petsapce_week1.vo.FavoriteBackendResponse
 import com.example.petsapce_week1.vo.FavoriteData
@@ -26,21 +25,22 @@ class PlaceToGoRegionAdapter(var items: MutableList<FavoriteBackendResponse.Favo
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(data: FavoriteBackendResponse.Favorite) {
-            val cut = String.format("%.2f", data.averageReviewScore)
+            Log.d("함께 갈 곳 data", data.toString())
+            //val cut = String.format("%.2f", data.averageReviewScore)
             val priceCut = DecimalFormat("#,###")
             var price = priceCut.format(data.price)
-
+            Log.d("함께 갈 곳 data", data.toString())
             val springDotsIndicator = binding.dotsIndicator
             val viewPager = binding.childViewPager
-            //val adapter = HomeChildAdapter(data.roomImages)
-            //viewPager.adapter = adapter
+            val adapter = PlaceToGoChildAdapter(data.roomImages)
+            viewPager.adapter = adapter
             springDotsIndicator.attachTo(viewPager)
-
+            Log.d("함께 갈 곳 data", data.toString())
 
             binding.apply {
                 textPrice.text = "₩${price} / 박"
                 textLoc.text = data.roomAddress
-                textScore.text = cut
+                textScore.text = data.averageReviewScore.toString()
             }
             /*      val springDotsIndicator = binding.dotsIndicator
                   val viewPager = binding.childViewPager
@@ -53,6 +53,7 @@ class PlaceToGoRegionAdapter(var items: MutableList<FavoriteBackendResponse.Favo
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        Log.d("함께 갈 곳 items", "$items")
         val binding =
             PlacetogoItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
@@ -78,7 +79,7 @@ class PlaceToGoRegionAdapter(var items: MutableList<FavoriteBackendResponse.Favo
         val roomIDNext = items[position].id
 
         holder.itemView.setOnClickListener {
-            val intent = Intent(holder.itemView?.context, AccMainActivity::class.java)
+            val intent = Intent(holder.itemView.context, AccMainActivity::class.java)
             intent.putExtra("content",roomIDNext)
             ContextCompat.startActivity(holder.itemView.context,intent,null)
             Log.d("content",roomIDNext.toString())
