@@ -18,7 +18,7 @@ import com.example.petsapce_week1.home.Home2Activity
 import com.example.petsapce_week1.network.RetrofitHelperHome
 import com.example.petsapce_week1.network.homeAPI
 import com.example.petsapce_week1.vo.HomeResponse
-import kotlinx.android.synthetic.main.home_main_row.*
+//import kotlinx.android.synthetic.main.home_main_row.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

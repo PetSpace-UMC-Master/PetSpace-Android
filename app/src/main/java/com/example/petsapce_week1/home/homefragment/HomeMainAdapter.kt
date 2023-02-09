@@ -13,8 +13,8 @@ import com.example.petsapce_week1.databinding.HomeMainRowChildBinding
 import com.example.petsapce_week1.vo.HomeResponse
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 import com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
-import kotlinx.android.synthetic.main.activity_acc_main.view.*
-import kotlinx.android.synthetic.main.home_main_row.view.*
+/*import kotlinx.android.synthetic.main.activity_acc_main.view.*
+import kotlinx.android.synthetic.main.home_main_row.view.**/
 import java.text.DecimalFormat
 
 class HomeMainAdapter(var items: ArrayList<HomeMainData>) :

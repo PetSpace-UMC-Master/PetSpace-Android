@@ -1,21 +1,17 @@
 package com.example.petsapce_week1
 
+//import kotlinx.android.synthetic.main.activity_home_onlyfortest.*
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.petsapce_week1.accommodation.AccMainActivity
 import com.example.petsapce_week1.databinding.ActivityHomeOnlyfortestBinding
 import com.example.petsapce_week1.loginrelated.LoginActivity
-
 import com.example.petsapce_week1.network.AccomoService
 import com.example.petsapce_week1.network.RetrofitHelper
 import com.example.petsapce_week1.placetogo.NoLoginPlacetogoFragment
-
-import com.example.petsapce_week1.review.ReviewPostActivity
 import com.example.petsapce_week1.placetogo.PlaceToGoFragment
-import kotlinx.android.synthetic.main.activity_home_onlyfortest.*
-import okhttp3.FormBody
-import okhttp3.OkHttpClient
+import com.example.petsapce_week1.review.ReviewPostActivity
 import retrofit2.Retrofit
 
 

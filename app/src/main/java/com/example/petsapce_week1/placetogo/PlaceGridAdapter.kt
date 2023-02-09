@@ -13,7 +13,7 @@ import com.example.petsapce_week1.R
 import com.example.petsapce_week1.network.AccomoService
 import com.example.petsapce_week1.network.RetrofitHelper
 import com.example.petsapce_week1.vo.FavoriteBackendResponse
-import kotlinx.android.synthetic.main.placetogo_grid_itemlist.view.*
+//import kotlinx.android.synthetic.main.placetogo_grid_itemlist.view.*
 import retrofit2.Retrofit
 
 
@@ -40,7 +40,7 @@ class PlaceGridAdapter(val context: Context, var img_list: Array<Int>, val acces
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view : View = LayoutInflater.from(context).inflate(R.layout.placetogo_grid_itemlist, null)
 
-        view.menu_seoul.setImageResource(img_list[position])
+        //view.menu_seoul.setImageResource(img_list[position])
 
         val button = view.findViewById<ImageButton>(R.id.menu_seoul)
         button.setOnClickListener {
