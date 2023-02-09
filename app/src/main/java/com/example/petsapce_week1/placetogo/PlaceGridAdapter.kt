@@ -18,6 +18,7 @@ import com.example.petsapce_week1.vo.FavoriteBackendResponse
 import kotlinx.android.synthetic.main.placetogo_grid_itemlist.view.*
 import retrofit2.Retrofit
 import java.io.Serializable
+import javax.xml.datatype.DatatypeFactory.newInstance
 
 
 class PlaceGridAdapter(val context: Context, var img_list:  Array<Int>, val accessToken: String) : BaseAdapter() {
@@ -52,51 +53,21 @@ class PlaceGridAdapter(val context: Context, var img_list:  Array<Int>, val acce
         val button = view.findViewById<ImageButton>(R.id.menu_seoul)
         button.setOnClickListener {
 
-            Log.d("함께 갈 곳 토큰 받아와55", accessToken)
             postaccessToken = "Bearer $accessToken"
-            Log.d("함께 갈 곳 토큰 받아와11", postaccessToken)
-
 
             api.getFavorites(postaccessToken, "SEOUL", 0,4).enqueue(object : retrofit2.Callback<FavoriteBackendResponse>{
                 override fun onResponse(
                     call: retrofit2.Call<FavoriteBackendResponse>,
                     response: retrofit2.Response<FavoriteBackendResponse>
                 ) {
-                    Log.d(" 함께 갈 곳에서 서울 버튼 누름", "ㅇㅇ")
                     Log.d("함께 갈 곳 성공", response.toString())
                     Log.d("함께 갈 곳", response.body().toString())
-                    accommoList = response.body()?.result?.favorites?.toMutableList()!!
-//                    response.takeIf { it.isSuccessful }
-//                        ?.body()
-//                        .let {
-//                            if(it != null) {
-//                                for (item in it.result.favorites) {
-//                                    accommoList.apply {
-//                                        add(
-//                                            FavoriteData(
-//                                                availableDays = item.availableDays,
-//                                                averageReviewScore = item.averageReviewScore,
-//                                                id = item.id,
-//                                                numberOfReview = item.numberOfReview,
-//                                                price = item.price,
-//                                                roomAddress = item.roomAddress,
-//                                                roomImages = item.roomImages.subList(
-//                                                    0,
-//                                                    item.roomImages.size
-//                                                )
-//                                            )
-//                                        )
-//                                    }
-//                                }
-//                                Log.d("함께 갈 곳 데이터1", "$accommoList")
-//                            }
-//                        }
-                    Log.d("함께 갈 곳 데이터2", "$accommoList")
                     if(response.body()?.result  != null){
+                        accommoList = response.body()?.result?.favorites?.toMutableList()!!
 
+                        Log.d("함께 갈 곳 데이터2", "$accommoList")
                         val nextScreenIntent = Intent(context, SeoulAccommoActivity::class.java).apply {
                             putExtra("accommoList", accommoList as Serializable)
-                            Log.d("함께 갈 곳 인텐t", "ㅇㅇ")
                         }
                         context.startActivity(nextScreenIntent)
 //                        val fragmentTransaction = fragmentManager
@@ -110,11 +81,27 @@ class PlaceGridAdapter(val context: Context, var img_list:  Array<Int>, val acce
 //                        Log.d("함께 갈 곳 start", "ㅇㅇ")
                     }
                     else{
+
+                        // ** no place to go fragment 로 이동하면 되는 코드....
+
+
+//                        val intent = Intent(context, NoPlaceToGoFragment::class.java)
+//                        Log.d("함께 갈 곳 인텐t", "ㅇㅇ")
+//                        context.startActivity(intent)
+//                        Log.d("함께 갈 곳 start", "ㅇㅇ")
+
 //                        val newFragment = NoPlaceToGoFragment.newInstance(getItem(position) as String)
 //                        fragment.parentFragmentManager
 //                            .beginTransaction()
 //                            .replace(R.id.placetogoLayout, newFragment)
 //                            .addToBackStack(null)
+//                            .commit()
+//                        val noplacetogofragment = NoPlaceToGoFragment()
+//                        val placetogofragment = PlaceToGoFragment()
+//                        placetogofragment.parentFragmentManager
+//                            .beginTransaction()
+//                            .addToBackStack(null)
+//                            .replace(R.id.fragmentContainerView, noplacetogofragment)
 //                            .commit()
                     }
 
@@ -126,18 +113,10 @@ class PlaceGridAdapter(val context: Context, var img_list:  Array<Int>, val acce
                 ) {
                     Log.d(" 함께 갈 곳 호출 실패", "ㅠㅠ")
                     Log.d("함께 에러 메시지", t.toString())
-                    val intent = Intent(context, NoPlaceToGoFragment::class.java)
-                    context.startActivity(intent)
+//                    val intent = Intent(context, NoPlaceToGoFragment::class.java)
+//                    context.startActivity(intent)
                 }
             })
-
-//      프래그먼트로 이동 시
-//            val newFragment = NewFragment.newInstance(getItem(position) as String)
-//            fragment.parentFragmentManager
-//                .beginTransaction()
-//                .replace(R.id.fragment_container, newFragment)
-//                .addToBackStack(null)
-//                .commit()
         }
         return view
     }
