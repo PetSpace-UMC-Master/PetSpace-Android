@@ -10,7 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageButton
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
+import androidx.fragment.app.FragmentManager
 import com.example.petsapce_week1.R
 import com.example.petsapce_week1.network.AccomoService
 import com.example.petsapce_week1.network.RetrofitHelper
@@ -21,7 +23,7 @@ import java.io.Serializable
 import javax.xml.datatype.DatatypeFactory.newInstance
 
 
-class PlaceGridAdapter(val context: Context, var img_list:  Array<Int>, val accessToken: String) : BaseAdapter() {
+class PlaceGridAdapter(val context: Context, var img_list:  Array<Int>, val accessToken: String, val fragmentManager: FragmentManager) : BaseAdapter() {
 
     override fun getCount(): Int {
         return img_list.size
@@ -49,13 +51,14 @@ class PlaceGridAdapter(val context: Context, var img_list:  Array<Int>, val acce
         val view : View = LayoutInflater.from(context).inflate(R.layout.placetogo_grid_itemlist, null)
 
         view.menu_seoul.setImageResource(img_list[position])
+        Log.d("함께 갈 곳 어답터", img_list.toString())
 
         val button = view.findViewById<ImageButton>(R.id.menu_seoul)
+        var isLast : Boolean = false
+        var page : Int = 0
         button.setOnClickListener {
-
             postaccessToken = "Bearer $accessToken"
-
-            api.getFavorites(postaccessToken, "SEOUL", 0,4).enqueue(object : retrofit2.Callback<FavoriteBackendResponse>{
+            api.getFavorites(postaccessToken, "SEOUL", page,4).enqueue(object : retrofit2.Callback<FavoriteBackendResponse>{
                 override fun onResponse(
                     call: retrofit2.Call<FavoriteBackendResponse>,
                     response: retrofit2.Response<FavoriteBackendResponse>
@@ -70,20 +73,30 @@ class PlaceGridAdapter(val context: Context, var img_list:  Array<Int>, val acce
                             putExtra("accommoList", accommoList as Serializable)
                         }
                         context.startActivity(nextScreenIntent)
+                        if(response.body()!!.result.isLast){
+                            isLast = true
+                        }
+                        // ** seoul activity 로 이동하면 되는 코드....
+                        Log.d("함께 갈 곳", "noplacetogo")
 //                        val fragmentTransaction = fragmentManager
 //                            .beginTransaction()
 //                            .replace(R.id.placetogoLayout, newFragment)
 //                            .addToBackStack(null)
 //                            .commit()
-//                        val intent = Intent(context, TestSeoulAccommosFragment::class.java)
-//                        Log.d("함께 갈 곳 인텐t", "ㅇㅇ")
-//                        context.startActivity(intent)
-//                        Log.d("함께 갈 곳 start", "ㅇㅇ")
+                        val intent = Intent(context, SeoulAccommoActivity::class.java)
+                        Log.d("함께 갈 곳 서울 인텐t", "ㅇㅇ")
+                        context.startActivity(intent)
+                        Log.d("함께 갈 곳 서울 start", "ㅇㅇ")
                     }
                     else{
 
                         // ** no place to go fragment 로 이동하면 되는 코드....
-
+                        val fragmentTransaction = fragmentManager.beginTransaction()
+                        val newFragment = NoPlaceToGoFragment()
+                        fragmentTransaction.add(R.id.placetogoLayout, newFragment)
+                        fragmentTransaction.addToBackStack(null)
+                        fragmentTransaction.commit()
+                        Log.d("함께 갈 곳 no", "noplacetogo")
 
 //                        val intent = Intent(context, NoPlaceToGoFragment::class.java)
 //                        Log.d("함께 갈 곳 인텐t", "ㅇㅇ")
@@ -115,8 +128,16 @@ class PlaceGridAdapter(val context: Context, var img_list:  Array<Int>, val acce
                     Log.d("함께 에러 메시지", t.toString())
 //                    val intent = Intent(context, NoPlaceToGoFragment::class.java)
 //                    context.startActivity(intent)
+                    // ** no place to go fragment 로 이동하면 되는 코드....
+                    val fragmentTransaction = fragmentManager.beginTransaction()
+                    val newFragment = NoPlaceToGoFragment()
+                    fragmentTransaction.add(R.id.placetogoLayout, newFragment)
+                    fragmentTransaction.addToBackStack(null)
+                    fragmentTransaction.commit()
+                    Log.d("함께 갈 곳 no", "noplacetogo")
                 }
             })
+
         }
         return view
     }

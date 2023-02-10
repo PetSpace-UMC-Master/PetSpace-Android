@@ -11,7 +11,7 @@ import com.example.petsapce_week1.databinding.FragmentReservationTabBinding
 
 class ReservationTabFragment : Fragment() {
 
-    var name = ""
+    var name = "예약 화면"
     lateinit var binding : FragmentReservationTabBinding
 
     override fun onCreateView(

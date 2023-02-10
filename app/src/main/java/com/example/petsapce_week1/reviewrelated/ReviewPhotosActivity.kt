@@ -9,6 +9,7 @@ import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.petsapce_week1.R
+import com.example.petsapce_week1.accommodation.scroll.reviewFragment
 import com.example.petsapce_week1.databinding.ActivityReviewReadMorePhotosBinding
 
 //
@@ -43,6 +44,14 @@ class ReviewPhotosActivity : AppCompatActivity() {
             setPageTransformer { page, position ->
                 page.translationX = position * -offsetPx
             }
+        }
+        binding.btnClose.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, reviewFragment())
+                .addToBackStack(null)
+                .commit()
+//            val intent = Intent(this, reviewFragment::class.java)
+//            startActivity(intent)
         }
 
     }

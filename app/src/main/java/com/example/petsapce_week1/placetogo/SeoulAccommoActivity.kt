@@ -47,8 +47,6 @@ class SeoulAccommoActivity : AppCompatActivity() {
             val intent = Intent(this, PlaceToGoFragment::class.java)
             startActivity(intent)
         }
-
-
     }
 
     //var dataList = accommoList
