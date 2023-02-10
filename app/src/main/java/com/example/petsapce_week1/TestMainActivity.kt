@@ -11,7 +11,6 @@ import com.example.petsapce_week1.network.AccomoService
 import com.example.petsapce_week1.network.RetrofitHelper
 import com.example.petsapce_week1.placetogo.NoLoginPlacetogoFragment
 import com.example.petsapce_week1.placetogo.PlaceToGoFragment
-import com.example.petsapce_week1.review.ReviewPostActivity
 import retrofit2.Retrofit
 
 
@@ -38,10 +37,10 @@ class TestMainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.btnReviewCreate.setOnClickListener {
-            val intent = Intent(this@TestMainActivity, ReviewPostActivity::class.java)
-            startActivity(intent)
-        }
+//        binding.btnReviewCreate.setOnClickListener {
+//            val intent = Intent(this@TestMainActivity, ReviewPostActivity::class.java)
+//            startActivity(intent)
+//        }
         binding.btnPlacetogo.setOnClickListener {
             supportFragmentManager.popBackStack()
             val fragmentTransaction = supportFragmentManager.beginTransaction()

@@ -1,13 +1,15 @@
 package com.example.petsapce_week1.reviewrelated
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petsapce_week1.R
+import com.example.petsapce_week1.vo.Review
 
-class ReviewAdapter(val itemList: ArrayList<ReviewItem>) : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>(){
+class ReviewAdapter(val itemList: List<Review>, val context: Context) : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.review_item_list,parent,false)
@@ -17,7 +19,7 @@ class ReviewAdapter(val itemList: ArrayList<ReviewItem>) : RecyclerView.Adapter<
     override fun onBindViewHolder(holder: ReviewViewHolder, position: Int) {
         holder.tv_name.text = itemList[position].nickName
         holder.tv_content.text = itemList[position].content
-        holder.tv_time.text = itemList[position].time
+        holder.tv_time.text = itemList[position].dayAfterCreated
     }
 
     override fun getItemCount(): Int {

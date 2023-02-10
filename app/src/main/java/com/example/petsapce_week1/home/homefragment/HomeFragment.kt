@@ -33,8 +33,9 @@ class HomeFragment : Fragment() {
     val btn4Country = "COUNTRY"
     val btn5Beach = "BEACH"
 
-    val sortPriceDesc = "PRICE_DESC"
-    val sortPriceAsc = "PRICE_ASC"
+    val sortDefault = "ID_DESC"
+    val sortPriceDesc = "PRICE_ASC"
+    val sortPriceAsc = "PRICE_DESC"
     val sortReviewCount = "REVIEW_COUNT_DESC"
     val sortReviewScore = "AVERAGE_REVIEW_SCORE_DESC"
 
@@ -65,7 +66,7 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(SortViewModel::class.java)
 
 
-        var dataList3 = ArrayList<HomeMainData>()
+      /*  var dataList3 = ArrayList<HomeMainData>()
 
         dataList3 = viewModel.update()
         for (i in 0 until dataList3.size) {
@@ -74,8 +75,7 @@ class HomeFragment : Fragment() {
         }
 
         Log.d("tag", dataList3.size.toString())
-
-
+*/
 
         //네트워크 통신
 
@@ -110,27 +110,28 @@ class HomeFragment : Fragment() {
                         )
                         when (spinner.getItemAtPosition(position)) {
                             "최근등록순" -> {
-                                updateTripple(3, sortPriceAsc, btn1House)
+                                updateDouble(sortDefault, btn1House)
                             }
                             "높은가격순" -> {
-                                updateTripple(3, sortPriceAsc, btn1House)
+                                updateDouble(sortPriceAsc, btn1House)
                             }
                             "낮은가격순" -> {
-                                updateTripple(3, sortPriceDesc, btn1House)
+                                updateDouble(sortPriceDesc, btn1House)
                             }
                             "평점높은순" -> {
-                                updateTripple(3, sortReviewScore, btn1House)
+                                updateDouble(sortReviewScore, btn1House)
                             }
                             "리뷰많은순" -> {
-                                updateTripple(3, sortReviewCount, btn1House)
+                                updateDouble(sortReviewCount, btn1House)
                             }
                             else -> {
-                                updateTripple(3, sortPriceAsc, btn1House)
+                                updateDouble(sortDefault, btn1House)
                             }
                         }
                     }
                 }
             }
+
             b2.setOnClickListener {
                 updateCategory(btn2Campsite)
             }
@@ -139,6 +140,44 @@ class HomeFragment : Fragment() {
             }
             b4.setOnClickListener {
                 updateCategory(btn4Country)
+                spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                    }
+
+                    @SuppressLint("NotifyDataSetChanged")
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        Log.d(
+                            "MainActivity",
+                            "onItemSelected : $position, ${spinner.getItemAtPosition(position)}"
+                        )
+                        when (spinner.getItemAtPosition(position)) {
+                            "최근등록순" -> {
+                                updateDouble(sortDefault, btn4Country)
+                            }
+                            "높은가격순" -> {
+                                updateDouble(sortPriceAsc, btn4Country)
+                            }
+                            "낮은가격순" -> {
+                                updateDouble(sortPriceDesc, btn4Country)
+                            }
+                            "평점높은순" -> {
+                                updateDouble(sortReviewScore, btn4Country)
+                            }
+                            "리뷰많은순" -> {
+                                updateDouble(sortReviewCount, btn4Country)
+                            }
+                            else -> {
+                                updateDouble(sortDefault, btn4Country)
+                            }
+                        }
+                    }
+                }
+
 
             }
             b5.setOnClickListener {
@@ -150,10 +189,10 @@ class HomeFragment : Fragment() {
 
     }
 
-    fun updateTripple(page: Int, sort: String, category: String) {
+    fun updateDouble(sort: String, category: String) {
         ArrayList<HomeMainData>()
 
-        api.getTriple(page, sort, category).enqueue(object : Callback<HomeResponse> {
+        api.getDouble(sort, category).enqueue(object : Callback<HomeResponse> {
             @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(
                 call: Call<HomeResponse>,
@@ -161,7 +200,7 @@ class HomeFragment : Fragment() {
             ) {
                 val usersSort = response.body()
                 if (usersSort != null) {
-                    Log.d("tripple", usersSort.result.toString())
+//                    Log.d("tripple", usersSort.result.toString())
                     val resultSize = usersSort.result.size
                     val dataList = ArrayList<HomeMainData>()
 //                    var dateList = arrayListOf(1,2,3)
@@ -176,7 +215,8 @@ class HomeFragment : Fragment() {
 
                         var childataList = ArrayList<HomeChildData>()
                         for (j in 0 until availImageSize) {
-                            childataList.add(HomeChildData(R.drawable.map))
+//                            childataList.add(HomeChildData(R.drawable.map))
+                            childataList.add(HomeChildData(usersSort.result[i].roomImages[j]))
 //                            Log.d("childataList",usersSort.result[i].roomImages[j])
 
                         }
@@ -194,7 +234,79 @@ class HomeFragment : Fragment() {
                                 usersSort.result[i].city + ", " + usersSort.result[i].district,
                                 "$statdate~$endDate",
                                 usersSort.result[i].price,
-                                usersSort.result[i].numberOfReview
+                                usersSort.result[i].numberOfReview,
+                                usersSort.result[i].roomId
+                            )
+
+                        )
+                    }
+
+                    adapter.items = dataList
+                    adapter.notifyDataSetChanged()
+
+
+                } else {
+                    Log.d("PRICE_DESC", response.code().toString())
+
+                }
+            }
+
+            override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
+                Log.d("PRICE_DESC", t.message.toString())
+            }
+        })
+
+    }
+
+
+    fun updateTripple(page: Int, sort: String, category: String) {
+        ArrayList<HomeMainData>()
+
+        api.getTriple(page, sort, category).enqueue(object : Callback<HomeResponse> {
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onResponse(
+                call: Call<HomeResponse>,
+                response: Response<HomeResponse>
+            ) {
+                val usersSort = response.body()
+                if (usersSort != null) {
+//                    Log.d("tripple", usersSort.result.toString())
+                    val resultSize = usersSort.result.size
+                    val dataList = ArrayList<HomeMainData>()
+//                    var dateList = arrayListOf(1,2,3)
+                    var statdate = ""
+                    var endDate = ""
+
+
+                    for (i in 0 until resultSize) {
+                        roomId = usersSort.result[i].roomId.toString()
+                        val availDaysList = usersSort.result[i].availableDays.size
+                        val availImageSize = usersSort.result[i].roomImages.size
+
+                        var childataList = ArrayList<HomeChildData>()
+                        for (j in 0 until availImageSize) {
+//                            childataList.add(HomeChildData(R.drawable.map))
+                            childataList.add(HomeChildData(usersSort.result[i].roomImages[j]))
+//                            Log.d("childataList",usersSort.result[i].roomImages[j])
+
+                        }
+
+                        if (availDaysList != 0) {
+                            statdate = usersSort.result[i].availableDays[0]
+                            endDate = usersSort.result[i].availableDays[availDaysList - 1]
+                        }
+
+
+                        dataList.add(
+                            HomeMainData(
+                                childataList,
+                                usersSort.result[i].averageReviewScore,
+                                usersSort.result[i].city + ", " + usersSort.result[i].district,
+                                "$statdate~$endDate",
+                                usersSort.result[i].price,
+                                usersSort.result[i].numberOfReview,
+                                usersSort.result[i].roomId
+
                             )
 
                         )
@@ -240,8 +352,10 @@ class HomeFragment : Fragment() {
                         val availImageSize = usersSort.result[i].roomImages.size
 
                         var childataList = ArrayList<HomeChildData>()
-                        for (j in 0 until 5) {
-                            childataList.add(HomeChildData(R.drawable.map))
+                        for (j in 0 until availImageSize) {
+                            childataList.add(HomeChildData(usersSort.result[i].roomImages[j]))
+
+//                            childataList.add(HomeChildData(R.drawable.map))
 //                            Log.d("childataList",usersSort.result[i].roomImages[j])
 
                         }
@@ -259,7 +373,9 @@ class HomeFragment : Fragment() {
                                 usersSort.result[i].city + ", " + usersSort.result[i].district,
                                 "$statdate~$endDate",
                                 usersSort.result[i].price,
-                                usersSort.result[i].numberOfReview
+                                usersSort.result[i].numberOfReview,
+                                usersSort.result[i].roomId
+
                             )
 
                         )
@@ -269,7 +385,7 @@ class HomeFragment : Fragment() {
 
 
                     adapter.items = dataList
-                    adapter.notifyDataSetChanged()
+//                    adapter.notifyDataSetChanged()
 
                 } else {
                     Log.d("PRICE_DESC오류", response.code().toString())
@@ -281,6 +397,9 @@ class HomeFragment : Fragment() {
                 Log.d("PRICE 연결 실패", t.message.toString())
             }
         })
+
+        adapter.notifyDataSetChanged()
+
 
     }
 
@@ -304,7 +423,8 @@ class HomeFragment : Fragment() {
                 )
                 when (spinner.getItemAtPosition(position)) {
                     "최근등록순" -> {
-                        updateSort(sortPriceAsc)
+                        updateSort(sortDefault)
+
                     }
                     "높은가격순" -> {
                         updateSort(sortPriceAsc)
@@ -350,10 +470,10 @@ class HomeFragment : Fragment() {
 
                         //이미지 입력
                         val childataList = ArrayList<HomeChildData>()
-                        for (j in 0 until 5) {
-                            childataList.add(HomeChildData(R.drawable.map))
-//                            childataList.add(HomeChildData(usersSort.result[i].roomImages[j])
-//                            Log.d("childataList",usersSort.result[i].roomImages[j])
+                        for (j in 0 until availImageSize) {
+//                            childataList.add(HomeChildData(R.drawable.map))
+                            childataList.add(HomeChildData(usersSort.result[i].roomImages[j]))
+                            Log.d("childataList",usersSort.result[i].roomImages[j])
                         }
 
                         //가용날짜 체크
@@ -370,7 +490,9 @@ class HomeFragment : Fragment() {
                                 usersSort.result[i].city + ", " + usersSort.result[i].district,
                                 "$statdate~$endDate",
                                 usersSort.result[i].price,
-                                usersSort.result[i].numberOfReview
+                                usersSort.result[i].numberOfReview,
+                                usersSort.result[i].roomId
+
                             )
 
                         )

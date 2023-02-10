@@ -5,10 +5,10 @@ data class ReviewPostData(
     val responseCode: Int,
     val responseMessage: String,
     val result: ReviewPostResult
-)
-
-data class ReviewPostResult(
-    val content: String,
-    val id: Int,
-    val score: Int
-)
+) {
+    data class ReviewPostResult(
+        val content: String,
+        val id: Int,
+        val score: Int
+    )
+}

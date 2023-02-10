@@ -2,7 +2,6 @@ package com.example.petsapce_week1.home.homefragment
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.example.petsapce_week1.R
 import com.example.petsapce_week1.network.RetrofitHelperHome
 import com.example.petsapce_week1.network.homeAPI
 import com.example.petsapce_week1.vo.HomeResponse
@@ -47,11 +46,11 @@ class SortViewModel : ViewModel() {
         adapter.notifyDataSetChanged()
     }
 
-    fun update(): ArrayList<HomeMainData> {
+  /*  fun update(): ArrayList<HomeMainData> {
         var dataList3 = ArrayList<HomeMainData>()
 
         var childataList = ArrayList<HomeChildData>()
-        for (i in 1..10) {
+       *//* for (i in 1..10) {
 
             when (i) {
 
@@ -82,12 +81,12 @@ class SortViewModel : ViewModel() {
                     5000, 136
                 )
             )
-
+*//*
 
         }
         return dataList3
 
-    }
+    }*/
 
 
 }

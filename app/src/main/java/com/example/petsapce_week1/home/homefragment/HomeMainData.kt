@@ -4,5 +4,5 @@ import java.io.Serializable
 
 class HomeMainData(
     val imgList: ArrayList<HomeChildData>, val score: Float, val location:String, val date:String, val price:Int,
-    val review:Int):
+    val review:Int,val roomID:Int):
     Serializable

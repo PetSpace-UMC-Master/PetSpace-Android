@@ -2,6 +2,7 @@ package com.example.petsapce_week1.network
 
 import com.example.petsapce_week1.vo.AccommodationFacilityMore
 import com.example.petsapce_week1.vo.FavoriteBackendResponse
+import com.example.petsapce_week1.vo.HomeResponse
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationData
 
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationRoomData
@@ -29,12 +30,20 @@ interface AccomoService {
         @Header("Authorization") accessToken : String
     ): Call<AccomodationData>
 
-    @FormUrlEncoded
-    @POST("/app/favorites?region=SEOUL")
+//    @FormUrlEncoded
+//    @POST("/app/favorites?region=SEOUL")
+//    fun getFavorites(
+//        @Header("Authorization") accessToken : String,
+//        @Field("region") region : String,
+//        @Field("page") page : Int
+//    ): Call<FavoriteBackendResponse>
+
+    @GET("/app/favorites?region=SEOUL")
     fun getFavorites(
         @Header("Authorization") accessToken : String,
-        @Field("region") region : String,
-        @Field("page") page : Int
+        @Query("region") region : String,
+        @Query("page") page : Int,
+        @Query("size") size : Int
     ): Call<FavoriteBackendResponse>
 
 }

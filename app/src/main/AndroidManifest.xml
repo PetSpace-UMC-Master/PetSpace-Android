@@ -24,13 +24,19 @@
         android:requestLegacyExternalStorage="true"
         tools:targetApi="31">
         <activity
-            android:name=".home.HomeResearchActivity"
+            android:name=".placetogo.SeoulAccommoActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <!-- 홈 내비게이션 액티비티 ===================================================================================== -->
+        <activity
+            android:name=".home.HomeResearchActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity> <!-- 홈 내비게이션 액티비티 ===================================================================================== -->
         <activity
             android:name=".home.Home2Activity"
             android:exported="false">
@@ -43,13 +49,14 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity>
-        <!-- 홈 내비게이션 액티비티 끝 ========================================================================== -->
+        </activity> <!-- 홈 내비게이션 액티비티 끝 ========================================================================== -->
         <!-- 네이버 지도 -->
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
@@ -109,7 +116,6 @@
         <activity
             android:name=".TestMainActivity"
             android:exported="true" /> <!-- ================프로필 화면 & 설정 화면 ============= -->
-        <activity android:name=".ProfileMenuActivity" />
         <activity android:name=".SettingsActivity" /> <!-- - splash 화면 -->
         <activity
             android:name=".SplashActivity"
@@ -139,10 +145,9 @@
                     tools:ignore="AppLinkUrlError" />
             </intent-filter>
         </activity>
-
-
-        <activity android:name=".review.ReviewPostActivity"
-            android:exported="true"></activity>
+        <activity
+            android:name=".review.ReviewPostActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
