@@ -2,6 +2,7 @@ package com.example.petsapce_week1.home
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.petsapce_week1.databinding.ActivityHomeResearchBinding
@@ -18,16 +19,21 @@ class HomeResearchActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        //viewmodel $$ observer
+        //viewmodel $$ observer패턴
         viewModel = ViewModelProvider(this).get(ResViewModel::class.java)
-//        viewModel.currentValue.observe(this, this)
-
-
+        //화면에 바로 뷰바인딩
         val nameObserver = Observer<String> { it ->
             binding.textWhere.text = it.toString()
         }
+
+        val nameObserver2 = Observer<String> { curText ->
+            binding.textWhere.text = curText.toString()
+        }
+        //옵저버 이벤트가 생길때마다 알려줌
         viewModel.currentValue.observe(this,nameObserver)
-       /* binding.DataBindingU
+        viewModel.currentValue.observe(this,nameObserver2)
+
+       /* binding.DataBinding
         binding.textWhere = viewModel*/
 
 
@@ -39,7 +45,21 @@ class HomeResearchActivity : AppCompatActivity() {
         dotsIndicator.attachTo(viewPager)
 
         initReset()
+        initPerson()
+//        showProfileDialog()
 
+    }
+
+    private fun initPerson() {
+        binding.textPerson.setOnClickListener {
+            showProfileDialog()
+        }
+    }
+
+    private fun showProfileDialog() {
+        PersonDialog(this) {
+//            viewModel.setName(it)
+        }.show()
     }
 
     private fun initReset() {

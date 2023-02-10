@@ -16,7 +16,7 @@ import retrofit2.Retrofit
 
 class ResViewModel : ViewModel() {
 
-   /* // 결과를 받을 변수, 초기 결과는 0
+    // 결과를 받을 변수, 초기 결과는 0
     var curText = "어느 지역으로 가시나요?"
 
     // 결과값을 return 하는 함수
@@ -29,7 +29,7 @@ class ResViewModel : ViewModel() {
     fun returnText(): String {
         return curText
         Log.d("text23", curText)
-    }*/
+    }
 
     private val _currentValue = MutableLiveData<String>()
 

@@ -116,7 +116,7 @@
         >
 
         <TextView
-            android:textStyle="bold"
+            android:fontFamily="@font/pretendard_semibold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -156,19 +156,19 @@
         >
 
         <TextView
-
+            android:fontFamily="@font/pretendard_semibold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="가족 수"
-            android:textStyle="bold"
             android:textColor="@color/textForBlack"
             android:textSize="16sp"
             />
 
         <TextView
+            android:id="@+id/text_person"
             android:clickable="true"
             android:focusable="true"
             android:background="?attr/selectableItemBackground"

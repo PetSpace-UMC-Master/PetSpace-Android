@@ -65,16 +65,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
         viewModel = ViewModelProvider(this).get(SortViewModel::class.java)
 
 
-        /*  var dataList3 = ArrayList<HomeMainData>()
-
-          dataList3 = viewModel.update()
-          for (i in 0 until dataList3.size) {
-
-              Log.d("tag", dataList3[i].toString())
-          }
-
-          Log.d("tag", dataList3.size.toString())
-  */
 
         //네트워크 통신
 
@@ -492,7 +482,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
                             endDate = usersSort.result[i].availableDays[availDaysList - 1]
                         }
 
-
                         dataList.add(
                             HomeMainData(
                                 childataList,
@@ -507,9 +496,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
                         )
                     }
-
-
-
 
                     adapter.items = dataList
                     adapter.notifyDataSetChanged()

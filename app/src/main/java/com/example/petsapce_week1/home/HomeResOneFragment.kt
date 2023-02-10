@@ -18,17 +18,6 @@ class HomeResOneFragment : Fragment(), View.OnClickListener {
     lateinit var viewModel: ResViewModel
 
 
-/*
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnButtonClickListener) {
-            listener = context
-        } else {
-            throw RuntimeException("$context must implement OnButtonClickListener")
-        }
-    }
-*/
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -82,11 +71,6 @@ class HomeResOneFragment : Fragment(), View.OnClickListener {
             }
         }
     }
-
-    /* override fun onDetach() {
-         super.onDetach()
-         listener = null
-     }*/
 
 
 }
