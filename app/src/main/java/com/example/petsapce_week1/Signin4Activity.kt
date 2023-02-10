@@ -354,7 +354,7 @@ class Signin4Activity : AppCompatActivity() {
                     )
                 )
                 flagPassword = 1
-                savePW(passwordInput)
+
                 return true
             } else {
                 editTextPassword.setBackgroundResource(R.drawable.btn_custom_red)
@@ -384,6 +384,10 @@ class Signin4Activity : AppCompatActivity() {
                         R.color.main_green
                     )
                 )
+                //val encodedpw = URLEncoder.encode(passwordInput, "UTF-8")
+                savePW(passwordEqual)
+                Log.d("pw",passwordEqual)
+                Log.d("pw",passwordEqual)
 
                 flagEqual = 1
                 return true
