@@ -195,11 +195,11 @@ class SigninDescriptionActivity : AppCompatActivity() {
         val editNickname  : SharedPreferences.Editor = prefNickName.edit()
         val editName  : SharedPreferences.Editor = prefName.edit()
         val editBirth  : SharedPreferences.Editor = prefBirth.edit()
-        editNickname.putString("nickname", nickname).apply()
-        editName.putString("name", name).apply()
-        editBirth.putString("birth", birth).apply()
+        editNickname.putString("userNickname", nickname).apply()
+        editName.putString("userName", name).apply()
+        editBirth.putString("userBirth", birth).apply()
 
-        Log.d("user 데이터", "saved")
+        Log.d("user 데이터", "${editBirth}, ${editName}")
     }
 
 /*    fun checkNickname(): Boolean {

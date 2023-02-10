@@ -418,13 +418,13 @@ class Signin4Activity : AppCompatActivity() {
     fun saveEmail(email : String){
         val prefEmail : SharedPreferences = getSharedPreferences("userEmail", MODE_PRIVATE)
         val editEmail : SharedPreferences.Editor = prefEmail.edit()
-        editEmail.putString("email", email).apply()
+        editEmail.putString("userEmail", email).apply()
         Log.d("회원가입 email", email)
     }
     fun savePW(pw : String){
-        val prefPW : SharedPreferences = getSharedPreferences("userEmail", MODE_PRIVATE)
+        val prefPW : SharedPreferences = getSharedPreferences("userPw", MODE_PRIVATE)
         val editPW : SharedPreferences.Editor = prefPW.edit()
-        editPW.putString("email", pw).apply()
+        editPW.putString("userPw", pw).apply()
         Log.d("회원가입 비번", pw)
     }
 }
