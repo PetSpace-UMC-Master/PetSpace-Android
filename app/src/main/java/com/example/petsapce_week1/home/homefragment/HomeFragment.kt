@@ -38,7 +38,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
     val sortReviewCount = "REVIEW_COUNT_DESC"
     val sortReviewScore = "AVERAGE_REVIEW_SCORE_DESC"
 
-
     //레트로핏 객체 생성
     var retrofit: Retrofit = RetrofitHelperHome.getRetrofitInstance()
 
@@ -47,7 +46,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     lateinit var viewModel: SortViewModel
 
-    //child apdater 이미지
+    //child apdater
     private lateinit var binding: FragmentHomeBinding
 
     var dataList = ArrayList<HomeMainData>()
@@ -210,7 +209,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
                     for (i in 0 until resultSize) {
                         roomId = usersSort.result[i].roomId.toString()
-                        val availDaysList = usersSort.result[i].availableDays.size
+//                        val availDaysList = usersSort.result[i].availableDays.size
                         val availImageSize = usersSort.result[i].roomImages.size
 
                         var childataList = ArrayList<HomeChildData>()
@@ -221,10 +220,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
                         }
 
-                        if (availDaysList != 0) {
+                   /*     if (availDaysList != 0) {
                             statdate = usersSort.result[i].availableDays[0]
                             endDate = usersSort.result[i].availableDays[availDaysList - 1]
-                        }
+                        }*/
 
 
                         dataList.add(
@@ -280,7 +279,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
                     for (i in 0 until resultSize) {
                         roomId = usersSort.result[i].roomId.toString()
-                        val availDaysList = usersSort.result[i].availableDays.size
+//                        val availDaysList = usersSort.result[i].availableDays.size
                         val availImageSize = usersSort.result[i].roomImages.size
 
                         var childataList = ArrayList<HomeChildData>()
@@ -291,10 +290,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
                         }
 
-                        if (availDaysList != 0) {
+                 /*       if (availDaysList != 0) {
                             statdate = usersSort.result[i].availableDays[0]
                             endDate = usersSort.result[i].availableDays[availDaysList - 1]
-                        }
+                        }*/
 
 
                         dataList.add(
@@ -348,22 +347,20 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
                     for (i in 0 until resultSize) {
                         roomId = usersSort.result[i].roomId.toString()
-                        val availDaysList = usersSort.result[i].availableDays.size
+//                        val availDaysList = usersSort.result[i].availableDays.size
                         val availImageSize = usersSort.result[i].roomImages.size
 
                         var childataList = ArrayList<HomeChildData>()
                         for (j in 0 until availImageSize) {
                             childataList.add(HomeChildData(usersSort.result[i].roomImages[j]))
 
-//                            childataList.add(HomeChildData(R.drawable.map))
-//                            Log.d("childataList",usersSort.result[i].roomImages[j])
 
                         }
 
-                        if (availDaysList != 0) {
+                /*        if (availDaysList != 0) {
                             statdate = usersSort.result[i].availableDays[0]
                             endDate = usersSort.result[i].availableDays[availDaysList - 1]
-                        }
+                        }*/
 
 
                         val add = dataList.add(
@@ -385,7 +382,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
 
                     adapter.items = dataList
-//                    adapter.notifyDataSetChanged()
+                    adapter.notifyDataSetChanged()
 
                 } else {
                     Log.d("PRICE_DESC오류", response.code().toString())
@@ -398,7 +395,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
             }
         })
 
-        adapter.notifyDataSetChanged()
+//        adapter.notifyDataSetChanged()
 
 
     }
@@ -465,7 +462,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
                     for (i in 0 until resultSize) {
                         roomId = usersSort.result[i].roomId.toString()
-                        val availDaysList = usersSort.result[i].availableDays.size
+//                        val availDaysList = usersSort.result[i].availableDays.size
                         val availImageSize = usersSort.result[i].roomImages.size
 
                         //이미지 입력
@@ -477,10 +474,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
                         }
 
                         //가용날짜 체크
-                        if (availDaysList != 0) {
+                    /*    if (availDaysList != 0) {
                             statdate = usersSort.result[i].availableDays[0]
                             endDate = usersSort.result[i].availableDays[availDaysList - 1]
-                        }
+                        }*/
 
                         dataList.add(
                             HomeMainData(
