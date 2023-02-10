@@ -87,6 +87,7 @@ class TermsActivity : AppCompatActivity() {
         //        }
 
         getSharedData()
+        Log.d("db 가져옴","${birth}, ${username}")
 
 
         binding.btnComleteAfter.setOnClickListener {
@@ -127,28 +128,30 @@ class TermsActivity : AppCompatActivity() {
 
         val birthPref = getSharedPreferences("userBirth", MODE_PRIVATE)
         if(birthPref != null){
-            birth = birthPref.getString("userBirth", "default")
-            Log.d("birth", birth!!)
+            birth = birthPref.getString("birth", "default")
+            Log.d("db 생일", "Value of birth: $birth")
+        } else {
+            Log.d("db birth", "birthPref is null")
         }
 
         val namePref = getSharedPreferences("userName", MODE_PRIVATE)
         if(namePref != null){
-            username = namePref.getString("userName", "default")
+            username = namePref.getString("name", "default")
         }
 
         val emailPref = getSharedPreferences("userEmail", MODE_PRIVATE)
         if(emailPref != null){
-            email = emailPref.getString("userEmail", "default")
+            email = emailPref.getString("email", "default")
         }
 
         val pwPref = getSharedPreferences("userPw", MODE_PRIVATE)
         if(pwPref != null){
-            password = pwPref.getString("userPw", "default")
+            password = pwPref.getString("pw", "default")
         }
 
         val nicknamePref = getSharedPreferences("userNickname", MODE_PRIVATE)
         if(nicknamePref != null){
-            nickname = nicknamePref.getString("userNickname", "default")
+            nickname = nicknamePref.getString("nickname", "default")
         }
         Log.d("회원가입 데이터", "${birth}, ${username}, ${password}, ${nickname}")
     }

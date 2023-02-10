@@ -353,8 +353,8 @@ class Signin4Activity : AppCompatActivity() {
                         R.color.main_green
                     )
                 )
-
                 flagPassword = 1
+                savePW(passwordInput)
                 return true
             } else {
                 editTextPassword.setBackgroundResource(R.drawable.btn_custom_red)
@@ -386,7 +386,6 @@ class Signin4Activity : AppCompatActivity() {
                 )
 
                 flagEqual = 1
-                savePW(passwordInput)
                 return true
             } else {
                 editTextPasswordAgain.setBackgroundResource(R.drawable.btn_custom_red)
@@ -418,13 +417,14 @@ class Signin4Activity : AppCompatActivity() {
     fun saveEmail(email : String){
         val prefEmail : SharedPreferences = getSharedPreferences("userEmail", MODE_PRIVATE)
         val editEmail : SharedPreferences.Editor = prefEmail.edit()
-        editEmail.putString("userEmail", email).apply()
-        Log.d("회원가입 email", email)
+        editEmail.putString("email", email).apply()
+        Log.d("db 회원가입 email", email)
+        Log.d("db 회원가입 email", editEmail.toString())
     }
     fun savePW(pw : String){
         val prefPW : SharedPreferences = getSharedPreferences("userPw", MODE_PRIVATE)
         val editPW : SharedPreferences.Editor = prefPW.edit()
-        editPW.putString("userPw", pw).apply()
-        Log.d("회원가입 비번", pw)
+        editPW.putString("pw", pw).apply()
+        Log.d("db 회원가입 비번", pw)
     }
 }

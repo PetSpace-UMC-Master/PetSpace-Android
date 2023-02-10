@@ -41,7 +41,7 @@ class SigninDescriptionActivity : AppCompatActivity() {
     private fun initNext() {
         binding.apply {
             btnContinue.setOnClickListener {
-                saveUserData(editTextNickname.toString(), editTextName.toString(), editTextBirth.toString())
+                saveUserData(editTextNickname.text.toString(), editTextName.text.toString(), editTextBirth.text.toString())
 
                 val intent = Intent(this@SigninDescriptionActivity,TermsActivity::class.java)
                 startActivity(intent)
@@ -116,7 +116,6 @@ class SigninDescriptionActivity : AppCompatActivity() {
                             textName.text = ""
                         }
                         nameFlag = true
-                        Log.d("여22기", "ㄴㄴ")
                     }
                 }
             }
@@ -148,7 +147,6 @@ class SigninDescriptionActivity : AppCompatActivity() {
                             textNickname.text = ""
                         }
                         nicknameFlag = true
-                        Log.d("여기33", "ㄴㄴ")
                     }
                 }
             }
@@ -181,7 +179,6 @@ class SigninDescriptionActivity : AppCompatActivity() {
                             textBirth.text = ""
                         }
                         birthFlag = true
-                        Log.d("여기44", "ㄴㄴ")
                     }
                 }
             }
@@ -195,11 +192,11 @@ class SigninDescriptionActivity : AppCompatActivity() {
         val editNickname  : SharedPreferences.Editor = prefNickName.edit()
         val editName  : SharedPreferences.Editor = prefName.edit()
         val editBirth  : SharedPreferences.Editor = prefBirth.edit()
-        editNickname.putString("userNickname", nickname).apply()
-        editName.putString("userName", name).apply()
-        editBirth.putString("userBirth", birth).apply()
+        editNickname.putString("nickname", nickname).apply()
+        editName.putString("name", name).apply()
+        editBirth.putString("birth", birth).apply()
 
-        Log.d("user 데이터", "${editBirth}, ${editName}")
+        Log.d("db user 데이터", "${editBirth}, ${editName}")
     }
 
 /*    fun checkNickname(): Boolean {
