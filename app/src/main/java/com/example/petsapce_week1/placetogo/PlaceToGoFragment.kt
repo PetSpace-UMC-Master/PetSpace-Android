@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 
 import com.example.petsapce_week1.R
 import com.example.petsapce_week1.databinding.FragmentPlaceToGoBinding
@@ -55,14 +56,23 @@ class PlaceToGoFragment : Fragment() {
             R.drawable.menu9,
         )
         getAccessToken()
+        val fragmentManager = (activity as AppCompatActivity).supportFragmentManager
         if(accessToken != null){
-            adapter = tcontext?.let { PlaceGridAdapter(it, img, accessToken!!) }!!
+            adapter = tcontext?.let { PlaceGridAdapter(it, img, accessToken!!, fragmentManager) }!!
             binding.placeGridview.adapter =
-                tcontext?.let { PlaceGridAdapter(context = requireContext(), accessToken = accessToken!!, img_list = img) }
+                tcontext?.let { PlaceGridAdapter(context = requireContext(), accessToken = accessToken!!, img_list = img, fragmentManager = fragmentManager) }
             binding.placeGridview.adapter = adapter
+            Log.d("함께 갈 곳", "안비었음")
         }
         else{
             Log.d("함께 갈 곳", "비었음")
+
+            val fragmentManager = (activity as AppCompatActivity).supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            val newFragment = NoLoginPlacetogoFragment()
+            fragmentTransaction.replace(R.id.placetogoLayout, newFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
         }
 
         //adapter = PlaceToGoRegionAdapter(dataList)

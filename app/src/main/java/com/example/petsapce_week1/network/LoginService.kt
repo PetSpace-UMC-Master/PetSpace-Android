@@ -1,12 +1,11 @@
 package com.example.petsapce_week1.network
 
 import com.example.petsapce_week1.loginrelated.*
+import com.example.petsapce_week1.vo.SignupData
+import com.example.petsapce_week1.vo.SignupResponse
 
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface LoginService {
     //Kakao Login
@@ -31,5 +30,15 @@ interface LoginService {
     fun TokenReissue(
         @Body jsonParams: ReissueData
     ):Call<LoginBackendResponse>
+
+    @POST("/app/sign-up/email-check/?email=tkdwls@naver.com")
+    fun EmailCheck(
+        @Query("email") email : String,
+    )
+
+    @POST("/app/sign-up")
+    fun SignUpPost(
+        @Body jsonParams : SignupData
+    ): Call<SignupResponse>
 
 }

@@ -18,6 +18,7 @@ import com.example.petsapce_week1.home.homefragment.ReserveFragment
 import com.example.petsapce_week1.placetogo.NoLoginPlacetogoFragment
 import com.example.petsapce_week1.placetogo.PlaceGridAdapter
 import com.example.petsapce_week1.placetogo.PlaceToGoFragment
+import com.example.petsapce_week1.reservation.ReservationFragment
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding:ActivityHomeBinding
