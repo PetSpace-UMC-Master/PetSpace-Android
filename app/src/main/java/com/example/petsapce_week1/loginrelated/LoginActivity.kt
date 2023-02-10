@@ -215,6 +215,8 @@ class LoginActivity : AppCompatActivity() {
                                     // == 기기 db (shared preference가) 로 저장
                                     saveIDPW(inputEmail, inputPassword)
                                     saveATRT(response.body()?.result?.accessToken.toString(), response.body()?.result?.refreshToken.toString())
+                                    Log.d("일반 로그인 데이터 저장", "saved")
+                                    Log.d("일반 로그인 데이터 저장", "${response.body()?.result?.accessToken}")
                                 }
                                 400 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 아이디나 비번이 올바르지 않습니다", Toast.LENGTH_LONG).show()
                                 500 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 서버 오류", Toast.LENGTH_LONG).show()
@@ -246,15 +248,16 @@ class LoginActivity : AppCompatActivity() {
                             call: Call<LoginBackendResponse>,
                             response: Response<LoginBackendResponse>
                         ) {
-                            Log.d("로그인 통신 성공",response.toString())
-                            Log.d("로그인 HTTP 코드", response.code().toString())
-                            Log.d("로그인 통신 성공", response.body().toString())
+                            Log.d("??로그인 통신 성공",response.toString())
+                            Log.d("??로그인 HTTP 코드", response.code().toString())
+                            Log.d("??로그인 통신 성공", response.body().toString())
 
                             when (response.code()) {
                                 200 -> {
                                     // == 기기 db (shared preference) 로 저장
                                     saveIDPW(inputEmail, inputPassword)
                                     saveATRT(response.body()?.result?.accessToken.toString(), response.body()?.result?.refreshToken.toString())
+                                    Log.d("일반 틀린 로그인 데이터 저장", "${response.body()?.result?.accessToken}")
                                 }
                                 400 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 아이디나 비번이 올바르지 않습니다", Toast.LENGTH_LONG).show()
                                 500 -> Toast.makeText(this@LoginActivity, "로그인 실패 : 서버 오류", Toast.LENGTH_LONG).show()
@@ -263,8 +266,8 @@ class LoginActivity : AppCompatActivity() {
 
                         override fun onFailure(call: Call<LoginBackendResponse>, t: Throwable) {
                             // 실패
-                            Log.d("로그인 통신 실패",t.message.toString())
-                            Log.d("로그인 통신 실패","fail")
+                            Log.d("??로그인 통신 실패",t.message.toString())
+                            Log.d("??로그인 통신 실패","fail")
                         }
                     })
                 }
@@ -302,5 +305,6 @@ class LoginActivity : AppCompatActivity() {
         editRT.putString("refreshToken", rt).apply()
 
         Log.d("로그인 tokens", "saved")
+        Log.d("로그인 tokens", "$at, $rt")
     }
 }
