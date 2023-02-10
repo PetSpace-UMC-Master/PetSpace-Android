@@ -88,6 +88,14 @@ class TermsActivity : AppCompatActivity() {
           }
 
         binding.btnComleteAfter.setOnClickListener {
+
+
+
+
+
+
+
+
             val intent = Intent(this, GifActivity::class.java)
             startActivity(intent)
         }

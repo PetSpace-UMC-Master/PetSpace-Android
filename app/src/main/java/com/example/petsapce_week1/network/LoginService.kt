@@ -1,6 +1,7 @@
 package com.example.petsapce_week1.network
 
 import com.example.petsapce_week1.loginrelated.*
+import com.example.petsapce_week1.vo.EmailCheckResponse
 import com.example.petsapce_week1.vo.SignupData
 import com.example.petsapce_week1.vo.SignupResponse
 
@@ -21,6 +22,16 @@ interface LoginService {
         @Body jsonParams: UserModelGeneral,
     ): Call<LoginBackendResponse>
 
+    @GET("/app/sign-up/email-check")
+    fun EmailCheck(
+        @Query("email", encoded = true) email : String,
+    ): Call<EmailCheckResponse>
+
+    @POST("/app/sign-up")
+    fun SignUpPost(
+        @Body jsonParams : SignupData
+    ): Call<SignupResponse>
+
     @GET("/app/users/2")
     fun GetUserInfo(
         @Header("Authorization") accessToken: String,
@@ -30,15 +41,5 @@ interface LoginService {
     fun TokenReissue(
         @Body jsonParams: ReissueData
     ):Call<LoginBackendResponse>
-
-    @POST("/app/sign-up/email-check/?email=tkdwls@naver.com")
-    fun EmailCheck(
-        @Query("email") email : String,
-    )
-
-    @POST("/app/sign-up")
-    fun SignUpPost(
-        @Body jsonParams : SignupData
-    ): Call<SignupResponse>
 
 }
