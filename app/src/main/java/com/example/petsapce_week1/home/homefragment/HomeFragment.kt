@@ -12,9 +12,8 @@ import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.petsapce_week1.R
 import com.example.petsapce_week1.databinding.FragmentHomeBinding
-import com.example.petsapce_week1.home.Home2Activity
+import com.example.petsapce_week1.home.HomeResearchActivity
 import com.example.petsapce_week1.network.RetrofitHelperHome
 import com.example.petsapce_week1.network.homeAPI
 import com.example.petsapce_week1.vo.HomeResponse
@@ -25,7 +24,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), View.OnClickListener {
 
     val btn1House = "HOUSE"
     val btn2Campsite = "CAMPSITE"
@@ -66,29 +65,29 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(SortViewModel::class.java)
 
 
-      /*  var dataList3 = ArrayList<HomeMainData>()
-
-        dataList3 = viewModel.update()
-        for (i in 0 until dataList3.size) {
-
-            Log.d("tag", dataList3[i].toString())
-        }
-
-        Log.d("tag", dataList3.size.toString())
-*/
 
         //네트워크 통신
 
 
+        initButton()
         initRecyclerView()
         initSpinner()
-        initButtonSort()
+//        initButtonSort()
+        initNext()
 //        initAddData()
 
         // Inflate the layout for this fragment
         return binding.root
     }
 
+    private fun initNext() {
+        binding.btnEdittext.setOnClickListener {
+            val intent = Intent(context,HomeResearchActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+/*
     private fun initButtonSort() {
         binding.apply {
             b1.setOnClickListener {
@@ -188,6 +187,7 @@ class HomeFragment : Fragment() {
         }
 
     }
+*/
 
     fun updateDouble(sort: String, category: String) {
         ArrayList<HomeMainData>()
@@ -473,7 +473,7 @@ class HomeFragment : Fragment() {
                         for (j in 0 until availImageSize) {
 //                            childataList.add(HomeChildData(R.drawable.map))
                             childataList.add(HomeChildData(usersSort.result[i].roomImages[j]))
-                            Log.d("childataList",usersSort.result[i].roomImages[j])
+                            Log.d("childataList", usersSort.result[i].roomImages[j])
                         }
 
                         //가용날짜 체크
@@ -481,7 +481,6 @@ class HomeFragment : Fragment() {
                             statdate = usersSort.result[i].availableDays[0]
                             endDate = usersSort.result[i].availableDays[availDaysList - 1]
                         }
-
 
                         dataList.add(
                             HomeMainData(
@@ -497,9 +496,6 @@ class HomeFragment : Fragment() {
 
                         )
                     }
-
-
-
 
                     adapter.items = dataList
                     adapter.notifyDataSetChanged()
@@ -530,27 +526,124 @@ class HomeFragment : Fragment() {
         binding.recyclerviewMain.isNestedScrollingEnabled = true
 
 
+        /*    adapter.itemClickListener = object : HomeMainAdapter.OnItemClickListener {
+                override fun OnItemClick(data: HomeMainData) {
+                    val intent = Intent(context, Home2Activity::class.java)
+                    intent.putExtra("price", data.price)
+    //                intent.putExtra("data", data)
+                    startActivity(intent)
+
+                    Log.d("test", "test")
+                }
 
 
-        adapter.itemClickListener = object : HomeMainAdapter.OnItemClickListener {
-            override fun OnItemClick(data: HomeMainData) {
-                val intent = Intent(context, Home2Activity::class.java)
-//                intent.putExtra("image", data.img)
-                intent.putExtra("score", roomId)
-                Log.d("score2", data.price.toString())
-                intent.putExtra("location", data.location)
-                intent.putExtra("date", data.date)
-                intent.putExtra("price", data.price)
-//                intent.putExtra("data", data)
+            }*/
 
+    }
 
-                startActivity(intent)
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            binding.b1.id -> {
+                updateCategory(btn1House)
+                spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                    }
 
-                Log.d("test", "test")
+                    @SuppressLint("NotifyDataSetChanged")
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        Log.d(
+                            "MainActivity",
+                            "onItemSelected : $position, ${spinner.getItemAtPosition(position)}"
+                        )
+                        when (spinner.getItemAtPosition(position)) {
+                            "최근등록순" -> {
+                                updateDouble(sortDefault, btn1House)
+                            }
+                            "높은가격순" -> {
+                                updateDouble(sortPriceAsc, btn1House)
+                            }
+                            "낮은가격순" -> {
+                                updateDouble(sortPriceDesc, btn1House)
+                            }
+                            "평점높은순" -> {
+                                updateDouble(sortReviewScore, btn1House)
+                            }
+                            "리뷰많은순" -> {
+                                updateDouble(sortReviewCount, btn1House)
+                            }
+                            else -> {
+                                updateDouble(sortDefault, btn1House)
+                            }
+                        }
+                    }
+                }
+
             }
+            binding.b2.id -> {
+                updateCategory(btn2Campsite)
 
+            }
+            binding.b3.id -> {
+                updateCategory(btn3Downtown)
 
+            }
+            binding.b4.id -> {
+                updateCategory(btn4Country)
+                spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                    }
+
+                    @SuppressLint("NotifyDataSetChanged")
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        Log.d(
+                            "MainActivity",
+                            "onItemSelected : $position, ${spinner.getItemAtPosition(position)}"
+                        )
+                        when (spinner.getItemAtPosition(position)) {
+                            "최근등록순" -> {
+                                updateDouble(sortDefault, btn4Country)
+                            }
+                            "높은가격순" -> {
+                                updateDouble(sortPriceAsc, btn4Country)
+                            }
+                            "낮은가격순" -> {
+                                updateDouble(sortPriceDesc, btn4Country)
+                            }
+                            "평점높은순" -> {
+                                updateDouble(sortReviewScore, btn4Country)
+                            }
+                            "리뷰많은순" -> {
+                                updateDouble(sortReviewCount, btn4Country)
+                            }
+                            else -> {
+                                updateDouble(sortDefault, btn4Country)
+                            }
+                        }
+                    }
+                }
+            }
+            binding.b5.id -> {
+                updateCategory(btn5Beach)
+            }
         }
+    }
+
+    fun initButton() {
+        binding.b1.setOnClickListener(this)
+        binding.b2.setOnClickListener(this)
+        binding.b3.setOnClickListener(this)
+        binding.b4.setOnClickListener(this)
+        binding.b5.setOnClickListener(this)
 
     }
 

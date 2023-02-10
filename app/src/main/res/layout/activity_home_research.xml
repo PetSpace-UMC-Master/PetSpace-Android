@@ -5,14 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingHorizontal="20dp"
     tools:context=".home.HomeResearchActivity">
 
 
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:padding="20dp"
         android:id="@+id/loginTop"
         android:layout_width="match_parent"
         android:layout_height="60dp">
+
+
 
         <ImageView
             android:id="@+id/btn_back"
@@ -26,13 +30,25 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:paddingHorizontal="20dp"
+        android:id="@+id/text_pet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/bmjua"
+        android:text="[반려동물이름]과 어디로 떠날까요?"
+        android:textColor="@color/textForBlack"
+        android:textSize="20sp"
+       />
+
     <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:layout_marginHorizontal="20dp"
         android:id="@+id/btn_edittext"
         android:layout_width="match_parent"
         android:layout_height="46sp"
         android:layout_marginTop="10dp"
         android:background="@drawable/edittext_main"
-        android:clickable="true"
         android:paddingHorizontal="20dp">
 
         <ImageView
@@ -45,6 +61,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/text_where"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -69,10 +86,174 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewpager"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:id="@+id/dots_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:dotsColor="#D9D9D9"
+        app:dotsCornerRadius="8dp"
+        app:dotsSize="7sp"
+        app:dotsSpacing="7dp"
+        app:dotsWidthFactor="2.5"
+        app:progressMode="true"
+        app:selectedDotColor="@color/main_green" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginTop="20dp"
+        android:paddingHorizontal="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:fontFamily="@font/pretendard_semibold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="날짜"
+            android:textColor="@color/textForBlack"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="16dp"
+            android:foreground="@drawable/background_stroke16"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="01월 09일 ~ 01월 11일, 2박"
+            android:textColor="@color/textForBlack"
+            android:textSize="14sp"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginTop="15dp"
+        android:paddingHorizontal="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:fontFamily="@font/pretendard_semibold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="가족 수"
+            android:textColor="@color/textForBlack"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id="@+id/text_person"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="16dp"
+            android:foreground="@drawable/background_stroke16"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="성인 2명, 아동 0명, 반려동물 1마리"
+            android:textColor="@color/textForBlack"
+            android:textSize="14sp"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginTop="40dp"
+        android:paddingHorizontal="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/reset"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="전체 초기화"
+            android:textColor="@color/textForBlack"
+            android:textSize="14sp"
+            />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingHorizontal="20dp"
+            android:id="@+id/btn_search"
+            android:layout_width="wrap_content"
+            android:layout_height="32sp"
+            android:background="@drawable/btn_small16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+
+           >
+
+            <ImageView
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="16sp"
+                android:layout_height="16sp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toStartOf="@+id/search"
+                android:src="@drawable/searchtbtn4x"
+
+                />
+
+            <TextView
+                android:id="@+id/search"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="검색하기"
+                android:fontFamily="@font/bmjua"
+                android:textColor="#EEF5F5"
+                android:textSize="16sp"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </LinearLayout>
