@@ -1,7 +1,6 @@
 package com.example.petsapce_week1.review
 
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -16,14 +15,11 @@ import com.example.petsapce_week1.databinding.ReviewCreateBinding
 import com.example.petsapce_week1.network.RetrofitHelper
 import com.example.petsapce_week1.network.ReviewAPI
 import com.example.petsapce_week1.vo.ReviewPostData
-import okhttp3.MediaType
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import okio.BufferedSink
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -40,13 +36,13 @@ class ReviewPostActivity2 : AppCompatActivity() {
     private var mediaPath: String? = null
     // private var bitmap: Bitmap? = null
 
-     //비트맵 + 압축
+/*     //비트맵 + 압축
     inner class BitmapRequestBody(private val bitmap: Bitmap) : RequestBody() {
         override fun contentType(): MediaType = "image/jpeg".toMediaType()
         override fun writeTo(sink: BufferedSink) {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 99, sink.outputStream())
         }
-    }
+    }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,6 +76,8 @@ class ReviewPostActivity2 : AppCompatActivity() {
             val content = binding.reviewInput.text.toString()
             val contentRequestBody: RequestBody = content.toPlainRequestBody()
             Log.d("contentRequestBody", "$contentRequestBody")
+            Log.d("contentRequestBody", "${contentRequestBody.javaClass}")
+
 
             // 리뷰 별점
             val reviewRateRequestBody: RequestBody = review_rate.toString().toPlainRequestBody()
@@ -93,6 +91,7 @@ class ReviewPostActivity2 : AppCompatActivity() {
             //리뷰 사진
             var fileToUpload = if (mediaPath != null) {
                 val file = File(mediaPath)
+                Log.d("파일파일", file.name.toString())
                 // image/jpeg 타입은 MIME 타입을 따르기 위함이다. 일반적인 String같은 경우 text/plain과 같이 쓴다.
                 val requestBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
                 MultipartBody.Part.createFormData("reviewImages", file.name, requestBody)
@@ -101,7 +100,15 @@ class ReviewPostActivity2 : AppCompatActivity() {
                 null
             }
 
-                Log.d("파일 경로", "$mediaPath")
+            Log.d("리뷰 사진", "$fileToUpload")
+            if (fileToUpload != null) {
+                Log.d("리뷰 사진 타입", "${fileToUpload.javaClass}")
+
+            }
+
+
+
+            Log.d("파일 경로", "$mediaPath")
                 //val images = MultipartBody.Part.createFormData("reviewImages", file.name, requestFile)
 
             //requestPermissionLauncher.launch()

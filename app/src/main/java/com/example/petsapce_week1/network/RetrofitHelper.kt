@@ -6,9 +6,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 //retrofit 객체 생성
 
-object RetrofitHelper_original {
+object RetrofitHelper {
 
-    val BASE_URL: String = "https://e0ef-115-94-178-52.jp.ngrok.io"
+    val BASE_URL: String = "https://08e6-125-143-134-113.jp.ngrok.io"
 
 
     var gson = GsonBuilder().setLenient().create()

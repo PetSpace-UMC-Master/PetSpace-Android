@@ -14,11 +14,14 @@ import com.example.petsapce_week1.vo.ReviewGetData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
 
 
 class ReviewReadMoreActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReviewReadMoreBinding
-    var api = RetrofitHelper.createBaseService(ReviewGETAPI::class.java)
+
+    private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
+    var api : ReviewGETAPI = retrofit.create(ReviewGETAPI::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
