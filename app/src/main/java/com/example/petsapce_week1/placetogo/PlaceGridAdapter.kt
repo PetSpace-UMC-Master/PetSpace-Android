@@ -135,13 +135,6 @@ class PlaceGridAdapter(val context: Context, var img_list:  Array<Int>, val acce
         //                            .replace(R.id.placetogoLayout, newFragment)
         //                            .addToBackStack(null)
         //                            .commit()
-                                val noplacetogofragment = NoPlaceToGoFragment()
-                                val placetogofragment = PlaceToGoFragment()
-                                placetogofragment.parentFragmentManager
-                                    .beginTransaction()
-                                    .addToBackStack(null)
-                                    .replace(R.id.fragmentContainerView, noplacetogofragment)
-                                    .commit()
                             }
 
                         }

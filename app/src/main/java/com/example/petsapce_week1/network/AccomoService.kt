@@ -38,7 +38,7 @@ interface AccomoService {
 //        @Field("page") page : Int
 //    ): Call<FavoriteBackendResponse>
 
-    @GET("/app/favorites?region=SEOUL")
+    @GET("/app/favorites?")
     fun getFavorites(
         @Header("Authorization") accessToken : String,
         @Query("region") region : String,
