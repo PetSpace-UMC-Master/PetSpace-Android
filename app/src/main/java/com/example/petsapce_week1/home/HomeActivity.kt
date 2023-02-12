@@ -72,9 +72,8 @@ class HomeActivity : AppCompatActivity() {
     fun LoginCheck(): Boolean {
         val isLogin : Boolean
         getAccessToken()
-        Log.d("함께 갈 곳 토큰 받아와큰22", "$accessToken")
 
-        if(accessToken != null) {
+        if(accessToken != "default") {
             isLogin = true
             return isLogin
         }
@@ -87,7 +86,9 @@ class HomeActivity : AppCompatActivity() {
 
     private fun getAccessToken() {
         val atpref = getSharedPreferences("accessToken", MODE_PRIVATE)
-        accessToken = atpref.getString("accessToken", "default")
-        Log.d("accessToken11","$accessToken")
+        if(atpref != null){
+            accessToken = atpref.getString("accessToken", "default")
+        }
+        Log.d("홈 화면 accessToken11","$accessToken")
     }
 }

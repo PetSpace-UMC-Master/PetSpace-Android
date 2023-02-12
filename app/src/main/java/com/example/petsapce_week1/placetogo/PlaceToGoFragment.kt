@@ -46,13 +46,13 @@ class PlaceToGoFragment : Fragment() {
 
         val img = arrayOf(
             R.drawable.menu1,
+            R.drawable.frame_busan,
             R.drawable.menu2,
+            R.drawable.menu8,
             R.drawable.menu5,
             R.drawable.menu4,
             R.drawable.menu6,
             R.drawable.menu7,
-            R.drawable.menu8,
-            R.drawable.menu9,
         )
         getAccessToken()
         val fragmentManager = (activity as AppCompatActivity).supportFragmentManager

@@ -84,10 +84,11 @@ class AccMainActivity : AppCompatActivity() {
         initViewPager()
 
         val data = AccomodationRoomData(roomId = null)
+        val roomId : Long = intent.getLongExtra("intent", 1)
 
         // =================== 백엔드 연동 부분 =====================
         //홈화면 연결 후 roomId 받아오면 반영!
-        api.getRoomDetail( accessTokenPost, 1).enqueue(object : Callback<AccomodationData> {
+        api.getRoomDetail( accessTokenPost, roomId).enqueue(object : Callback<AccomodationData> {
             @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
             override fun onResponse(
                 call: Call<AccomodationData>,

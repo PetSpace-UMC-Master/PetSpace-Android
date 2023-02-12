@@ -20,7 +20,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".placetogo.SeoulAccommoActivity"
+            android:name=".placetogo.PlaceToGoRegionActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
