@@ -41,6 +41,7 @@ class HomeActivity : AppCompatActivity() {
                     }
                     R.id.menu_main_btm_nav_heart -> {
                         val isLogin = LoginCheck()
+                        Log.d("로그인 됨??", isLogin.toString())
                         if(isLogin){
                             supportFragmentManager.beginTransaction()
                                 .replace(R.id.main_frm, PlaceToGoFragment())

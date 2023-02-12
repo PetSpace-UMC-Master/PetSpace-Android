@@ -27,7 +27,7 @@
             android:fontFamily="@font/bmjua"
             android:gravity="left"
             android:lineSpacingExtra="-1sp"
-            android:text="[반려동물이름]과 함께 가고 싶은 곳"
+            android:text="[우주댕댕이]와 함께 가고 싶은 곳"
             android:textColor="#0C201E"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
