@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.FrameLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.petsapce_week1.R
 import com.example.petsapce_week1.accommodation.AccMainActivity
@@ -89,23 +90,13 @@ class PlaceToGoRegionActivity : AppCompatActivity() {
                             } else {
                                 Log.d("함께 갈 곳 page+", "empty")
                             }
-                            if (response.body()?.result?.favorites?.size == 0){
-                                Log.d("함께 없음","ㅎㅎ")
-                                val noplacetogofragment = NoPlaceToGoFragment()
-                                val placetogofragment = PlaceToGoFragment()
-                                supportFragmentManager
-                                    .beginTransaction()
+                            if (response.body()?.result?.favorites?.size == 0) {
+                                supportFragmentManager.beginTransaction()
+                                    .replace(R.id.thisLayout, NoPlaceToGoFragment())
                                     .addToBackStack(null)
-                                    .replace(R.id.recyclerview_main_home, noplacetogofragment)
                                     .commit()
-
-//                                val noplaceToGoFragment = NoPlaceToGoFragment()
-//                                supportFragmentManager.beginTransaction()
-//                                    .replace(R.id.recyclerview_main_home, noplaceToGoFragment)
-//                                    .commit()
                             }
                         }
-
                         override fun onFailure(
                             call: retrofit2.Call<FavoriteBackendResponse>,
                             t: Throwable
@@ -153,19 +144,6 @@ class PlaceToGoRegionActivity : AppCompatActivity() {
 //            }
 //            page+=1
 //        }
-
-        /**
-         * 처음에 메인액티비티에서 시작함 -> 바텀네비게이션 있는 액티비티
-         * 메인액티비티의 "함께 갈 곳" 클릭했음
-         * 함께 갈 곳 이라는 프래그먼트가 컨테이너뷰 위에 올려졌지 (replace썼겠지)
-         * 그리고 여기서 "서울" 누르면 새로운 플레이스투고리전"액티비티"가 replace가 아니라 start된다.
-         * 그니까 샌드위치를 생각해보면 새로운 토핑이 올라온거임
-         * 그렇게 차곡차곡 쌓여진 상태를 생각해보는거야
-         *
-         * 근데 뒤로가기를 눌러서 프레그먼트 컨테이너에 올려진 프래그먼트를 웬 이상한 녀석이 바꾸려 해
-         * 그래서 오류가 뜬거야
-         *
-         */
         binding.btnBack.setOnClickListener {
             finish()
         }
