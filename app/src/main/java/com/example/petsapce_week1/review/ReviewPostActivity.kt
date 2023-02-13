@@ -35,7 +35,6 @@ class ReviewPostActivity : AppCompatActivity() {
     var api : ReviewAPI = retrofit.create(ReviewAPI::class.java)
     var localImgFile: File ?= null
     var images = arrayListOf<MultipartBody.Part>()
-    var fileToUpload = arrayListOf<MultipartBody.Part>()
     private var success_review_id: Int? = null
     private var review_rate: Int? = null
     private var mediaPath: String? = null
@@ -84,8 +83,11 @@ class ReviewPostActivity : AppCompatActivity() {
             textHashMap["content"] = contentRequestBody
             textHashMap["score"] = reviewRateRequestBody
 
+            for (image in images) {
+                Log.d("이미지 여러개", image.toString())
+            }
             // 통신 부분
-            api.post_reviews(accessTokenPost, textHashMap, fileToUpload)
+            api.post_reviews(accessTokenPost, textHashMap, images)
                 .enqueue(object : Callback<ReviewPostData> {
                     // 통신 성공
                     override fun onResponse(
