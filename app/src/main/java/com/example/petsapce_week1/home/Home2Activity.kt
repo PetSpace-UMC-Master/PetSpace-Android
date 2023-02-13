@@ -202,8 +202,8 @@ class Home2Activity : AppCompatActivity() {
                     call: Call<Home2Response>,
                     response: Response<Home2Response>
                 ) {
-                  /*  binding.recyclerviewMain.visibility = View.VISIBLE
-                    binding.sorrydog.visibility = View.GONE*/
+                    binding.recyclerviewMain.visibility = View.VISIBLE
+                    binding.sorrydog.visibility = View.GONE
                     val usersSort = response.body()
 
                     if (usersSort != null && usersSort.result != null) {
