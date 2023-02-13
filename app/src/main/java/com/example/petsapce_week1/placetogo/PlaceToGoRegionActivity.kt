@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.petsapce_week1.R
 import com.example.petsapce_week1.accommodation.AccMainActivity
 import com.example.petsapce_week1.databinding.ActivitySeoulAccommoBinding
@@ -34,6 +35,7 @@ class PlaceToGoRegionActivity : AppCompatActivity() {
     var isLast : Boolean = false
     var accessToken : String ?= null
     var region : String ?= null
+    var reviewCount :Int ?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +46,7 @@ class PlaceToGoRegionActivity : AppCompatActivity() {
         isLast = intent.getBooleanExtra("isLast", false)
         accessToken = intent.getStringExtra("accessToken")
         region = intent.getStringExtra("region")
+        reviewCount = intent.getIntExtra("reviewCount", 0)
         Log.d("함께 서울", "$accommoList")
         Log.d("함께 서울 isLast", "$isLast")
         Log.d("함께 서울 at", "$accessToken")
@@ -61,55 +64,135 @@ class PlaceToGoRegionActivity : AppCompatActivity() {
         }
 
         binding.tvRegion.text = regionKor
-
+        var page : Int = 1
         //initRecyclerView()
         var adapter: PlaceToGoRegionAdapter = PlaceToGoRegionAdapter(accommoList, accessToken!!)
         binding.recyclerviewMainHome.layoutManager = LinearLayoutManager(this)
         binding.recyclerviewMainHome.adapter = adapter
         binding.recyclerviewMainHome.isNestedScrollingEnabled = true
 
-        Log.d("함께 어답터 실행됨", "ㅐㅐ")
-
-        accessToken?.let {
-            if (region != null) {
-                api.getFavorites(it, region!!, 0, 3)
-                    .enqueue(object : retrofit2.Callback<FavoriteBackendResponse> {
-                        override fun onResponse(
-                            call: retrofit2.Call<FavoriteBackendResponse>,
-                            response: retrofit2.Response<FavoriteBackendResponse>
-                        ) {
-                            Log.d("함께 갈 곳 page+ 성공", response.toString())
-                            Log.d("함께 갈 곳 page+", response.body().toString())
-                            if (response.body()?.result != null) {
-                                accommoList = response.body()?.result?.favorites?.toMutableList()!!
-                                if (response.body()!!.result.isLast) {
-                                    isLast = true
+        ////기존 adapter(recyclerview adpater)
+        ////        binding.recyclerviewMain.layoutManager = LinearLayoutManager(
+        ////            this, LinearLayoutManager.VERTICAL, false
+        ////        )
+        ////
+        ////        binding.recyclerviewMain.adapter = adapter
+        ////        binding.recyclerviewMain.isNestedScrollingEnabled = true
+        binding.recyclerviewMainHome.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            var isLoading = false
+            var isLastPage = false
+            var currentPage = 0
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val layoutManager = binding.recyclerviewMainHome.layoutManager as LinearLayoutManager
+                //val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val totalItemCount = layoutManager.itemCount
+                Log.d("부산1", totalItemCount.toString())
+                val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
+                Log.d("부산2", lastVisibleItem.toString())
+                if (!isLoading && !isLastPage && lastVisibleItem == totalItemCount - 1)  {
+                    currentPage++
+                    isLoading = true
+                    region?.let {
+                        api.getFavorites(accessToken!!, it, page = currentPage, size = 5).enqueue(object : retrofit2.Callback<FavoriteBackendResponse> {
+                            override fun onResponse(
+                                call: retrofit2.Call<FavoriteBackendResponse>,
+                                response: retrofit2.Response<FavoriteBackendResponse>
+                            ) {
+                                Log.d("함께 갈 곳 스크롤", currentPage.toString())
+                                val data = response.body()
+                                Log.d("함께 갈 곳 스크롤", data.toString())
+                                if (data?.result != null) {
+                                    Log.d("함께 갈 곳 isLast", data.result.isLast.toString())
+                                    if(data.result.isLast){
+                                        isLastPage = true
+                                    }
+                                    else{
+                                        adapter = PlaceToGoRegionAdapter(accommoList, accessToken!!)
+                                        binding.recyclerviewMainHome.layoutManager =
+                                            LinearLayoutManager(this@PlaceToGoRegionActivity)
+                                        binding.recyclerviewMainHome.adapter = adapter
+                                        binding.recyclerviewMainHome.isNestedScrollingEnabled = true
+                                    }
                                 }
-                                adapter = PlaceToGoRegionAdapter(accommoList, accessToken!!)
-                                binding.recyclerviewMainHome.layoutManager =
-                                    LinearLayoutManager(this@PlaceToGoRegionActivity)
-                                binding.recyclerviewMainHome.adapter = adapter
-                                binding.recyclerviewMainHome.isNestedScrollingEnabled = true
-                                //binding.recyclerviewMainHome.btn_heart.
-                            } else {
-                                Log.d("함께 갈 곳 page+", "empty")
+                                else{
+//                                    fragmentManager
+//                                        .beginTransaction()
+//                                        .add(R.id.thisLayout, NoPlaceToGoFragment() )
+//                                        .addToBackStack(null)
+//                                        .show(NoPlaceToGoFragment())
+//                                        //.hide(PlaceToGoFragment())
+//                                        .commit()
+                                    val noplacetogofragment = NoPlaceToGoFragment()
+                                    val placetogofragment = PlaceToGoFragment()
+                                    Log.d("함께 갈 곳 2222", "222222")
+                                    placetogofragment.parentFragmentManager
+                                        .beginTransaction()
+                                        .replace(R.id.thisLayout, noplacetogofragment)
+                                        .addToBackStack(null)
+                                        .commit()
+                                }
+                                isLoading = false
+
                             }
-                            if (response.body()?.result?.favorites?.size == 0) {
-                                supportFragmentManager.beginTransaction()
-                                    .replace(R.id.thisLayout, NoPlaceToGoFragment())
-                                    .addToBackStack(null)
-                                    .commit()
+
+                            override fun onFailure(call: retrofit2.Call<FavoriteBackendResponse>, t: Throwable) {
+                                Log.d("함께 갈 곳 스크롤ㄴㄴ", "ㄴㄴ")
+                                isLoading = false
+
                             }
-                        }
-                        override fun onFailure(
-                            call: retrofit2.Call<FavoriteBackendResponse>,
-                            t: Throwable
-                        ) {
-                            Log.d("함께 갈 곳 page+ failed", t.toString())
-                        }
-                    })
+                        })
+
+                    }
+                }
             }
+        })
+        binding.btnBack.setOnClickListener {
+            finish()
         }
+    }
+}
+
+
+//
+//        accessToken?.let {
+//            if (region != null) {
+//                api.getFavorites(it, region!!, 0, 3)
+//                    .enqueue(object : retrofit2.Callback<FavoriteBackendResponse> {
+//                        override fun onResponse(
+//                            call: retrofit2.Call<FavoriteBackendResponse>,
+//                            response: retrofit2.Response<FavoriteBackendResponse>
+//                        ) {
+//                            Log.d("함께 갈 곳 page+ 성공", response.toString())
+//                            Log.d("함께 갈 곳 page+", response.body().toString())
+//                            if (response.body()?.result != null) {
+//                                accommoList = response.body()?.result?.favorites?.toMutableList()!!
+//                                if (response.body()!!.result.isLast) {
+//                                    isLast = true
+//                                }
+//                                adapter = PlaceToGoRegionAdapter(accommoList, accessToken!!)
+//                                binding.recyclerviewMainHome.layoutManager =
+//                                    LinearLayoutManager(this@PlaceToGoRegionActivity)
+//                                binding.recyclerviewMainHome.adapter = adapter
+//                                binding.recyclerviewMainHome.isNestedScrollingEnabled = true
+//                                //binding.recyclerviewMainHome.btn_heart.
+//                            } else {
+//                                Log.d("함께 갈 곳 page+", "empty")
+//                            }
+//                            if (response.body()?.result?.favorites?.size == 0) {
+//                                supportFragmentManager.beginTransaction()
+//                                    .replace(R.id.thisLayout, NoPlaceToGoFragment())
+//                                    .addToBackStack(null)
+//                                    .commit()
+//                            }
+//                        }
+//                        override fun onFailure(
+//                            call: retrofit2.Call<FavoriteBackendResponse>,
+//                            t: Throwable
+//                        ) {
+//                            Log.d("함께 갈 곳 page+ failed", t.toString())
+//                        }
+//                    })
 //        var page = 1
 //        while(isLast){
 //            accessToken?.let {
@@ -148,11 +231,6 @@ class PlaceToGoRegionActivity : AppCompatActivity() {
 //            }
 //            page+=1
 //        }
-        binding.btnBack.setOnClickListener {
-            finish()
-        }
-
-    }
 
     //var dataList = accommoList
 
@@ -185,4 +263,3 @@ class PlaceToGoRegionActivity : AppCompatActivity() {
 //
 //    }
 
-}

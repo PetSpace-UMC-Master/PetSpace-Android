@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageButton
+import androidx.fragment.app.FragmentManager
 import com.example.petsapce_week1.R
+import com.example.petsapce_week1.databinding.FragmentNoPlaceToGoBinding
 import com.example.petsapce_week1.network.AccomoService
 import com.example.petsapce_week1.network.RetrofitHelper
 import com.example.petsapce_week1.vo.FavoriteBackendResponse
@@ -18,7 +20,7 @@ import retrofit2.Retrofit
 import java.io.Serializable
 
 
-class PlaceGridAdapter(val context: Context, var img_list:  Array<Int>, val accessToken: String) : BaseAdapter() {
+class PlaceGridAdapter(private val fragmentManager: FragmentManager, val context: Context, var img_list:  Array<Int>, val accessToken: String) : BaseAdapter() {
 
     override fun getCount(): Int {
         return img_list.size
@@ -91,8 +93,9 @@ class PlaceGridAdapter(val context: Context, var img_list:  Array<Int>, val acce
         button?.setOnClickListener {
             postaccessToken = "Bearer $accessToken"
             if (region != null) {
-                api.getFavorites(postaccessToken, region, 0, 4)
+                api.getFavorites(postaccessToken, region, 0, 5)
                     .enqueue(object : retrofit2.Callback<FavoriteBackendResponse> {
+                        @SuppressLint("ResourceType")
                         override fun onResponse(
                             call: retrofit2.Call<FavoriteBackendResponse>,
                             response: retrofit2.Response<FavoriteBackendResponse>
@@ -112,55 +115,41 @@ class PlaceGridAdapter(val context: Context, var img_list:  Array<Int>, val acce
                                         putExtra("isLast", isLast)
                                         putExtra("accessToken", postaccessToken)
                                         putExtra("region", region)
+                                        putExtra("reviewCount", response.body()!!.result.favorites[position].numberOfReview)
                                     }
                                 context.startActivity(nextScreenIntent)
                                 Log.d("함께 ㅇㅇ","ㅇㅇ")
-                            } else {
-                                // ** no place to go fragment 로 이동하면 되는 코드....
-        //                            val fragmentTransaction = fragmentManager.beginTransaction()
-        //                            val newFragment = NoPlaceToGoFragment()
-        //                            fragmentTransaction.add(R.id.placetogoLayout, newFragment)
-        //                            fragmentTransaction.addToBackStack(null)
-        //                            fragmentTransaction.commit()
-        //                            Log.d("함께 갈 곳 no", "noplacetogo")
-
-        //                        val intent = Intent(context, NoPlaceToGoFragment::class.java)
-        //                        Log.d("함께 갈 곳 인텐t", "ㅇㅇ")
-        //                        context.startActivity(intent)
-        //                        Log.d("함께 갈 곳 start", "ㅇㅇ")
-
-        //                        val newFragment = NoPlaceToGoFragment.newInstance(getItem(position) as String)
-        //                        fragment.parentFragmentManager
-        //                            .beginTransaction()
-        //                            .replace(R.id.placetogoLayout, newFragment)
-        //                            .addToBackStack(null)
-        //                            .commit()
                             }
-
+                            else{
+//                                    fragmentManager
+//                                        .beginTransaction()
+//                                        .add(R.id.thisLayout, NoPlaceToGoFragment() )
+//                                        .addToBackStack(null)
+//                                        .show(NoPlaceToGoFragment())
+//                                        //.hide(PlaceToGoFragment())
+//                                        .commit()
+//                                val noplacetogofragment = NoPlaceToGoFragment()
+//                                val placetogofragment = PlaceToGoFragment()
+//                                placetogofragment.parentFragmentManager
+//                                    .beginTransaction()
+//                                    .replace(R.id.placetogoLayout, noplacetogofragment)
+//                                    .addToBackStack(null)
+//                                    .commit()
+                            }
                         }
-
                         override fun onFailure(
                             call: retrofit2.Call<FavoriteBackendResponse>,
                             t: Throwable
                         ) {
                             Log.d(" 함께 갈 곳 호출 실패", "ㅠㅠ")
                             Log.d("함께 에러 메시지", t.toString())
-        //                    val intent = Intent(context, NoPlaceToGoFragment::class.java)
-        //                    context.startActivity(intent)
-                            // ** no place to go fragment 로 이동하면 되는 코드....
-        //                        val fragmentTransaction = fragmentManager.beginTransaction()
-        //                        val newFragment = NoPlaceToGoFragment()
-        //                        fragmentTransaction.add(R.id.placetogoLayout, newFragment)
-        //                        fragmentTransaction.addToBackStack(null)
-        //                        fragmentTransaction.commit()
-        //                        Log.d("함께 갈 곳 no", "noplacetogo")
-                            val noplacetogofragment = NoPlaceToGoFragment()
-                            val placetogofragment = PlaceToGoFragment()
-                            placetogofragment.parentFragmentManager
-                                .beginTransaction()
-                                .addToBackStack(null)
-                                .replace(R.id.fragmentContainerView, noplacetogofragment)
-                                .commit()
+//                            val noplacetogofragment = NoPlaceToGoFragment()
+//                            val placetogofragment = PlaceToGoFragment()
+//                            placetogofragment.parentFragmentManager
+//                                .beginTransaction()
+//                                .addToBackStack(null)
+//                                .replace(R.id.fragmentContainerView, noplacetogofragment)
+//                                .commit()
                         }
                     })
             }

@@ -59,7 +59,7 @@ class PlaceToGoFragment : Fragment() {
         if(accessToken != null){
             val gridVew = binding.placeGridview
             gridVew.adapter =
-                tcontext?.let { PlaceGridAdapter(it, accessToken = accessToken!!, img_list = img) }
+                tcontext?.let { PlaceGridAdapter(parentFragmentManager, it, accessToken = accessToken!!, img_list = img) }
             //adapter = tcontext?.let { PlaceGridAdapter(it, img, accessToken!!) }!!
 //            binding.placeGridview.adapter =
 //                tcontext?.let { PlaceGridAdapter(context = requireContext(), accessToken = accessToken!!, img_list = img) }

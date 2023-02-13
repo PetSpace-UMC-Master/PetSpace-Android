@@ -26,6 +26,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import java.text.DecimalFormat
 
 class AccMainActivity : AppCompatActivity() {
     lateinit var binding:ActivityAccMainBinding
@@ -161,7 +162,9 @@ class AccMainActivity : AppCompatActivity() {
                     // ================ 맨 위 프레임 ==================
                     binding.tvHousename.text = body.result.roomName
                     binding.textAddress.text = body.result.address
-                    binding.textPrice.text = "₩ ${body.result.price}/박"
+                    val priceCut = DecimalFormat("#,###")
+                    var price = priceCut.format(body.result.price)
+                    binding.textPrice.text = "₩ ${price}/박"
                     binding.textStarscore.text = body.result.roomAverageScore.toString()
                     binding.textReviewcount.text = "${body.result.reviewCount}개"
 

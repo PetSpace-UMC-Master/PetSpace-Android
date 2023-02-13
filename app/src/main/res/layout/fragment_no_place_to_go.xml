@@ -5,27 +5,32 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".placetogo.PlaceToGoFragment">
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="@font/bmjua"
-        android:layout_gravity="center"
-        android:text="함께 갈 곳이 없어요"
-        android:textColor="@color/black"
-        android:textSize="20dp" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="80dp"
+        android:id="@+id/noplacetogoframelayout">
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/bmjua"
+            android:layout_gravity="center"
+            android:text="함께 갈 곳이 없어요"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center"
-        android:fontFamily="@font/pretendard_regular"
-        android:text="하트를 누르면 저장할 수 있어요!"
-        android:textColor="#0C201E"
-        android:textSize="16dp" />
-
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="하트를 누르면 저장할 수 있어요!"
+            android:textColor="#0C201E"
+            android:textSize="16dp" />
+    </FrameLayout>
 
 </FrameLayout>

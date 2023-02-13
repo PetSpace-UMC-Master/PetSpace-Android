@@ -114,14 +114,6 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/text_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="1월 2일 ~ 1월 8일"
-        android:textColor="@color/textForBlack"
-        android:textSize="14sp" />
-
-    <TextView
         android:id="@+id/text_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -59,6 +59,7 @@ class PlaceToGoRegionAdapter(var items: MutableList<FavoriteBackendResponse.Favo
                 textPrice.text = "₩${price} / 박"
                 textLoc.text = data.roomAddress
                 textScore.text = data.averageReviewScore.toString()
+                textReview.text = data.numberOfReview.toString()
             }
             /*      val springDotsIndicator = binding.dotsIndicator
                   val viewPager = binding.childViewPager
