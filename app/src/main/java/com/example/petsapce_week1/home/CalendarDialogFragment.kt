@@ -17,6 +17,9 @@ import com.example.petsapce_week1.databinding.FragmentCalendarDialogBinding
 import com.example.petsapce_week1.home.calendar.SaturdayDecorator
 import com.example.petsapce_week1.home.calendar.SundayDecorator
 import com.prolificinteractive.materialcalendarview.*
+import java.time.LocalDate
+import java.time.Period
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -46,18 +49,19 @@ class CalendarDialogFragment : DialogFragment() {
 
         return binding.root
     }
-
     @SuppressLint("SetTextI18n")
     private fun initDataBinding() {
-
         //시작일 끝일
         viewModel.curStartDate.observe(viewLifecycleOwner) {
-            binding.btnResult.text = "$it ~ ${viewModel.curEndDate.value}"
+            binding.btnResult.text = "$it ~ ${viewModel.curEndDate.value} / ${viewModel.days.value}박"
 
         }
         viewModel.curEndDate.observe(viewLifecycleOwner){
-            binding.btnResult.text = "${viewModel.curStartDate.value} ~ $it"
+            binding.btnResult.text = "${viewModel.curStartDate.value} ~ $it / ${viewModel.days.value}박"
 
+        }
+        viewModel.days.observe(viewLifecycleOwner){
+            binding.btnResult.text = "${viewModel.curStartDate.value} ~ ${viewModel.curEndDate.value} / ${it}박"
         }
 
     }
@@ -84,9 +88,18 @@ class CalendarDialogFragment : DialogFragment() {
         calendarView.setOnRangeSelectedListener { widget, dates ->
             val startDay = dates[0].date.toString()
             val endDay = dates[dates.size - 1].date.toString()
+
+            //날짜간 차이 계산
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            val startDa = LocalDate.parse(startDay, formatter)
+            val endDa = LocalDate.parse(endDay, formatter)
+            val period = Period.between(startDa, endDa)
+            val days = period.days
+
             viewModel.getStardDate(startDay)
             viewModel.getEndDate(endDay)
-            Log.d("day", "시작일 : $startDay, 종료일 : $endDay")
+            viewModel.getCalDate(days)
+            Log.d("day", "시작일 : $startDay, 종료일 : $endDay, 차이 : $days")
         }
 
 
@@ -120,6 +133,11 @@ class CalendarDialogFragment : DialogFragment() {
 //        calendarView.addDecorators(sundayDecorator, saturdayDecorator)
 
     }
+
+    /*
+    private fun updateButtonText() {
+        binding.btnResult.text = "${viewModel.curStartDate.value} ~ ${viewModel.curEndDate.value}"
+    }*/
 
 
 }

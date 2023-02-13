@@ -36,6 +36,7 @@
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"
+        android:textAlignment="center"
         android:text="2022.12.13 (화) ~ 2022.12.16 (금) / 3박"
         android:textColor="#EEF5F5"
         android:textSize="16dp" />

@@ -1,13 +1,12 @@
 package com.example.petsapce_week1.home
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.kakao.sdk.user.model.User
 import java.time.LocalDate
+import java.time.Period
 import java.time.format.DateTimeFormatter
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -39,29 +38,34 @@ class ResViewModel : ViewModel() {
     val curAdult: MutableLiveData<Int> by lazy {
         MutableLiveData<Int>()
     }
+
     init {
         curAdult.value = 0
     }
-    fun plusAdult(){
-        curAdult.value  = curAdult.value?.plus(1)
+
+    fun plusAdult() {
+        curAdult.value = curAdult.value?.plus(1)
     }
-    fun minusAdult(){
-        curAdult.value  = curAdult.value?.minus(1)
+
+    fun minusAdult() {
+        curAdult.value = curAdult.value?.minus(1)
     }
 
 
     //아이
     val curChild = MutableLiveData<Int>()
+
     init {
         curChild.value = 0
     }
-    fun plusChild(){
-        curChild.value  = curChild.value?.plus(1)
-    }
-    fun minusChild(){
-        curChild.value  = curChild.value?.minus(1)
+
+    fun plusChild() {
+        curChild.value = curChild.value?.plus(1)
     }
 
+    fun minusChild() {
+        curChild.value = curChild.value?.minus(1)
+    }
 
 
     //동물
@@ -73,11 +77,12 @@ class ResViewModel : ViewModel() {
         curAnimal.value = 0
     }
 
-    fun plusAnimal(){
-        curAnimal.value  = curAnimal.value?.plus(1)
+    fun plusAnimal() {
+        curAnimal.value = curAnimal.value?.plus(1)
     }
-    fun minusAnimal(){
-        curAnimal.value  = curAnimal.value?.minus(1)
+
+    fun minusAnimal() {
+        curAnimal.value = curAnimal.value?.minus(1)
 //        Log.d("btn1", curAnimal.value.toString())
     }
 
@@ -100,6 +105,7 @@ class ResViewModel : ViewModel() {
     }
 
 
+//    날짜===================================================================================================
 
     //날짜
     val now: LocalDate = LocalDate.now()
@@ -117,26 +123,43 @@ class ResViewModel : ViewModel() {
         curEndDate.value = endDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
     }
 
-    fun getStardDate(nowday:String){
-        curStartDate.value  = nowday.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+    fun getStardDate(nowday: String) {
+        curStartDate.value = nowday.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
     }
 
-    fun getEndDate(nowday:String){
-        curEndDate.value  = nowday.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+    fun getEndDate(nowday: String) {
+        curEndDate.value = nowday.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
     }
 
 
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+    val startDay = LocalDate.parse(curStartDate.value, formatter)
+    val endDay = LocalDate.parse(curEndDate.value, formatter)
+    val period = Period.between(startDay, endDay)
 
-   /* fun plusAnimal(){
-        curCalDate.value  = curCalDate.value?.plus(1)
+    val days: MutableLiveData<Int> by lazy {
+        MutableLiveData<Int>()
     }
-    fun minusAnimal(){
-        curCalDate.value  = curCalDate.value?.minus(1)
-//        Log.d("btn1", curAnimal.value.toString())
-    }*/
+
+    init {
+        days.value = period.days
+
+    }
+
+    fun getCalDate(nowday: Int) {
+        days.value = nowday
+    }
+
+//    날짜끝===================================================================================================
 
 
-
+    /* fun plusAnimal(){
+         curCalDate.value  = curCalDate.value?.plus(1)
+     }
+     fun minusAnimal(){
+         curCalDate.value  = curCalDate.value?.minus(1)
+ //        Log.d("btn1", curAnimal.value.toString())
+     }*/
 
 
 }

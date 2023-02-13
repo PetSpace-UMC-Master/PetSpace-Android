@@ -3,6 +3,7 @@ package com.example.petsapce_week1.home
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.petsapce_week1.databinding.ActivityHomeResearchBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.android.synthetic.main.activity_home_research.*
+import java.time.LocalDate
 
 class HomeResearchActivity : AppCompatActivity() {
 
@@ -65,8 +67,26 @@ class HomeResearchActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun initDataBinding() {
+        //옵저버 한번에 붙이기
+        val observer = Observer<Any> {
+            binding.textPerson.text =
+                "성인 ${viewModel.curAdult.value}명, 아동 ${viewModel.curChild.value}명, 반려동물 ${viewModel.curAnimal.value}마리"
+            binding.textCalendar.text = "${viewModel.curStartDate.value} ~ ${viewModel.curEndDate.value} / ${viewModel.days.value}박"
+        }
+        viewModel.curAdult.observe(this, observer)
+        viewModel.curChild.observe(this, observer)
+        viewModel.curAnimal.observe(this, observer)
+        viewModel.curStartDate.observe(this, observer)
+        viewModel.curEndDate.observe(this, observer)
+        viewModel.days.observe(this,observer)
+
+//        Log.d("today",viewModel.calcuDate.toString())
+//        viewModel.minusDate()
+
+
+
         //성인
-        val nameObserver = Observer<Int> { curAdult ->
+      /*  val nameObserver = Observer<Int> { curAdult ->
             binding.textPerson.text =
                 "성인 ${curAdult}명, 아동 ${viewModel.curChild.value}명, 반려동물 ${viewModel.curAnimal.value}마리"
         }
@@ -82,10 +102,11 @@ class HomeResearchActivity : AppCompatActivity() {
         viewModel.curAnimal.observe(this, Observer { curAnimal ->
             binding.textPerson.text =
                 "성인 ${viewModel.curAdult.value}명, 아동 ${viewModel.curChild.value}명, 반려동물 ${curAnimal}마리"
-        })
+        })*/
+
 
         //날짜
-        val calStartObserver = Observer<String> { it ->
+    /*    val calStartObserver = Observer<String> { it ->
             binding.textCalendar.text = "$it ~ ${viewModel.curEndDate.value}"
         }
         viewModel.curStartDate.observe(this, calStartObserver)
@@ -94,7 +115,7 @@ class HomeResearchActivity : AppCompatActivity() {
         val calEndObserver = Observer<String> { curEndDate ->
             binding.textCalendar.text = "${viewModel.curStartDate.value} ~ $curEndDate"
         }
-        viewModel.curEndDate.observe(this, calEndObserver)
+        viewModel.curEndDate.observe(this, calEndObserver)*/
     }
 
     //fragment dialog불러오기
@@ -120,6 +141,8 @@ class HomeResearchActivity : AppCompatActivity() {
 
     //reset
     private fun initReset() {
+        val now: LocalDate = LocalDate.now()
+        val endDate = now.plusDays(2)
         binding.apply {
             reset.setOnClickListener {
                 textWhereShow.setText("")
@@ -127,6 +150,8 @@ class HomeResearchActivity : AppCompatActivity() {
                 viewModel.curAdult.postValue(0)
                 viewModel.curChild.postValue(0)
                 viewModel.curAnimal.postValue(0)
+                viewModel.getStardDate(now.toString())
+                viewModel.getEndDate(endDate.toString())
             }
         }
     }
