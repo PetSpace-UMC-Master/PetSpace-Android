@@ -1,6 +1,7 @@
 package com.example.petsapce_week1.home
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -13,7 +14,7 @@ import com.example.petsapce_week1.databinding.ActivityHome2Binding
 import com.example.petsapce_week1.home.homefragment.SortViewModel
 import com.example.petsapce_week1.network.RetrofitHelperHome
 import com.example.petsapce_week1.network.homeAPI
-import com.example.petsapce_week1.vo.HomeResponse
+import com.example.petsapce_week1.vo.Home2Response
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -49,6 +50,16 @@ class Home2Activity : AppCompatActivity() {
 
     lateinit var adapter: Home2MainAdapter
 
+    //초기 검색값 세팅
+    lateinit var searchText:String
+    lateinit var startDay:String
+    lateinit var endDay:String
+    var adult = 0
+    var child = 0
+    var animal = 0
+    var people = adult+child
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHome2Binding.inflate(layoutInflater)
@@ -59,22 +70,34 @@ class Home2Activity : AppCompatActivity() {
         initSpinner()
         initButtonSort()
         initRecyclerView()
+        initBefore()
 
     }
 
+
+
     private fun initFirst() {
-        val searchText = intent.getStringExtra("searchText")
-        val startDay = intent.getStringExtra("startDay")
-        val endDay = intent.getStringExtra("endDay")
-        val adult = intent.getIntExtra("adult",-1)
-        val child = intent.getIntExtra("child",-1)
-        val animal = intent.getIntExtra("animal",-1)
-        Log.d("tag",searchText.toString())
-        Log.d("tag1",startDay.toString())
-        Log.d("tag2",endDay.toString())
-        Log.d("tag3",adult.toString())
-        Log.d("tag4",child.toString())
-        Log.d("tag5",animal.toString())
+         searchText = intent.getStringExtra("searchText").toString().trim()
+        /*if (searchText == " "){
+            searchText = ""
+        }*/
+         startDay = intent.getStringExtra("startDay").toString()
+         endDay = intent.getStringExtra("endDay").toString()
+         adult = intent.getIntExtra("adult", -1)
+         child = intent.getIntExtra("child", -1)
+         people = adult + child
+         animal = intent.getIntExtra("animal", -1)
+        Log.d("tag", searchText.toString())
+        Log.d("tag1", startDay.toString())
+        Log.d("tag2", endDay.toString())
+        Log.d("tag3", adult.toString())
+        Log.d("tag4", child.toString())
+        Log.d("tag5", animal.toString())
+
+        binding.textChange.text = searchText
+        updateTripple(0,"","",startDay,endDay,searchText,people,animal)
+
+
     }
 
     private fun initSpinner() {
@@ -96,23 +119,23 @@ class Home2Activity : AppCompatActivity() {
                 )
                 when (spinner.getItemAtPosition(position)) {
                     "최근등록순" -> {
-                        updateTripple(0,sortDefault,"")
+//                        updateTripple(0, sortDefault, "")
 
                     }
                     "높은가격순" -> {
-                        updateTripple(0,sortPriceAsc,"")
+//                        updateTripple(0, sortPriceAsc, "")
                     }
                     "낮은가격순" -> {
-                        updateTripple(0,sortPriceDesc,"")
+//                        updateTripple(0, sortPriceDesc, "")
                     }
                     "평점높은순" -> {
-                        updateTripple(0,sortReviewScore,"")
+//                        updateTripple(0, sortReviewScore, "")
                     }
                     "리뷰많은순" -> {
-                        updateTripple(0,sortReviewCount,"")
+//                        updateTripple(0, sortReviewCount, "")
                     }
                     else -> {
-                        updateTripple(0,sortPriceAsc,"")
+//                        updateTripple(0, sortPriceAsc, "")
                     }
                 }
             }
@@ -124,7 +147,8 @@ class Home2Activity : AppCompatActivity() {
     private fun initButtonSort() {
         binding.apply {
             b1.setOnClickListener {
-                updateTripple(0,"", btn1House)
+                updateTripple(0, "", btn1House,startDay.toString(),endDay.toString(), searchText,people,animal)
+/*
                 spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                     override fun onNothingSelected(parent: AdapterView<*>?) {
                     }
@@ -142,36 +166,38 @@ class Home2Activity : AppCompatActivity() {
                         )
                         when (spinner.getItemAtPosition(position)) {
                             "최근등록순" -> {
-                                updateTripple(0,sortDefault, btn1House)
+                                updateTripple(0, sortDefault, btn1House)
                             }
                             "높은가격순" -> {
-                                updateTripple(0,sortPriceAsc, btn1House)
+                                updateTripple(0, sortPriceAsc, btn1House)
                             }
                             "낮은가격순" -> {
-                                updateTripple(0,sortPriceDesc, btn1House)
+                                updateTripple(0, sortPriceDesc, btn1House)
                             }
                             "평점높은순" -> {
-                                updateTripple(0,sortReviewScore, btn1House)
+                                updateTripple(0, sortReviewScore, btn1House)
                             }
                             "리뷰많은순" -> {
-                                updateTripple(0,sortReviewCount, btn1House)
+                                updateTripple(0, sortReviewCount, btn1House)
                             }
                             else -> {
-                                updateTripple(0,sortDefault, btn1House)
+                                updateTripple(0, sortDefault, btn1House)
                             }
                         }
                     }
                 }
+*/
             }
 
             b2.setOnClickListener {
-                updateTripple(0,"",btn2Campsite)
+                updateTripple(0, "", btn2Campsite,startDay.toString(),endDay.toString(), searchText,people,animal)
             }
             b3.setOnClickListener {
-                updateTripple(0,"",btn3Downtown)
+                updateTripple(0, "", btn3Downtown,startDay.toString(),endDay.toString(), searchText,people,animal)
             }
             b4.setOnClickListener {
-                updateTripple(0,"",btn4Country)
+                updateTripple(0, "", btn4Country,startDay.toString(),endDay.toString(), searchText,people,animal)
+/*
                 spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                     override fun onNothingSelected(parent: AdapterView<*>?) {
                     }
@@ -189,31 +215,32 @@ class Home2Activity : AppCompatActivity() {
                         )
                         when (spinner.getItemAtPosition(position)) {
                             "최근등록순" -> {
-                                updateTripple(0,sortDefault, btn4Country)
+                                updateTripple(0, sortDefault, btn4Country)
                             }
                             "높은가격순" -> {
-                                updateTripple(0,sortPriceAsc, btn4Country)
+                                updateTripple(0, sortPriceAsc, btn4Country)
                             }
                             "낮은가격순" -> {
-                                updateTripple(0,sortPriceDesc, btn4Country)
+                                updateTripple(0, sortPriceDesc, btn4Country)
                             }
                             "평점높은순" -> {
-                                updateTripple(0,sortReviewScore, btn4Country)
+                                updateTripple(0, sortReviewScore, btn4Country)
                             }
                             "리뷰많은순" -> {
-                                updateTripple(0,sortReviewCount, btn4Country)
+                                updateTripple(0, sortReviewCount, btn4Country)
                             }
                             else -> {
-                                updateTripple(0,sortDefault, btn4Country)
+                                updateTripple(0, sortDefault, btn4Country)
                             }
                         }
                     }
                 }
+*/
 
 
             }
             b5.setOnClickListener {
-                updateTripple(0,"",btn5Beach)
+                updateTripple(0, "", btn5Beach,startDay.toString(),endDay.toString(), searchText,people,animal)
 
             }
 
@@ -221,63 +248,80 @@ class Home2Activity : AppCompatActivity() {
 
     }
 
-    fun updateTripple(page: Int, sort: String, category: String) {
+    fun updateTripple(
+        page: Int,
+        sort: String,
+        category: String,
+        startDay: String,
+        endDay: String,
+        keyword: String,
+        people: Int,
+        pets: Int
+    ) {
 
-        api.getTriple(page, sort, category).enqueue(object : Callback<HomeResponse> {
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onResponse(
-                call: Call<HomeResponse>,
-                response: Response<HomeResponse>
-            ) {
-                val usersSort = response.body()
-                if (usersSort != null) {
+        api.getAll(page, sort, category, startDay, endDay,keyword,people,pets)
+            .enqueue(object : Callback<Home2Response> {
+                @SuppressLint("NotifyDataSetChanged")
+                override fun onResponse(
+                    call: Call<Home2Response>,
+                    response: Response<Home2Response>
+                ) {
+                  /*  binding.recyclerviewMain.visibility = View.VISIBLE
+                    binding.sorrydog.visibility = View.GONE*/
+                    val usersSort = response.body()
+
+                    if (usersSort != null && usersSort.result != null) {
+                        val resultSize = usersSort.result.size
 //                    Log.d("tripple", usersSort.result.toString())
-                    val resultSize = usersSort.result.size
-                    val dataList = ArrayList<Home2MainData>()
-                    var statdate = ""
-                    var endDate = ""
+                        val dataList = ArrayList<Home2MainData>()
+                        var statdate = ""
+                        var endDate = ""
+
+                        Log.d("PRICE_DESCgggg", usersSort.result.toString())
 
 
-                    for (i in 0 until resultSize) {
-                        roomId = usersSort.result[i].roomId.toString()
+                        for (i in 0 until resultSize) {
+                            roomId = usersSort.result[i].roomId.toString()
 //                        val availDaysList = usersSort.result[i].availableDays.size
-                        val availImageSize = usersSort.result[i].roomImages.size
+                            val availImageSize = usersSort.result[i].roomImages.size
 
-                        var childataList = ArrayList<Home2ChildData>()
-                        for (j in 0 until availImageSize) {
-                            childataList.add(Home2ChildData(usersSort.result[i].roomImages[j]))
+                            var childataList = ArrayList<Home2ChildData>()
+                            for (j in 0 until availImageSize) {
+                                childataList.add(Home2ChildData(usersSort.result[i].roomImages[j]))
 
-                        }
+                            }
 
-                        dataList.add(
-                            Home2MainData(
-                                childataList,
-                                usersSort.result[i].averageReviewScore,
-                                usersSort.result[i].city + ", " + usersSort.result[i].district,
-                                "$statdate~$endDate",
-                                usersSort.result[i].price,
-                                usersSort.result[i].numberOfReview,
-                                usersSort.result[i].roomId
+                            dataList.add(
+                                Home2MainData(
+                                    childataList,
+                                    usersSort.result[i].averageReviewScore,
+                                    usersSort.result[i].city + ", " + usersSort.result[i].district,
+                                    "$statdate~$endDate",
+                                    usersSort.result[i].price,
+                                    usersSort.result[i].numberOfReview,
+                                    usersSort.result[i].roomId
+
+                                )
 
                             )
+                        }
 
-                        )
+                        adapter.items = dataList
+                        adapter.notifyDataSetChanged()
+
+
+                    } else {
+                        binding.recyclerviewMain.visibility = View.GONE
+                        binding.sorrydog.visibility = View.VISIBLE
+                        Log.d("PRICE_DESCgggg", response.code().toString())
+
                     }
-
-                    adapter.items = dataList
-                    adapter.notifyDataSetChanged()
-
-
-                } else {
-                    Log.d("PRICE_DESC", response.code().toString())
-
                 }
-            }
 
-            override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
-                Log.d("PRICE_DESC", t.message.toString())
-            }
-        })
+                override fun onFailure(call: Call<Home2Response>, t: Throwable) {
+                    Log.d("PRICE_DESC", t.message.toString())
+                }
+            })
 
     }
 
@@ -291,7 +335,13 @@ class Home2Activity : AppCompatActivity() {
         adapter = Home2MainAdapter(dataList)
         binding.recyclerviewMain.adapter = adapter
         binding.recyclerviewMain.isNestedScrollingEnabled = false
+    }
 
+    private fun initBefore() {
+        binding.imgBack.setOnClickListener {
+            val intent = Intent(this, HomeResearchActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.petsapce_week1.R
+import com.example.petsapce_week1.databinding.Home2MainRowChildBinding
 import com.example.petsapce_week1.databinding.HomeMainRowChildBinding
 import com.example.petsapce_week1.home.homefragment.HomeChildData
 
@@ -15,7 +16,7 @@ class Home2ChildAdapter(private val items: List<Home2ChildData>) : RecyclerView.
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChildViewHolder {
-        val binding = HomeMainRowChildBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = Home2MainRowChildBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ChildViewHolder(binding)
     }
 
@@ -34,7 +35,7 @@ class Home2ChildAdapter(private val items: List<Home2ChildData>) : RecyclerView.
 
     override fun getItemCount(): Int = items.size
 
-    inner class ChildViewHolder(val binding: HomeMainRowChildBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class ChildViewHolder(val binding: Home2MainRowChildBinding) : RecyclerView.ViewHolder(binding.root){
 
     }
 }

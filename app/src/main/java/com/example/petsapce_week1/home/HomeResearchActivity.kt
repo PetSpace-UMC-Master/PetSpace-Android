@@ -163,7 +163,7 @@ class HomeResearchActivity : AppCompatActivity() {
             val adult = viewModel.curAdult.value
             val child = viewModel.curChild.value
             val animal = viewModel.curAnimal.value
-            Log.d("search", animal.toString())
+            Log.d("search", searchText.toString())
 
             val intent = Intent(this, Home2Activity::class.java)
             intent.putExtra("searchText", searchText)
