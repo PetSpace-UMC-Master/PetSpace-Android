@@ -86,107 +86,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
         }
     }
 
-/*
-    private fun initButtonSort() {
-        binding.apply {
-            b1.setOnClickListener {
-                updateCategory(btn1House)
-                spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                    override fun onNothingSelected(parent: AdapterView<*>?) {
-                    }
-
-                    @SuppressLint("NotifyDataSetChanged")
-                    override fun onItemSelected(
-                        parent: AdapterView<*>?,
-                        view: View?,
-                        position: Int,
-                        id: Long
-                    ) {
-                        Log.d(
-                            "MainActivity",
-                            "onItemSelected : $position, ${spinner.getItemAtPosition(position)}"
-                        )
-                        when (spinner.getItemAtPosition(position)) {
-                            "최근등록순" -> {
-                                updateDouble(sortDefault, btn1House)
-                            }
-                            "높은가격순" -> {
-                                updateDouble(sortPriceAsc, btn1House)
-                            }
-                            "낮은가격순" -> {
-                                updateDouble(sortPriceDesc, btn1House)
-                            }
-                            "평점높은순" -> {
-                                updateDouble(sortReviewScore, btn1House)
-                            }
-                            "리뷰많은순" -> {
-                                updateDouble(sortReviewCount, btn1House)
-                            }
-                            else -> {
-                                updateDouble(sortDefault, btn1House)
-                            }
-                        }
-                    }
-                }
-            }
-
-            b2.setOnClickListener {
-                updateCategory(btn2Campsite)
-            }
-            b3.setOnClickListener {
-                updateCategory(btn3Downtown)
-            }
-            b4.setOnClickListener {
-                updateCategory(btn4Country)
-                spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                    override fun onNothingSelected(parent: AdapterView<*>?) {
-                    }
-
-                    @SuppressLint("NotifyDataSetChanged")
-                    override fun onItemSelected(
-                        parent: AdapterView<*>?,
-                        view: View?,
-                        position: Int,
-                        id: Long
-                    ) {
-                        Log.d(
-                            "MainActivity",
-                            "onItemSelected : $position, ${spinner.getItemAtPosition(position)}"
-                        )
-                        when (spinner.getItemAtPosition(position)) {
-                            "최근등록순" -> {
-                                updateDouble(sortDefault, btn4Country)
-                            }
-                            "높은가격순" -> {
-                                updateDouble(sortPriceAsc, btn4Country)
-                            }
-                            "낮은가격순" -> {
-                                updateDouble(sortPriceDesc, btn4Country)
-                            }
-                            "평점높은순" -> {
-                                updateDouble(sortReviewScore, btn4Country)
-                            }
-                            "리뷰많은순" -> {
-                                updateDouble(sortReviewCount, btn4Country)
-                            }
-                            else -> {
-                                updateDouble(sortDefault, btn4Country)
-                            }
-                        }
-                    }
-                }
-
-
-            }
-            b5.setOnClickListener {
-                updateCategory(btn5Beach)
-
-            }
-
-        }
-
-    }
-*/
 
     fun updateDouble(sort: String, category: String) {
         ArrayList<HomeMainData>()
@@ -199,7 +98,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
             ) {
                 val usersSort = response.body()
                 if (usersSort != null) {
-//                    Log.d("tripple", usersSort.result.toString())
+                    Log.d("시골2", usersSort.result.toString())
                     val resultSize = usersSort.result.size
                     val dataList = ArrayList<HomeMainData>()
 //                    var dateList = arrayListOf(1,2,3)
@@ -337,7 +236,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 val usersSort = response.body()
 
                 if (usersSort != null) {
-                    Log.d("PRICE_DESC", usersSort.result.toString())
+                    Log.d("시골1", usersSort.result.toString())
                     val resultSize = usersSort.result.size
                     var dataList = ArrayList<HomeMainData>()
 //                    var dateList = arrayListOf(1,2,3)
@@ -452,7 +351,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 val usersSort = response.body()
 
                 if (usersSort != null) {
-                    Log.d("PRICE_DESC", usersSort.result.toString())
+                    Log.d("Double_onesort", usersSort.result.toString())
                     val resultSize = usersSort.result.size
                     val dataList = ArrayList<HomeMainData>()
 //                    var dateList = arrayListOf(1,2,3)
@@ -643,6 +542,108 @@ class HomeFragment : Fragment(), View.OnClickListener {
         binding.b5.setOnClickListener(this)
 
     }
+
+    /*
+    private fun initButtonSort() {
+        binding.apply {
+            b1.setOnClickListener {
+                updateCategory(btn1House)
+                spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                    }
+
+                    @SuppressLint("NotifyDataSetChanged")
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        Log.d(
+                            "MainActivity",
+                            "onItemSelected : $position, ${spinner.getItemAtPosition(position)}"
+                        )
+                        when (spinner.getItemAtPosition(position)) {
+                            "최근등록순" -> {
+                                updateDouble(sortDefault, btn1House)
+                            }
+                            "높은가격순" -> {
+                                updateDouble(sortPriceAsc, btn1House)
+                            }
+                            "낮은가격순" -> {
+                                updateDouble(sortPriceDesc, btn1House)
+                            }
+                            "평점높은순" -> {
+                                updateDouble(sortReviewScore, btn1House)
+                            }
+                            "리뷰많은순" -> {
+                                updateDouble(sortReviewCount, btn1House)
+                            }
+                            else -> {
+                                updateDouble(sortDefault, btn1House)
+                            }
+                        }
+                    }
+                }
+            }
+
+            b2.setOnClickListener {
+                updateCategory(btn2Campsite)
+            }
+            b3.setOnClickListener {
+                updateCategory(btn3Downtown)
+            }
+            b4.setOnClickListener {
+                updateCategory(btn4Country)
+                spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                    }
+
+                    @SuppressLint("NotifyDataSetChanged")
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        Log.d(
+                            "MainActivity",
+                            "onItemSelected : $position, ${spinner.getItemAtPosition(position)}"
+                        )
+                        when (spinner.getItemAtPosition(position)) {
+                            "최근등록순" -> {
+                                updateDouble(sortDefault, btn4Country)
+                            }
+                            "높은가격순" -> {
+                                updateDouble(sortPriceAsc, btn4Country)
+                            }
+                            "낮은가격순" -> {
+                                updateDouble(sortPriceDesc, btn4Country)
+                            }
+                            "평점높은순" -> {
+                                updateDouble(sortReviewScore, btn4Country)
+                            }
+                            "리뷰많은순" -> {
+                                updateDouble(sortReviewCount, btn4Country)
+                            }
+                            else -> {
+                                updateDouble(sortDefault, btn4Country)
+                            }
+                        }
+                    }
+                }
+
+
+            }
+            b5.setOnClickListener {
+                updateCategory(btn5Beach)
+
+            }
+
+        }
+
+    }
+*/
 
 
 }

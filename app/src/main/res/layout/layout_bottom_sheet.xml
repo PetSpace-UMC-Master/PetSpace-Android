@@ -107,9 +107,9 @@
                 android:text="0"
                 android:textColor="@color/textForBlack"
                 android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@+id/btn_minus_adult"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btn_plus_adult"
+                app:layout_constraintStart_toEndOf="@+id/btn_minus_adult"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatImageButton
@@ -168,8 +168,8 @@
                 android:textColor="@color/textForBlack"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/btn_minus_child"
                 app:layout_constraintEnd_toStartOf="@+id/btn_plus_child"
+                app:layout_constraintStart_toEndOf="@+id/btn_minus_child"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatImageButton
@@ -226,9 +226,9 @@
                 android:text="0"
                 android:textColor="@color/textForBlack"
                 android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@+id/btn_minus_animal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btn_plus_animal"
+                app:layout_constraintStart_toEndOf="@+id/btn_minus_animal"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatImageButton
@@ -254,7 +254,7 @@
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
-            android:text="성인 @{dialogViewModel.curAdult}명, 아동 0명, 반려동물 1마리"
+            android:text="성인 0명, 아동 0명, 반려동물 1마리"
             android:textColor="#EEF5F5"
             android:textSize="16dp"
 
