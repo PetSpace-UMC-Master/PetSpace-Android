@@ -19,7 +19,7 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/btn_heart"
+                android:id="@+id/btn_heart_after"
                 android:translationZ="1dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="15dp"

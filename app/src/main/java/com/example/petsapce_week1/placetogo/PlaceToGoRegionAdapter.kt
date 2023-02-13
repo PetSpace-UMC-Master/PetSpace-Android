@@ -9,11 +9,26 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petsapce_week1.accommodation.AccMainActivity
 import com.example.petsapce_week1.databinding.PlacetogoItemsBinding
+import com.example.petsapce_week1.network.AccomoService
+import com.example.petsapce_week1.network.RetrofitHelper
 import com.example.petsapce_week1.vo.FavoriteBackendResponse
 import com.example.petsapce_week1.vo.FavoriteData
+import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationData
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
 import java.text.DecimalFormat
 
-class PlaceToGoRegionAdapter(var items: MutableList<FavoriteBackendResponse.Favorite>) : RecyclerView.Adapter<PlaceToGoRegionAdapter.ViewHolder>() {
+class PlaceToGoRegionAdapter(var items: MutableList<FavoriteBackendResponse.Favorite>, val accessToken : String) : RecyclerView.Adapter<PlaceToGoRegionAdapter.ViewHolder>() {
+
+    // ========== 백엔드 연동 부분 ===========
+    private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
+    // 기본 숙소 정보 불러올때 호출
+    var api : AccomoService = retrofit.create(AccomoService::class.java)
+
+    // 좋아요 버튼 눌렀을 때 호출
+    var apiLike : AccomoService = retrofit.create(AccomoService::class.java)
 
     interface OnItemClickListener {
         fun OnItemClick(data: FavoriteData)
@@ -84,24 +99,45 @@ class PlaceToGoRegionAdapter(var items: MutableList<FavoriteBackendResponse.Favo
             ContextCompat.startActivity(holder.itemView.context,intent,null)
             Log.d("content",roomIDNext.toString())
         }
-
+        holder.binding.btnHeartAfter.isSelected = true
 
 //        holder.childViewPager.adapter = HomeChildViewPagerAdapter(items[position].imgList)
 //        holder.binding.childViewPager.visibility = View.VISIBLE
         holder.binding.apply {
             topcardview.cardElevation = 0f
-            btnHeart.setOnClickListener {
-                btnHeart.isSelected = btnHeart.isSelected != true
+            btnHeartAfter.setOnClickListener {
+                btnHeartAfter.isSelected = btnHeartAfter.isSelected != true
+                if(!btnHeartAfter.isSelected){
+                    api.postLikes(accessToken).enqueue(object : Callback<AccomodationData> {
+                        override fun onResponse(
+                            call: Call<AccomodationData>,
+                            response: Response<AccomodationData>
+                        ) {
+                            Log.d("숙소 좋아요 표시", "했음")
+                        }
+
+                        override fun onFailure(call: Call<AccomodationData>, t: Throwable) {
+                            Log.d("숙소 좋아요 표시", "x했음")
+                        }
+
+                    })
+                }
+                else{
+                    api.postLikes(accessToken).enqueue(object : Callback<AccomodationData> {
+                        override fun onResponse(
+                            call: Call<AccomodationData>,
+                            response: Response<AccomodationData>
+                        ) {
+                            Log.d("숙소 좋아요 표시", "했음")
+                        }
+
+                        override fun onFailure(call: Call<AccomodationData>, t: Throwable) {
+                            Log.d("숙소 좋아요 표시", "x했음")
+                        }
+
+                    })
+                }
             }
-
-
-            //이미지는 이런식으로 담아야함.
-//            imgMain.setImageResource(items[position].img)
-            /*  textLoc.text = items[position].location
-              textScore.text = items[position].score.toString()
-              textDate.text = items[position].date.toString()
-              textPrice.text = "₩" + items[position].price.toString() + " / 박"*/
-//            textViewDifficulty.text= "난이도 ${position+1}"
 
         }
         holder.bind(items[position])

@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.petsapce_week1.R
@@ -14,6 +15,8 @@ import com.example.petsapce_week1.network.AccomoService
 import com.example.petsapce_week1.network.RetrofitHelper
 import com.example.petsapce_week1.vo.FavoriteBackendResponse
 import com.example.petsapce_week1.vo.FavoriteData
+import kotlinx.android.synthetic.main.home_main_row.view.*
+import kotlinx.android.synthetic.main.placetogo_items.view.*
 import retrofit2.Retrofit
 
 class PlaceToGoRegionActivity : AppCompatActivity() {
@@ -60,10 +63,11 @@ class PlaceToGoRegionActivity : AppCompatActivity() {
         binding.tvRegion.text = regionKor
 
         //initRecyclerView()
-        var adapter: PlaceToGoRegionAdapter = PlaceToGoRegionAdapter(accommoList)
+        var adapter: PlaceToGoRegionAdapter = PlaceToGoRegionAdapter(accommoList, accessToken!!)
         binding.recyclerviewMainHome.layoutManager = LinearLayoutManager(this)
         binding.recyclerviewMainHome.adapter = adapter
         binding.recyclerviewMainHome.isNestedScrollingEnabled = true
+
         Log.d("함께 어답터 실행됨", "ㅐㅐ")
 
         accessToken?.let {
@@ -81,12 +85,12 @@ class PlaceToGoRegionActivity : AppCompatActivity() {
                                 if (response.body()!!.result.isLast) {
                                     isLast = true
                                 }
-                                adapter = PlaceToGoRegionAdapter(accommoList)
+                                adapter = PlaceToGoRegionAdapter(accommoList, accessToken!!)
                                 binding.recyclerviewMainHome.layoutManager =
                                     LinearLayoutManager(this@PlaceToGoRegionActivity)
                                 binding.recyclerviewMainHome.adapter = adapter
                                 binding.recyclerviewMainHome.isNestedScrollingEnabled = true
-
+                                //binding.recyclerviewMainHome.btn_heart.
                             } else {
                                 Log.d("함께 갈 곳 page+", "empty")
                             }
