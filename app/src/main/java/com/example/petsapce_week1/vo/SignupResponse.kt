@@ -24,4 +24,9 @@ data class EmailCheckResponse(
     val responseCode: Int,
     val responseMessage: String,
     val result: Result
-)
+){
+    data class Result (
+        val email: String,
+        val isAvailable : Boolean
+    )
+}

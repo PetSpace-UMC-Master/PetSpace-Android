@@ -1,6 +1,7 @@
 package com.example.petsapce_week1
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,12 +12,24 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.petsapce_week1.databinding.ActivitySignin2Binding
+import com.example.petsapce_week1.network.AccomoService
+import com.example.petsapce_week1.network.LoginService
+import com.example.petsapce_week1.network.RetrofitHelper
+import com.example.petsapce_week1.vo.EmailCheckResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import java.net.URLEncoder
 import java.util.regex.Pattern
 
 class Signin4Activity : AppCompatActivity() {
     lateinit var binding: ActivitySignin2Binding
     lateinit var viewModel: EmailViewModel
 
+    // ========== 백엔드 연동 부분 ===========
+    private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
+    var api : LoginService = retrofit.create(LoginService::class.java)
 
     //비밀번호 입력 담는 지역 변수(올바른 형식으로 초기화 안할시 처음 화면에서 빨간불 들어옴)
     lateinit var passwordInput: String
@@ -48,8 +61,8 @@ class Signin4Activity : AppCompatActivity() {
 
         //1-1 이메일 중복 체크
         //임의의 이메일 선언
-        val email = "aaa@naver.com"
-        initButtonCheck(email)
+        initButtonCheck()
+
 
 
         //2번 패스워드 체크
@@ -61,38 +74,85 @@ class Signin4Activity : AppCompatActivity() {
     }
 
     //중복 확인(코드 수정 필요..textwather에 넣어야 할듯 이것도...)
-     fun initButtonCheck(email: String){
-        binding.apply {
-            binding.emailDuplicationAfter.setOnClickListener {
-                if (email == editTextEmail.text.toString().trim()) {
-                    flagButton = 0
-                    viewModel.plusValue(flagButton)
+    private fun initButtonCheck(){
+
+        binding.emailDuplicationAfter.setOnClickListener {
+            val email = binding.editTextEmail.text.toString().trim()
+            Log.d("이메일", email)
+            val encodedEmail = URLEncoder.encode(email, "UTF-8")
+            api.EmailCheck(email = encodedEmail).enqueue(object : Callback<EmailCheckResponse>{
+                override fun onResponse(
+                    call: Call<EmailCheckResponse>,
+                    response: Response<EmailCheckResponse>
+                ) {
+                    Log.d("이메일 중복체크 통신 성공",response.toString())
+                    Log.d("이메일 중복체크 통신 성공", response.body().toString())
+                    if(response.body()?.isSuccess == false){
+                        flagButton = 0
+                        viewModel.plusValue(flagButton)
 //                    emailDuplicationAfter.isEnabled = false
-                    textEmail.setTextColor(
-                        ContextCompat.getColor(
-                            applicationContext!!,
-                            R.color.red
+                        binding.textEmail.setTextColor(
+                            ContextCompat.getColor(
+                                applicationContext!!,
+                                R.color.red
+                            )
                         )
-                    )
-                    editTextEmail.setBackgroundResource(R.drawable.btn_emailbox_error)
-                    textEmail.text = "중복된 이메일입니다. 다른 이메일을 사용해주세요."
-
-                } else {
-                    flagButton = 1
-                    viewModel.plusValue(flagButton)
+                        binding.editTextEmail.setBackgroundResource(R.drawable.btn_emailbox_error)
+                        binding.textEmail.text = "중복된 이메일입니다. 다른 이메일을 사용해주세요."
+                    }
+                    else{
+                        flagButton = 1
+                        viewModel.plusValue(flagButton)
 //                    emailDuplicationAfter.isEnabled = true
-                    textEmail.setTextColor(
-                        ContextCompat.getColor(
-                            applicationContext!!,
-                            R.color.main_green
+                        binding.textEmail.setTextColor(
+                            ContextCompat.getColor(
+                                applicationContext!!,
+                                R.color.main_green
+                            )
                         )
-                    )
-                    textEmail.text = "사용 가능한 이메일 입니다."
-
+                        binding.textEmail.text = "사용 가능한 이메일 입니다."
+                    }
                 }
-//                emailDuplicationAfter.isEnabled = true
-            }
+
+                override fun onFailure(call: Call<EmailCheckResponse>, t: Throwable) {
+                    Log.d("이메일 중복 체크 실패", "ㅠㅠ")
+                }
+
+            })
+
         }
+
+//        binding.apply {
+//            binding.emailDuplicationAfter.setOnClickListener {
+//                if (email == editTextEmail.text.toString().trim()) {
+//                    flagButton = 0
+//                    viewModel.plusValue(flagButton)
+////                    emailDuplicationAfter.isEnabled = false
+//                    textEmail.setTextColor(
+//                        ContextCompat.getColor(
+//                            applicationContext!!,
+//                            R.color.red
+//                        )
+//                    )
+//                    editTextEmail.setBackgroundResource(R.drawable.btn_emailbox_error)
+//                    textEmail.text = "중복된 이메일입니다. 다른 이메일을 사용해주세요."
+//
+//                } else {
+//                    flagButton = 1
+//                    viewModel.plusValue(flagButton)
+////                    emailDuplicationAfter.isEnabled = true
+//                    textEmail.setTextColor(
+//                        ContextCompat.getColor(
+//                            applicationContext!!,
+//                            R.color.main_green
+//                        )
+//                    )
+//                    textEmail.text = "사용 가능한 이메일 입니다."
+//
+//                }
+////                emailDuplicationAfter.isEnabled = true
+//            }
+//        }
     }
 
     //1. 이메일
@@ -259,7 +319,7 @@ class Signin4Activity : AppCompatActivity() {
                     )
                 )
                 flagEmail = 1
-
+                saveEmail(email)
                 return true
             } else {
                 editTextEmail.setBackgroundResource(R.drawable.btn_emailbox_error)
@@ -293,8 +353,8 @@ class Signin4Activity : AppCompatActivity() {
                         R.color.main_green
                     )
                 )
-
                 flagPassword = 1
+
                 return true
             } else {
                 editTextPassword.setBackgroundResource(R.drawable.btn_custom_red)
@@ -324,6 +384,10 @@ class Signin4Activity : AppCompatActivity() {
                         R.color.main_green
                     )
                 )
+                //val encodedpw = URLEncoder.encode(passwordInput, "UTF-8")
+                savePW(passwordEqual)
+                Log.d("pw",passwordEqual)
+                Log.d("pw",passwordEqual)
 
                 flagEqual = 1
                 return true
@@ -354,8 +418,17 @@ class Signin4Activity : AppCompatActivity() {
         }
     }
 
-
-
-
-
+    fun saveEmail(email : String){
+        val prefEmail : SharedPreferences = getSharedPreferences("userEmail", MODE_PRIVATE)
+        val editEmail : SharedPreferences.Editor = prefEmail.edit()
+        editEmail.putString("email", email).apply()
+        Log.d("db 회원가입 email", email)
+        Log.d("db 회원가입 email", editEmail.toString())
+    }
+    fun savePW(pw : String){
+        val prefPW : SharedPreferences = getSharedPreferences("userPw", MODE_PRIVATE)
+        val editPW : SharedPreferences.Editor = prefPW.edit()
+        editPW.putString("pw", pw).apply()
+        Log.d("db 회원가입 비번", pw)
+    }
 }

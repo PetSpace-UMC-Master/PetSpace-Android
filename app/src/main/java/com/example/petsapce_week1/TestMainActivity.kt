@@ -53,8 +53,6 @@ class TestMainActivity : AppCompatActivity() {
             fragmentTransaction.replace(R.id.fragmentContainerView, placeFragment, null).commit()
             //fragmentTransaction.addToBackStack(null)
         }
-
-
         // ============ 홈 => 함께갈곳 이동 시 로그인 여부 체크 =============
 
         //토큰 저장 객체

@@ -1,13 +1,16 @@
 package com.example.petsapce_week1
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
+import android.widget.EditText
 import androidx.core.content.ContextCompat
 import com.example.petsapce_week1.databinding.ActivitySigninDescriptionBinding
-import com.example.petsapce_week1.loginrelated.LoginActivity
 
 class SigninDescriptionActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySigninDescriptionBinding
@@ -38,6 +41,8 @@ class SigninDescriptionActivity : AppCompatActivity() {
     private fun initNext() {
         binding.apply {
             btnContinue.setOnClickListener {
+                saveUserData(editTextNickname.text.toString(), editTextName.text.toString(), editTextBirth.text.toString())
+
                 val intent = Intent(this@SigninDescriptionActivity,TermsActivity::class.java)
                 startActivity(intent)
             }
@@ -178,6 +183,20 @@ class SigninDescriptionActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+    @SuppressLint("CommitPrefEdits")
+    fun saveUserData(nickname: String, name: String, birth: String){
+        val prefNickName  : SharedPreferences = getSharedPreferences("userNickname", MODE_PRIVATE)
+        val prefName  : SharedPreferences= getSharedPreferences("userName", MODE_PRIVATE)
+        val prefBirth  : SharedPreferences= getSharedPreferences("userBirth", MODE_PRIVATE)
+        val editNickname  : SharedPreferences.Editor = prefNickName.edit()
+        val editName  : SharedPreferences.Editor = prefName.edit()
+        val editBirth  : SharedPreferences.Editor = prefBirth.edit()
+        editNickname.putString("nickname", nickname).apply()
+        editName.putString("name", name).apply()
+        editBirth.putString("birth", birth).apply()
+
+        Log.d("db user 데이터", "${editBirth}, ${editName}")
     }
 
 /*    fun checkNickname(): Boolean {
