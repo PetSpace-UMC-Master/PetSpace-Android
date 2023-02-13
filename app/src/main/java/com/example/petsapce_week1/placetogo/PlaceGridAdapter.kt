@@ -88,6 +88,7 @@ class PlaceGridAdapter(private val fragmentManager: FragmentManager, val context
 
         val button = view?.findViewById<ImageButton>(R.id.place_menu)
         var isLast : Boolean = false
+        var reviewCount : Int = 0
 
 
         button?.setOnClickListener {
@@ -109,13 +110,16 @@ class PlaceGridAdapter(private val fragmentManager: FragmentManager, val context
                                 if (response.body()!!.result.isLast) {
                                     isLast = true
                                 }
+                                if(!response.body()!!.result.favorites.isEmpty()){
+                                    reviewCount = response.body()!!.result.favorites[position].numberOfReview
+                                }
                                 val nextScreenIntent =
                                     Intent(context, PlaceToGoRegionActivity::class.java).apply {
                                         putExtra("accommoList", accommoList as Serializable)
                                         putExtra("isLast", isLast)
                                         putExtra("accessToken", postaccessToken)
                                         putExtra("region", region)
-                                        putExtra("reviewCount", response.body()!!.result.favorites[position].numberOfReview)
+                                        putExtra("reviewCount", reviewCount)
                                     }
                                 context.startActivity(nextScreenIntent)
                                 Log.d("함께 ㅇㅇ","ㅇㅇ")

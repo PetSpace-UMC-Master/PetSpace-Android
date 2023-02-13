@@ -69,7 +69,7 @@
             android:paddingStart="20dp"
             android:paddingRight="20dp"
             android:stateListAnimator="@null"
-            android:text="\t알림 설정"
+            android:text="\t\t알림 설정"
             android:textColor="#0C201E"
             android:textSize="16dp" />
 
@@ -85,7 +85,7 @@
             android:paddingStart="20dp"
             android:paddingRight="20dp"
             android:stateListAnimator="@null"
-            android:text="\t계정 설정"
+            android:text="\t\t계정 설정"
             android:textColor="#0C201E"
             android:textSize="16dp" />
 
@@ -101,7 +101,7 @@
             android:paddingStart="20dp"
             android:paddingRight="20dp"
             android:stateListAnimator="@null"
-            android:text="\t공지사항"
+            android:text="\t\t공지사항"
             android:textColor="#0C201E"
             android:textSize="16dp" />
 
@@ -117,7 +117,7 @@
             android:paddingStart="20dp"
             android:paddingRight="20dp"
             android:stateListAnimator="@null"
-            android:text="\t자주 묻는 질문"
+            android:text="\t\t자주 묻는 질문"
             android:textColor="#0C201E"
             android:textSize="16dp" />
 
@@ -133,7 +133,7 @@
             android:paddingStart="20dp"
             android:paddingRight="20dp"
             android:stateListAnimator="@null"
-            android:text="\t프라이버시 항목"
+            android:text="\t\t프라이버시 항목"
             android:textColor="#0C201E"
             android:textSize="16dp" />
 
@@ -149,7 +149,7 @@
             android:paddingStart="20dp"
             android:paddingRight="20dp"
             android:stateListAnimator="@null"
-            android:text="\t로그아웃"
+            android:text="\t\t로그아웃"
             android:textColor="#0C201E"
             android:textSize="16dp" />
 
@@ -165,7 +165,7 @@
             android:paddingStart="20dp"
             android:paddingRight="20dp"
             android:stateListAnimator="@null"
-            android:text="\t회원 탈퇴"
+            android:text="\t\t회원 탈퇴"
             android:textColor="#0C201E"
             android:textSize="16dp" />
     </LinearLayout>
