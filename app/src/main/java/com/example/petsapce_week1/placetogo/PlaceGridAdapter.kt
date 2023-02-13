@@ -3,15 +3,15 @@ package com.example.petsapce_week1.placetogo
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageButton
-import androidx.core.content.ContextCompat.startActivity
+import androidx.fragment.app.FragmentManager
 import com.example.petsapce_week1.R
+import com.example.petsapce_week1.databinding.FragmentNoPlaceToGoBinding
 import com.example.petsapce_week1.network.AccomoService
 import com.example.petsapce_week1.network.RetrofitHelper
 import com.example.petsapce_week1.vo.FavoriteBackendResponse
@@ -20,7 +20,7 @@ import retrofit2.Retrofit
 import java.io.Serializable
 
 
-class PlaceGridAdapter(val context: Context, var img_list:  Array<Int>, val accessToken: String) : BaseAdapter() {
+class PlaceGridAdapter(private val fragmentManager: FragmentManager, val context: Context, var img_list:  Array<Int>, val accessToken: String) : BaseAdapter() {
 
     override fun getCount(): Int {
         return img_list.size
@@ -43,104 +43,121 @@ class PlaceGridAdapter(val context: Context, var img_list:  Array<Int>, val acce
 
     var accommoList = mutableListOf<FavoriteBackendResponse.Favorite>()
 
-    @SuppressLint("ViewHolder", "InflateParams")
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view : View = LayoutInflater.from(context).inflate(R.layout.placetogo_grid_itemlist, null)
+    @SuppressLint("ViewHolder", "InflateParams", "CutPasteId")
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
 
-        view.menu_seoul.setImageResource(img_list[position])
+        Log.d("함께 갈 곳", "111")
 
-        val button = view.findViewById<ImageButton>(R.id.menu_seoul)
-        button.setOnClickListener {
+        val view : View = convertView ?: LayoutInflater.from(context).inflate(R.layout.placetogo_grid_itemlist, parent, false)
+        val imageView = view.findViewById<ImageButton>(R.id.place_menu)
+        val image = img_list[position]
+        imageView.setImageResource(image)
 
-            Log.d("함께 갈 곳 토큰 받아와55", accessToken)
+        var region : String ?= null
+
+        when (position) {
+            0 -> {
+                region = "SEOUL"
+            }
+            1 -> {
+                region = "BUSAN"
+            }
+            2 -> {
+                region = "CHUNGCHENOGDO"
+            }
+            3 -> {
+                region = "JEJUDO"
+            }
+            4 -> {
+                region = "DAEGU"
+            }
+            5 -> {
+                region = "GYEONGGIDO"
+            }
+            6 -> {
+                region = "GWANGJU"
+            }
+            7 -> {
+                region = "JEOLLADO"
+            }
+        }
+
+        Log.d("함께 갈 곳", accessToken)
+        view?.place_menu?.setImageResource(img_list[position])
+        Log.d("함께 갈 곳 어답터", img_list.toString())
+
+        val button = view?.findViewById<ImageButton>(R.id.place_menu)
+        var isLast : Boolean = false
+        var reviewCount : Int = 0
+
+
+        button?.setOnClickListener {
             postaccessToken = "Bearer $accessToken"
-            Log.d("함께 갈 곳 토큰 받아와11", postaccessToken)
-
-
-            api.getFavorites(postaccessToken, "SEOUL", 0,4).enqueue(object : retrofit2.Callback<FavoriteBackendResponse>{
-                override fun onResponse(
-                    call: retrofit2.Call<FavoriteBackendResponse>,
-                    response: retrofit2.Response<FavoriteBackendResponse>
-                ) {
-                    Log.d(" 함께 갈 곳에서 서울 버튼 누름", "ㅇㅇ")
-                    Log.d("함께 갈 곳 성공", response.toString())
-                    Log.d("함께 갈 곳", response.body().toString())
-                    accommoList = response.body()?.result?.favorites?.toMutableList()!!
-//                    response.takeIf { it.isSuccessful }
-//                        ?.body()
-//                        .let {
-//                            if(it != null) {
-//                                for (item in it.result.favorites) {
-//                                    accommoList.apply {
-//                                        add(
-//                                            FavoriteData(
-//                                                availableDays = item.availableDays,
-//                                                averageReviewScore = item.averageReviewScore,
-//                                                id = item.id,
-//                                                numberOfReview = item.numberOfReview,
-//                                                price = item.price,
-//                                                roomAddress = item.roomAddress,
-//                                                roomImages = item.roomImages.subList(
-//                                                    0,
-//                                                    item.roomImages.size
-//                                                )
-//                                            )
-//                                        )
-//                                    }
-//                                }
-//                                Log.d("함께 갈 곳 데이터1", "$accommoList")
-//                            }
-//                        }
-                    Log.d("함께 갈 곳 데이터2", "$accommoList")
-                    if(response.body()?.result  != null){
-
-                        val nextScreenIntent = Intent(context, SeoulAccommoActivity::class.java).apply {
-                            putExtra("accommoList", accommoList as Serializable)
-                            Log.d("함께 갈 곳 인텐t", "ㅇㅇ")
+            if (region != null) {
+                api.getFavorites(postaccessToken, region, 0, 5)
+                    .enqueue(object : retrofit2.Callback<FavoriteBackendResponse> {
+                        @SuppressLint("ResourceType")
+                        override fun onResponse(
+                            call: retrofit2.Call<FavoriteBackendResponse>,
+                            response: retrofit2.Response<FavoriteBackendResponse>
+                        ) {
+                            Log.d("함께 갈 곳 성공", response.toString())
+                            Log.d("함께 갈 곳", response.body().toString())
+                            if (response.body()?.result != null) {
+                                accommoList = response.body()?.result?.favorites?.toMutableList()!!
+                                Log.d("함께 갈 곳 데이터2", "$accommoList")
+                                Log.d("함께 갈 곳 region", "$region")
+                                if (response.body()!!.result.isLast) {
+                                    isLast = true
+                                }
+                                if(!response.body()!!.result.favorites.isEmpty()){
+                                    reviewCount = response.body()!!.result.favorites[position].numberOfReview
+                                }
+                                val nextScreenIntent =
+                                    Intent(context, PlaceToGoRegionActivity::class.java).apply {
+                                        putExtra("accommoList", accommoList as Serializable)
+                                        putExtra("isLast", isLast)
+                                        putExtra("accessToken", postaccessToken)
+                                        putExtra("region", region)
+                                        putExtra("reviewCount", reviewCount)
+                                    }
+                                context.startActivity(nextScreenIntent)
+                                Log.d("함께 ㅇㅇ","ㅇㅇ")
+                            }
+                            else{
+//                                    fragmentManager
+//                                        .beginTransaction()
+//                                        .add(R.id.thisLayout, NoPlaceToGoFragment() )
+//                                        .addToBackStack(null)
+//                                        .show(NoPlaceToGoFragment())
+//                                        //.hide(PlaceToGoFragment())
+//                                        .commit()
+//                                val noplacetogofragment = NoPlaceToGoFragment()
+//                                val placetogofragment = PlaceToGoFragment()
+//                                placetogofragment.parentFragmentManager
+//                                    .beginTransaction()
+//                                    .replace(R.id.placetogoLayout, noplacetogofragment)
+//                                    .addToBackStack(null)
+//                                    .commit()
+                            }
                         }
-                        context.startActivity(nextScreenIntent)
-//                        val fragmentTransaction = fragmentManager
-//                            .beginTransaction()
-//                            .replace(R.id.placetogoLayout, newFragment)
-//                            .addToBackStack(null)
-//                            .commit()
-//                        val intent = Intent(context, TestSeoulAccommosFragment::class.java)
-//                        Log.d("함께 갈 곳 인텐t", "ㅇㅇ")
-//                        context.startActivity(intent)
-//                        Log.d("함께 갈 곳 start", "ㅇㅇ")
-                    }
-                    else{
-//                        val newFragment = NoPlaceToGoFragment.newInstance(getItem(position) as String)
-//                        fragment.parentFragmentManager
-//                            .beginTransaction()
-//                            .replace(R.id.placetogoLayout, newFragment)
-//                            .addToBackStack(null)
-//                            .commit()
-                    }
-
-                }
-
-                override fun onFailure(
-                    call: retrofit2.Call<FavoriteBackendResponse>,
-                    t: Throwable
-                ) {
-                    Log.d(" 함께 갈 곳 호출 실패", "ㅠㅠ")
-                    Log.d("함께 에러 메시지", t.toString())
-                    val intent = Intent(context, NoPlaceToGoFragment::class.java)
-                    context.startActivity(intent)
-                }
-            })
-
-//      프래그먼트로 이동 시
-//            val newFragment = NewFragment.newInstance(getItem(position) as String)
-//            fragment.parentFragmentManager
-//                .beginTransaction()
-//                .replace(R.id.fragment_container, newFragment)
-//                .addToBackStack(null)
-//                .commit()
+                        override fun onFailure(
+                            call: retrofit2.Call<FavoriteBackendResponse>,
+                            t: Throwable
+                        ) {
+                            Log.d(" 함께 갈 곳 호출 실패", "ㅠㅠ")
+                            Log.d("함께 에러 메시지", t.toString())
+//                            val noplacetogofragment = NoPlaceToGoFragment()
+//                            val placetogofragment = PlaceToGoFragment()
+//                            placetogofragment.parentFragmentManager
+//                                .beginTransaction()
+//                                .addToBackStack(null)
+//                                .replace(R.id.fragmentContainerView, noplacetogofragment)
+//                                .commit()
+                        }
+                    })
+            }
         }
         return view
     }
-
-
 }

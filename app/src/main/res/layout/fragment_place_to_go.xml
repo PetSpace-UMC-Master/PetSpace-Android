@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -29,7 +29,7 @@
             android:fontFamily="@font/bmjua"
             android:gravity="left"
             android:lineSpacingExtra="-1sp"
-            android:text="[반려동물이름]과 함께 가고 싶은 곳"
+            android:text="[우주댕댕이]과 함께 가고 싶은 곳"
             android:textColor="#0C201E"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -42,16 +42,13 @@
 
     <GridView
         android:id="@+id/place_gridview"
-        tools:listitem="@layout/placetogo_grid_itemlist"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:numColumns="2"
+        android:layout_height="match_parent"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/constraintLayout"
-        android:paddingBottom="50dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"/>
+        android:numColumns="2"
+        android:paddingTop="50dp"
+        tools:listitem="@layout/placetogo_grid_itemlist" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
 

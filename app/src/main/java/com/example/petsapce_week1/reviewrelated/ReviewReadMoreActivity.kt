@@ -1,7 +1,9 @@
 package com.example.petsapce_week1.reviewrelated
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.petsapce_week1.TermsActivity
@@ -11,6 +13,7 @@ import com.example.petsapce_week1.databinding.ActivityReviewReadMoreBinding
 
 class ReviewReadMoreActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReviewReadMoreBinding
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -39,9 +42,8 @@ class ReviewReadMoreActivity : AppCompatActivity() {
         itemList.add(ReviewItem("10주 전","댕댕", "너무 좋아요 너무 좋아요 Google 지도에서 방문한 장소에 대한 리뷰를 작성할 수 있습니다."))
 
 
-
         //변경됨을 어댑터에 알림
-        //rvAdapter.notifyDataSetChanged()
+        rvAdapter.notifyDataSetChanged()
 
     }
 }

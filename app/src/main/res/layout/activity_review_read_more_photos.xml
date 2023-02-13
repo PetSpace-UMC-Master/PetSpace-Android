@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/reviewreadmorelayout"
     android:layout_height="match_parent"
     android:background="@color/black">
 
@@ -10,7 +11,7 @@
         android:id="@+id/review_viewpager"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="300dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4" >
@@ -29,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/btn_close"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="#00ff0000"
@@ -54,4 +55,4 @@
             android:textSize="20sp" />
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

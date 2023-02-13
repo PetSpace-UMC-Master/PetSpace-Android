@@ -9,6 +9,7 @@ object RetrofitHelperHome {
 
     //base_url 애들 마다 다 다름 얘들아 테섭 하나 만들어죠
     val BASE_URL: String = "https://d872-59-6-94-207.jp.ngrok.io"
+
     var gson = GsonBuilder().setLenient().create()
 
     fun getRetrofitInstance(): Retrofit {
