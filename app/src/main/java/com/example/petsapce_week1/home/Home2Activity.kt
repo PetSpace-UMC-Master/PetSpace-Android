@@ -34,6 +34,10 @@ class Home2Activity : AppCompatActivity() {
     val sortReviewCount = "REVIEW_COUNT_DESC"
     val sortReviewScore = "AVERAGE_REVIEW_SCORE_DESC"
 
+    //스피너 및 버튼 전역변수
+    var spinnerCheck:String = ""
+    var buttonCheck:String = ""
+
     //레트로핏 객체 생성
     var retrofit: Retrofit = RetrofitHelperHome.getRetrofitInstance()
 
@@ -66,10 +70,14 @@ class Home2Activity : AppCompatActivity() {
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(SortViewModel::class.java)
 
+        //검색결과 : 최근등록순으로 정렬
         initFirst()
+        //스피너 초기화
         initSpinner()
+        //버튼 초기화
         initButtonSort()
         initRecyclerView()
+        //이전으로
         initBefore()
 
     }
@@ -95,7 +103,7 @@ class Home2Activity : AppCompatActivity() {
         Log.d("tag5", animal.toString())
 
         binding.textChange.text = searchText
-        updateTripple(0,"","",startDay,endDay,searchText,people,animal)
+        updateTripple(0,spinnerCheck,buttonCheck,startDay,endDay,searchText,people,animal)
 
 
     }
@@ -119,23 +127,30 @@ class Home2Activity : AppCompatActivity() {
                 )
                 when (spinner.getItemAtPosition(position)) {
                     "최근등록순" -> {
-//                        updateTripple(0, sortDefault, "")
+                        spinnerCheck = sortDefault
+                        updateTripple(0, spinnerCheck, buttonCheck,startDay,endDay, searchText,people,animal)
+                        Log.d("tag", "spinner : $spinnerCheck button : $buttonCheck")
 
                     }
                     "높은가격순" -> {
-//                        updateTripple(0, sortPriceAsc, "")
+                        spinnerCheck = sortPriceAsc
+                        updateTripple(0, spinnerCheck, buttonCheck,startDay,endDay, searchText,people,animal)
                     }
                     "낮은가격순" -> {
-//                        updateTripple(0, sortPriceDesc, "")
+                        spinnerCheck = sortPriceDesc
+                        updateTripple(0, spinnerCheck, buttonCheck,startDay,endDay, searchText,people,animal)
                     }
                     "평점높은순" -> {
-//                        updateTripple(0, sortReviewScore, "")
+                        spinnerCheck = sortReviewScore
+                        updateTripple(0, spinnerCheck, buttonCheck,startDay,endDay, searchText,people,animal)
                     }
                     "리뷰많은순" -> {
-//                        updateTripple(0, sortReviewCount, "")
+                        spinnerCheck = sortReviewCount
+                        updateTripple(0, spinnerCheck, buttonCheck,startDay,endDay, searchText,people,animal)
                     }
                     else -> {
-//                        updateTripple(0, sortPriceAsc, "")
+                        spinnerCheck = sortDefault
+                        updateTripple(0, spinnerCheck, buttonCheck,startDay,endDay, searchText,people,animal)
                     }
                 }
             }
@@ -147,105 +162,26 @@ class Home2Activity : AppCompatActivity() {
     private fun initButtonSort() {
         binding.apply {
             b1.setOnClickListener {
-                updateTripple(0, "", btn1House,startDay.toString(),endDay.toString(), searchText,people,animal)
-/*
-                spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                    override fun onNothingSelected(parent: AdapterView<*>?) {
-                    }
-
-                    @SuppressLint("NotifyDataSetChanged")
-                    override fun onItemSelected(
-                        parent: AdapterView<*>?,
-                        view: View?,
-                        position: Int,
-                        id: Long
-                    ) {
-                        Log.d(
-                            "MainActivity",
-                            "onItemSelected : $position, ${spinner.getItemAtPosition(position)}"
-                        )
-                        when (spinner.getItemAtPosition(position)) {
-                            "최근등록순" -> {
-                                updateTripple(0, sortDefault, btn1House)
-                            }
-                            "높은가격순" -> {
-                                updateTripple(0, sortPriceAsc, btn1House)
-                            }
-                            "낮은가격순" -> {
-                                updateTripple(0, sortPriceDesc, btn1House)
-                            }
-                            "평점높은순" -> {
-                                updateTripple(0, sortReviewScore, btn1House)
-                            }
-                            "리뷰많은순" -> {
-                                updateTripple(0, sortReviewCount, btn1House)
-                            }
-                            else -> {
-                                updateTripple(0, sortDefault, btn1House)
-                            }
-                        }
-                    }
-                }
-*/
+                buttonCheck = btn1House
+                updateTripple(0, "", buttonCheck,startDay.toString(),endDay.toString(), searchText,people,animal)
             }
-
             b2.setOnClickListener {
-                updateTripple(0, "", btn2Campsite,startDay.toString(),endDay.toString(), searchText,people,animal)
+                buttonCheck = btn2Campsite
+                updateTripple(0, "", buttonCheck,startDay.toString(),endDay.toString(), searchText,people,animal)
             }
             b3.setOnClickListener {
-                updateTripple(0, "", btn3Downtown,startDay.toString(),endDay.toString(), searchText,people,animal)
+                buttonCheck = btn3Downtown
+                updateTripple(0, "", buttonCheck,startDay.toString(),endDay.toString(), searchText,people,animal)
             }
             b4.setOnClickListener {
-                updateTripple(0, "", btn4Country,startDay.toString(),endDay.toString(), searchText,people,animal)
-/*
-                spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                    override fun onNothingSelected(parent: AdapterView<*>?) {
-                    }
-
-                    @SuppressLint("NotifyDataSetChanged")
-                    override fun onItemSelected(
-                        parent: AdapterView<*>?,
-                        view: View?,
-                        position: Int,
-                        id: Long
-                    ) {
-                        Log.d(
-                            "MainActivity",
-                            "onItemSelected : $position, ${spinner.getItemAtPosition(position)}"
-                        )
-                        when (spinner.getItemAtPosition(position)) {
-                            "최근등록순" -> {
-                                updateTripple(0, sortDefault, btn4Country)
-                            }
-                            "높은가격순" -> {
-                                updateTripple(0, sortPriceAsc, btn4Country)
-                            }
-                            "낮은가격순" -> {
-                                updateTripple(0, sortPriceDesc, btn4Country)
-                            }
-                            "평점높은순" -> {
-                                updateTripple(0, sortReviewScore, btn4Country)
-                            }
-                            "리뷰많은순" -> {
-                                updateTripple(0, sortReviewCount, btn4Country)
-                            }
-                            else -> {
-                                updateTripple(0, sortDefault, btn4Country)
-                            }
-                        }
-                    }
-                }
-*/
-
-
+                buttonCheck = btn4Country
+                updateTripple(0, "", buttonCheck,startDay.toString(),endDay.toString(), searchText,people,animal)
             }
             b5.setOnClickListener {
-                updateTripple(0, "", btn5Beach,startDay.toString(),endDay.toString(), searchText,people,animal)
-
+                buttonCheck = btn5Beach
+                updateTripple(0, "", buttonCheck,startDay.toString(),endDay.toString(), searchText,people,animal)
             }
-
         }
-
     }
 
     fun updateTripple(

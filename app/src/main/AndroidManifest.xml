@@ -34,6 +34,7 @@
                 android:value="" />
         </activity> <!-- 홈 내비게이션 액티비티 ===================================================================================== -->
         <activity
+            android:parentActivityName=".home.HomeResearchActivity"
             android:name=".home.Home2Activity"
             android:exported="false">
             <meta-data
