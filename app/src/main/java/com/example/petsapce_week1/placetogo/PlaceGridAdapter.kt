@@ -70,7 +70,7 @@ class PlaceGridAdapter(val context: Context, var img_list:  Array<Int>, val acce
                 region = "DAEGU"
             }
             5 -> {
-                region = "BUSAN"
+                region = "GYEONGGIDO"
             }
             6 -> {
                 region = "GWANGJU"
