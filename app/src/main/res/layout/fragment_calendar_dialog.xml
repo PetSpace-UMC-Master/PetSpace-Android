@@ -16,14 +16,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="20dp"
-        app:mcv_dateTextAppearance="@style/CalenderViewDateCustomText"
         app:mcv_headerTextAppearance="@style/CalendarWidgetHeader"
         app:mcv_selectionColor="@color/main_green"
         app:mcv_selectionMode="range"
         app:mcv_showOtherDates="out_of_range"
         app:mcv_tileHeight="37dp"
         app:mcv_tileWidth="46dp"
-        app:mcv_weekDayTextAppearance="@font/pretendard_regular" />
+        app:mcv_weekDayTextAppearance="@style/CustomTextAppearance" />
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -36,8 +35,8 @@
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"
-        android:textAlignment="center"
         android:text="2022.12.13 (화) ~ 2022.12.16 (금) / 3박"
+        android:textAlignment="center"
         android:textColor="#EEF5F5"
         android:textSize="16dp" />
 

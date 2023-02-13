@@ -239,10 +239,12 @@
             android:clickable="true"
             android:focusable="true"
             android:paddingHorizontal="20dp"
+            android:paddingVertical="8dp"
             android:id="@+id/btn_search"
             android:layout_width="wrap_content"
             android:layout_height="32sp"
             android:background="@drawable/btn_small16"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
 
@@ -261,6 +263,8 @@
                 />
 
             <TextView
+                android:gravity="center"
+                android:textAlignment="center"
                 android:id="@+id/search"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"

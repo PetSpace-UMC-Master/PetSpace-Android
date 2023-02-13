@@ -1,16 +1,14 @@
 package com.example.petsapce_week1.home
 
 import android.annotation.SuppressLint
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.petsapce_week1.databinding.ActivityHomeResearchBinding
-import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.android.synthetic.main.activity_home_research.*
 import java.time.LocalDate
 
@@ -18,7 +16,7 @@ class HomeResearchActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeResearchBinding
     lateinit var viewModel: ResViewModel
-    lateinit var city:String
+    lateinit var city: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,6 +58,7 @@ class HomeResearchActivity : AppCompatActivity() {
         initCalendar()
         initDataBinding()
         initReset()
+        initNext()
 //        showProfileDialog()
 
     }
@@ -71,51 +70,51 @@ class HomeResearchActivity : AppCompatActivity() {
         val observer = Observer<Any> {
             binding.textPerson.text =
                 "성인 ${viewModel.curAdult.value}명, 아동 ${viewModel.curChild.value}명, 반려동물 ${viewModel.curAnimal.value}마리"
-            binding.textCalendar.text = "${viewModel.curStartDate.value} ~ ${viewModel.curEndDate.value} / ${viewModel.days.value}박"
+            binding.textCalendar.text =
+                "${viewModel.curStartDate.value} ~ ${viewModel.curEndDate.value} / ${viewModel.days.value}박"
         }
         viewModel.curAdult.observe(this, observer)
         viewModel.curChild.observe(this, observer)
         viewModel.curAnimal.observe(this, observer)
         viewModel.curStartDate.observe(this, observer)
         viewModel.curEndDate.observe(this, observer)
-        viewModel.days.observe(this,observer)
+        viewModel.days.observe(this, observer)
 
 //        Log.d("today",viewModel.calcuDate.toString())
 //        viewModel.minusDate()
 
 
-
         //성인
-      /*  val nameObserver = Observer<Int> { curAdult ->
-            binding.textPerson.text =
-                "성인 ${curAdult}명, 아동 ${viewModel.curChild.value}명, 반려동물 ${viewModel.curAnimal.value}마리"
-        }
-        viewModel.curAdult.observe(this, nameObserver)
+        /*  val nameObserver = Observer<Int> { curAdult ->
+              binding.textPerson.text =
+                  "성인 ${curAdult}명, 아동 ${viewModel.curChild.value}명, 반려동물 ${viewModel.curAnimal.value}마리"
+          }
+          viewModel.curAdult.observe(this, nameObserver)
 
-        //아동
-        viewModel.curChild.observe(this, Observer { curChild ->
-            binding.textPerson.text =
-                "성인 ${viewModel.curAdult.value}명, 아동 ${curChild}명, 반려동물 ${viewModel.curAnimal.value}마리"
-        })
+          //아동
+          viewModel.curChild.observe(this, Observer { curChild ->
+              binding.textPerson.text =
+                  "성인 ${viewModel.curAdult.value}명, 아동 ${curChild}명, 반려동물 ${viewModel.curAnimal.value}마리"
+          })
 
-        //동물
-        viewModel.curAnimal.observe(this, Observer { curAnimal ->
-            binding.textPerson.text =
-                "성인 ${viewModel.curAdult.value}명, 아동 ${viewModel.curChild.value}명, 반려동물 ${curAnimal}마리"
-        })*/
+          //동물
+          viewModel.curAnimal.observe(this, Observer { curAnimal ->
+              binding.textPerson.text =
+                  "성인 ${viewModel.curAdult.value}명, 아동 ${viewModel.curChild.value}명, 반려동물 ${curAnimal}마리"
+          })*/
 
 
         //날짜
-    /*    val calStartObserver = Observer<String> { it ->
-            binding.textCalendar.text = "$it ~ ${viewModel.curEndDate.value}"
-        }
-        viewModel.curStartDate.observe(this, calStartObserver)
+        /*    val calStartObserver = Observer<String> { it ->
+                binding.textCalendar.text = "$it ~ ${viewModel.curEndDate.value}"
+            }
+            viewModel.curStartDate.observe(this, calStartObserver)
 
 
-        val calEndObserver = Observer<String> { curEndDate ->
-            binding.textCalendar.text = "${viewModel.curStartDate.value} ~ $curEndDate"
-        }
-        viewModel.curEndDate.observe(this, calEndObserver)*/
+            val calEndObserver = Observer<String> { curEndDate ->
+                binding.textCalendar.text = "${viewModel.curStartDate.value} ~ $curEndDate"
+            }
+            viewModel.curEndDate.observe(this, calEndObserver)*/
     }
 
     //fragment dialog불러오기
@@ -130,13 +129,12 @@ class HomeResearchActivity : AppCompatActivity() {
     private fun initCalendar() {
         binding.textCalendar.setOnClickListener {
 
-    /*        val datePicker = MaterialDatePicker.Builder.dateRangePicker().build()
-            datePicker.show(supportFragmentManager, "DatePicker")*/
+            /*        val datePicker = MaterialDatePicker.Builder.dateRangePicker().build()
+                    datePicker.show(supportFragmentManager, "DatePicker")*/
             val dialog = CalendarDialogFragment()
             dialog.show(supportFragmentManager, "CalendarDialogFragment")
         }
     }
-
 
 
     //reset
@@ -152,8 +150,35 @@ class HomeResearchActivity : AppCompatActivity() {
                 viewModel.curAnimal.postValue(0)
                 viewModel.getStardDate(now.toString())
                 viewModel.getEndDate(endDate.toString())
+                viewModel.days.postValue(2)
             }
         }
+    }
+
+    private fun initNext() {
+        binding.btnSearch.setOnClickListener {
+            val searchText = text_where_show.text.toString().trim()
+            val startDay = viewModel.curStartDate.value
+            val endDay = viewModel.curEndDate.value
+            val adult = viewModel.curAdult.value
+            val child = viewModel.curChild.value
+            val animal = viewModel.curAnimal.value
+            Log.d("search", animal.toString())
+
+            val intent = Intent(this, Home2Activity::class.java)
+            intent.putExtra("searchText", searchText)
+            intent.putExtra("startDay", startDay)
+            intent.putExtra("endDay", endDay)
+            intent.putExtra("adult", adult)
+            intent.putExtra("child", child)
+            intent.putExtra("animal", animal)
+
+
+            ContextCompat.startActivity(this, intent, null)
+//        Log.d("content",roomIDNext.toString())
+        }
+
+
     }
 
 

@@ -5,19 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingHorizontal="20dp"
     android:background="@color/white"
     tools:context=".home.Home2Activity">
 
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginHorizontal="20dp"
+        android:background="?attr/selectableItemBackground"
         android:id="@+id/btn_edittext"
         android:layout_width="match_parent"
         android:layout_height="46sp"
-        android:layout_marginTop="18dp"
-        android:background="@drawable/edittext_main"
+        android:layout_marginTop="20dp"
+        android:foreground="@drawable/edittext_main"
         android:clickable="true"
+        android:focusable="true"
         android:paddingHorizontal="20dp">
 
         <ImageView
@@ -68,12 +69,14 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:paddingHorizontal="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 app:layout_constraintHorizontal_chainStyle="spread_inside">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:background="?attr/selectableItemBackground"
                     android:id="@+id/b1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -84,19 +87,19 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <ImageButton
-                        android:clickable="true"
+                    <ImageView
                         android:id="@+id/im1"
                         android:layout_width="48sp"
                         android:layout_height="48sp"
-                        android:background="@drawable/btn11"
+                        android:src="@drawable/btn11"
                         app:layout_constraintBottom_toTopOf="@+id/text1"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:focusable="true" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
+                        android:id="@+id/im1_black"
+                        android:visibility="visible"
                         android:layout_width="48sp"
                         android:layout_height="48sp"
                         android:src="@drawable/btn1"
@@ -120,6 +123,7 @@
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:background="?attr/selectableItemBackground"
                     android:id="@+id/b2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -163,6 +167,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:background="?attr/selectableItemBackground"
                     android:id="@+id/b3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -204,9 +209,9 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:background="?attr/selectableItemBackground"
                     android:id="@+id/b4"
                     android:layout_width="wrap_content"
-
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/b5"
@@ -245,6 +250,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:background="?attr/selectableItemBackground"
                     android:id="@+id/b5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -289,11 +295,32 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_marginVertical="20dp"
+                android:background="#F9F9F9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Spinner
+                    android:paddingLeft="20dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:id="@+id/spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:entries="@array/spinner_entries" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_main"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="30dp" />
+                android:paddingHorizontal="20dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
 
 
         </LinearLayout>

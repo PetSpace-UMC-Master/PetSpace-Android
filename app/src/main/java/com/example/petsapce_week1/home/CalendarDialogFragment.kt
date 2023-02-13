@@ -1,21 +1,19 @@
 package com.example.petsapce_week1.home
 
+import SundayDecorator
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CalendarView
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.petsapce_week1.R.style.CalendarWidgetHeader
+import com.example.petsapce_week1.R.style.*
 import com.example.petsapce_week1.databinding.FragmentCalendarDialogBinding
-import com.example.petsapce_week1.home.calendar.SaturdayDecorator
-import com.example.petsapce_week1.home.calendar.SundayDecorator
+import com.example.petsapce_week1.home.calendar.DayDecorator
 import com.prolificinteractive.materialcalendarview.*
 import java.time.LocalDate
 import java.time.Period
@@ -27,7 +25,6 @@ class CalendarDialogFragment : DialogFragment() {
 
     private lateinit var binding: FragmentCalendarDialogBinding
     private lateinit var calendarView: MaterialCalendarView
-    private lateinit var calendar2: CalendarView
     lateinit var viewModel: ResViewModel
 
 
@@ -49,19 +46,23 @@ class CalendarDialogFragment : DialogFragment() {
 
         return binding.root
     }
+
     @SuppressLint("SetTextI18n")
     private fun initDataBinding() {
         //시작일 끝일
         viewModel.curStartDate.observe(viewLifecycleOwner) {
-            binding.btnResult.text = "$it ~ ${viewModel.curEndDate.value} / ${viewModel.days.value}박"
+            binding.btnResult.text =
+                "$it ~ ${viewModel.curEndDate.value} / ${viewModel.days.value}박"
 
         }
-        viewModel.curEndDate.observe(viewLifecycleOwner){
-            binding.btnResult.text = "${viewModel.curStartDate.value} ~ $it / ${viewModel.days.value}박"
+        viewModel.curEndDate.observe(viewLifecycleOwner) {
+            binding.btnResult.text =
+                "${viewModel.curStartDate.value} ~ $it / ${viewModel.days.value}박"
 
         }
-        viewModel.days.observe(viewLifecycleOwner){
-            binding.btnResult.text = "${viewModel.curStartDate.value} ~ ${viewModel.curEndDate.value} / ${it}박"
+        viewModel.days.observe(viewLifecycleOwner) {
+            binding.btnResult.text =
+                "${viewModel.curStartDate.value} ~ ${viewModel.curEndDate.value} / ${it}박"
         }
 
     }
@@ -77,13 +78,12 @@ class CalendarDialogFragment : DialogFragment() {
         // corner radius의 적용이 보이지 않는다.
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-//        calendar2.
-
         btnResult.setOnClickListener {
             dismiss()
         }
 
-        calendarView.setHeaderTextAppearance(CalendarWidgetHeader)
+//        calendarView.setHeaderTextAppearance(CalendarWidgetHeader)
+
 
         calendarView.setOnRangeSelectedListener { widget, dates ->
             val startDay = dates[0].date.toString()
@@ -95,6 +95,8 @@ class CalendarDialogFragment : DialogFragment() {
             val endDa = LocalDate.parse(endDay, formatter)
             val period = Period.between(startDa, endDa)
             val days = period.days
+//            calendarView.setDateTextAppearance(CalendarDateTextAppearanceWhite)
+
 
             viewModel.getStardDate(startDay)
             viewModel.getEndDate(endDay)
@@ -103,24 +105,17 @@ class CalendarDialogFragment : DialogFragment() {
         }
 
 
-/*
-        val stCalendarDay = CalendarDay(
-            currentYear,
-            currentMonth,
-            currentDate
-        )
-        val enCalendarDay = CalendarDay(
-            endTimeCalendar.get(Calendar.YEAR),
-            endTimeCalendar.get(Calendar.MONTH),
-            endTimeCalendar.get(Calendar.DATE)
-        )
-*/
-
         //달 변경
-//        val sundayDecorator = SundayDecorator()
-        val saturdayDecorator = SaturdayDecorator()
         val sundayDecorator = SundayDecorator()
-        calendarView.addDecorator(sundayDecorator)
+        val todayDecorator = DayDecorator(context)
+//        calendarView.addDecorator(sundayDecorator)
+
+        calendarView.addDecorators(todayDecorator)
+
+
+//        val calendarView = MaterialCalendarView(this)
+//        calendarView.setDateTextAppearance(CalendarDateTextAppearanceWhite)
+//        val saturdayDecorator = SaturdayDecorator()
         /*  calendarView.setOnMonthChangedListener(object : OnMonthChangedListener {
               override fun onMonthChanged(widget: MaterialCalendarView, date: CalendarDay) {
                   calendarView.removeDecorator(sundayDecorator)
