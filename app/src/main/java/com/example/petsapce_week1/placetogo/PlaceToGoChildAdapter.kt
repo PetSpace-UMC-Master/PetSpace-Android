@@ -15,6 +15,7 @@ class PlaceToGoChildAdapter(private val items: List<String>) : RecyclerView.Adap
     override fun onBindViewHolder(holder: ChildViewHolder, position: Int) {
         val item = items[position]
         //holder.textView.text = item.text
+
     }
 
     override fun getItemCount(): Int {

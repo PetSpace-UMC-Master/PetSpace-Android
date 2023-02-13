@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.os.persistableBundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petsapce_week1.accommodation.AccMainActivity
 import com.example.petsapce_week1.databinding.PlacetogoItemsBinding
@@ -29,6 +30,8 @@ class PlaceToGoRegionAdapter(var items: MutableList<FavoriteBackendResponse.Favo
 
     // 좋아요 버튼 눌렀을 때 호출
     var apiLike : AccomoService = retrofit.create(AccomoService::class.java)
+
+    var roomId : Long = 1
 
     interface OnItemClickListener {
         fun OnItemClick(data: FavoriteData)
@@ -62,12 +65,53 @@ class PlaceToGoRegionAdapter(var items: MutableList<FavoriteBackendResponse.Favo
                   val adapter = HomeChildAdapter(items[position].imgList)
                   viewPager.adapter = adapter
                   springDotsIndicator.attachTo(viewPager)*/
+            binding.btnHeartAfter.isSelected = true
 
+            binding.apply {
+                topcardview.cardElevation = 0f
+                btnHeartAfter.setOnClickListener {
+                    btnHeartAfter.isSelected = btnHeartAfter.isSelected != true
+                    if(!btnHeartAfter.isSelected){
+                        api.postLikes(accessToken, data.id.toLong()).enqueue(object : Callback<AccomodationData> {
+                            override fun onResponse(
+                                call: Call<AccomodationData>,
+                                response: Response<AccomodationData>
+                            ) {
+                                Log.d("숙소 좋아요 표시", "했음")
+                                Log.d("숙소 좋아요 roomId", data.id.toLong().toString())
+                            }
+
+                            override fun onFailure(call: Call<AccomodationData>, t: Throwable) {
+                                Log.d("숙소 좋아요 표시", "x했음")
+                            }
+
+                        })
+                    }
+                    else{
+                        api.postLikes(accessToken, data.id.toLong()).enqueue(object : Callback<AccomodationData> {
+                            override fun onResponse(
+                                call: Call<AccomodationData>,
+                                response: Response<AccomodationData>
+                            ) {
+                                Log.d("숙소 좋아요 표시", "뺐음")
+                                Log.d("roomId", data.id.toLong().toString())
+                            }
+
+                            override fun onFailure(call: Call<AccomodationData>, t: Throwable) {
+                                Log.d("숙소 좋아요 표시", "x했음")
+                            }
+
+                        })
+                    }
+                }
+
+            }
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
         Log.d("함께 갈 곳 items", "$items")
         val binding =
             PlacetogoItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -92,6 +136,9 @@ class PlaceToGoRegionAdapter(var items: MutableList<FavoriteBackendResponse.Favo
            springDotsIndicator.attachTo(viewPager)*/
 
         val roomIDNext = items[position].id
+        roomId = items[position].id.toLong()
+        Log.d("==roomIdNEXT", roomIDNext.toString())
+        Log.d("==roomId", roomId.toString())
 
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, AccMainActivity::class.java)
@@ -99,47 +146,7 @@ class PlaceToGoRegionAdapter(var items: MutableList<FavoriteBackendResponse.Favo
             ContextCompat.startActivity(holder.itemView.context,intent,null)
             Log.d("content",roomIDNext.toString())
         }
-        holder.binding.btnHeartAfter.isSelected = true
 
-//        holder.childViewPager.adapter = HomeChildViewPagerAdapter(items[position].imgList)
-//        holder.binding.childViewPager.visibility = View.VISIBLE
-        holder.binding.apply {
-            topcardview.cardElevation = 0f
-            btnHeartAfter.setOnClickListener {
-                btnHeartAfter.isSelected = btnHeartAfter.isSelected != true
-                if(!btnHeartAfter.isSelected){
-                    api.postLikes(accessToken).enqueue(object : Callback<AccomodationData> {
-                        override fun onResponse(
-                            call: Call<AccomodationData>,
-                            response: Response<AccomodationData>
-                        ) {
-                            Log.d("숙소 좋아요 표시", "했음")
-                        }
-
-                        override fun onFailure(call: Call<AccomodationData>, t: Throwable) {
-                            Log.d("숙소 좋아요 표시", "x했음")
-                        }
-
-                    })
-                }
-                else{
-                    api.postLikes(accessToken).enqueue(object : Callback<AccomodationData> {
-                        override fun onResponse(
-                            call: Call<AccomodationData>,
-                            response: Response<AccomodationData>
-                        ) {
-                            Log.d("숙소 좋아요 표시", "했음")
-                        }
-
-                        override fun onFailure(call: Call<AccomodationData>, t: Throwable) {
-                            Log.d("숙소 좋아요 표시", "x했음")
-                        }
-
-                    })
-                }
-            }
-
-        }
         holder.bind(items[position])
 
     }

@@ -72,7 +72,7 @@ class PlaceToGoRegionActivity : AppCompatActivity() {
 
         accessToken?.let {
             if (region != null) {
-                api.getFavorites(it, region!!, 0, 2)
+                api.getFavorites(it, region!!, 0, 3)
                     .enqueue(object : retrofit2.Callback<FavoriteBackendResponse> {
                         override fun onResponse(
                             call: retrofit2.Call<FavoriteBackendResponse>,

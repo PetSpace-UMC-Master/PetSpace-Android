@@ -15,7 +15,7 @@ interface AccomoService {
     @GET("/app/rooms/{roomId}")
     fun getRoomDetail(
         @Header("Authorization") accessToken: String,
-        @Path("roomId") roomId : Long = 1
+        @Path("roomId") roomId : Long
         //@Body jsonParams : AccomodationRoomData
     ):Call<AccomodationData>
 
@@ -25,9 +25,11 @@ interface AccomoService {
         @Path("roomId") roomId : Long = 1
     ): Call<AccommodationFacilityMore>
 
-    @POST("/app/favorites?roomId=1")
+
+    @POST("/app/favorites?")
     fun postLikes(
-        @Header("Authorization") accessToken : String
+        @Header("Authorization") accessToken : String,
+        @Query("roomId") roomId: Long
     ): Call<AccomodationData>
 
 //    @FormUrlEncoded

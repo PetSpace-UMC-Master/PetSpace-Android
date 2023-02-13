@@ -121,7 +121,7 @@ class AccMainActivity : AppCompatActivity() {
                             binding.btnHeartAfter.visibility = View.VISIBLE
                             if1Checked = 1
                             // 상진쓰랑 할것
-                            api.postLikes(accessTokenPost).enqueue(object : Callback<AccomodationData>{
+                            api.postLikes(accessTokenPost, roomId).enqueue(object : Callback<AccomodationData>{
                                 override fun onResponse(
                                     call: Call<AccomodationData>,
                                     response: Response<AccomodationData>
@@ -141,7 +141,7 @@ class AccMainActivity : AppCompatActivity() {
                             binding.btnHeartAfter.visibility = View.INVISIBLE
                             if1Checked = 0
                             // 상진쓰랑 할것
-                            api.postLikes(accessTokenPost).enqueue(object : Callback<AccomodationData>{
+                            api.postLikes(accessTokenPost, roomId).enqueue(object : Callback<AccomodationData>{
                                 override fun onResponse(
                                     call: Call<AccomodationData>,
                                     response: Response<AccomodationData>
