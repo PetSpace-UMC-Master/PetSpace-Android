@@ -69,9 +69,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         viewModel = ViewModelProvider(this).get(SortViewModel::class.java)
 
 
-
         //네트워크 통신
-
 
         //버튼정렬
         initButton()
