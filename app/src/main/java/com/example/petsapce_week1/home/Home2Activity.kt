@@ -10,6 +10,7 @@ import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.petsapce_week1.databinding.ActivityHome2Binding
 import com.example.petsapce_week1.home.homefragment.SortViewModel
 import com.example.petsapce_week1.network.RetrofitHelperHome
@@ -37,6 +38,13 @@ class Home2Activity : AppCompatActivity() {
     //스피너 및 버튼 전역변수
     var spinnerCheck:String = ""
     var buttonCheck:String = ""
+
+    //페이징
+    private var isLoading = false
+    private var isLastPage = false
+    private val PAGE_START = 1
+    private var currentPage = PAGE_START
+    private val PAGE_SIZE = 4
 
     //레트로핏 객체 생성
     var retrofit: Retrofit = RetrofitHelperHome.getRetrofitInstance()
@@ -163,23 +171,23 @@ class Home2Activity : AppCompatActivity() {
         binding.apply {
             b1.setOnClickListener {
                 buttonCheck = btn1House
-                updateTripple(0, "", buttonCheck,startDay.toString(),endDay.toString(), searchText,people,animal)
+                updateTripple(0, spinnerCheck, buttonCheck,startDay,endDay, searchText,people,animal)
             }
             b2.setOnClickListener {
                 buttonCheck = btn2Campsite
-                updateTripple(0, "", buttonCheck,startDay.toString(),endDay.toString(), searchText,people,animal)
+                updateTripple(0, spinnerCheck, buttonCheck,startDay,endDay, searchText,people,animal)
             }
             b3.setOnClickListener {
                 buttonCheck = btn3Downtown
-                updateTripple(0, "", buttonCheck,startDay.toString(),endDay.toString(), searchText,people,animal)
+                updateTripple(0, spinnerCheck, buttonCheck,startDay,endDay, searchText,people,animal)
             }
             b4.setOnClickListener {
                 buttonCheck = btn4Country
-                updateTripple(0, "", buttonCheck,startDay.toString(),endDay.toString(), searchText,people,animal)
+                updateTripple(0, spinnerCheck, buttonCheck,startDay,endDay, searchText,people,animal)
             }
             b5.setOnClickListener {
                 buttonCheck = btn5Beach
-                updateTripple(0, "", buttonCheck,startDay.toString(),endDay.toString(), searchText,people,animal)
+                updateTripple(0, spinnerCheck, buttonCheck,startDay,endDay, searchText,people,animal)
             }
         }
     }
@@ -222,6 +230,7 @@ class Home2Activity : AppCompatActivity() {
                             val availImageSize = usersSort.result[i].roomImages.size
 
                             var childataList = ArrayList<Home2ChildData>()
+
                             for (j in 0 until availImageSize) {
                                 childataList.add(Home2ChildData(usersSort.result[i].roomImages[j]))
 
@@ -271,6 +280,24 @@ class Home2Activity : AppCompatActivity() {
         adapter = Home2MainAdapter(dataList)
         binding.recyclerviewMain.adapter = adapter
         binding.recyclerviewMain.isNestedScrollingEnabled = false
+
+       /* binding.recyclerviewMain.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val visibleItemCount = layoutManager.childCount
+                val totalItemCount = layoutManager.itemCount
+                val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+
+                if (!isLoading && !isLastPage) {
+                    if (visibleItemCount + firstVisibleItemPosition >= totalItemCount
+                        && firstVisibleItemPosition >= 0
+                        && totalItemCount >= PAGE_SIZE
+                    ) {
+                        loadMoreData(currentPage + 1)
+                    }
+                }
+            }
+        })*/
     }
 
     private fun initBefore() {
@@ -279,6 +306,12 @@ class Home2Activity : AppCompatActivity() {
             startActivity(intent)
         }
 
+    }
+
+    private fun loadMoreData(page: Int) {
+        isLoading = true
+        currentPage = page
+        updateTripple(currentPage, spinnerCheck, buttonCheck, startDay, endDay, searchText, people, animal)
     }
 
 }
