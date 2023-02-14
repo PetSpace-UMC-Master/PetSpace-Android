@@ -20,7 +20,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-            tools:listitem="@layout/reservation_accommo_list">
+            tools:listitem="@layout/visited_accommo_list">
 
         </androidx.recyclerview.widget.RecyclerView>
 

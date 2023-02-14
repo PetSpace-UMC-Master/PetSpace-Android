@@ -1,19 +1,24 @@
 package com.example.petsapce_week1.reservation
 
+import android.util.Log
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class ReservationTabAdapter(fm : FragmentManager) : FragmentStatePagerAdapter(fm) {
+class ReservationTabAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
 
-    private var fragments : ArrayList<ReservationTabFragment> = ArrayList()
+    override fun getItemCount(): Int {
+        return 2 // Return the number of menus
+    }
 
-    override fun getItem(position: Int): Fragment = fragments[position]
-
-    override fun getCount(): Int = fragments.size
-
-    fun addItems(fragment : ReservationTabFragment){
-        fragments.add(fragment)
+    override fun createFragment(position: Int): Fragment {
+        Log.d("예약 화면 adapter", "dd")
+        return when (position) {
+            0 -> ReservationTabFragment()
+            1 -> VisitedTabFragment()
+            else -> throw IllegalArgumentException("Invalid position")
+        }
     }
 }

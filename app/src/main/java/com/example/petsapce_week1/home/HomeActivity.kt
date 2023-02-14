@@ -54,8 +54,9 @@ class HomeActivity : AppCompatActivity() {
                     }
                     R.id.menu_main_btm_nav_reserve -> {
                         supportFragmentManager.beginTransaction()
-                            .replace(R.id.main_frm, ReserveFragment())
+                            .replace(R.id.main_frm, ReservationFragment())
                             .commitAllowingStateLoss()
+                        Log.d("예약 화면 switch", "dd")
                     }
                     R.id.menu_main_btm_nav_profile -> {
                         supportFragmentManager.beginTransaction()
