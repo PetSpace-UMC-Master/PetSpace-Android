@@ -126,6 +126,7 @@ class PlaceGridAdapter(private val fragmentManager: FragmentManager, val context
                                 Log.d("함께 ㅇㅇ","ㅇㅇ")
                             }
                             else{
+
 //                                    fragmentManager
 //                                        .beginTransaction()
 //                                        .add(R.id.thisLayout, NoPlaceToGoFragment() )
@@ -137,7 +138,7 @@ class PlaceGridAdapter(private val fragmentManager: FragmentManager, val context
 //                                val placetogofragment = PlaceToGoFragment()
 //                                placetogofragment.parentFragmentManager
 //                                    .beginTransaction()
-//                                    .replace(R.id.placetogoLayout, noplacetogofragment)
+//                                    .replace(R.id.menu_layout, noplacetogofragment)
 //                                    .addToBackStack(null)
 //                                    .commit()
                             }

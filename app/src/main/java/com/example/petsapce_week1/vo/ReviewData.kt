@@ -7,7 +7,8 @@ data class ReviewData(
     val description: String,
     val nickname: String,
     val userId: Int,
-    val score : Int
+    val score : Int,
+    val profileImage: String
 )
 
 // 하나의 시설에 대한 정보

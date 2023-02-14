@@ -40,6 +40,12 @@ class PlaceToGoRegionActivity : AppCompatActivity() {
         region = intent.getStringExtra("region")
         reviewCount = intent.getIntExtra("reviewCount", 0)
         Log.d("함께 서울", "$accommoList")
+        if(accommoList.isEmpty()){
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.thisLayout, NoPlaceToGoFragment())
+                //.addToBackStack(null)
+                .commit()
+        }
         Log.d("함께 서울 isLast", "$isLast")
         Log.d("함께 서울 at", "$accessToken")
         Log.d("함께 서울 region", "$region")
@@ -56,20 +62,12 @@ class PlaceToGoRegionActivity : AppCompatActivity() {
         }
 
         binding.tvRegion.text = regionKor
-        var page : Int = 1
+
         //initRecyclerView()
         var adapter: PlaceToGoRegionAdapter = PlaceToGoRegionAdapter(accommoList, accessToken!!)
         binding.recyclerviewMainHome.layoutManager = LinearLayoutManager(this)
         binding.recyclerviewMainHome.adapter = adapter
         binding.recyclerviewMainHome.isNestedScrollingEnabled = true
-
-        ////기존 adapter(recyclerview adpater)
-        ////        binding.recyclerviewMain.layoutManager = LinearLayoutManager(
-        ////            this, LinearLayoutManager.VERTICAL, false
-        ////        )
-        ////
-        ////        binding.recyclerviewMain.adapter = adapter
-        ////        binding.recyclerviewMain.isNestedScrollingEnabled = true
         binding.recyclerviewMainHome.addOnScrollListener(object : RecyclerView.OnScrollListener(){
             var isLoading = false
             var isLastPage = false
