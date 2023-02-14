@@ -9,6 +9,8 @@ data class ReviewGetData(
     data class ReviewGETResult(
         val isLast: Boolean,
         val page: Int,
+        val numberOfReview: Int,
+        val averageReviewScore: Double,
         val reviews: List<Review>
     )
 

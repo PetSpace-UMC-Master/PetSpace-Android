@@ -1,5 +1,6 @@
 package com.example.petsapce_week1.reviewrelated
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -39,7 +40,6 @@ class ReviewReadMoreActivity : AppCompatActivity() {
         loadData()
         initScrollListener()
 
-
         binding.btnReviewClose.setOnClickListener {
             finish()
         }
@@ -51,10 +51,14 @@ class ReviewReadMoreActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val body = response.body()
                     if (body != null && response.isSuccessful) {
+                        binding.reviewCnt.text = "${body.result.numberOfReview}개의 리뷰"
+                        binding.avgScore.text = body.result.averageReviewScore.toString()
                         is_last = body.result.isLast
                         page_num = body.result.page
                         adapter.setReviews(body.result.reviews)
                         Log.d("body1", body.result.toString())
+                        Log.d("reviewCnt", body.result.numberOfReview.toString())
+                        Log.d("avgScore", body.result.averageReviewScore.toString())
                     }
                     } else {
                         Log.d("바디", response.body().toString())
@@ -77,6 +81,7 @@ class ReviewReadMoreActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             api.getReviews(roomId = 1, getPage(), size)
                 .enqueue(object : Callback<ReviewGetData> {
+                    @SuppressLint("SetTextI18n")
                     override fun onResponse(
                         call: Call<ReviewGetData>,
                         response: Response<ReviewGetData>

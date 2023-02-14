@@ -8,13 +8,9 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.petsapce_week1.R
 import com.example.petsapce_week1.TestMainActivity
 import com.example.petsapce_week1.databinding.ReviewCreateBinding
 import com.example.petsapce_week1.network.RetrofitHelper
@@ -35,7 +31,7 @@ import java.io.FileOutputStream
 import java.io.InputStream
 import java.io.OutputStream
 
-class ReviewPostActivity : AppCompatActivity() {
+class ReviewPostActivity_orig : AppCompatActivity() {
     private lateinit var binding: ReviewCreateBinding
     private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
     var api : ReviewAPI = retrofit.create(ReviewAPI::class.java)
@@ -46,22 +42,10 @@ class ReviewPostActivity : AppCompatActivity() {
     private var mediaPath: String? = null
     var selected: Int?=null
 
-    // 이미지 리사이클러 데이터
-    var list = ArrayList<Uri>()
-    val adapter = MultiImageAdapter(list, this)
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ReviewCreateBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        // 이미지 리사이클러
-        var images_rv = findViewById<RecyclerView>(R.id.review_rv)
-        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
-        images_rv.layoutManager = layoutManager
-        images_rv.adapter = adapter
-
 
         // 리뷰 내용 글자 수
         review_input.addTextChangedListener(object: TextWatcher{
@@ -90,7 +74,6 @@ class ReviewPostActivity : AppCompatActivity() {
         binding.openGallery.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
             activityResult.launch(intent)
         }
 
@@ -172,68 +155,64 @@ class ReviewPostActivity : AppCompatActivity() {
     val activityResult: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
-        mediaPath = getRealPathFromURI(it.data?.data!!)
         if (it.resultCode == RESULT_OK && it.data != null) {
-            list.clear()
-            val count = it.data!!.clipData!!.itemCount
-            if (count > 10) {
-                Toast.makeText(applicationContext, "사진은 최대 10장까지 선택 가능합니다.", Toast.LENGTH_LONG)
-                return@registerForActivityResult
+            val uri = it.data!!.data
+            mediaPath = getRealPathFromURI(it.data?.data!!)
+            selected = selected?.inc()
+            Log.d("selected",selected.toString())
+  /*          if(selected == 1){
+                Glide.with(this)
+                    .load(uri)
+                    .into(binding.selectedImage1)
             }
-            for (i in 0 until count) {
-                val imageUri = it.data!!.clipData!!.getItemAt(i).uri
-                list.add(imageUri)
-                copy_and_multipart(imageUri)
+            else if(selected == 2){
+                Glide.with(this)
+                    .load(uri)
+                    .into(binding.selectedImage2)
             }
-        }
-        else {// 단일 선택
-            it.data?.data?.let { uri ->
-                val imageUri : Uri? = it.data?.data
-                if (imageUri != null) {
-                    list.add(imageUri)
-                    copy_and_multipart(imageUri)
+            else if(selected == 3){
+                selected = 0
+                Glide.with(this)
+                    .load(uri)
+                    .into(binding.selectedImage3)
+            }*/
+            // 사진 데이터 => 외부 저장소에 복제 후 멀티파트에 담기
+            val i: InputStream? = uri?.let { it1 -> contentResolver.openInputStream(it1) } //src
+            val extension: String = mediaPath!!.substring(mediaPath!!.lastIndexOf("."))
+            localImgFile = File(applicationContext.filesDir, "localImgFile$extension")
+
+            if (i != null) {
+                try {
+                    val out: OutputStream = FileOutputStream(localImgFile) //dst
+                    try {
+                        // Transfer bytes from in to out
+                        val buf = ByteArray(1024)
+                        var len: Int
+                        while (i.read(buf).also { len = it } > 0) {
+                            out.write(buf, 0, len)
+                        }
+                    } finally {
+                        out.close()
+                    }
+                } finally {
+                    i.close()
                 }
             }
-        }
-        adapter.notifyDataSetChanged()
+            val requestFile = localImgFile!!.asRequestBody("image/*".toMediaTypeOrNull())
+            images.add(MultipartBody.Part.createFormData("reviewImages", localImgFile!!.name, requestFile))
             Log.d("멀티파트에 담긴 reviewImages", images.toString())
             Log.d("파일 경로", "$mediaPath")
+        }
     }
 
     // 이전 화면
     fun initPrevious() {
         binding.apply {
             btnBack.setOnClickListener {
-                val intent = Intent(this@ReviewPostActivity, TestMainActivity::class.java)
+                val intent = Intent(this@ReviewPostActivity_orig, TestMainActivity::class.java)
                 startActivity(intent)
             }
         }
-    }
-
-    fun copy_and_multipart(uri: Uri) {
-        // 사진 데이터 => 외부 저장소에 복제 후 멀티파트에 담기
-        val i: InputStream? = uri?.let { it1 -> contentResolver.openInputStream(it1) } //src
-        val extension: String = mediaPath!!.substring(mediaPath!!.lastIndexOf("."))
-        localImgFile = File(applicationContext.filesDir, "localImgFile$extension")
-        if (i != null) {
-            try {
-                val out: OutputStream = FileOutputStream(localImgFile) //dst
-                try {
-                    // Transfer bytes from in to out
-                    val buf = ByteArray(1024)
-                    var len: Int
-                    while (i.read(buf).also { len = it } > 0) {
-                        out.write(buf, 0, len)
-                    }
-                } finally {
-                    out.close()
-                }
-            } finally {
-                i.close()
-            }
-        }
-        val requestFile = localImgFile!!.asRequestBody("image/*".toMediaTypeOrNull())
-        images.add(MultipartBody.Part.createFormData("reviewImages", localImgFile!!.name, requestFile))
     }
 
     private fun String?.toPlainRequestBody() =

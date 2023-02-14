@@ -87,6 +87,7 @@ class ReviewAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 itemView.apply {
                     Glide.with(context)
                         .load(review.profileImage)
+                        .circleCrop()
                         .into(profimg)
                 }
             }

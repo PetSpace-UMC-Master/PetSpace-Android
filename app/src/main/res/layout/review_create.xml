@@ -231,25 +231,12 @@
                     android:layout_height="80dp"
                     android:src="@drawable/photo_input"/>
 
-                <ImageView
-                    android:id="@+id/selected_image1"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/review_rv"
                     android:layout_marginStart="10dp"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"/>
-
-                <ImageView
-                    android:id="@+id/selected_image2"
-                    android:layout_marginStart="10dp"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"/>
-
-                <ImageView
-                    android:id="@+id/selected_image3"
-                    android:layout_marginStart="10dp"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"/>
-
-
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="20dp"/>
             </LinearLayout>
 
 
