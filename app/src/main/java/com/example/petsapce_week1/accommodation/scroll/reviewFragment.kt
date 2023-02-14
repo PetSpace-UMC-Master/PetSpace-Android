@@ -78,6 +78,7 @@ class reviewFragment : Fragment() {
                                                 nickname = item.nickname,
                                                 userId = item.userId,
                                                 score = item.score,
+                                                profileImage = item.profileImage
                                             )
                                         )
                                     }
@@ -94,7 +95,7 @@ class reviewFragment : Fragment() {
                          */
                         dataList.add (
                             reviewData(
-                                R.drawable.face,
+                                reviewList[i].profileImage,
                                 reviewList[i].score,
                                 reviewList[i].nickname,
                                 reviewList[i].createdAt,
@@ -104,7 +105,7 @@ class reviewFragment : Fragment() {
                     }
 
                     Log.d("숙소 ===", dataList[0].toString())
-                    val vreviewAdapter = reviewAdapter(dataList)
+                    val vreviewAdapter = context?.let { reviewAdapter(dataList, it) }
                     binding.recyclerview.adapter = vreviewAdapter
                 }
             }
@@ -123,7 +124,7 @@ class reviewFragment : Fragment() {
         binding.recyclerview.layoutManager = LinearLayoutManager(
             context, LinearLayoutManager.HORIZONTAL, false
         )
-        adapter = reviewAdapter(dataList)
+        adapter = context?.let { reviewAdapter(dataList, it) }!!
         binding.recyclerview.adapter = adapter
 
 

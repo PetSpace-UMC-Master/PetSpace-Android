@@ -62,13 +62,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="#F9F9F9"
+            android:background="@drawable/circle"
             app:srcCompat="@drawable/frame_293" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:paddingLeft="13dp"
             android:orientation="vertical"
             android:paddingTop="13dp"
             android:paddingBottom="13dp">

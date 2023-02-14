@@ -40,6 +40,7 @@ data class AccomodationData(
         val description: String,
         val nickname: String,
         val userId: Int,
-        val score : Int
+        val score : Int,
+        val profileImage: String
     )
 }
