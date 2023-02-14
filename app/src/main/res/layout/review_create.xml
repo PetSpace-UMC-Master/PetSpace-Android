@@ -232,7 +232,19 @@
                     android:src="@drawable/photo_input"/>
 
                 <ImageView
-                    android:id="@+id/selected_image"
+                    android:id="@+id/selected_image1"
+                    android:layout_marginStart="10dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"/>
+
+                <ImageView
+                    android:id="@+id/selected_image2"
+                    android:layout_marginStart="10dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"/>
+
+                <ImageView
+                    android:id="@+id/selected_image3"
                     android:layout_marginStart="10dp"
                     android:layout_width="80dp"
                     android:layout_height="80dp"/>

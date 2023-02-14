@@ -9,7 +9,7 @@ data class HomeResponse(
 
 ) {
     data class Result(
-        val availableDays: List<String>,
+//        val availableDays: List<String>,
         val averageReviewScore: Float,
         val city: String,
         val district: String,

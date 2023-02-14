@@ -4,10 +4,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.petsapce_week1.R
-import com.example.petsapce_week1.databinding.ReviewItemListBinding
 import com.example.petsapce_week1.vo.ReviewGetData
 
 
@@ -65,18 +66,50 @@ class ReviewAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         Log.d("리뷰 목록 items", "$reviews")
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-/*        holder.tv_name.text = itemList[position].nickName
-        holder.tv_content.text = itemList[position].content
-        holder.tv_time.text = itemList[position].dayAfterCreated*/
-        when (holder.itemViewType) {
-            TYPE_POST -> {
-                val reviewViewHolder = holder as ReviewViewHolder
-                reviewViewHolder.bind(reviews[position])
+    inner class ReviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind(review: ReviewGetData.Review?) {
+            Log.d("리뷰 더보기 데이터", review.toString())
+            val tv_name = itemView.findViewById<TextView>(R.id.tv_user_nickname)
+            val tv_content = itemView.findViewById<TextView>(R.id.readmoreTV_review_content)
+            val profimg = itemView.findViewById<ImageView>(R.id.user_profile_img)
+            val tv_date = itemView.findViewById<TextView>(R.id.tv_review_date)
+            // 리뷰 이미지
+/*            val img1 = itemView.findViewById<TextView>(R.id.img_review_1)
+            val img2 = itemView.findViewById<TextView>(R.id.img_review_2)
+            val img3 = itemView.findViewById<TextView>(R.id.img_review_3)
+            val img4 = itemView.findViewById<TextView>(R.id.img_review_4)*/
+
+            if (review != null) {
+                tv_name.text = review.nickName
+                tv_content.text = review.content
+                tv_date.text = review.dayAfterCreated
+                //img1.text = review.reviewImage
+                itemView.apply {
+                    Glide.with(context)
+                        .load(review.profileImage)
+                        .into(profimg)
+                }
             }
         }
     }
 
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (holder.itemViewType) {
+            TYPE_POST -> {
+                val reviewViewHolder = holder as ReviewViewHolder
+                reviewViewHolder.bind(reviews[position])
+/*                val review: ReviewGetData.Review?
+                val profimg = ReviewGetData.Review
+                val profimg = itemView.findViewById<ImageView>(R.id.user_profile_img)
+
+                holder.apply {
+                    Glide.with()
+                        .load(review.profileImage)
+                        .into(profimg)
+                }*/
+            }
+        }
+    }
 
     override fun getItemCount(): Int {
         return reviews.count()
@@ -88,27 +121,6 @@ class ReviewAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             else -> TYPE_POST
         }
     }
-
-
-    inner class ReviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(review: ReviewGetData.Review?) {
-            val tv_time = itemView.findViewById<TextView>(R.id.tv_review_date)
-            val tv_name = itemView.findViewById<TextView>(R.id.tv_user_nickname)
-            val tv_content = itemView.findViewById<TextView>(R.id.readmoreTV_review_content)
-        }
-    }
-
-/*    inner class ReviewViewHolder(val binding: View):
-            RecyclerView.ViewHolder(binding.root) {
-                fun bind(data: Review) {
-                    Log.d("ReviewGET data", data.toString())
-
-                    binding.apply {
-                        tvReviewDate.text = data.dayAfterCreated
-                        readmoreTVReviewContent.text = data.content
-                    }
-                }
-    }*/
 
     class LoadingViewHolder(inflatedView: View, itemView: View) : RecyclerView.ViewHolder(itemView) {
 }

@@ -5,39 +5,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingHorizontal="20dp"
     android:background="@color/white"
     tools:context=".home.Home2Activity">
 
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginHorizontal="20dp"
         android:id="@+id/btn_edittext"
         android:layout_width="match_parent"
         android:layout_height="46sp"
-        android:layout_marginTop="18dp"
-        android:background="@drawable/edittext_main"
-        android:clickable="true"
+        android:layout_marginTop="20dp"
+        android:foreground="@drawable/edittext_main"
         android:paddingHorizontal="20dp">
 
         <ImageView
-            android:id="@+id/img_search"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/searchicon"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"
+            android:id="@+id/img_back"
+            android:layout_width="16sp"
+            android:layout_height="16sp"
+            android:src="@drawable/icon_back_home"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/text_change"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="반려동물과 어디로 여행가세요?"
-            android:textColor="#7F7F7F"
+            android:textColor="@color/textForBlack"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/img_search"
+            app:layout_constraintStart_toEndOf="@+id/img_back"
             app:layout_constraintTop_toTopOf="parent"
 
             />
@@ -68,12 +70,14 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:paddingHorizontal="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 app:layout_constraintHorizontal_chainStyle="spread_inside">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:background="?attr/selectableItemBackground"
                     android:id="@+id/b1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -84,19 +88,19 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <ImageButton
-                        android:clickable="true"
+                    <ImageView
                         android:id="@+id/im1"
                         android:layout_width="48sp"
                         android:layout_height="48sp"
-                        android:background="@drawable/btn11"
+                        android:src="@drawable/btn11"
                         app:layout_constraintBottom_toTopOf="@+id/text1"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:focusable="true" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
+                        android:id="@+id/im1_black"
+                        android:visibility="visible"
                         android:layout_width="48sp"
                         android:layout_height="48sp"
                         android:src="@drawable/btn1"
@@ -120,6 +124,7 @@
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:background="?attr/selectableItemBackground"
                     android:id="@+id/b2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -163,6 +168,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:background="?attr/selectableItemBackground"
                     android:id="@+id/b3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -204,9 +210,9 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:background="?attr/selectableItemBackground"
                     android:id="@+id/b4"
                     android:layout_width="wrap_content"
-
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/b5"
@@ -245,6 +251,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:background="?attr/selectableItemBackground"
                     android:id="@+id/b5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -289,11 +296,73 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_marginVertical="20dp"
+                android:background="#F9F9F9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Spinner
+                    android:paddingLeft="20dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:id="@+id/spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:entries="@array/spinner_entries" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
             <androidx.recyclerview.widget.RecyclerView
+                android:visibility="visible"
                 android:id="@+id/recyclerview_main"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="30dp" />
+                android:paddingHorizontal="20dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+            <LinearLayout
+                android:id="@+id/sorrydog"
+                android:visibility="gone"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/sorrydog"
+                />
+
+            <TextView
+                android:layout_marginTop="30dp"
+                android:textSize="20sp"
+                android:textColor="@color/textForBlack"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/bmjua"
+                android:text="검색 결과가 없어요"/>
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:textSize="14sp"
+                android:textColor="#595959"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="검색어의 철자가 정확한지 확인해보세요.\n비슷한 다른 검색어를 입력해보세요.\n단어의 수를 줄여보세요."/>
+            </LinearLayout>
 
 
         </LinearLayout>

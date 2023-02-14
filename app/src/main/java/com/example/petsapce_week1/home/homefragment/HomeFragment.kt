@@ -38,6 +38,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
     val sortReviewCount = "REVIEW_COUNT_DESC"
     val sortReviewScore = "AVERAGE_REVIEW_SCORE_DESC"
 
+    //스피너 및 버튼 전역변수
+    var page = 0
+    var spinnerCheck:String = ""
+    var buttonCheck:String = ""
 
     //레트로핏 객체 생성
     var retrofit: Retrofit = RetrofitHelperHome.getRetrofitInstance()
@@ -47,7 +51,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     lateinit var viewModel: SortViewModel
 
-    //child apdater 이미지
+    //child apdater
     private lateinit var binding: FragmentHomeBinding
 
     var dataList = ArrayList<HomeMainData>()
@@ -65,345 +69,51 @@ class HomeFragment : Fragment(), View.OnClickListener {
         viewModel = ViewModelProvider(this).get(SortViewModel::class.java)
 
 
-
         //네트워크 통신
 
-
+        //버튼정렬
         initButton()
-        initRecyclerView()
+        //스피너정렬
         initSpinner()
-//        initButtonSort()
+        //리사이클러뷰
+        initRecyclerView()
+        //다음페이지
         initNext()
+
+//        initButtonSort()
 //        initAddData()
 
         // Inflate the layout for this fragment
         return binding.root
     }
 
-    private fun initNext() {
-        binding.btnEdittext.setOnClickListener {
-            val intent = Intent(context,HomeResearchActivity::class.java)
-            startActivity(intent)
+    //버튼 정렬
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            binding.b1.id -> {
+                buttonCheck = btn1House
+                updateTripple(page,spinnerCheck,buttonCheck)
+            }
+            binding.b2.id -> {
+                buttonCheck = btn2Campsite
+                updateTripple(page,spinnerCheck,buttonCheck)
+            }
+            binding.b3.id -> {
+                buttonCheck = btn3Downtown
+                updateTripple(page,spinnerCheck,buttonCheck)
+            }
+            binding.b4.id -> {
+                buttonCheck = btn4Country
+                updateTripple(page,spinnerCheck,buttonCheck)
+            }
+            binding.b5.id -> {
+                buttonCheck = btn5Beach
+                updateTripple(page,spinnerCheck,buttonCheck)
+            }
         }
     }
 
-/*
-    private fun initButtonSort() {
-        binding.apply {
-            b1.setOnClickListener {
-                updateCategory(btn1House)
-                spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                    override fun onNothingSelected(parent: AdapterView<*>?) {
-                    }
-
-                    @SuppressLint("NotifyDataSetChanged")
-                    override fun onItemSelected(
-                        parent: AdapterView<*>?,
-                        view: View?,
-                        position: Int,
-                        id: Long
-                    ) {
-                        Log.d(
-                            "MainActivity",
-                            "onItemSelected : $position, ${spinner.getItemAtPosition(position)}"
-                        )
-                        when (spinner.getItemAtPosition(position)) {
-                            "최근등록순" -> {
-                                updateDouble(sortDefault, btn1House)
-                            }
-                            "높은가격순" -> {
-                                updateDouble(sortPriceAsc, btn1House)
-                            }
-                            "낮은가격순" -> {
-                                updateDouble(sortPriceDesc, btn1House)
-                            }
-                            "평점높은순" -> {
-                                updateDouble(sortReviewScore, btn1House)
-                            }
-                            "리뷰많은순" -> {
-                                updateDouble(sortReviewCount, btn1House)
-                            }
-                            else -> {
-                                updateDouble(sortDefault, btn1House)
-                            }
-                        }
-                    }
-                }
-            }
-
-            b2.setOnClickListener {
-                updateCategory(btn2Campsite)
-            }
-            b3.setOnClickListener {
-                updateCategory(btn3Downtown)
-            }
-            b4.setOnClickListener {
-                updateCategory(btn4Country)
-                spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                    override fun onNothingSelected(parent: AdapterView<*>?) {
-                    }
-
-                    @SuppressLint("NotifyDataSetChanged")
-                    override fun onItemSelected(
-                        parent: AdapterView<*>?,
-                        view: View?,
-                        position: Int,
-                        id: Long
-                    ) {
-                        Log.d(
-                            "MainActivity",
-                            "onItemSelected : $position, ${spinner.getItemAtPosition(position)}"
-                        )
-                        when (spinner.getItemAtPosition(position)) {
-                            "최근등록순" -> {
-                                updateDouble(sortDefault, btn4Country)
-                            }
-                            "높은가격순" -> {
-                                updateDouble(sortPriceAsc, btn4Country)
-                            }
-                            "낮은가격순" -> {
-                                updateDouble(sortPriceDesc, btn4Country)
-                            }
-                            "평점높은순" -> {
-                                updateDouble(sortReviewScore, btn4Country)
-                            }
-                            "리뷰많은순" -> {
-                                updateDouble(sortReviewCount, btn4Country)
-                            }
-                            else -> {
-                                updateDouble(sortDefault, btn4Country)
-                            }
-                        }
-                    }
-                }
-
-
-            }
-            b5.setOnClickListener {
-                updateCategory(btn5Beach)
-
-            }
-
-        }
-
-    }
-*/
-
-    fun updateDouble(sort: String, category: String) {
-        ArrayList<HomeMainData>()
-
-        api.getDouble(sort, category).enqueue(object : Callback<HomeResponse> {
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onResponse(
-                call: Call<HomeResponse>,
-                response: Response<HomeResponse>
-            ) {
-                val usersSort = response.body()
-                if (usersSort != null) {
-//                    Log.d("tripple", usersSort.result.toString())
-                    val resultSize = usersSort.result.size
-                    val dataList = ArrayList<HomeMainData>()
-//                    var dateList = arrayListOf(1,2,3)
-                    var statdate = ""
-                    var endDate = ""
-
-
-                    for (i in 0 until resultSize) {
-                        roomId = usersSort.result[i].roomId.toString()
-                        val availDaysList = usersSort.result[i].availableDays.size
-                        val availImageSize = usersSort.result[i].roomImages.size
-
-                        var childataList = ArrayList<HomeChildData>()
-                        for (j in 0 until availImageSize) {
-//                            childataList.add(HomeChildData(R.drawable.map))
-                            childataList.add(HomeChildData(usersSort.result[i].roomImages[j]))
-//                            Log.d("childataList",usersSort.result[i].roomImages[j])
-
-                        }
-
-                        if (availDaysList != 0) {
-                            statdate = usersSort.result[i].availableDays[0]
-                            endDate = usersSort.result[i].availableDays[availDaysList - 1]
-                        }
-
-
-                        dataList.add(
-                            HomeMainData(
-                                childataList,
-                                usersSort.result[i].averageReviewScore,
-                                usersSort.result[i].city + ", " + usersSort.result[i].district,
-                                "$statdate~$endDate",
-                                usersSort.result[i].price,
-                                usersSort.result[i].numberOfReview,
-                                usersSort.result[i].roomId
-                            )
-
-                        )
-                    }
-
-                    adapter.items = dataList
-                    adapter.notifyDataSetChanged()
-
-
-                } else {
-                    Log.d("PRICE_DESC", response.code().toString())
-
-                }
-            }
-
-            override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
-                Log.d("PRICE_DESC", t.message.toString())
-            }
-        })
-
-    }
-
-
-    fun updateTripple(page: Int, sort: String, category: String) {
-        ArrayList<HomeMainData>()
-
-        api.getTriple(page, sort, category).enqueue(object : Callback<HomeResponse> {
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onResponse(
-                call: Call<HomeResponse>,
-                response: Response<HomeResponse>
-            ) {
-                val usersSort = response.body()
-                if (usersSort != null) {
-//                    Log.d("tripple", usersSort.result.toString())
-                    val resultSize = usersSort.result.size
-                    val dataList = ArrayList<HomeMainData>()
-//                    var dateList = arrayListOf(1,2,3)
-                    var statdate = ""
-                    var endDate = ""
-
-
-                    for (i in 0 until resultSize) {
-                        roomId = usersSort.result[i].roomId.toString()
-                        val availDaysList = usersSort.result[i].availableDays.size
-                        val availImageSize = usersSort.result[i].roomImages.size
-
-                        var childataList = ArrayList<HomeChildData>()
-                        for (j in 0 until availImageSize) {
-//                            childataList.add(HomeChildData(R.drawable.map))
-                            childataList.add(HomeChildData(usersSort.result[i].roomImages[j]))
-//                            Log.d("childataList",usersSort.result[i].roomImages[j])
-
-                        }
-
-                        if (availDaysList != 0) {
-                            statdate = usersSort.result[i].availableDays[0]
-                            endDate = usersSort.result[i].availableDays[availDaysList - 1]
-                        }
-
-
-                        dataList.add(
-                            HomeMainData(
-                                childataList,
-                                usersSort.result[i].averageReviewScore,
-                                usersSort.result[i].city + ", " + usersSort.result[i].district,
-                                "$statdate~$endDate",
-                                usersSort.result[i].price,
-                                usersSort.result[i].numberOfReview,
-                                usersSort.result[i].roomId
-
-                            )
-
-                        )
-                    }
-
-                    adapter.items = dataList
-                    adapter.notifyDataSetChanged()
-
-
-                } else {
-                    Log.d("PRICE_DESC", response.code().toString())
-
-                }
-            }
-
-            override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
-                Log.d("PRICE_DESC", t.message.toString())
-            }
-        })
-
-    }
-
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun updateCategory(category: String) {
-        val call = api.getCategory(category)
-        call.enqueue(object : Callback<HomeResponse> {
-            override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
-                val usersSort = response.body()
-
-                if (usersSort != null) {
-                    Log.d("PRICE_DESC", usersSort.result.toString())
-                    val resultSize = usersSort.result.size
-                    var dataList = ArrayList<HomeMainData>()
-//                    var dateList = arrayListOf(1,2,3)
-                    var statdate = ""
-                    var endDate = ""
-
-
-                    for (i in 0 until resultSize) {
-                        roomId = usersSort.result[i].roomId.toString()
-                        val availDaysList = usersSort.result[i].availableDays.size
-                        val availImageSize = usersSort.result[i].roomImages.size
-
-                        var childataList = ArrayList<HomeChildData>()
-                        for (j in 0 until availImageSize) {
-                            childataList.add(HomeChildData(usersSort.result[i].roomImages[j]))
-
-//                            childataList.add(HomeChildData(R.drawable.map))
-//                            Log.d("childataList",usersSort.result[i].roomImages[j])
-
-                        }
-
-                        if (availDaysList != 0) {
-                            statdate = usersSort.result[i].availableDays[0]
-                            endDate = usersSort.result[i].availableDays[availDaysList - 1]
-                        }
-
-
-                        val add = dataList.add(
-                            HomeMainData(
-                                childataList,
-                                usersSort.result[i].averageReviewScore,
-                                usersSort.result[i].city + ", " + usersSort.result[i].district,
-                                "$statdate~$endDate",
-                                usersSort.result[i].price,
-                                usersSort.result[i].numberOfReview,
-                                usersSort.result[i].roomId
-
-                            )
-
-                        )
-                    }
-
-//                        childataList.add(HomeChildData(R.drawable.map))
-
-
-                    adapter.items = dataList
-//                    adapter.notifyDataSetChanged()
-
-                } else {
-                    Log.d("PRICE_DESC오류", response.code().toString())
-                }
-                // handle users
-            }
-
-            override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
-                Log.d("PRICE 연결 실패", t.message.toString())
-            }
-        })
-
-        adapter.notifyDataSetChanged()
-
-
-    }
-
-
+    //스피너 정렬
     private fun initSpinner() {
         spinner = binding.spinner
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -423,23 +133,28 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 )
                 when (spinner.getItemAtPosition(position)) {
                     "최근등록순" -> {
-                        updateSort(sortDefault)
-
+                        spinnerCheck = sortDefault
+                        updateTripple(page,spinnerCheck,buttonCheck)
                     }
                     "높은가격순" -> {
-                        updateSort(sortPriceAsc)
+                        spinnerCheck = sortPriceAsc
+                        updateTripple(page,spinnerCheck,buttonCheck)
                     }
                     "낮은가격순" -> {
-                        updateSort(sortPriceDesc)
+                        spinnerCheck = sortPriceDesc
+                        updateTripple(page,spinnerCheck,buttonCheck)
                     }
                     "평점높은순" -> {
-                        updateSort(sortReviewScore)
+                        spinnerCheck = sortReviewScore
+                        updateTripple(page,spinnerCheck,buttonCheck)
                     }
                     "리뷰많은순" -> {
-                        updateSort(sortReviewCount)
+                        spinnerCheck = sortReviewCount
+                        updateTripple(page,spinnerCheck,buttonCheck)
                     }
                     else -> {
-                        updateSort(sortPriceAsc)
+                        spinnerCheck = sortDefault
+                        updateTripple(page,spinnerCheck,buttonCheck)
                     }
                 }
             }
@@ -447,15 +162,19 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     }
 
-    fun updateSort(sort: String) {
-        val call = api.getSort(sort)
-        call.enqueue(object : Callback<HomeResponse> {
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
-                val usersSort = response.body()
 
-                if (usersSort != null) {
-                    Log.d("PRICE_DESC", usersSort.result.toString())
+    //삼중 정렬
+    fun updateTripple(page: Int, sort: String, category: String) {
+        ArrayList<HomeMainData>()
+
+        api.getTriple(page, sort, category).enqueue(object : Callback<HomeResponse> {
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onResponse(
+                call: Call<HomeResponse>,
+                response: Response<HomeResponse>
+            ) {
+                val usersSort = response.body()
+                if (usersSort != null && usersSort.result != null) {
                     val resultSize = usersSort.result.size
                     val dataList = ArrayList<HomeMainData>()
 //                    var dateList = arrayListOf(1,2,3)
@@ -465,22 +184,22 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
                     for (i in 0 until resultSize) {
                         roomId = usersSort.result[i].roomId.toString()
-                        val availDaysList = usersSort.result[i].availableDays.size
+//                        val availDaysList = usersSort.result[i].availableDays.size
                         val availImageSize = usersSort.result[i].roomImages.size
 
-                        //이미지 입력
-                        val childataList = ArrayList<HomeChildData>()
+                        var childataList = ArrayList<HomeChildData>()
                         for (j in 0 until availImageSize) {
 //                            childataList.add(HomeChildData(R.drawable.map))
                             childataList.add(HomeChildData(usersSort.result[i].roomImages[j]))
-                            Log.d("childataList", usersSort.result[i].roomImages[j])
+//                            Log.d("childataList",usersSort.result[i].roomImages[j])
+
                         }
 
-                        //가용날짜 체크
-                        if (availDaysList != 0) {
+                 /*       if (availDaysList != 0) {
                             statdate = usersSort.result[i].availableDays[0]
                             endDate = usersSort.result[i].availableDays[availDaysList - 1]
-                        }
+                        }*/
+
 
                         dataList.add(
                             HomeMainData(
@@ -500,14 +219,15 @@ class HomeFragment : Fragment(), View.OnClickListener {
                     adapter.items = dataList
                     adapter.notifyDataSetChanged()
 
+
                 } else {
-                    Log.d("PRICE_DESC오류", response.code().toString())
+                    Log.d("PRICE_DESC", response.code().toString())
+
                 }
-                // handle users
             }
 
             override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
-                Log.d("PRICE 연결 실패", t.message.toString())
+                Log.d("PRICE_DESC", t.message.toString())
             }
         })
 
@@ -541,102 +261,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     }
 
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            binding.b1.id -> {
-                updateCategory(btn1House)
-                spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                    override fun onNothingSelected(parent: AdapterView<*>?) {
-                    }
-
-                    @SuppressLint("NotifyDataSetChanged")
-                    override fun onItemSelected(
-                        parent: AdapterView<*>?,
-                        view: View?,
-                        position: Int,
-                        id: Long
-                    ) {
-                        Log.d(
-                            "MainActivity",
-                            "onItemSelected : $position, ${spinner.getItemAtPosition(position)}"
-                        )
-                        when (spinner.getItemAtPosition(position)) {
-                            "최근등록순" -> {
-                                updateDouble(sortDefault, btn1House)
-                            }
-                            "높은가격순" -> {
-                                updateDouble(sortPriceAsc, btn1House)
-                            }
-                            "낮은가격순" -> {
-                                updateDouble(sortPriceDesc, btn1House)
-                            }
-                            "평점높은순" -> {
-                                updateDouble(sortReviewScore, btn1House)
-                            }
-                            "리뷰많은순" -> {
-                                updateDouble(sortReviewCount, btn1House)
-                            }
-                            else -> {
-                                updateDouble(sortDefault, btn1House)
-                            }
-                        }
-                    }
-                }
-
-            }
-            binding.b2.id -> {
-                updateCategory(btn2Campsite)
-
-            }
-            binding.b3.id -> {
-                updateCategory(btn3Downtown)
-
-            }
-            binding.b4.id -> {
-                updateCategory(btn4Country)
-                spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                    override fun onNothingSelected(parent: AdapterView<*>?) {
-                    }
-
-                    @SuppressLint("NotifyDataSetChanged")
-                    override fun onItemSelected(
-                        parent: AdapterView<*>?,
-                        view: View?,
-                        position: Int,
-                        id: Long
-                    ) {
-                        Log.d(
-                            "MainActivity",
-                            "onItemSelected : $position, ${spinner.getItemAtPosition(position)}"
-                        )
-                        when (spinner.getItemAtPosition(position)) {
-                            "최근등록순" -> {
-                                updateDouble(sortDefault, btn4Country)
-                            }
-                            "높은가격순" -> {
-                                updateDouble(sortPriceAsc, btn4Country)
-                            }
-                            "낮은가격순" -> {
-                                updateDouble(sortPriceDesc, btn4Country)
-                            }
-                            "평점높은순" -> {
-                                updateDouble(sortReviewScore, btn4Country)
-                            }
-                            "리뷰많은순" -> {
-                                updateDouble(sortReviewCount, btn4Country)
-                            }
-                            else -> {
-                                updateDouble(sortDefault, btn4Country)
-                            }
-                        }
-                    }
-                }
-            }
-            binding.b5.id -> {
-                updateCategory(btn5Beach)
-            }
-        }
-    }
 
     fun initButton() {
         binding.b1.setOnClickListener(this)
@@ -645,6 +269,13 @@ class HomeFragment : Fragment(), View.OnClickListener {
         binding.b4.setOnClickListener(this)
         binding.b5.setOnClickListener(this)
 
+    }
+
+    private fun initNext() {
+        binding.btnEdittext.setOnClickListener {
+            val intent = Intent(context,HomeResearchActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 

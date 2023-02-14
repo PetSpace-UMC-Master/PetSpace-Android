@@ -41,6 +41,7 @@ class ReviewPostActivity : AppCompatActivity() {
     private var success_review_id: Int? = null
     private var review_rate: Int? = null
     private var mediaPath: String? = null
+    var selected: Int?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -160,11 +161,24 @@ class ReviewPostActivity : AppCompatActivity() {
         if (it.resultCode == RESULT_OK && it.data != null) {
             val uri = it.data!!.data
             mediaPath = getRealPathFromURI(it.data?.data!!)
-
-            Glide.with(this)
-                .load(uri)
-                .into(binding.selectedImage)
-
+            selected = selected?.inc()
+            Log.d("selected",selected.toString())
+            if(selected == 1){
+                Glide.with(this)
+                    .load(uri)
+                    .into(binding.selectedImage1)
+            }
+            else if(selected == 2){
+                Glide.with(this)
+                    .load(uri)
+                    .into(binding.selectedImage2)
+            }
+            else if(selected == 3){
+                selected = 0
+                Glide.with(this)
+                    .load(uri)
+                    .into(binding.selectedImage3)
+            }
             // 사진 데이터 => 외부 저장소에 복제 후 멀티파트에 담기
             val i: InputStream? = uri?.let { it1 -> contentResolver.openInputStream(it1) } //src
             val extension: String = mediaPath!!.substring(mediaPath!!.lastIndexOf("."))
