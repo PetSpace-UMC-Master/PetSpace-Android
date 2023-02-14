@@ -40,15 +40,21 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <GridView
-        android:id="@+id/place_gridview"
+    <FrameLayout
+        android:id="@+id/menu_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:numColumns="2"
-        android:paddingTop="50dp"
-        tools:listitem="@layout/placetogo_grid_itemlist" />
+        android:layout_marginTop="60dp">
+        <GridView
+            android:id="@+id/place_gridview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:numColumns="2"
+            tools:listitem="@layout/placetogo_grid_itemlist" />
 
+
+    </FrameLayout>
 
 </FrameLayout>
 
