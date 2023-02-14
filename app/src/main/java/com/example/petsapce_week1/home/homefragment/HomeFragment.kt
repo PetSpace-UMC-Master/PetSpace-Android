@@ -12,6 +12,7 @@ import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.petsapce_week1.databinding.FragmentHomeBinding
 import com.example.petsapce_week1.home.HomeResearchActivity
 import com.example.petsapce_week1.network.RetrofitHelperHome
@@ -38,10 +39,17 @@ class HomeFragment : Fragment(), View.OnClickListener {
     val sortReviewCount = "REVIEW_COUNT_DESC"
     val sortReviewScore = "AVERAGE_REVIEW_SCORE_DESC"
 
+    //페이징
+    private var isLoading = false
+    private var isLastPage = false
+    private val PAGE_START = 0
+    private var currentPage = PAGE_START
+    private val PAGE_SIZE = 4
+
     //스피너 및 버튼 전역변수
     var page = 0
-    var spinnerCheck:String = ""
-    var buttonCheck:String = ""
+    var spinnerCheck: String = ""
+    var buttonCheck: String = ""
 
     //레트로핏 객체 생성
     var retrofit: Retrofit = RetrofitHelperHome.getRetrofitInstance()
@@ -92,23 +100,23 @@ class HomeFragment : Fragment(), View.OnClickListener {
         when (v?.id) {
             binding.b1.id -> {
                 buttonCheck = btn1House
-                updateTripple(page,spinnerCheck,buttonCheck)
+                updateTripple(page, spinnerCheck, buttonCheck)
             }
             binding.b2.id -> {
                 buttonCheck = btn2Campsite
-                updateTripple(page,spinnerCheck,buttonCheck)
+                updateTripple(page, spinnerCheck, buttonCheck)
             }
             binding.b3.id -> {
                 buttonCheck = btn3Downtown
-                updateTripple(page,spinnerCheck,buttonCheck)
+                updateTripple(page, spinnerCheck, buttonCheck)
             }
             binding.b4.id -> {
                 buttonCheck = btn4Country
-                updateTripple(page,spinnerCheck,buttonCheck)
+                updateTripple(page, spinnerCheck, buttonCheck)
             }
             binding.b5.id -> {
                 buttonCheck = btn5Beach
-                updateTripple(page,spinnerCheck,buttonCheck)
+                updateTripple(page, spinnerCheck, buttonCheck)
             }
         }
     }
@@ -134,27 +142,29 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 when (spinner.getItemAtPosition(position)) {
                     "최근등록순" -> {
                         spinnerCheck = sortDefault
-                        updateTripple(page,spinnerCheck,buttonCheck)
+
+
+                        updateTripple(page, spinnerCheck, buttonCheck)
                     }
                     "높은가격순" -> {
                         spinnerCheck = sortPriceAsc
-                        updateTripple(page,spinnerCheck,buttonCheck)
+                        updateTripple(page, spinnerCheck, buttonCheck)
                     }
                     "낮은가격순" -> {
                         spinnerCheck = sortPriceDesc
-                        updateTripple(page,spinnerCheck,buttonCheck)
+                        updateTripple(page, spinnerCheck, buttonCheck)
                     }
                     "평점높은순" -> {
                         spinnerCheck = sortReviewScore
-                        updateTripple(page,spinnerCheck,buttonCheck)
+                        updateTripple(page, spinnerCheck, buttonCheck)
                     }
                     "리뷰많은순" -> {
                         spinnerCheck = sortReviewCount
-                        updateTripple(page,spinnerCheck,buttonCheck)
+                        updateTripple(page, spinnerCheck, buttonCheck)
                     }
                     else -> {
                         spinnerCheck = sortDefault
-                        updateTripple(page,spinnerCheck,buttonCheck)
+                        updateTripple(page, spinnerCheck, buttonCheck)
                     }
                 }
             }
@@ -165,7 +175,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     //삼중 정렬
     fun updateTripple(page: Int, sort: String, category: String) {
-        ArrayList<HomeMainData>()
 
         api.getTriple(page, sort, category).enqueue(object : Callback<HomeResponse> {
             @SuppressLint("NotifyDataSetChanged")
@@ -175,9 +184,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
             ) {
                 val usersSort = response.body()
                 if (usersSort != null && usersSort.result != null) {
+
+
                     val resultSize = usersSort.result.size
                     val dataList = ArrayList<HomeMainData>()
-//                    var dateList = arrayListOf(1,2,3)
                     var statdate = ""
                     var endDate = ""
 
@@ -189,17 +199,13 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
                         var childataList = ArrayList<HomeChildData>()
                         for (j in 0 until availImageSize) {
-//                            childataList.add(HomeChildData(R.drawable.map))
                             childataList.add(HomeChildData(usersSort.result[i].roomImages[j]))
 //                            Log.d("childataList",usersSort.result[i].roomImages[j])
-
                         }
-
-                 /*       if (availDaysList != 0) {
-                            statdate = usersSort.result[i].availableDays[0]
-                            endDate = usersSort.result[i].availableDays[availDaysList - 1]
-                        }*/
-
+                        /*       if (availDaysList != 0) {
+                                   statdate = usersSort.result[i].availableDays[0]
+                                   endDate = usersSort.result[i].availableDays[availDaysList - 1]
+                               }*/
 
                         dataList.add(
                             HomeMainData(
@@ -210,15 +216,12 @@ class HomeFragment : Fragment(), View.OnClickListener {
                                 usersSort.result[i].price,
                                 usersSort.result[i].numberOfReview,
                                 usersSort.result[i].roomId
-
                             )
-
                         )
                     }
 
                     adapter.items = dataList
                     adapter.notifyDataSetChanged()
-
 
                 } else {
                     Log.d("PRICE_DESC", response.code().toString())
@@ -245,6 +248,24 @@ class HomeFragment : Fragment(), View.OnClickListener {
         binding.recyclerviewMain.adapter = adapter
         binding.recyclerviewMain.isNestedScrollingEnabled = true
 
+        /* binding.recyclerviewMain.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                 val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                 val visibleItemCount = layoutManager.childCount
+                 val totalItemCount = layoutManager.itemCount
+                 val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+
+                 if (!isLoading && !isLastPage) {
+                     if (visibleItemCount + firstVisibleItemPosition >= totalItemCount
+                         && firstVisibleItemPosition >= 0
+                         && totalItemCount >= PAGE_SIZE
+                     ) {
+                         loadMoreData(currentPage + 1)
+                     }
+                 }
+             }
+         })*/
+
 
         /*    adapter.itemClickListener = object : HomeMainAdapter.OnItemClickListener {
                 override fun OnItemClick(data: HomeMainData) {
@@ -261,6 +282,12 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     }
 
+    private fun loadMoreData(page: Int) {
+        isLoading = true
+        currentPage = page
+        updateTripple(currentPage, spinnerCheck, buttonCheck)
+    }
+
 
     fun initButton() {
         binding.b1.setOnClickListener(this)
@@ -273,7 +300,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     private fun initNext() {
         binding.btnEdittext.setOnClickListener {
-            val intent = Intent(context,HomeResearchActivity::class.java)
+            val intent = Intent(context, HomeResearchActivity::class.java)
             startActivity(intent)
         }
     }

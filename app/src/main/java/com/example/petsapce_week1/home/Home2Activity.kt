@@ -203,6 +203,7 @@ class Home2Activity : AppCompatActivity() {
         pets: Int
     ) {
 
+
         api.getAll(page, sort, category, startDay, endDay,keyword,people,pets)
             .enqueue(object : Callback<Home2Response> {
                 @SuppressLint("NotifyDataSetChanged")
@@ -281,7 +282,8 @@ class Home2Activity : AppCompatActivity() {
         binding.recyclerviewMain.adapter = adapter
         binding.recyclerviewMain.isNestedScrollingEnabled = false
 
-       /* binding.recyclerviewMain.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+/*
+        binding.recyclerviewMain.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val layoutManager = recyclerView.layoutManager as LinearLayoutManager
                 val visibleItemCount = layoutManager.childCount
@@ -297,7 +299,8 @@ class Home2Activity : AppCompatActivity() {
                     }
                 }
             }
-        })*/
+        })
+*/
     }
 
     private fun initBefore() {

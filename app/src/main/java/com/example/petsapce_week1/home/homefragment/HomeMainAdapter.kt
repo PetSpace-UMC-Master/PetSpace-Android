@@ -146,11 +146,14 @@ class HomeMainAdapter(var items: ArrayList<HomeMainData>) :
         return items.size
     }
 
-   /* fun updateItems(newItems: HomeResponse) {
-        items.clear()
-        items.addAll(newItems)
-        notifyDataSetChanged()
-    }*/
+
+
+
+    /* fun updateItems(newItems: HomeResponse) {
+         items.clear()
+         items.addAll(newItems)
+         notifyDataSetChanged()
+     }*/
 
 
 }
