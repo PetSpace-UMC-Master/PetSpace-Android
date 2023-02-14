@@ -46,6 +46,7 @@ class PlaceGridAdapter(private val fragmentManager: FragmentManager, val context
     @SuppressLint("ViewHolder", "InflateParams", "CutPasteId")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
 
+
         Log.d("함께 갈 곳", "111")
 
         val view : View = convertView ?: LayoutInflater.from(context).inflate(R.layout.placetogo_grid_itemlist, parent, false)

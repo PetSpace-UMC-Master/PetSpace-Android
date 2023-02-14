@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    //id 'kotlin-parcelize'
     id 'kotlin-android-extensions'
 }
 
@@ -16,7 +17,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.petsapce_week1"
-        minSdk 26
+        minSdk 21
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -61,13 +62,23 @@ dependencies {
     implementation "com.kakao.sdk:v2-navi:2.12.0" // 카카오내비
     implementation "com.kakao.sdk:v2-friend:2.12.0" // 카카오톡 소셜 피커, 리소스 번들 파일 포함
 
-    //retrofit
+    // Rx
+    implementation 'io.reactivex.rxjava3:rxkotlin:3.0.0'
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
 
+    //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
     implementation 'com.squareup.okhttp3:okhttp:4.8.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.8.0'
     implementation 'com.google.code.gson:gson:2.10'
+
+    // rxjava3
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
+
     // Coroutine
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'// Coroutine
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
@@ -115,4 +126,6 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+
+    implementation 'androidx.fragment:fragment-ktx:1.5.5'
 }

@@ -1,23 +1,15 @@
 package com.example.petsapce_week1.placetogo
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petsapce_week1.R
-import com.example.petsapce_week1.accommodation.AccMainActivity
 import com.example.petsapce_week1.databinding.ActivitySeoulAccommoBinding
-import com.example.petsapce_week1.home.Home2Activity
 import com.example.petsapce_week1.network.AccomoService
 import com.example.petsapce_week1.network.RetrofitHelper
 import com.example.petsapce_week1.vo.FavoriteBackendResponse
-import com.example.petsapce_week1.vo.FavoriteData
-import kotlinx.android.synthetic.main.home_main_row.view.*
-import kotlinx.android.synthetic.main.placetogo_items.view.*
 import retrofit2.Retrofit
 
 class PlaceToGoRegionActivity : AppCompatActivity() {
