@@ -156,23 +156,6 @@
                 android:textSize="16dp"
                 android:textStyle="bold" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_google"
-                android:layout_width="match_parent"
-                android:layout_height="48sp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/btn_google"
-                android:drawableLeft="@drawable/icons8_google"
-                android:fontFamily="@font/roboto_medium"
-                android:paddingLeft="20dp"
-                android:paddingRight="43dp"
-                android:text="Google로 로그인"
-                android:textAllCaps="false"
-                android:textColor="@color/textForBlack"
-                android:textSize="16dp"
-
-                />
-
 
             <LinearLayout
                 android:layout_width="match_parent"

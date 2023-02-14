@@ -2,7 +2,8 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-    id 'kotlin-parcelize'
+    //id 'kotlin-parcelize'
+    id 'kotlin-android-extensions'
 }
 
 //native app key 숨겨서 사용하는 법
@@ -45,7 +46,9 @@ android {
     }
     buildFeatures {
         viewBinding true
-        dataBinding true
+    }
+    buildFeatures {
+        dataBinding = true
     }
 
 

@@ -1,11 +1,15 @@
 package com.example.petsapce_week1.reviewrelated
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Handler
+import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.petsapce_week1.R
+import com.example.petsapce_week1.accommodation.scroll.reviewFragment
 import com.example.petsapce_week1.databinding.ActivityReviewReadMorePhotosBinding
 
 //
@@ -16,9 +20,11 @@ class ReviewPhotosActivity : AppCompatActivity() {
         binding.reviewViewpager.currentItem = binding.reviewViewpager.currentItem + 1
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityReviewReadMorePhotosBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
 
         val imageList = arrayListOf<Int>().apply{
@@ -35,22 +41,19 @@ class ReviewPhotosActivity : AppCompatActivity() {
             adapter = ReviewPhotosAdapter(imageList, binding.reviewViewpager)
             offscreenPageLimit = 1
             getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
-            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-                    slideImageHandler.removeCallbacks(slideImageRunnable)
-                    slideImageHandler.postDelayed(slideImageRunnable, 1000)
-                }
-            })
             setPageTransformer { page, position ->
                 page.translationX = position * -offsetPx
             }
         }
-        binding.tvPhotoOrder
-    }
-    override fun onResume() {
-        super.onResume()
-        slideImageHandler.postDelayed(slideImageRunnable, 1000)
+        binding.btnClose.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, reviewFragment())
+                .addToBackStack(null)
+                .commit()
+//            val intent = Intent(this, reviewFragment::class.java)
+//            startActivity(intent)
+        }
+
     }
 
     override fun onPause() {

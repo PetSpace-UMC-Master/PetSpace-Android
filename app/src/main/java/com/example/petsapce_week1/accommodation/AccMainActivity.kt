@@ -25,6 +25,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import java.text.DecimalFormat
 
 class AccMainActivity : AppCompatActivity() {
     lateinit var binding:ActivityAccMainBinding
@@ -43,7 +44,6 @@ class AccMainActivity : AppCompatActivity() {
     var apiLike : AccomoService = retrofit.create(AccomoService::class.java)
     //============ 토큰 재발급 ==============
     var apiReissue : LoginService = retrofit.create(LoginService::class.java)
-
 
     private val MIN_SCALE = 0.85f // 뷰가 몇퍼센트로 줄어들 것인지
     private val MIN_ALPHA = 0.5f // 어두워지는 정도를 나타낸 듯 하다.
@@ -84,10 +84,11 @@ class AccMainActivity : AppCompatActivity() {
         initViewPager()
 
         val data = AccomodationRoomData(roomId = null)
+        val roomId : Long = intent.getLongExtra("intent", 1)
 
         // =================== 백엔드 연동 부분 =====================
         //홈화면 연결 후 roomId 받아오면 반영!
-        api.getRoomDetail( accessTokenPost, 1).enqueue(object : Callback<AccomodationData> {
+        api.getRoomDetail( accessTokenPost, roomId).enqueue(object : Callback<AccomodationData> {
             @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
             override fun onResponse(
                 call: Call<AccomodationData>,
@@ -120,7 +121,7 @@ class AccMainActivity : AppCompatActivity() {
                             binding.btnHeartAfter.visibility = View.VISIBLE
                             if1Checked = 1
                             // 상진쓰랑 할것
-                            api.postLikes(accessTokenPost).enqueue(object : Callback<AccomodationData>{
+                            api.postLikes(accessTokenPost, roomId).enqueue(object : Callback<AccomodationData>{
                                 override fun onResponse(
                                     call: Call<AccomodationData>,
                                     response: Response<AccomodationData>
@@ -140,7 +141,7 @@ class AccMainActivity : AppCompatActivity() {
                             binding.btnHeartAfter.visibility = View.INVISIBLE
                             if1Checked = 0
                             // 상진쓰랑 할것
-                            api.postLikes(accessTokenPost).enqueue(object : Callback<AccomodationData>{
+                            api.postLikes(accessTokenPost, roomId).enqueue(object : Callback<AccomodationData>{
                                 override fun onResponse(
                                     call: Call<AccomodationData>,
                                     response: Response<AccomodationData>
@@ -160,7 +161,9 @@ class AccMainActivity : AppCompatActivity() {
                     // ================ 맨 위 프레임 ==================
                     binding.tvHousename.text = body.result.roomName
                     binding.textAddress.text = body.result.address
-                    binding.textPrice.text = "₩ ${body.result.price}/박"
+                    val priceCut = DecimalFormat("#,###")
+                    var price = priceCut.format(body.result.price)
+                    binding.textPrice.text = "₩ ${price}/박"
                     binding.textStarscore.text = body.result.roomAverageScore.toString()
                     binding.textReviewcount.text = "${body.result.reviewCount}개"
 

@@ -78,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_regular"
-                android:text="닉네임"
+                android:text="우주댕댕이"
                 android:textColor="#0C201E"
                 android:textSize="16sp" />
 
@@ -132,7 +132,7 @@
             android:drawableRight="@drawable/arrow_forward_ios"
             android:gravity="left"
             android:stateListAnimator="@null"
-            android:text="\t프로필 변경"
+            android:text="\t\t\t프로필 변경"
             android:textColor="#0C201E"
             android:fontFamily="@font/pretendard_regular"
             android:textSize="16dp" />
@@ -147,7 +147,7 @@
             android:drawableRight="@drawable/arrow_forward_ios"
             android:gravity="left"
             android:stateListAnimator="@null"
-            android:text="\t개인정보"
+            android:text="\t\t\t개인정보"
             android:textColor="#0C201E"
             android:fontFamily="@font/pretendard_regular"
             android:textSize="16dp" />
@@ -162,7 +162,7 @@
             android:drawableRight="@drawable/arrow_forward_ios"
             android:gravity="left"
             android:stateListAnimator="@null"
-            android:text="\t개인정보 처리방침"
+            android:text="\t\t\t개인정보 처리방침"
             android:textColor="#0C201E"
             android:fontFamily="@font/pretendard_regular"
             android:textSize="16dp" />
@@ -177,7 +177,7 @@
             android:drawableRight="@drawable/arrow_forward_ios"
             android:gravity="left"
             android:stateListAnimator="@null"
-            android:text="\t이용약관"
+            android:text="\t\t\t이용약관"
             android:textColor="#0C201E"
             android:fontFamily="@font/pretendard_regular"
             android:textSize="16dp" />
@@ -192,7 +192,7 @@
             android:drawableRight="@drawable/arrow_forward_ios"
             android:gravity="left"
             android:stateListAnimator="@null"
-            android:text="\t환경설정"
+            android:text="\t\t\t환경설정"
             android:textColor="#0C201E"
             android:fontFamily="@font/pretendard_regular"
             android:textSize="16dp" />

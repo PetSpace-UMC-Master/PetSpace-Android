@@ -5,6 +5,8 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -15,6 +17,7 @@ import com.example.petsapce_week1.databinding.ReviewCreateBinding
 import com.example.petsapce_week1.network.RetrofitHelper
 import com.example.petsapce_week1.network.ReviewAPI
 import com.example.petsapce_week1.vo.ReviewPostData
+import kotlinx.android.synthetic.main.review_create.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -43,6 +46,24 @@ class ReviewPostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ReviewCreateBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        review_input.addTextChangedListener(object: TextWatcher{
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                wordcount_review.text = "0 / 1000"
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                var userinput = review_input.text.toString()
+                wordcount_review.text = userinput.length.toString() + " / 1000"
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                var userinput = review_input.text.toString()
+                wordcount_review.text = userinput.length.toString() + " / 1000"
+            }
+
+        })
 
         // 이전 버튼
         initPrevious()

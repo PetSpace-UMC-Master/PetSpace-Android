@@ -1,12 +1,12 @@
 package com.example.petsapce_week1.network
 
 import com.example.petsapce_week1.loginrelated.*
+import com.example.petsapce_week1.vo.EmailCheckResponse
+import com.example.petsapce_week1.vo.SignupData
+import com.example.petsapce_week1.vo.SignupResponse
 
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface LoginService {
     //Kakao Login
@@ -21,6 +21,16 @@ interface LoginService {
     fun userLogin(
         @Body jsonParams: UserModelGeneral,
     ): Call<LoginBackendResponse>
+
+    @GET("/app/sign-up/email-check")
+    fun EmailCheck(
+        @Query("email", encoded = true) email : String,
+    ): Call<EmailCheckResponse>
+
+    @POST("/app/sign-up")
+    fun SignUpPost(
+        @Body jsonParams : SignupData
+    ): Call<SignupResponse>
 
     @GET("/app/users/2")
     fun GetUserInfo(

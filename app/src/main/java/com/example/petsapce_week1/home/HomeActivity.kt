@@ -12,6 +12,7 @@ import com.example.petsapce_week1.home.homefragment.HomeFragment
 import com.example.petsapce_week1.home.homefragment.ReserveFragment
 import com.example.petsapce_week1.placetogo.NoLoginPlacetogoFragment
 import com.example.petsapce_week1.placetogo.PlaceToGoFragment
+import com.example.petsapce_week1.reservation.ReservationFragment
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding:ActivityHomeBinding
@@ -65,9 +66,8 @@ class HomeActivity : AppCompatActivity() {
     fun LoginCheck(): Boolean {
         val isLogin : Boolean
         getAccessToken()
-        Log.d("함께 갈 곳 토큰 받아와큰22", "$accessToken")
 
-        if(accessToken != null) {
+        if(accessToken != "default") {
             isLogin = true
             return isLogin
         }
@@ -80,7 +80,9 @@ class HomeActivity : AppCompatActivity() {
 
     private fun getAccessToken() {
         val atpref = getSharedPreferences("accessToken", MODE_PRIVATE)
-        accessToken = atpref.getString("accessToken", "default")
-        Log.d("accessToken11","$accessToken")
+        if(atpref != null){
+            accessToken = atpref.getString("accessToken", "default")
+        }
+        Log.d("홈 화면 accessToken11","$accessToken")
     }
 }

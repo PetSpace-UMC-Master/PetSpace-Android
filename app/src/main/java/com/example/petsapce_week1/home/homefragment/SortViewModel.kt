@@ -1,6 +1,8 @@
 package com.example.petsapce_week1.home.homefragment
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.petsapce_week1.network.RetrofitHelperHome
 import com.example.petsapce_week1.network.homeAPI
@@ -15,6 +17,31 @@ class SortViewModel : ViewModel() {
     var api: homeAPI = retrofit.create(homeAPI::class.java)
     var dataList = ArrayList<HomeMainData>()
     lateinit var adapter: HomeMainAdapter
+
+
+
+    private val _currentValue = MutableLiveData<String>()
+
+    val currentValue: LiveData<String>
+        get() = _currentValue
+
+    //초기값 설정
+    init {
+        Log.d("teext", "myNumberViewModel - 생성자 호출")
+        _currentValue.value = "어느 지역으로 가시나요?"
+    }
+
+    fun plusValue(input: String) {
+        _currentValue.value = input
+
+    }
+
+
+    fun minusValue(): String? {
+        return _currentValue.value
+    }
+
+
 
 
     fun HouseRecent() {
@@ -45,48 +72,6 @@ class SortViewModel : ViewModel() {
         adapter.items = dataList
         adapter.notifyDataSetChanged()
     }
-
-  /*  fun update(): ArrayList<HomeMainData> {
-        var dataList3 = ArrayList<HomeMainData>()
-
-        var childataList = ArrayList<HomeChildData>()
-       *//* for (i in 1..10) {
-
-            when (i) {
-
-                1 -> {
-                    childataList.add(HomeChildData(R.drawable.map))
-                    childataList.add(HomeChildData(R.drawable.map))
-                    childataList.add(HomeChildData(R.drawable.map))
-                    childataList.add(HomeChildData(R.drawable.map))
-                    childataList.add(HomeChildData(R.drawable.map))
-                    childataList.add(HomeChildData(R.drawable.map))
-                    childataList.add(HomeChildData(R.drawable.map))
-                }
-                2 -> {
-                    childataList.add(HomeChildData(R.drawable.home2))
-                    childataList.add(HomeChildData(R.drawable.home2))
-                    childataList.add(HomeChildData(R.drawable.home2))
-                    childataList.add(HomeChildData(R.drawable.home2))
-
-                }
-
-            }
-            dataList.add(
-                HomeMainData(
-                    childataList,
-                    5.0000.toFloat(),
-                    "종로구, 서울",
-                    "123",
-                    5000, 136
-                )
-            )
-*//*
-
-        }
-        return dataList3
-
-    }*/
 
 
 }

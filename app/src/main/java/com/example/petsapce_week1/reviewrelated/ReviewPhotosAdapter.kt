@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.petsapce_week1.databinding.ReviewReadMorePhotolistBinding
+import kotlinx.android.synthetic.main.activity_review_read_more_photos.view.*
 
 
 class ReviewPhotosAdapter(
