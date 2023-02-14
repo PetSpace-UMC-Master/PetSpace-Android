@@ -33,7 +33,7 @@
                 android:id="@+id/im1"
                 android:layout_width="93dp"
                 android:layout_height="93dp"
-                android:src="@drawable/seoul"
+                android:src="@drawable/guangju"
                 app:layout_constraintBottom_toTopOf="@+id/text1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +72,7 @@
                 android:id="@+id/im2"
                 android:layout_width="93dp"
                 android:layout_height="93dp"
-                android:src="@drawable/seoul"
+                android:src="@drawable/daego"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

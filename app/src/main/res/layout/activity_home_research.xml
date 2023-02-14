@@ -60,13 +60,35 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+    <!--    <TextView
+            android:visibility="invisible"
             android:id="@+id/text_where"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="어느 지역으로 가시나요?"
             android:textColor="#7F7F7F"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/img_search"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
+-->
+        <EditText
+            android:imeOptions="actionDone"
+            android:maxLength="10"
+            android:hint="어느 지역으로 가시나요?"
+            android:singleLine = "true"
+            android:lines = "1"
+            android:ems="10"
+            android:background="@null"
+            android:id="@+id/text_where_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/textForBlack"
+            android:textColorHint="#7F7F7F"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/img_search"
@@ -128,6 +150,7 @@
             />
 
         <TextView
+            android:id="@+id/text_calendar"
             android:clickable="true"
             android:focusable="true"
             android:background="?attr/selectableItemBackground"
@@ -216,10 +239,12 @@
             android:clickable="true"
             android:focusable="true"
             android:paddingHorizontal="20dp"
+            android:paddingVertical="8dp"
             android:id="@+id/btn_search"
             android:layout_width="wrap_content"
             android:layout_height="32sp"
             android:background="@drawable/btn_small16"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
 
@@ -238,6 +263,8 @@
                 />
 
             <TextView
+                android:gravity="center"
+                android:textAlignment="center"
                 android:id="@+id/search"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"

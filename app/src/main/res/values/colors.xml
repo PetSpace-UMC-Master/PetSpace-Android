@@ -14,4 +14,7 @@
     <color name="textForBlack">#0C201E</color>
     <color name="textForGray">#7F7F7F</color>
     <color name="btn_notTouch">#D9D9D9</color>
+
+    <color name="sunday_color">#BB2649</color>
+    <color name="saturday_color">#2662BB</color>
 </resources>

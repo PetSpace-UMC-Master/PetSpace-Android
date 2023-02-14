@@ -44,34 +44,4 @@ class SortViewModel : ViewModel() {
 
 
 
-    fun HouseRecent() {
-        api.getDouble("PRICE_DESC", "HOUSE").enqueue(object : Callback<HomeResponse> {
-            override fun onResponse(
-                call: Call<HomeResponse>,
-                response: Response<HomeResponse>
-            ) {
-                val body = response.body()
-                if (body != null) {
-                    Log.d("Sort", body.result.toString())
-
-                } else {
-                    Log.d("PRICE_DESC", response.code().toString())
-
-                }
-            }
-
-            override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
-                Log.d("PRICE_DESC", t.message.toString())
-            }
-        })
-
-        var dataList = ArrayList<HomeMainData>()
-
-
-
-        adapter.items = dataList
-        adapter.notifyDataSetChanged()
-    }
-
-
 }
