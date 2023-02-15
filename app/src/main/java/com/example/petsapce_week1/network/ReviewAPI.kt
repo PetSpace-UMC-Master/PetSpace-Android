@@ -13,8 +13,7 @@ interface ReviewAPI {
        @Header("Authorization") accessToken: String,
         //@Part jsonParams: ReviewDTO,
        @PartMap data: HashMap<String, RequestBody>,
-       @Part reviewImages: MultipartBody.Part?
-        //@Body jsonParams: ReviewDTO
+       @Part reviewImages: List<MultipartBody.Part>?
     ): Call<ReviewPostData>
 
   //  abstract fun post_reviews(jsonParams: ReviewDTO): Call<ReviewData>

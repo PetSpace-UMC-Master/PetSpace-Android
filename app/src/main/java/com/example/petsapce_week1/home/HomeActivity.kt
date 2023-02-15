@@ -1,22 +1,16 @@
 package com.example.petsapce_week1.home
 
+//import com.example.petsapce_week1.home.homefragment.HomeFragment
+
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.petsapce_week1.ProfileMenuFragment
 import com.example.petsapce_week1.R
 import com.example.petsapce_week1.databinding.ActivityHomeBinding
-import com.example.petsapce_week1.databinding.FragmentPlaceToGoBinding
-
-import com.example.petsapce_week1.home.homefragment.GoFragment
 import com.example.petsapce_week1.home.homefragment.HomeFragment
-//import com.example.petsapce_week1.home.homefragment.HomeFragment
-
-import com.example.petsapce_week1.home.homefragment.ProfileFragment
 import com.example.petsapce_week1.home.homefragment.ReserveFragment
 import com.example.petsapce_week1.placetogo.NoLoginPlacetogoFragment
-import com.example.petsapce_week1.placetogo.PlaceGridAdapter
 import com.example.petsapce_week1.placetogo.PlaceToGoFragment
 import com.example.petsapce_week1.reservation.ReservationFragment
 

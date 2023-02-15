@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.os.persistableBundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petsapce_week1.accommodation.AccMainActivity
 import com.example.petsapce_week1.databinding.PlacetogoItemsBinding
