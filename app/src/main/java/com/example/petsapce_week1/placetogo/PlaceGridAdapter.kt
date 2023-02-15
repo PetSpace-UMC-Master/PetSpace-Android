@@ -46,6 +46,7 @@ class PlaceGridAdapter(private val fragmentManager: FragmentManager, val context
     @SuppressLint("ViewHolder", "InflateParams", "CutPasteId")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
 
+
         Log.d("함께 갈 곳", "111")
 
         val view : View = convertView ?: LayoutInflater.from(context).inflate(R.layout.placetogo_grid_itemlist, parent, false)
@@ -125,6 +126,7 @@ class PlaceGridAdapter(private val fragmentManager: FragmentManager, val context
                                 Log.d("함께 ㅇㅇ","ㅇㅇ")
                             }
                             else{
+
 //                                    fragmentManager
 //                                        .beginTransaction()
 //                                        .add(R.id.thisLayout, NoPlaceToGoFragment() )
@@ -136,7 +138,7 @@ class PlaceGridAdapter(private val fragmentManager: FragmentManager, val context
 //                                val placetogofragment = PlaceToGoFragment()
 //                                placetogofragment.parentFragmentManager
 //                                    .beginTransaction()
-//                                    .replace(R.id.placetogoLayout, noplacetogofragment)
+//                                    .replace(R.id.menu_layout, noplacetogofragment)
 //                                    .addToBackStack(null)
 //                                    .commit()
                             }

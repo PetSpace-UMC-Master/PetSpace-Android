@@ -19,7 +19,6 @@ import com.example.petsapce_week1.network.AccomoService
 import com.example.petsapce_week1.network.LoginService
 import com.example.petsapce_week1.network.RetrofitHelper
 import com.example.petsapce_week1.vo.FacilityData
-import com.example.petsapce_week1.vo.FavoriteBackendResponse
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationData
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationRoomData
 import retrofit2.Call

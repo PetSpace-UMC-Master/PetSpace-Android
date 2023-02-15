@@ -1,5 +1,6 @@
 package com.example.petsapce_week1.home.homefragment
 
+//import kotlinx.android.synthetic.main.home_main_row.*
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -13,12 +14,17 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.petsapce_week1.R
 import com.example.petsapce_week1.databinding.FragmentHomeBinding
 import com.example.petsapce_week1.home.HomeResearchActivity
 import com.example.petsapce_week1.network.RetrofitHelperHome
 import com.example.petsapce_week1.network.homeAPI
+import com.example.petsapce_week1.placetogo.NoPlaceToGoFragment
+import com.example.petsapce_week1.placetogo.PlaceToGoFragment
+import com.example.petsapce_week1.placetogo.PlaceToGoRegionAdapter
+import com.example.petsapce_week1.vo.FavoriteBackendResponse
 import com.example.petsapce_week1.vo.HomeResponse
-import kotlinx.android.synthetic.main.home_main_row.*
+import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -142,9 +148,68 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 when (spinner.getItemAtPosition(position)) {
                     "최근등록순" -> {
                         spinnerCheck = sortDefault
+                        Log.d("spinnercheck", spinnerCheck)
+
+                        updateTripple3(currentPage, spinnerCheck, buttonCheck)
+
+                        binding.recyclerviewMain.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+                            var isLoading = false
+                            var isLastPage = false
+                            var currentPage = 0
+                            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                                super.onScrolled(recyclerView, dx, dy)
+                                val layoutManager = binding.recyclerviewMain.layoutManager as LinearLayoutManager
+                                //val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                                val totalItemCount = layoutManager.itemCount
+                                Log.d("부산1", totalItemCount.toString())
+                                val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
+                                Log.d("부산2", lastVisibleItem.toString())
+                                if (!isLoading && !isLastPage && lastVisibleItem == totalItemCount - 1)  {
+                                    currentPage++
+                                    isLoading = true
+                                    updateTripple3(currentPage, spinnerCheck, buttonCheck)
 
 
-                        updateTripple(page, spinnerCheck, buttonCheck)
+
+
+
+                                }
+                            }
+                        })
+
+
+                        /* for (i in 0..4) {
+
+                             updateTripple(i, spinnerCheck, buttonCheck)
+
+                         }*/
+
+                     /*   binding.recyclerviewMain.addOnScrollListener(object :
+                            RecyclerView.OnScrollListener() {
+                            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                                super.onScrolled(recyclerView, dx, dy)
+                                Log.d("spinnercheckinner", spinnerCheck)
+
+                                val layoutManager =
+                                    recyclerView.layoutManager as LinearLayoutManager
+                                val visibleItemCount = layoutManager.childCount
+                                val totalItemCount = layoutManager.itemCount
+                                val firstVisibleItemPosition =
+                                    layoutManager.findFirstVisibleItemPosition()
+
+                                if (!isLoading && (visibleItemCount + firstVisibleItemPosition) >= totalItemCount && firstVisibleItemPosition >= 0) {
+                                    // load next page
+                                    currentPage++
+                                    updateTripple3(currentPage, spinnerCheck, buttonCheck)
+
+                                    isLoading = true
+                                }
+                            }
+                        })*/
+//                        adapter.notifyDataSetChanged()
+
+
+//                        updateTripple(page, spinnerCheck, buttonCheck)
                     }
                     "높은가격순" -> {
                         spinnerCheck = sortPriceAsc
@@ -164,12 +229,95 @@ class HomeFragment : Fragment(), View.OnClickListener {
                     }
                     else -> {
                         spinnerCheck = sortDefault
-                        updateTripple(page, spinnerCheck, buttonCheck)
+                        binding.recyclerviewMain.addOnScrollListener(object :
+                            RecyclerView.OnScrollListener() {
+                            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                                super.onScrolled(recyclerView, dx, dy)
+
+                                val layoutManager =
+                                    recyclerView.layoutManager as LinearLayoutManager
+                                val visibleItemCount = layoutManager.childCount
+                                val totalItemCount = layoutManager.itemCount
+                                val firstVisibleItemPosition =
+                                    layoutManager.findFirstVisibleItemPosition()
+
+                                if (!isLoading && (visibleItemCount + firstVisibleItemPosition) >= totalItemCount && firstVisibleItemPosition >= 0) {
+                                    // load next page
+                                    currentPage++
+                                    updateTripple3(currentPage, spinnerCheck, buttonCheck)
+
+                                    isLoading = true
+                                }
+                            }
+                        })
+
+//                        updateTripple(page, spinnerCheck, buttonCheck)
                     }
                 }
             }
         }
 
+    }
+
+    fun updateTripple3(page: Int, sort: String, category: String) {
+        api.getTriple(page, sort, category).enqueue(object : Callback<HomeResponse> {
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
+                val usersSort = response.body()
+                if (usersSort != null && usersSort.result != null) {
+                    // map response data to list of HomeMainData objects
+                    val dataList = mapResponseToDataList(usersSort.result)
+                    Log.d("datalist", dataList.toString())
+
+                    // update RecyclerView adapter with new data
+
+                    /*  for (i in 0.. usersSort.result.size/5){
+
+
+                      }*/
+
+
+                    if (page == PAGE_START) {
+                        adapter.items = dataList as ArrayList<HomeMainData>
+                        isLoading = true
+
+                    } else {
+                        adapter.items.addAll(dataList)
+                    }
+                    adapter.notifyDataSetChanged()
+
+                    // reset isLoading flag
+                    isLoading = false
+                }
+            }
+
+            override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
+                Log.d("PRICE_DESC", t.message.toString())
+            }
+        })
+    }
+
+
+    private fun mapResponseToDataList(results: List<HomeResponse.Result>): List<HomeMainData> {
+        val dataList = mutableListOf<HomeMainData>()
+        for (result in results) {
+            val childataList = mutableListOf<HomeChildData>()
+            for (roomImage in result.roomImages) {
+                childataList.add(HomeChildData(roomImage))
+            }
+            val homeMainData = HomeMainData(
+                childataList as ArrayList<HomeChildData>,
+                result.averageReviewScore,
+                "${result.city}, ${result.district}",
+                " " + " ",
+                result.price,
+                result.numberOfReview,
+                result.roomId
+            )
+            dataList.add(homeMainData)
+        }
+        Log.d("dataList2", dataList.toString())
+        return dataList
     }
 
 
@@ -248,23 +396,23 @@ class HomeFragment : Fragment(), View.OnClickListener {
         binding.recyclerviewMain.adapter = adapter
         binding.recyclerviewMain.isNestedScrollingEnabled = true
 
-        /* binding.recyclerviewMain.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                 val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-                 val visibleItemCount = layoutManager.childCount
-                 val totalItemCount = layoutManager.itemCount
-                 val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+        /*  binding.recyclerviewMain.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+              override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                  super.onScrolled(recyclerView, dx, dy)
 
-                 if (!isLoading && !isLastPage) {
-                     if (visibleItemCount + firstVisibleItemPosition >= totalItemCount
-                         && firstVisibleItemPosition >= 0
-                         && totalItemCount >= PAGE_SIZE
-                     ) {
-                         loadMoreData(currentPage + 1)
-                     }
-                 }
-             }
-         })*/
+                  val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                  val visibleItemCount = layoutManager.childCount
+                  val totalItemCount = layoutManager.itemCount
+                  val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+
+                  if (!isLoading && (visibleItemCount + firstVisibleItemPosition) >= totalItemCount && firstVisibleItemPosition >= 0) {
+                      // load next page
+                      currentPage++
+                      updateTripple3(currentPage, spinnerCheck, buttonCheck)
+                      isLoading = true
+                  }
+              }
+          })*/
 
 
         /*    adapter.itemClickListener = object : HomeMainAdapter.OnItemClickListener {
