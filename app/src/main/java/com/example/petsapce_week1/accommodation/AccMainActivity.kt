@@ -17,8 +17,12 @@ import com.example.petsapce_week1.databinding.ActivityAccHostBinding
 import com.example.petsapce_week1.databinding.ActivityAccMainBinding
 import com.example.petsapce_week1.network.AccomoService
 import com.example.petsapce_week1.network.LoginService
+import com.example.petsapce_week1.network.ReservationAPI
 import com.example.petsapce_week1.network.RetrofitHelper
 import com.example.petsapce_week1.vo.FacilityData
+import com.example.petsapce_week1.vo.FavoriteBackendResponse
+import com.example.petsapce_week1.vo.ReservationCreateResponse
+import com.example.petsapce_week1.vo.ReservationUserData
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationData
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationRoomData
 import retrofit2.Call
@@ -88,7 +92,7 @@ class AccMainActivity : AppCompatActivity() {
 
         // =================== 백엔드 연동 부분 =====================
         //홈화면 연결 후 roomId 받아오면 반영!
-        api.getRoomDetail( accessTokenPost, roomId).enqueue(object : Callback<AccomodationData> {
+        api.getRoomDetail( accessTokenPost, 1).enqueue(object : Callback<AccomodationData> {
             @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
             override fun onResponse(
                 call: Call<AccomodationData>,
@@ -235,22 +239,22 @@ class AccMainActivity : AppCompatActivity() {
                     Glide.with(this@AccMainActivity)
                         .load(reviewList[1].imgUrl)
                         .into(binding.frameFacility.imgFac2)
-                    binding.frameFacility.tvFac3.text = reviewList[2].facname
-                    Glide.with(this@AccMainActivity)
-                        .load(reviewList[2].imgUrl)
-                        .into(binding.frameFacility.imgFac3)
-                    binding.frameFacility.tvFac4.text = reviewList[3].facname
-                    Glide.with(this@AccMainActivity)
-                        .load(reviewList[3].imgUrl)
-                        .into(binding.frameFacility.imgFac4)
-                    binding.frameFacility.tvFac5.text = reviewList[4].facname
-                    Glide.with(this@AccMainActivity)
-                        .load(reviewList[4].imgUrl)
-                        .into(binding.frameFacility.imgFac5)
-                    binding.frameFacility.tvFac6.text = reviewList[5].facname
-                    Glide.with(this@AccMainActivity)
-                        .load(reviewList[5].imgUrl)
-                        .into(binding.frameFacility.imgFac6)
+//                    binding.frameFacility.tvFac3.text = reviewList[2].facname
+//                    Glide.with(this@AccMainActivity)
+//                        .load(reviewList[2].imgUrl)
+//                        .into(binding.frameFacility.imgFac3)
+//                    binding.frameFacility.tvFac4.text = reviewList[3].facname
+//                    Glide.with(this@AccMainActivity)
+//                        .load(reviewList[3].imgUrl)
+//                        .into(binding.frameFacility.imgFac4)
+//                    binding.frameFacility.tvFac5.text = reviewList[4].facname
+//                    Glide.with(this@AccMainActivity)
+//                        .load(reviewList[4].imgUrl)
+//                        .into(binding.frameFacility.imgFac5)
+//                    binding.frameFacility.tvFac6.text = reviewList[5].facname
+//                    Glide.with(this@AccMainActivity)
+//                        .load(reviewList[5].imgUrl)
+//                        .into(binding.frameFacility.imgFac6)
                 }
 
             }
@@ -273,6 +277,26 @@ class AccMainActivity : AppCompatActivity() {
         binding.frameFacility.tvViewmore.setOnClickListener {
             val intent = Intent(this@AccMainActivity, AccFacilityMoreActivity::class.java)
             startActivity(intent)
+        }
+
+        // ============== 예약 하기 버튼 ==============
+
+        binding.btnReserve.setOnClickListener{
+            var apiReservation : ReservationAPI = retrofit.create(ReservationAPI::class.java)
+            apiReservation.postReservation(accessTokenPost, jsonParams = ReservationUserData(2,1,"2023-02-16", "2023-02-17"), 1).enqueue(object : Callback<ReservationCreateResponse>{
+                override fun onResponse(
+                    call: Call<ReservationCreateResponse>,
+                    response: Response<ReservationCreateResponse>
+                ) {
+                    Log.d("예약 생성 통신 성공", response.toString())
+                    Log.d("예약 생성 통신 성공", response.body().toString())
+                }
+
+                override fun onFailure(call: Call<ReservationCreateResponse>, t: Throwable) {
+                    Log.d("예약 생성 통신 실패", t.toString())
+                }
+
+            })
         }
     }
 

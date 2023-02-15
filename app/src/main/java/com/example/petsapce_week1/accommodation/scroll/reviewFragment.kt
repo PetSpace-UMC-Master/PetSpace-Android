@@ -104,7 +104,7 @@ class reviewFragment : Fragment() {
                         )
                     }
 
-                    Log.d("숙소 ===", dataList[0].toString())
+                    //Log.d("숙소 ===", dataList[0].toString())
                     val vreviewAdapter = context?.let { reviewAdapter(dataList, it) }
                     binding.recyclerview.adapter = vreviewAdapter
                 }

@@ -179,38 +179,38 @@ class LoginActivity : AppCompatActivity() {
             }
         } else {
             UserApiClient.instance.loginWithKakaoAccount(this@LoginActivity, callback = callback)
-            api.postAccessToken(UserModelKakao(accessToken = authToken)).enqueue(object : Callback<LoginBackendResponse>{
-                override fun onResponse(call: Call<LoginBackendResponse>, response: Response<LoginBackendResponse>) {
-                    Log.d("로그인 통신 성공", response.toString())
-                    Log.d("로그인 통신 성공", response.body().toString())
-                    Log.d("로그인 통신 id", response.body()?.result?.email.toString())
-                    Log.d("로그인 통신 at", response.body()?.result?.accessToken.toString())
-
-                    saveIDPW(response.body()?.result?.email.toString(), "")
-                    saveATRT(response.body()?.result?.accessToken.toString(), response.body()?.result?.refreshToken.toString())
-
-                    when (response.code()) {
-                        200 -> {
-                            Log.d("로그인 성공" , "ggg")
-                        }
-                        405 -> Toast.makeText(
-                            this@LoginActivity,
-                            "로그인 실패 : 아이디나 비번이 올바르지 않습니다",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        500 -> Toast.makeText(
-                            this@LoginActivity,
-                            "로그인 실패 : 서버 오류",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
-                    val intent = Intent(this@LoginActivity, HomeActivity::class.java)
-                    startActivity(intent)
-                }
-                override fun onFailure(call: Call<LoginBackendResponse>, t: Throwable) {
-                    Log.d("통신 로그인..", "전송 실패")
-                }
-            })
+//            api.postAccessToken(UserModelKakao(accessToken = authToken)).enqueue(object : Callback<LoginBackendResponse>{
+//                override fun onResponse(call: Call<LoginBackendResponse>, response: Response<LoginBackendResponse>) {
+//                    Log.d("설치 로그인 통신 성공", response.toString())
+//                    Log.d("설치 로그인 통신 성공", response.body().toString())
+//                    Log.d("설치 로그인 통신 id", response.body()?.result?.email.toString())
+//                    Log.d("설치 로그인 통신 at", response.body()?.result?.accessToken.toString())
+//
+//                    saveIDPW(response.body()?.result?.email.toString(), "")
+//                    saveATRT(response.body()?.result?.accessToken.toString(), response.body()?.result?.refreshToken.toString())
+//
+//                    when (response.code()) {
+//                        200 -> {
+//                            Log.d("로그인 성공" , "ggg")
+//                        }
+//                        405 -> Toast.makeText(
+//                            this@LoginActivity,
+//                            "로그인 실패 : 아이디나 비번이 올바르지 않습니다",
+//                            Toast.LENGTH_LONG
+//                        ).show()
+//                        500 -> Toast.makeText(
+//                            this@LoginActivity,
+//                            "로그인 실패 : 서버 오류",
+//                            Toast.LENGTH_LONG
+//                        ).show()
+//                    }
+//                    val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+//                    startActivity(intent)
+//                }
+//                override fun onFailure(call: Call<LoginBackendResponse>, t: Throwable) {
+//                    Log.d("통신 로그인..", "전송 실패")
+//                }
+//            })
         }
     }
 

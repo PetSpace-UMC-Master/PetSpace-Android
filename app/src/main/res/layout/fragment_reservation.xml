@@ -16,13 +16,13 @@
         android:text="예약 일정"
         android:textSize="20dp"
         android:textColor="#0C201E"
-        app:layout_constraintBottom_toTopOf="@+id/tabLayout"
+        app:layout_constraintBottom_toTopOf="@+id/reserv_tabLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:fontFamily="@font/bmjua" />
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
+        android:id="@+id/reserv_tabLayout"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
@@ -32,12 +32,23 @@
         app:tabTextColor="#0C201E"
         app:tabSelectedTextColor="#40A196"/>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpager"
-        android:layout_width="411dp"
-        android:layout_height="782dp"
-        android:layout_marginTop="30dp"
+    <FrameLayout
+        android:id="@+id/menu_frame_reserv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@id/reserv_tabLayout"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/reserv_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reserv_tabLayout" />
+    </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

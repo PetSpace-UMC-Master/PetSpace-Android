@@ -1,5 +1,6 @@
 package com.example.petsapce_week1.network
 
+import com.example.petsapce_week1.network.RetrofitHelperHome.BASE_URL
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -8,6 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitHelper {
 
+    //val BASE_URL: String = "https://d810-115-94-178-52.jp.ngrok.io"
     val BASE_URL: String = "http://3.38.26.120:8080"
 
 
