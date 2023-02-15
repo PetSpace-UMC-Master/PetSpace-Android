@@ -34,6 +34,11 @@ class ProfileMenuFragment : Fragment() {
             startActivity(intent)
         }
 
+        binding.imageButton.setOnClickListener {
+            val intent = Intent(context, LoginActivity::class.java)
+            startActivity(intent)
+        }
+
 
         return binding.root
     }
