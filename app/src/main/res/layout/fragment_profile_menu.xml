@@ -124,7 +124,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 
         <Button
-            android:id="@+id/btn_profile1"
+            android:id="@+id/btn_profile_cy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"

@@ -44,7 +44,6 @@ class ReviewPostActivity : AppCompatActivity() {
     private var success_review_id: Int? = null
     private var review_rate: Int? = null
     private var mediaPath: String? = null
-    var selected: Int?=null
 
     // 이미지 리사이클러 데이터
     var list = ArrayList<Uri>()
@@ -172,32 +171,39 @@ class ReviewPostActivity : AppCompatActivity() {
     val activityResult: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
-        mediaPath = getRealPathFromURI(it.data?.data!!)
         if (it.resultCode == RESULT_OK && it.data != null) {
+            mediaPath = getRealPathFromURI(it.data?.data!!)
             list.clear()
+            val clipData = it.data!!.clipData
             val count = it.data!!.clipData!!.itemCount
-            if (count > 10) {
-                Toast.makeText(applicationContext, "사진은 최대 10장까지 선택 가능합니다.", Toast.LENGTH_LONG)
-                return@registerForActivityResult
-            }
-            for (i in 0 until count) {
-                val imageUri = it.data!!.clipData!!.getItemAt(i).uri
-                list.add(imageUri)
-                copy_and_multipart(imageUri)
-            }
-        }
-        else {// 단일 선택
-            it.data?.data?.let { uri ->
-                val imageUri : Uri? = it.data?.data
-                if (imageUri != null) {
+            Log.d("photo", "11")
+            if(clipData != null){
+                if (count > 10) {
+                    Toast.makeText(applicationContext, "사진은 최대 10장까지 선택 가능합니다.", Toast.LENGTH_LONG)
+                    return@registerForActivityResult
+                }
+                for (i in 0 until count) {
+                    val imageUri = it.data!!.clipData!!.getItemAt(i).uri
                     list.add(imageUri)
                     copy_and_multipart(imageUri)
                 }
             }
+            else {// 단일 선택
+                Log.d("photo", "22")
+                it.data?.data?.let { uri ->
+                    val imageUri : Uri? = it.data?.data
+                    if (imageUri != null) {
+                        list.add(imageUri)
+                        copy_and_multipart(imageUri)
+                    }
+                }
+            }
+
         }
+
         adapter.notifyDataSetChanged()
-            Log.d("멀티파트에 담긴 reviewImages", images.toString())
-            Log.d("파일 경로", "$mediaPath")
+        Log.d("멀티파트에 담긴 reviewImages", images.toString())
+        Log.d("파일 경로", "$mediaPath")
     }
 
     // 이전 화면
@@ -214,7 +220,11 @@ class ReviewPostActivity : AppCompatActivity() {
         // 사진 데이터 => 외부 저장소에 복제 후 멀티파트에 담기
         val i: InputStream? = uri?.let { it1 -> contentResolver.openInputStream(it1) } //src
         val extension: String = mediaPath!!.substring(mediaPath!!.lastIndexOf("."))
+/*        Log.d("extension", extension)
+        Log.d("에서미디어패스", mediaPath!!)*/
         localImgFile = File(applicationContext.filesDir, "localImgFile$extension")
+        Log.d("localimgfile", localImgFile.toString())
+
         if (i != null) {
             try {
                 val out: OutputStream = FileOutputStream(localImgFile) //dst
