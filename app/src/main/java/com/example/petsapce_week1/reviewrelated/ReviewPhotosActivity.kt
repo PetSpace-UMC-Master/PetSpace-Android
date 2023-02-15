@@ -20,6 +20,9 @@ class ReviewPhotosActivity : AppCompatActivity() {
         binding.reviewViewpager.currentItem = binding.reviewViewpager.currentItem + 1
     }
 
+    //홈화면 리사이클러뷰에서 넘어감
+    val roomId  = intent.getIntExtra("content",-1)
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +50,7 @@ class ReviewPhotosActivity : AppCompatActivity() {
         }
         binding.btnClose.setOnClickListener {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainerView, reviewFragment())
+                .replace(R.id.fragmentContainerView, reviewFragment(roomId = roomId.toLong()))
                 .addToBackStack(null)
                 .commit()
 //            val intent = Intent(this, reviewFragment::class.java)

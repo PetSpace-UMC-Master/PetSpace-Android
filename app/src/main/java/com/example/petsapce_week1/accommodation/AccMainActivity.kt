@@ -73,8 +73,9 @@ class AccMainActivity : AppCompatActivity() {
 
         // close btn
         binding.btnBack.setOnClickListener {
-            val intent = Intent(this, ProfileMenuFragment::class.java)
-            startActivity(intent)
+//            val intent = Intent(this, AccMainActivity::class.java)
+//            startActivity(intent)
+            finish()
         }
 
         // .bind와 .inflate 차이 / layoutinflater , view 객체 차이
@@ -84,15 +85,15 @@ class AccMainActivity : AppCompatActivity() {
         // 이런식으로 간략하게 쳐도됨
         // bindingHostBinding = ActivityAccHostBinding.bind(binding.frameHost.root)
 
-
         initViewPager()
 
-        val data = AccomodationRoomData(roomId = null)
-        val roomId : Long = intent.getLongExtra("intent", 1)
+        //val data = AccomodationRoomData(roomId = null)
+//        val roomId : Long = intent.getLongExtra("content", -1)
+//        Log.d("숙소 roomId", roomId.toString())
 
         // =================== 백엔드 연동 부분 =====================
         //홈화면 연결 후 roomId 받아오면 반영!
-        api.getRoomDetail( accessTokenPost, 1).enqueue(object : Callback<AccomodationData> {
+        api.getRoomDetail( accessTokenPost, roomBeforeID.toLong()).enqueue(object : Callback<AccomodationData> {
             @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
             override fun onResponse(
                 call: Call<AccomodationData>,
@@ -125,7 +126,7 @@ class AccMainActivity : AppCompatActivity() {
                             binding.btnHeartAfter.visibility = View.VISIBLE
                             if1Checked = 1
                             // 상진쓰랑 할것
-                            api.postLikes(accessTokenPost, roomId).enqueue(object : Callback<AccomodationData>{
+                            api.postLikes(accessTokenPost, roomBeforeID.toLong()).enqueue(object : Callback<AccomodationData>{
                                 override fun onResponse(
                                     call: Call<AccomodationData>,
                                     response: Response<AccomodationData>
@@ -145,7 +146,7 @@ class AccMainActivity : AppCompatActivity() {
                             binding.btnHeartAfter.visibility = View.INVISIBLE
                             if1Checked = 0
                             // 상진쓰랑 할것
-                            api.postLikes(accessTokenPost, roomId).enqueue(object : Callback<AccomodationData>{
+                            api.postLikes(accessTokenPost, roomBeforeID.toLong()).enqueue(object : Callback<AccomodationData>{
                                 override fun onResponse(
                                     call: Call<AccomodationData>,
                                     response: Response<AccomodationData>
@@ -160,8 +161,6 @@ class AccMainActivity : AppCompatActivity() {
                             })
                         }
                     }
-
-
                     // ================ 맨 위 프레임 ==================
                     binding.tvHousename.text = body.result.roomName
                     binding.textAddress.text = body.result.address
@@ -239,22 +238,22 @@ class AccMainActivity : AppCompatActivity() {
                     Glide.with(this@AccMainActivity)
                         .load(reviewList[1].imgUrl)
                         .into(binding.frameFacility.imgFac2)
-//                    binding.frameFacility.tvFac3.text = reviewList[2].facname
-//                    Glide.with(this@AccMainActivity)
-//                        .load(reviewList[2].imgUrl)
-//                        .into(binding.frameFacility.imgFac3)
-//                    binding.frameFacility.tvFac4.text = reviewList[3].facname
-//                    Glide.with(this@AccMainActivity)
-//                        .load(reviewList[3].imgUrl)
-//                        .into(binding.frameFacility.imgFac4)
-//                    binding.frameFacility.tvFac5.text = reviewList[4].facname
-//                    Glide.with(this@AccMainActivity)
-//                        .load(reviewList[4].imgUrl)
-//                        .into(binding.frameFacility.imgFac5)
-//                    binding.frameFacility.tvFac6.text = reviewList[5].facname
-//                    Glide.with(this@AccMainActivity)
-//                        .load(reviewList[5].imgUrl)
-//                        .into(binding.frameFacility.imgFac6)
+                    binding.frameFacility.tvFac3.text = reviewList[2].facname
+                    Glide.with(this@AccMainActivity)
+                        .load(reviewList[2].imgUrl)
+                        .into(binding.frameFacility.imgFac3)
+                    binding.frameFacility.tvFac4.text = reviewList[3].facname
+                    Glide.with(this@AccMainActivity)
+                        .load(reviewList[3].imgUrl)
+                        .into(binding.frameFacility.imgFac4)
+                    binding.frameFacility.tvFac5.text = reviewList[4].facname
+                    Glide.with(this@AccMainActivity)
+                        .load(reviewList[4].imgUrl)
+                        .into(binding.frameFacility.imgFac5)
+                    binding.frameFacility.tvFac6.text = reviewList[5].facname
+                    Glide.with(this@AccMainActivity)
+                        .load(reviewList[5].imgUrl)
+                        .into(binding.frameFacility.imgFac6)
                 }
 
             }
@@ -266,12 +265,12 @@ class AccMainActivity : AppCompatActivity() {
 
         supportFragmentManager
             .beginTransaction()
-            .replace(binding.frameGoogle.id, googleFragment())
+            .replace(binding.frameGoogle.id, googleFragment(roomBeforeID.toLong()))
             .commitAllowingStateLoss()
 
         supportFragmentManager
             .beginTransaction()
-            .add(binding.frameReview.id, reviewFragment())
+            .add(binding.frameReview.id, reviewFragment(roomBeforeID.toLong()))
             .commitAllowingStateLoss()
 
         binding.frameFacility.tvViewmore.setOnClickListener {

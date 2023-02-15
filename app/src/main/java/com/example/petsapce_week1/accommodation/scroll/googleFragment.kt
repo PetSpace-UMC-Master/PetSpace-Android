@@ -31,7 +31,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import kotlin.properties.Delegates
 
-class googleFragment : Fragment(), OnMapReadyCallback {
+class googleFragment(val roomId : Long) : Fragment(), OnMapReadyCallback {
 
     private lateinit var viewModel: GoogleViewModel
     private lateinit var viewBinding:FragmentGoogleBinding
@@ -46,6 +46,7 @@ class googleFragment : Fragment(), OnMapReadyCallback {
     val accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ5c2xpbTM3QG5hdmVyLmNvbSIsImlhdCI6MTY3NTMyMTY0NywiZXhwIjoxNjc1MzIzNDQ3fQ.4CDgFa2fp_b-9fEuDiiwPkTR3SC23bI23NYOEdBiSB8"
     val accessTokenPost = "Bearer $accessToken"
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,7 +54,7 @@ class googleFragment : Fragment(), OnMapReadyCallback {
         viewBinding = FragmentGoogleBinding.inflate(layoutInflater)
         //activity의 setcontentview가 아닌 return값을 주면된다.
 
-        val roomId : Long = 1
+
         api.getRoomDetail(accessToken = accessTokenPost, roomId = roomId).enqueue(object : Callback<AccomodationData> {
             @SuppressLint("SetTextI18n")
             override fun onResponse(

@@ -77,7 +77,7 @@
                 android:id="@+id/imgFac2"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/facultybed" />
+                android:src="@drawable/facultyhang" />
 
             <TextView
                 android:id="@+id/tv_fac2"
@@ -112,7 +112,7 @@
                 android:id="@+id/imgFac3"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/facultydry" />
+                android:src="@drawable/facultyhang" />
 
             <TextView
                 android:id="@+id/tv_fac3"
@@ -137,7 +137,7 @@
                 android:id="@+id/imgFac4"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/facultycloth" />
+                android:src="@drawable/facultyhang" />
 
             <TextView
                 android:id="@+id/tv_fac4"
@@ -197,7 +197,7 @@
                 android:id="@+id/imgFac6"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/facultyair" />
+                android:src="@drawable/facultyhang" />
 
             <TextView
                 android:id="@+id/tv_fac6"
