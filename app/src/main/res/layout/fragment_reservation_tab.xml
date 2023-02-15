@@ -6,16 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".reservation.ReservationTabFragment">
 
-    <TextView
-        android:id="@+id/tv_menu"
-        android:layout_width="210dp"
-        android:layout_height="175dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="84dp"
-        android:layout_marginEnd="101dp"
-        android:text="화면"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <FrameLayout
+        android:id="@+id/reservationTab"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="80dp">
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:id="@+id/recyclerview_reservation_tab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+            tools:listitem="@layout/reservation_accommo_list">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -40,6 +40,7 @@ class PlaceToGoRegionActivity : AppCompatActivity() {
         region = intent.getStringExtra("region")
         reviewCount = intent.getIntExtra("reviewCount", 0)
         Log.d("함께 서울", "$accommoList")
+        Log.d("함께 서울", "$region")
         if(accommoList.isEmpty()){
             supportFragmentManager.beginTransaction()
                 .replace(R.id.thisLayout, NoPlaceToGoFragment())

@@ -113,7 +113,7 @@ class HomeMainAdapter(var items: ArrayList<HomeMainData>) :
             val intent = Intent(holder.itemView?.context,AccMainActivity::class.java)
             intent.putExtra("content",roomIDNext)
             ContextCompat.startActivity(holder.itemView.context,intent,null)
-            Log.d("content",roomIDNext.toString())
+            Log.d("content22222",roomIDNext.toString())
         }
 
 

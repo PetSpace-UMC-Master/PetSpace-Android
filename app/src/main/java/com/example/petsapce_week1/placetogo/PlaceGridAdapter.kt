@@ -111,19 +111,20 @@ class PlaceGridAdapter(private val fragmentManager: FragmentManager, val context
                                 if (response.body()!!.result.isLast) {
                                     isLast = true
                                 }
-                                if(!response.body()!!.result.favorites.isEmpty()){
+                             /*   if(!response.body()!!.result.favorites.isEmpty()){
                                     reviewCount = response.body()!!.result.favorites[position].numberOfReview
-                                }
+                                }*/
                                 val nextScreenIntent =
                                     Intent(context, PlaceToGoRegionActivity::class.java).apply {
                                         putExtra("accommoList", accommoList as Serializable)
                                         putExtra("isLast", isLast)
                                         putExtra("accessToken", postaccessToken)
                                         putExtra("region", region)
-                                        putExtra("reviewCount", reviewCount)
+//                                        putExtra("reviewCount", reviewCount)
                                     }
+                                Log.d("함께 ㅇㅇ",region)
                                 context.startActivity(nextScreenIntent)
-                                Log.d("함께 ㅇㅇ","ㅇㅇ")
+                                Log.d("함께 ㅇㅇ",nextScreenIntent.toString())
                             }
                             else{
 
@@ -159,6 +160,7 @@ class PlaceGridAdapter(private val fragmentManager: FragmentManager, val context
                         }
                     })
             }
+
         }
         return view
     }

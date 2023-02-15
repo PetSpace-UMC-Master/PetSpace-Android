@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.petsapce_week1.databinding.FragmentProfileMenuBinding
+import com.example.petsapce_week1.loginrelated.LoginActivity
 
 class ProfileMenuFragment : Fragment() {
     lateinit var binding: FragmentProfileMenuBinding
@@ -24,7 +25,7 @@ class ProfileMenuFragment : Fragment() {
         binding = FragmentProfileMenuBinding.inflate(layoutInflater)
 
         binding.btnSettings.setOnClickListener {
-            val intent = Intent(context, SettingsActivity::class.java)
+            val intent = Intent(context, LoginActivity::class.java)
             startActivity(intent)
         }
 
