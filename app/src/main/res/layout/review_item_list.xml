@@ -131,6 +131,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/readmoreTV_review_content">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reviewget_rv"
+            android:layout_marginStart="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginEnd="15dp"/>
+
         <ImageButton
             android:id="@+id/img_review_1"
             android:layout_width="wrap_content"
@@ -139,7 +146,7 @@
             android:background="@android:color/transparent"
             app:srcCompat="@drawable/pic_1" />
 
-        <ImageButton
+<!--        <ImageButton
             android:id="@+id/img_review_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -161,7 +168,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            app:srcCompat="@drawable/pic_4" />
+            app:srcCompat="@drawable/pic_4" />-->
     </LinearLayout>
 
 

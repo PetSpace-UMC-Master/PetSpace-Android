@@ -1,7 +1,6 @@
-package com.example.petsapce_week1.review
+package com.example.petsapce_week1.reviewrelated
 
 import android.content.Context
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.petsapce_week1.R
 
-class MultiImageAdapter(val items: ArrayList<Uri>, val context: Context) : RecyclerView.Adapter<MultiImageAdapter.ViewHolder>() {
+class ReviewGET_MultiImageAdapter(val items: List<String>, val context: Context) : RecyclerView.Adapter<ReviewGET_MultiImageAdapter.ViewHolder>() {
 
     inner class ViewHolder(v: View) :RecyclerView.ViewHolder(v){
         private var view: View = v
@@ -22,7 +21,7 @@ class MultiImageAdapter(val items: ArrayList<Uri>, val context: Context) : Recyc
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val inflatedView = LayoutInflater.from(parent.context).inflate(R.layout.multi_image_review, parent, false)
+        val inflatedView = LayoutInflater.from(parent.context).inflate(R.layout.multi_image_reviewget, parent, false)
         return ViewHolder(inflatedView)
     }
 

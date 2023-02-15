@@ -20,7 +20,7 @@ data class ReviewGetData(
         val id: Int,
         val nickName: String,
         val profileImage: String,
-        val reviewImage: List<String>,
+        val reviewImages: List<String>,
         val score: Int
     )}
 

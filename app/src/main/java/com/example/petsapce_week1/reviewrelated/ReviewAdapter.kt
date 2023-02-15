@@ -63,41 +63,71 @@ class ReviewAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 return LoadingViewHolder(inflatedView, inflatedView)
             }
         }
-        Log.d("리뷰 목록 items", "$reviews")
+        Log.d("review 목록 items", "$reviews")
     }
 
     inner class ReviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        //val context: Context = itemView.context
         fun bind(review: ReviewGetData.Review?) {
-            Log.d("리뷰 더보기 데이터", review.toString())
+            Log.d("review 더보기 데이터", review.toString())
+            // xml 변수명
             val tv_name = itemView.findViewById<TextView>(R.id.tv_user_nickname)
             val tv_content = itemView.findViewById<TextView>(R.id.readmoreTV_review_content)
             val profimg = itemView.findViewById<ImageView>(R.id.user_profile_img)
             val tv_date = itemView.findViewById<TextView>(R.id.tv_review_date)
             // 리뷰 이미지
+            val rv_images = itemView.findViewById<RecyclerView>(R.id.reviewget_rv)
 /*            val img1 = itemView.findViewById<TextView>(R.id.img_review_1)
             val img2 = itemView.findViewById<TextView>(R.id.img_review_2)
             val img3 = itemView.findViewById<TextView>(R.id.img_review_3)
             val img4 = itemView.findViewById<TextView>(R.id.img_review_4)*/
 
+
+
             if (review != null) {
                 tv_name.text = review.nickName
                 tv_content.text = review.content
                 tv_date.text = review.dayAfterCreated
-                //img1.text = review.reviewImage
+                //var profimg_url = review.profileImage
+
+                // 이미지 리사이클러 데이터
+//            var list = reviews.reviewImages
+                val imageList = review.reviewImages
+                Log.d("review111","fff")
+                //val image_adapter = imageList?.let { ReviewGET_MultiImageAdapter(it, context) }
+
+                // 이미지 리사이클러
+                //var images_rv = itemView.findViewById<RecyclerView>(R.id.review_rv)
+/*                Log.d("review1221","fff")
+                val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
+                images_rv.layoutManager = layoutManager
+                images_rv.adapter = image_adapter*/
+
+                // 프로필 사진
                 itemView.apply {
                     Glide.with(context)
                         .load(review.profileImage)
                         .circleCrop()
                         .into(profimg)
                 }
+                // 리뷰 사진
+/*                itemView.apply {
+                    Glide.with(context)
+                        .load(imageList)
+                        .override(80, 80)
+                        .into(itemView.image)
+                }*/
+
             }
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        Log.d("review onBindViewHolder", "exe")
         when (holder.itemViewType) {
             TYPE_POST -> {
                 val reviewViewHolder = holder as ReviewViewHolder
+                Log.d("review 3333", reviews.toString())
                 reviewViewHolder.bind(reviews[position])
 /*                val review: ReviewGetData.Review?
                 val profimg = ReviewGetData.Review

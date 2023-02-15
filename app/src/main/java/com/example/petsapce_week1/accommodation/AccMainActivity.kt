@@ -235,8 +235,8 @@ class AccMainActivity : AppCompatActivity() {
                     Glide.with(this@AccMainActivity)
                         .load(reviewList[1].imgUrl)
                         .into(binding.frameFacility.imgFac2)
-                    binding.frameFacility.tvFac3.text = reviewList[2].facname
-                    Glide.with(this@AccMainActivity)
+                    //binding.frameFacility.tvFac3.text = reviewList[2].facname
+                    /*Glide.with(this@AccMainActivity)
                         .load(reviewList[2].imgUrl)
                         .into(binding.frameFacility.imgFac3)
                     binding.frameFacility.tvFac4.text = reviewList[3].facname
@@ -250,7 +250,7 @@ class AccMainActivity : AppCompatActivity() {
                     binding.frameFacility.tvFac6.text = reviewList[5].facname
                     Glide.with(this@AccMainActivity)
                         .load(reviewList[5].imgUrl)
-                        .into(binding.frameFacility.imgFac6)
+                        .into(binding.frameFacility.imgFac6)*/
                 }
 
             }

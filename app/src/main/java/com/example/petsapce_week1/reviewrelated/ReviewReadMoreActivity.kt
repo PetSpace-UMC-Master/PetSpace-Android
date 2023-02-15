@@ -25,17 +25,37 @@ class ReviewReadMoreActivity : AppCompatActivity() {
 
     private var is_last: Boolean = false
     private var page_num: Int = -1
-    private var size: Int = 5
+    private var size: Int = 100
 
     private lateinit var adapter: ReviewAdapter
+
+/*
+    // 이미지 리사이클러 데이터
+    var list = mutableListOf<Uri>()
+    val image_adapter = ReviewGET_MultiImageAdapter(list, this)
+*/
 
      override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityReviewReadMoreBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        adapter = ReviewAdapter()
-        binding.rvReview.adapter = adapter
+         adapter = ReviewAdapter()
+         binding.rvReview.adapter = adapter
+
+
+/*         val itemList = ArrayList<ReviewGetData.Review>()
+         val rvAdapter = ReviewAdapter()*/
+
+/*
+         // 이미지 리사이클러
+         var images_rv = findViewById<RecyclerView>(R.id.reviewget_rv)
+         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
+         images_rv.layoutManager = layoutManager
+         images_rv.adapter = image_adapter
+*/
+/*         binding.rvReview.adapter = rvAdapter
+         binding.rvReview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)*/
 
         loadData()
         initScrollListener()
@@ -50,18 +70,20 @@ class ReviewReadMoreActivity : AppCompatActivity() {
             override fun onResponse(call: Call<ReviewGetData>, response: Response<ReviewGetData>) {
                 if (response.isSuccessful) {
                     val body = response.body()
+                    Log.d("review body0", body.toString())
                     if (body != null && response.isSuccessful) {
                         binding.reviewCnt.text = "${body.result.numberOfReview}개의 리뷰"
                         binding.avgScore.text = body.result.averageReviewScore.toString()
                         is_last = body.result.isLast
                         page_num = body.result.page
+
                         adapter.setReviews(body.result.reviews)
-                        Log.d("body1", body.result.toString())
+                        Log.d("review body1", body.result.toString())
                         Log.d("reviewCnt", body.result.numberOfReview.toString())
                         Log.d("avgScore", body.result.averageReviewScore.toString())
                     }
                     } else {
-                        Log.d("바디", response.body().toString())
+                        Log.d("review nn", response.body().toString())
                     Log.d("error", "err")
                     // 통신 에러
                     }
@@ -87,6 +109,8 @@ class ReviewReadMoreActivity : AppCompatActivity() {
                         response: Response<ReviewGetData>
                     ) {
                         val body = response.body()
+                        Log.d("review handler", response.toString())
+                        Log.d("review handler", body.toString())
                         if (body != null && response.isSuccessful) {
                             is_last = body.result.isLast
                             page_num = body.result.page

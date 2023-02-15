@@ -8,13 +8,10 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.petsapce_week1.R
+import com.bumptech.glide.Glide
 import com.example.petsapce_week1.TestMainActivity
 import com.example.petsapce_week1.databinding.ReviewCreateBinding
 import com.example.petsapce_week1.network.RetrofitHelper
@@ -44,11 +41,11 @@ class ReviewPostActivity : AppCompatActivity() {
     private var success_review_id: Int? = null
     private var review_rate: Int? = null
     private var mediaPath: String? = null
-    var selected: Int?=null
+    var selected: Int?= null
 
-    // 이미지 리사이클러 데이터
+/*    // 이미지 리사이클러 데이터
     var list = ArrayList<Uri>()
-    val adapter = MultiImageAdapter(list, this)
+    val adapter = MultiImageAdapter(list, this)*/
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,11 +53,11 @@ class ReviewPostActivity : AppCompatActivity() {
         binding = ReviewCreateBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 이미지 리사이클러
+/*        // 이미지 리사이클러
         var images_rv = findViewById<RecyclerView>(R.id.review_rv)
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
         images_rv.layoutManager = layoutManager
-        images_rv.adapter = adapter
+        images_rv.adapter = adapter*/
 
 
         // 리뷰 내용 글자 수
@@ -90,8 +87,9 @@ class ReviewPostActivity : AppCompatActivity() {
         binding.openGallery.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+            //다중 intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
             activityResult.launch(intent)
+
         }
 
         // 리뷰 작성하기 버튼 누르면 통신 시작 !
@@ -172,10 +170,45 @@ class ReviewPostActivity : AppCompatActivity() {
     val activityResult: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
-        mediaPath = getRealPathFromURI(it.data?.data!!)
-        if (it.resultCode == RESULT_OK && it.data != null) {
-            list.clear()
-            val count = it.data!!.clipData!!.itemCount
+            if (it.resultCode == RESULT_OK && it.data != null) {
+                val uri = it.data!!.data
+                mediaPath = getRealPathFromURI(it.data?.data!!)
+
+                Glide.with(this)
+                    .load(uri)
+                    .into(binding.selectedImage)
+
+                // 사진 데이터 => 외부 저장소에 복제 후 멀티파트에 담기
+                val i: InputStream? = uri?.let { it1 -> contentResolver.openInputStream(it1) } //src
+                val extension: String = mediaPath!!.substring(mediaPath!!.lastIndexOf("."))
+                localImgFile = File(applicationContext.filesDir, "localImgFile$extension")
+
+                if (i != null) {
+                    try {
+                        val out: OutputStream = FileOutputStream(localImgFile) //dst
+                        try {
+                            // Transfer bytes from in to out
+                            val buf = ByteArray(1024)
+                            var len: Int
+                            while (i.read(buf).also { len = it } > 0) {
+                                out.write(buf, 0, len)
+                            }
+                        } finally {
+                            out.close()
+                        }
+                    } finally {
+                        i.close()
+                    }
+                }
+                val requestFile = localImgFile!!.asRequestBody("image/*".toMediaTypeOrNull())
+                images.add(MultipartBody.Part.createFormData("reviewImages", localImgFile!!.name, requestFile))
+                Log.d("멀티파트에 담긴 reviewImages", images.toString())
+                Log.d("파일 경로", "$mediaPath")
+
+
+
+                // list.clear()
+/*            val count = it.data!!.clipData!!.itemCount
             if (count > 10) {
                 Toast.makeText(applicationContext, "사진은 최대 10장까지 선택 가능합니다.", Toast.LENGTH_LONG)
                 return@registerForActivityResult
@@ -194,11 +227,11 @@ class ReviewPostActivity : AppCompatActivity() {
                     copy_and_multipart(imageUri)
                 }
             }
-        }
-        adapter.notifyDataSetChanged()
+        }*/
+/*        adapter.notifyDataSetChanged()
             Log.d("멀티파트에 담긴 reviewImages", images.toString())
-            Log.d("파일 경로", "$mediaPath")
-    }
+            Log.d("파일 경로", "$mediaPath")*/
+    }}
 
     // 이전 화면
     fun initPrevious() {
@@ -210,11 +243,20 @@ class ReviewPostActivity : AppCompatActivity() {
         }
     }
 
-    fun copy_and_multipart(uri: Uri) {
+    private fun String?.toPlainRequestBody() =
+        requireNotNull(this).toRequestBody("text/plain".toMediaTypeOrNull())
+}
+
+
+   /* fun copy_and_multipart(uri: Uri) {
         // 사진 데이터 => 외부 저장소에 복제 후 멀티파트에 담기
         val i: InputStream? = uri?.let { it1 -> contentResolver.openInputStream(it1) } //src
         val extension: String = mediaPath!!.substring(mediaPath!!.lastIndexOf("."))
+*//*        Log.d("extension", extension)
+        Log.d("에서미디어패스", mediaPath!!)*//*
         localImgFile = File(applicationContext.filesDir, "localImgFile$extension")
+        Log.d("localimgfile", localImgFile.toString())
+
         if (i != null) {
             try {
                 val out: OutputStream = FileOutputStream(localImgFile) //dst
@@ -234,8 +276,4 @@ class ReviewPostActivity : AppCompatActivity() {
         }
         val requestFile = localImgFile!!.asRequestBody("image/*".toMediaTypeOrNull())
         images.add(MultipartBody.Part.createFormData("reviewImages", localImgFile!!.name, requestFile))
-    }
-
-    private fun String?.toPlainRequestBody() =
-        requireNotNull(this).toRequestBody("text/plain".toMediaTypeOrNull())
-}
+    }*/

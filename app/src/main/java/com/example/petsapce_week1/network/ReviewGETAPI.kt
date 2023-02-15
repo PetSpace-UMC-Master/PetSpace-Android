@@ -5,7 +5,7 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface ReviewGETAPI {
-    @GET("/app/reviews?roomId=1&?page=0&size=5")
+    @GET("/app/reviews?roomId=1")
     fun getReviews(
         @Query("roomId") roomId: Long,
         @Query("page") page: Int,
