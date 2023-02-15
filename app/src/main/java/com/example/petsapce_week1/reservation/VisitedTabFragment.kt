@@ -8,32 +8,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.petsapce_week1.R
 import com.example.petsapce_week1.databinding.FragmentVisitedTabBinding
+import com.example.petsapce_week1.databinding.VisitedAccommoListBinding
 import com.example.petsapce_week1.network.ReservationAPI
 import com.example.petsapce_week1.network.RetrofitHelper
 import com.example.petsapce_week1.placetogo.PlaceToGoRegionAdapter
 import com.example.petsapce_week1.vo.ReservationReadResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 
 
 class VisitedTabFragment : Fragment() {
 
-    var accommoList = mutableListOf<ReservationReadResponse>()
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var visitedAdapter: VisitedTabAdapter
 
-    companion object{
-        fun newInstance(accommoList: MutableList<ReservationReadResponse.Reservation>): VisitedTabFragment {
-            val fragment = VisitedTabFragment()
-            val args = Bundle()
-            args.putSerializable("accommoList", accommoList.toString())
-            Log.d("예약 ???", args.toString())
-            fragment.arguments = args
-            return fragment
-        }
-    }
+    var accommoList = mutableListOf<ReservationReadResponse.Reservation>()
 
     lateinit var binding : FragmentVisitedTabBinding
+
     var accessToken : String ?= null
+
     // ========== 백엔드 연동 부분 ===========
     private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
     // 기본 숙소 정보 불러올때 호출
@@ -57,15 +56,24 @@ class VisitedTabFragment : Fragment() {
 
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val adapter : VisitedTabAdapter = VisitedTabAdapter(accommoList)
-        Log.d("예약 왜안되지", accommoList.toString())
         binding = FragmentVisitedTabBinding.inflate(layoutInflater)
-        binding.recyclerviewVisitedTab.adapter = adapter
+        getAccessToken()
+
+        Log.d("예약 왜 안될까?","3 fragment")
+
+        recyclerView = binding.recyclerviewVisitedTab
+//        recyclerView = view.findViewById(R.id.recyclerview_visited_tab)
+        visitedAdapter = accessToken?.let { VisitedTabAdapter(it, accommoList) }!!
+        recyclerView.adapter = visitedAdapter
+
+//        binding = FragmentVisitedTabBinding.inflate(layoutInflater)
+//        binding.recyclerviewVisitedTab.adapter = adapter
         binding.recyclerviewVisitedTab.layoutManager = LinearLayoutManager(context)
         binding.recyclerviewVisitedTab.isNestedScrollingEnabled = true
         Log.d("예약 왜 안될까?","3 fragment")

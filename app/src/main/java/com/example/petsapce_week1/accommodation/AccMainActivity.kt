@@ -239,22 +239,22 @@ class AccMainActivity : AppCompatActivity() {
                     Glide.with(this@AccMainActivity)
                         .load(reviewList[1].imgUrl)
                         .into(binding.frameFacility.imgFac2)
-                    binding.frameFacility.tvFac3.text = reviewList[2].facname
-                    Glide.with(this@AccMainActivity)
-                        .load(reviewList[2].imgUrl)
-                        .into(binding.frameFacility.imgFac3)
-                    binding.frameFacility.tvFac4.text = reviewList[3].facname
-                    Glide.with(this@AccMainActivity)
-                        .load(reviewList[3].imgUrl)
-                        .into(binding.frameFacility.imgFac4)
-                    binding.frameFacility.tvFac5.text = reviewList[4].facname
-                    Glide.with(this@AccMainActivity)
-                        .load(reviewList[4].imgUrl)
-                        .into(binding.frameFacility.imgFac5)
-                    binding.frameFacility.tvFac6.text = reviewList[5].facname
-                    Glide.with(this@AccMainActivity)
-                        .load(reviewList[5].imgUrl)
-                        .into(binding.frameFacility.imgFac6)
+//                    binding.frameFacility.tvFac3.text = reviewList[2].facname
+//                    Glide.with(this@AccMainActivity)
+//                        .load(reviewList[2].imgUrl)
+//                        .into(binding.frameFacility.imgFac3)
+//                    binding.frameFacility.tvFac4.text = reviewList[3].facname
+//                    Glide.with(this@AccMainActivity)
+//                        .load(reviewList[3].imgUrl)
+//                        .into(binding.frameFacility.imgFac4)
+//                    binding.frameFacility.tvFac5.text = reviewList[4].facname
+//                    Glide.with(this@AccMainActivity)
+//                        .load(reviewList[4].imgUrl)
+//                        .into(binding.frameFacility.imgFac5)
+//                    binding.frameFacility.tvFac6.text = reviewList[5].facname
+//                    Glide.with(this@AccMainActivity)
+//                        .load(reviewList[5].imgUrl)
+//                        .into(binding.frameFacility.imgFac6)
                 }
 
             }

@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitHelper {
 
-    //val BASE_URL: String = "https://c13d-115-94-178-52.jp.ngrok.io"
+    //val BASE_URL: String = "https://d810-115-94-178-52.jp.ngrok.io"
     val BASE_URL: String = "http://3.38.26.120:8080"
 
 

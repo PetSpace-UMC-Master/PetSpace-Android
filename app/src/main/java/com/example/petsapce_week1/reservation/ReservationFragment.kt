@@ -7,6 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.example.petsapce_week1.R
 import com.example.petsapce_week1.databinding.FragmentReservationBinding
 import com.example.petsapce_week1.network.ReservationAPI
@@ -20,10 +25,19 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 
+//Main Fragment
 class ReservationFragment : Fragment() {
 
+    private lateinit var tabLayout: TabLayout
+    private lateinit var viewPager: ViewPager2
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var visitedAdapter: VisitedTabAdapter
+
+    private lateinit var reservationTabAdapter: ReservationTabAdapter
+
     private lateinit var mContext: Context
-    lateinit var binding : FragmentReservationBinding
+    //lateinit var binding : FragmentReservationBinding
 
     private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
     var api : ReservationAPI = retrofit.create(ReservationAPI::class.java)
@@ -42,27 +56,23 @@ class ReservationFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mContext = context?.applicationContext!!
-        binding = FragmentReservationBinding.inflate(layoutInflater)
-        Log.d("예약 언제 실행되나1", "지금")
+//        mContext = context?.applicationContext!!
+//        binding = FragmentReservationBinding.inflate(layoutInflater)
+//        Log.d("예약 언제 실행되나1", "지금")
+        val view = inflater.inflate(R.layout.fragment_reservation, container, false)
+
+        tabLayout = view.findViewById(R.id.reserv_tabLayout)
+        viewPager = view.findViewById(R.id.reserv_viewpager)
+
+        val pagerAdapter = ReservationAdapter(requireActivity().supportFragmentManager, lifecycle)
+        viewPager.adapter = pagerAdapter
         getAccessToken()
-
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
         Log.d("예약 화면1", "onViewCreated")
-
-        val tabLayout = binding.reservTabLayout
-        val viewPager = binding.reservViewpager
-        Log.d("예약 화면2", "${accessToken}")
 
         getAccessToken()
 
         if (accessToken != null) {
-            viewPager.adapter = ReservationAdapter(accessToken!!, requireActivity())
+            viewPager.adapter = ReservationAdapter(requireActivity().supportFragmentManager, lifecycle)
         }
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
@@ -73,6 +83,12 @@ class ReservationFragment : Fragment() {
             }
         }.attach()
         Log.d("예약 화면3", "onViewCreated")
+
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
@@ -87,6 +103,7 @@ class ReservationFragment : Fragment() {
                 }
                 Log.d("예약 탭", position.toString())
                 Log.d("예약 탭", fragment.toString())
+
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.menu_frame_reserv, fragment)
                     .addToBackStack(null)
@@ -109,22 +126,17 @@ class ReservationFragment : Fragment() {
                         call: Call<ReservationReadResponse>,
                         response: Response<ReservationReadResponse>
                     ) {
-                        Log.d("예약 read 1 ", response.toString())
-                        Log.d("예약 read1", response.body().toString())
+                        Log.d("예약 read 0 ", response.toString())
+                        Log.d("예약 read0", response.body().toString())
                         accommoList = (response.body()?.result?.reservations?.toMutableList() as ArrayList<ReservationReadResponse.Reservation>?)!!
-                        Log.d("예약 read 1 리스트", accommoList.toString())
-                        val bundle = Bundle()
-                        //bundle.putParcelable("accommoList", accommoList)
-                        bundle.putSerializable("accommoList", accommoList)
+                        Log.d("예약 read 0 리스트", accommoList.toString())
 
-                        //bundle.putParcelableArrayList("accommoList", ArrayList(accommoList)) // add data to the bundle
-                        val fragment = ReservationTabFragment()
-                        fragment.arguments = bundle
+                        recyclerView = view?.findViewById(R.id.recyclerview_reservation_tab)!!
+                        reservationTabAdapter = accessToken?.let { ReservationTabAdapter(it, accommoList) }!!
+                        recyclerView.adapter = reservationTabAdapter
+                        recyclerView.layoutManager = LinearLayoutManager(context)
 
-                        //val bundle = Bundle()
-                        //bundle.putParcelableArrayList("key", ArrayList(myDataList)) // add mutableList of data class to the bundle
-                        //val fragment = MyFragment()
-                        //fragment.arguments = bundle // set the bundle as arguments of the fragment
+                        Log.d("예약 read 000", accommoList.toString())
                     }
 
                     override fun onFailure(call: Call<ReservationReadResponse>, t: Throwable) {
@@ -144,10 +156,28 @@ class ReservationFragment : Fragment() {
                     ) {
                         Log.d("예약 read 1 ", response.toString())
                         Log.d("예약 read1", response.body().toString())
-                        accommoList = (response.body()?.result?.reservations?.toMutableList() as ArrayList<ReservationReadResponse.Reservation>?)!!
+                        //if(accessToken != null){
+                        //            val gridVew = binding.placeGridview
+                        //            gridVew.adapter =
+                        //                tcontext?.let { PlaceGridAdapter(parentFragmentManager, it, accessToken = accessToken!!, img_list = img) }
+                        //            //adapter = tcontext?.let { PlaceGridAdapter(it, img, accessToken!!) }!!
+                        ////            binding.placeGridview.adapter =
+                        val viewPager = view?.findViewById<ViewPager2>(R.id.reserv_viewpager)
+                        viewPager?.adapter = context.let {
+                            ReservationAdapter(fragmentManager = childFragmentManager, lifecycle)
+                        }
+
                         Log.d("예약 read 1", accommoList.toString())
+
 //                        val fragment = viewPager.adapter?.instantiateItem(viewPager, 1) as? MyFragment
 //                        fragment?.updateUI(data)
+//                        if (response.isSuccessful) {
+//                            accommoList = response.body()?.result?.reservations as MutableList<ReservationReadResponse.Reservation>
+//                            val reservations = response.body()
+//                            reservations?.let {
+//
+//                            }
+//                        }
                     }
 
                     override fun onFailure(call: Call<ReservationReadResponse>, t: Throwable) {
@@ -164,8 +194,6 @@ class ReservationFragment : Fragment() {
         Log.d("언제 실행되나3", "지금")
         val reservationDone = ReservationTabFragment()
         val visitingDone = ReservationTabFragment()
-
-        val adapter = accessToken?.let { activity?.let { it1 -> ReservationAdapter(it, it1) } }
 
 //        adapter.addItems(reservationDone)
 //        adapter.addItems(visitingDone)
