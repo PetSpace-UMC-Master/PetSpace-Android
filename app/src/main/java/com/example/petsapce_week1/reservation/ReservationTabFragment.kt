@@ -1,5 +1,6 @@
 package com.example.petsapce_week1.reservation
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.petsapce_week1.R
 import com.example.petsapce_week1.databinding.FragmentReservationTabBinding
 import com.example.petsapce_week1.network.AccomoService
@@ -21,6 +23,20 @@ import retrofit2.Retrofit
 
 class ReservationTabFragment : Fragment() {
 
+    companion object {
+        fun newInstance(accessToken: String): ReservationTabFragment {
+            val fragment = ReservationTabFragment()
+            val args = Bundle()
+            args.putString("accessToken", accessToken)
+            //args.putString("accommoList", accommoList)
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
+    //val data = arguments?.getParcelable<ReservationReadResponse.Reservation>("accommoList") // get the data class from the arguments bundle
+
+    @SuppressLint("StaticFieldLeak")
     lateinit var binding : FragmentReservationTabBinding
     var accessToken : String ?= null
     // ========== 백엔드 연동 부분 ===========
@@ -30,25 +46,14 @@ class ReservationTabFragment : Fragment() {
 
     var roomId : Long = 1
 
-    override fun onResume() {
-        super.onResume()
-        getAccessToken()
-    }
-    private fun getAccessToken() {
-        val atpref = requireContext().getSharedPreferences("accessToken", Context.MODE_PRIVATE)
-        accessToken = atpref.getString("accessToken", "default")
-        Log.d("예약 완료 액토","$accessToken")
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d("예약 완료 onCreateView", "oo")
+        //Log.d("예약 완료 data", "$data")
         val binding = FragmentReservationTabBinding.inflate(layoutInflater)
-
-
-
+        //binding.recyclerviewReservationTab.adapter = ReservationTabAdapter.ViewHolder
 
         return binding.root
     }

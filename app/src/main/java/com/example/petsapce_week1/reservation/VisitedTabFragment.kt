@@ -7,19 +7,30 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.petsapce_week1.R
-import com.example.petsapce_week1.databinding.FragmentReservationTabBinding
 import com.example.petsapce_week1.databinding.FragmentVisitedTabBinding
 import com.example.petsapce_week1.network.ReservationAPI
 import com.example.petsapce_week1.network.RetrofitHelper
+import com.example.petsapce_week1.placetogo.PlaceToGoRegionAdapter
 import com.example.petsapce_week1.vo.ReservationReadResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 
 
 class VisitedTabFragment : Fragment() {
+
+    var accommoList = mutableListOf<ReservationReadResponse>()
+
+    companion object{
+        fun newInstance(accommoList: MutableList<ReservationReadResponse.Reservation>): VisitedTabFragment {
+            val fragment = VisitedTabFragment()
+            val args = Bundle()
+            args.putSerializable("accommoList", accommoList.toString())
+            Log.d("예약 ???", args.toString())
+            fragment.arguments = args
+            return fragment
+        }
+    }
 
     lateinit var binding : FragmentVisitedTabBinding
     var accessToken : String ?= null
@@ -42,6 +53,7 @@ class VisitedTabFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("예약 왜 안될까?","4")
 
     }
 
@@ -50,10 +62,14 @@ class VisitedTabFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        val adapter : VisitedTabAdapter = VisitedTabAdapter(accommoList)
+        Log.d("예약 왜안되지", accommoList.toString())
         binding = FragmentVisitedTabBinding.inflate(layoutInflater)
-        Log.d(" 예약 방문 완료 onCreateView", "oo")
-
-        return inflater.inflate(R.layout.fragment_visited_tab, container, false)
+        binding.recyclerviewVisitedTab.adapter = adapter
+        binding.recyclerviewVisitedTab.layoutManager = LinearLayoutManager(context)
+        binding.recyclerviewVisitedTab.isNestedScrollingEnabled = true
+        Log.d("예약 왜 안될까?","3 fragment")
+        return binding.root
     }
 
 }

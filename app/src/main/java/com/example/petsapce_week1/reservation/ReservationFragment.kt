@@ -1,24 +1,20 @@
 package com.example.petsapce_week1.reservation
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.PagerAdapter
-import androidx.viewpager2.widget.ViewPager2
 import com.example.petsapce_week1.R
 import com.example.petsapce_week1.databinding.FragmentReservationBinding
 import com.example.petsapce_week1.network.ReservationAPI
 import com.example.petsapce_week1.network.RetrofitHelper
+
 import com.example.petsapce_week1.vo.ReservationReadResponse
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.fragment_reservation.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,11 +26,10 @@ class ReservationFragment : Fragment() {
     lateinit var binding : FragmentReservationBinding
 
     private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
-    // 기본 숙소 정보 불러올때 호출
     var api : ReservationAPI = retrofit.create(ReservationAPI::class.java)
 
-
     var accessToken : String ?= null
+    var accommoList = ArrayList<ReservationReadResponse.Reservation>()
 
     private fun getAccessToken() {
         val atpref = requireContext().getSharedPreferences("accessToken", Context.MODE_PRIVATE)
@@ -52,8 +47,6 @@ class ReservationFragment : Fragment() {
         Log.d("예약 언제 실행되나1", "지금")
         getAccessToken()
 
-        //initViewPager()
-
         return binding.root
     }
 
@@ -66,9 +59,10 @@ class ReservationFragment : Fragment() {
         val viewPager = binding.reservViewpager
         Log.d("예약 화면2", "${accessToken}")
 
-        if(accessToken != null){
-            viewPager.adapter = ReservationTabAdapter(accessToken!!, requireActivity())
-            Log.d("예약 화면4", "onViewCreated")
+        getAccessToken()
+
+        if (accessToken != null) {
+            viewPager.adapter = ReservationAdapter(accessToken!!, requireActivity())
         }
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
@@ -84,12 +78,26 @@ class ReservationFragment : Fragment() {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 val position = tab.position
                 sendGetRequest(position)
+                val fragment : Fragment
+                if(position == 0){
+                    fragment = ReservationTabFragment()
+                }
+                else{
+                    fragment = VisitedTabFragment()
+                }
+                Log.d("예약 탭", position.toString())
+                Log.d("예약 탭", fragment.toString())
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.menu_frame_reserv, fragment)
+                    .addToBackStack(null)
+                    .commit()
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {}
 
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
+        //initViewPager()
 
     }
     private fun sendGetRequest(position: Int) {
@@ -103,6 +111,20 @@ class ReservationFragment : Fragment() {
                     ) {
                         Log.d("예약 read 1 ", response.toString())
                         Log.d("예약 read1", response.body().toString())
+                        accommoList = (response.body()?.result?.reservations?.toMutableList() as ArrayList<ReservationReadResponse.Reservation>?)!!
+                        Log.d("예약 read 1 리스트", accommoList.toString())
+                        val bundle = Bundle()
+                        //bundle.putParcelable("accommoList", accommoList)
+                        bundle.putSerializable("accommoList", accommoList)
+
+                        //bundle.putParcelableArrayList("accommoList", ArrayList(accommoList)) // add data to the bundle
+                        val fragment = ReservationTabFragment()
+                        fragment.arguments = bundle
+
+                        //val bundle = Bundle()
+                        //bundle.putParcelableArrayList("key", ArrayList(myDataList)) // add mutableList of data class to the bundle
+                        //val fragment = MyFragment()
+                        //fragment.arguments = bundle // set the bundle as arguments of the fragment
                     }
 
                     override fun onFailure(call: Call<ReservationReadResponse>, t: Throwable) {
@@ -122,6 +144,8 @@ class ReservationFragment : Fragment() {
                     ) {
                         Log.d("예약 read 1 ", response.toString())
                         Log.d("예약 read1", response.body().toString())
+                        accommoList = (response.body()?.result?.reservations?.toMutableList() as ArrayList<ReservationReadResponse.Reservation>?)!!
+                        Log.d("예약 read 1", accommoList.toString())
 //                        val fragment = viewPager.adapter?.instantiateItem(viewPager, 1) as? MyFragment
 //                        fragment?.updateUI(data)
                     }
@@ -136,14 +160,13 @@ class ReservationFragment : Fragment() {
 }
 
 
-//    private fun initViewPager(){
-//        Log.d("언제 실행되나3", "지금")
-//        val reservationDone = ReservationTabFragment()
-//        reservationDone.name = "예약 완료"
-//        val visitingDone = ReservationTabFragment()
-//        visitingDone.name = "방문 완료"
-//
-//        val adapter = ReservationTabAdapter(childFragmentManager)
+    private fun initViewPager(){
+        Log.d("언제 실행되나3", "지금")
+        val reservationDone = ReservationTabFragment()
+        val visitingDone = ReservationTabFragment()
+
+        val adapter = accessToken?.let { activity?.let { it1 -> ReservationAdapter(it, it1) } }
+
 //        adapter.addItems(reservationDone)
 //        adapter.addItems(visitingDone)
 //
@@ -152,8 +175,8 @@ class ReservationFragment : Fragment() {
 //
 //        binding.tabLayout.getTabAt(0)?.customView = createView("예약 완료")
 //        binding.tabLayout.getTabAt(1)?.customView = createView("방문 완료")
-//
-//    }
+
+    }
 //    @SuppressLint("InflateParams")
 //    private fun createView(tabName : String) : View {
 //        //binding = FragmentReservationBinding.inflate(layoutInflater)
