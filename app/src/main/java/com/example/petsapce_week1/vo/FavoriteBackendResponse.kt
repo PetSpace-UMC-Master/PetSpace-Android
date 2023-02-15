@@ -9,26 +9,27 @@ data class FavoriteBackendResponse(
     val responseMessage: String,
     val result: Result
 ){
-    data class Favorite(
-        @SerializedName("averageReviewScore")
-        val averageReviewScore: Double,
-        @SerializedName("id")
-        val id: Int,
-        @SerializedName("numberOfReview")
-        val numberOfReview: Int,
-        @SerializedName("price")
-        val price: Int,
-        @SerializedName("roomAddress")
-        val roomAddress: String,
-        @SerializedName("roomImages")
-        val roomImages: List<String>
-    ): Serializable
-
     data class Result(
         val favorites: List<Favorite>,
         val isLast: Boolean,
         val page: Int
-    )
+    ){
+        data class Favorite(
+            @SerializedName("averageReviewScore")
+            val averageReviewScore: Double,
+            @SerializedName("id")
+            val id: Int,
+            @SerializedName("numberOfReview")
+            val numberOfReview: Int,
+            @SerializedName("price")
+            val price: Int,
+            @SerializedName("roomAddress")
+            val roomAddress: String,
+            @SerializedName("roomImages")
+            val roomImages: List<String>
+        ): Serializable
+    }
+
 }
 
 data class FavoriteData(

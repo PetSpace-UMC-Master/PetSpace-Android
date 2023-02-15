@@ -20,7 +20,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import java.text.DecimalFormat
 
-class PlaceToGoRegionAdapter(var items: MutableList<FavoriteBackendResponse.Favorite>, val accessToken : String) : RecyclerView.Adapter<PlaceToGoRegionAdapter.ViewHolder>() {
+class PlaceToGoRegionAdapter(var items: MutableList<FavoriteBackendResponse.Result.Favorite>, val accessToken : String) : RecyclerView.Adapter<PlaceToGoRegionAdapter.ViewHolder>() {
 
     // ========== 백엔드 연동 부분 ===========
     private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
@@ -41,7 +41,7 @@ class PlaceToGoRegionAdapter(var items: MutableList<FavoriteBackendResponse.Favo
     inner class ViewHolder(val binding: PlacetogoItemsBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(data: FavoriteBackendResponse.Favorite) {
+        fun bind(data: FavoriteBackendResponse.Result.Favorite) {
             Log.d("함께 갈 곳 data", data.toString())
             //val cut = String.format("%.2f", data.averageReviewScore)
             val priceCut = DecimalFormat("#,###")
