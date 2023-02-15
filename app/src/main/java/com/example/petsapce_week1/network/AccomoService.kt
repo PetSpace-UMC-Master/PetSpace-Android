@@ -22,7 +22,7 @@ interface AccomoService {
     //숙소 말고 편의시설!! 더보기
     @GET("/app/rooms/{roomId}/facilities")
     fun getFacilities(
-        @Path("roomId") roomId : Long = 1
+        @Path("roomId") roomId : Long
     ): Call<AccommodationFacilityMore>
 
 

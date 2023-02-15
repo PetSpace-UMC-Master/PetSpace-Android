@@ -23,7 +23,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 
 
-class reviewFragment : Fragment() {
+class reviewFragment(val roomId : Long) : Fragment() {
 
     private lateinit var binding:FragmentReviewBinding
     lateinit var adapter: reviewAdapter
@@ -49,7 +49,7 @@ class reviewFragment : Fragment() {
         initRecyclerView()
 
         // ============== 백엔드 연동 =================
-        val roomId : Long = 1
+
         api.getRoomDetail(accessToken = accessTokenPost, roomId = roomId).enqueue(object : Callback<AccomodationData> {
             @SuppressLint("SetTextI18n")
             override fun onResponse(

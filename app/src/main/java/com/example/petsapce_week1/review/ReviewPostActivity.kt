@@ -206,6 +206,7 @@ class ReviewPostActivity : AppCompatActivity() {
         Log.d("파일 경로", "$mediaPath")
     }
 
+
     // 이전 화면
     fun initPrevious() {
         binding.apply {

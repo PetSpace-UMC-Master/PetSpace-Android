@@ -34,6 +34,7 @@ class ProfileMenuFragment : Fragment() {
             startActivity(intent)
         }
 
+
         return binding.root
     }
 }
