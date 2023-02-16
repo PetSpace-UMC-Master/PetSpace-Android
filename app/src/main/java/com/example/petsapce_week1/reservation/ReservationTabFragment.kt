@@ -69,46 +69,46 @@ class ReservationTabFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_reservation_tab, container, false)
 
         getAccessToken()
-        Log.d("예약 fragment onCreateView", "ddddd")
+//        Log.d("예약 fragment onCreateView", "ddddd")
 
 //        recyclerView = view.findViewById(R.id.recyclerview_reservation_tab)
 //        reservationTabAdapter = accessToken?.let { ReservationTabAdapter(it) }!!
 //        recyclerView.adapter = reservationTabAdapter
 
-        Log.d("예약 fragment onCreateView", "ttt")
+//        Log.d("예약 fragment onCreateView", "ttt")
 
-//        accessToken?.let { it ->
-//            api.getReservationReadUpcoming(it, page = 0, size = 5).enqueue(object  : Callback<ReservationReadResponse>{
-//                override fun onResponse(
-//                    call: Call<ReservationReadResponse>,
-//                    response: Response<ReservationReadResponse>
-//                ) {
-//                    Log.d("예약 완료 화면", response.toString())
-//                    Log.d("예약 완료 화면", response.body().toString())
-//                    if (response.isSuccessful) {
-//                        val reservations = response.body()?.result
-//                        reservations?.let {
-//                            reservationTabAdapter.setData(it)
-//                        }
-//                    }
-//                    else{
-//                        val noplacetogofragment = NoPlaceToGoFragment()
-//                        val placetogofragment = ReservationTabFragment()
-//                        Log.d("함께 갈 곳 2222", "222222")
-//                        placetogofragment.parentFragmentManager
-//                            .beginTransaction()
-//                            .replace(R.id.thisLayout, noplacetogofragment)
-//                            .addToBackStack(null)
-//                            .commit()
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<ReservationReadResponse>, t: Throwable) {
-//                    Log.d("예약 완료 실패", t.toString())
-//                }
-//
-//            })
-//        }
+        accessToken?.let { it ->
+            api.getReservationReadUpcoming(it, page = 0, size = 5).enqueue(object  : Callback<ReservationReadResponse>{
+                override fun onResponse(
+                    call: Call<ReservationReadResponse>,
+                    response: Response<ReservationReadResponse>
+                ) {
+                    Log.d("예약 완료 화면", response.toString())
+                    Log.d("예약 완료 화면", response.body().toString())
+                    if (response.isSuccessful) {
+                        val reservations = response.body()?.result
+                        reservations?.let {
+                            reservationTabAdapter.setData(it)
+                        }
+                    }
+                    else{
+                        val noplacetogofragment = NoPlaceToGoFragment()
+                        val placetogofragment = ReservationTabFragment()
+                        Log.d("함께 갈 곳 2222", "222222")
+                        placetogofragment.parentFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.thisLayout, noplacetogofragment)
+                            .addToBackStack(null)
+                            .commit()
+                    }
+                }
+
+                override fun onFailure(call: Call<ReservationReadResponse>, t: Throwable) {
+                    Log.d("예약 완료 실패", t.toString())
+                }
+
+            })
+        }
 
         return view
     }

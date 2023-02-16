@@ -7,13 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.petsapce_week1.R
-import com.example.petsapce_week1.databinding.FragmentReservationBinding
 import com.example.petsapce_week1.network.ReservationAPI
 import com.example.petsapce_week1.network.RetrofitHelper
 
@@ -64,7 +61,7 @@ class ReservationFragment : Fragment() {
         tabLayout = view.findViewById(R.id.reserv_tabLayout)
         viewPager = view.findViewById(R.id.reserv_viewpager)
 
-        val pagerAdapter = ReservationAdapter(requireActivity().supportFragmentManager)
+        val pagerAdapter = ReservationAdapter(this)
         viewPager.adapter = pagerAdapter
         getAccessToken()
         Log.d("예약 화면1", "onViewCreated")
@@ -72,11 +69,10 @@ class ReservationFragment : Fragment() {
         getAccessToken()
 
         if (accessToken != null) {
-            viewPager.adapter = ReservationAdapter(requireActivity().supportFragmentManager)
+            viewPager.adapter = ReservationAdapter(this)
         }
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-
             when (position) {
                 0 -> tab.text = "예약 완료"
                 1 -> tab.text = "방문 완료"
@@ -162,10 +158,11 @@ class ReservationFragment : Fragment() {
                         //                tcontext?.let { PlaceGridAdapter(parentFragmentManager, it, accessToken = accessToken!!, img_list = img) }
                         //            //adapter = tcontext?.let { PlaceGridAdapter(it, img, accessToken!!) }!!
                         ////            binding.placeGridview.adapter =
-                        val viewPager = view?.findViewById<ViewPager2>(R.id.reserv_viewpager)
-                        viewPager?.adapter = context.let {
-                            ReservationAdapter(fragmentManager = childFragmentManager)
-                        }
+                    /*    val viewPager = view?.findViewById<ViewPager2>(R.id.reserv_viewpager)
+                        *//*viewPager?.adapter = context.let {
+                            ReservationAdapter(this)
+                        }*/
+
 
                         Log.d("예약 read 1", accommoList.toString())
 
