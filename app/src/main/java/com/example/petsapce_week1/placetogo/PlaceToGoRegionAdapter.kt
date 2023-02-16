@@ -11,6 +11,7 @@ import com.example.petsapce_week1.accommodation.AccMainActivity
 import com.example.petsapce_week1.databinding.PlacetogoItemsBinding
 import com.example.petsapce_week1.network.AccomoService
 import com.example.petsapce_week1.network.RetrofitHelper
+import com.example.petsapce_week1.reviewrelated.ReviewReadMoreActivity
 import com.example.petsapce_week1.vo.FavoriteBackendResponse
 import com.example.petsapce_week1.vo.FavoriteData
 import com.example.petsapce_week1.vo.accomo_datamodel.AccomodationData
@@ -20,7 +21,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import java.text.DecimalFormat
 
-class PlaceToGoRegionAdapter(var items: MutableList<FavoriteBackendResponse.Favorite>, val accessToken : String) : RecyclerView.Adapter<PlaceToGoRegionAdapter.ViewHolder>() {
+class PlaceToGoRegionAdapter(var items: MutableList<FavoriteBackendResponse.Result.Favorite>, val accessToken : String) : RecyclerView.Adapter<PlaceToGoRegionAdapter.ViewHolder>() {
 
     // ========== 백엔드 연동 부분 ===========
     private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
@@ -41,7 +42,7 @@ class PlaceToGoRegionAdapter(var items: MutableList<FavoriteBackendResponse.Favo
     inner class ViewHolder(val binding: PlacetogoItemsBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(data: FavoriteBackendResponse.Favorite) {
+        fun bind(data: FavoriteBackendResponse.Result.Favorite) {
             Log.d("함께 갈 곳 data", data.toString())
             //val cut = String.format("%.2f", data.averageReviewScore)
             val priceCut = DecimalFormat("#,###")
@@ -144,7 +145,6 @@ class PlaceToGoRegionAdapter(var items: MutableList<FavoriteBackendResponse.Favo
             val intent = Intent(holder.itemView.context, AccMainActivity::class.java)
             intent.putExtra("content",roomIDNext)
             ContextCompat.startActivity(holder.itemView.context,intent,null)
-            Log.d("content",roomIDNext.toString())
         }
 
         holder.bind(items[position])

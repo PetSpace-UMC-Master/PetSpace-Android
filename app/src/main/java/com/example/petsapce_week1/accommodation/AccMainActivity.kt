@@ -39,6 +39,8 @@ class AccMainActivity : AppCompatActivity() {
     val reviewList = mutableListOf<FacilityData>()
     var photos = mutableListOf<String>()
 
+    lateinit var roomId: String
+
     // ========== 백엔드 연동 부분 ===========
     private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
     // 기본 숙소 정보 불러올때 호출
@@ -282,7 +284,7 @@ class AccMainActivity : AppCompatActivity() {
 
         binding.btnReserve.setOnClickListener{
             var apiReservation : ReservationAPI = retrofit.create(ReservationAPI::class.java)
-            apiReservation.postReservation(accessTokenPost, jsonParams = ReservationUserData(2,1,"2023-02-16", "2023-02-17"), 1).enqueue(object : Callback<ReservationCreateResponse>{
+            apiReservation.postReservation(accessTokenPost, jsonParams = ReservationUserData(2,1,"2023-02-20", "2023-02-21"), 1).enqueue(object : Callback<ReservationCreateResponse>{
                 override fun onResponse(
                     call: Call<ReservationCreateResponse>,
                     response: Response<ReservationCreateResponse>

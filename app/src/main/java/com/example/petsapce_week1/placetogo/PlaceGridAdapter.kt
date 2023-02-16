@@ -41,7 +41,7 @@ class PlaceGridAdapter(private val fragmentManager: FragmentManager, val context
 
     lateinit var postaccessToken : String
 
-    var accommoList = mutableListOf<FavoriteBackendResponse.Favorite>()
+    var accommoList = mutableListOf<FavoriteBackendResponse.Result.Favorite>()
 
     @SuppressLint("ViewHolder", "InflateParams", "CutPasteId")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
@@ -111,16 +111,13 @@ class PlaceGridAdapter(private val fragmentManager: FragmentManager, val context
                                 if (response.body()!!.result.isLast) {
                                     isLast = true
                                 }
-                                if(!response.body()!!.result.favorites.isEmpty()){
-                                    reviewCount = response.body()!!.result.favorites[position].numberOfReview
-                                }
+
                                 val nextScreenIntent =
                                     Intent(context, PlaceToGoRegionActivity::class.java).apply {
                                         putExtra("accommoList", accommoList as Serializable)
                                         putExtra("isLast", isLast)
                                         putExtra("accessToken", postaccessToken)
                                         putExtra("region", region)
-                                        putExtra("reviewCount", reviewCount)
                                     }
                                 context.startActivity(nextScreenIntent)
                                 Log.d("함께 ㅇㅇ","ㅇㅇ")

@@ -32,6 +32,12 @@ interface LoginService {
         @Body jsonParams : SignupData
     ): Call<SignupResponse>
 
+    @POST("/app/logout")
+    fun userLogout(
+        @Header("authorization") accessToken : String
+    ): Call<LogoutBackendResponse>
+
+
     @GET("/app/users/2")
     fun GetUserInfo(
         @Header("Authorization") accessToken: String,

@@ -21,7 +21,7 @@ class PlaceToGoRegionActivity : AppCompatActivity() {
     //서비스 객체 생성
     var api: AccomoService = retrofit.create(AccomoService::class.java)
 
-    var accommoList: MutableList<FavoriteBackendResponse.Favorite> = mutableListOf()
+    var accommoList: MutableList<FavoriteBackendResponse.Result.Favorite> = mutableListOf()
 
     lateinit var roomId: String
     var isLast : Boolean = false
@@ -34,7 +34,7 @@ class PlaceToGoRegionActivity : AppCompatActivity() {
         binding = ActivitySeoulAccommoBinding.inflate(layoutInflater)
         setContentView(binding.root)
         //val intent = Intent(this@SeoulAccommoActivity,PlaceGridAdapter::class.java)
-        accommoList = intent.getSerializableExtra("accommoList") as MutableList<FavoriteBackendResponse.Favorite>
+        accommoList = intent.getSerializableExtra("accommoList") as MutableList<FavoriteBackendResponse.Result.Favorite>
         isLast = intent.getBooleanExtra("isLast", false)
         accessToken = intent.getStringExtra("accessToken")
         region = intent.getStringExtra("region")
