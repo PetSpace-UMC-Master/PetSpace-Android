@@ -13,6 +13,7 @@ import com.example.petsapce_week1.home.homefragment.ReserveFragment
 import com.example.petsapce_week1.placetogo.NoLoginPlacetogoFragment
 import com.example.petsapce_week1.placetogo.PlaceToGoFragment
 import com.example.petsapce_week1.reservation.ReservationFragment
+import com.example.petsapce_week1.reservationbcw.reservationMainFragment
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding:ActivityHomeBinding
@@ -48,7 +49,7 @@ class HomeActivity : AppCompatActivity() {
                     }
                     R.id.menu_main_btm_nav_reserve -> {
                         supportFragmentManager.beginTransaction()
-                            .replace(R.id.main_frm, ReservationFragment())
+                            .replace(R.id.main_frm, reservationMainFragment())
                             .commitAllowingStateLoss()
                         Log.d("예약 화면 switch", "dd")
                     }

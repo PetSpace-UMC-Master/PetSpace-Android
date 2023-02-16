@@ -58,6 +58,7 @@ class reviewFragment(val roomId : Long) : Fragment() {
             ) {
                 Log.d("숙소 세부 정보 review 통신 성공",response.toString())
                 Log.d("숙소 세부 정보 review 통신 성공", response.body().toString())
+                
                 val body = response.body()
                 if (body != null) {
 

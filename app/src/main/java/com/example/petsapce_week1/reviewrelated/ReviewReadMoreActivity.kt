@@ -46,7 +46,9 @@ class ReviewReadMoreActivity : AppCompatActivity() {
     }
 
     private fun loadData() {
-        api.getReviews(roomId = 1, getPage(), size).enqueue(object : Callback<ReviewGetData> {
+        val roomId  = intent.getIntExtra("content2",-1)
+        Log.d("리뷰 roomId 11", roomId.toString())
+        api.getReviews(roomId = roomId.toLong(), getPage(), size).enqueue(object : Callback<ReviewGetData> {
             override fun onResponse(call: Call<ReviewGetData>, response: Response<ReviewGetData>) {
                 if (response.isSuccessful) {
                     val body = response.body()
@@ -56,18 +58,18 @@ class ReviewReadMoreActivity : AppCompatActivity() {
                         is_last = body.result.isLast
                         page_num = body.result.page
                         adapter.setReviews(body.result.reviews)
-                        Log.d("body1", body.result.toString())
-                        Log.d("reviewCnt", body.result.numberOfReview.toString())
-                        Log.d("avgScore", body.result.averageReviewScore.toString())
+                        Log.d("리뷰 body1", body.result.toString())
+                        Log.d("리뷰 reviewCnt", body.result.numberOfReview.toString())
+                        Log.d("리뷰 avgScore", body.result.averageReviewScore.toString())
                     }
                     } else {
-                        Log.d("바디", response.body().toString())
-                    Log.d("error", "err")
+                        Log.d("리뷰 바디", response.body().toString())
+                    Log.d("리뷰 error", "err")
                     // 통신 에러
                     }
                 }
             override fun onFailure(call: Call<ReviewGetData>, t: Throwable) {
-                Log.d("this is error", t.toString())
+                Log.d("리뷰 this is error", t.toString())
             }
         })
     }
@@ -75,17 +77,22 @@ class ReviewReadMoreActivity : AppCompatActivity() {
     // 리사이클러뷰에 더 보여줄 데이터를 로드하는 경우
     private fun loadMoreReviews() {
         adapter.setLoadingView(true)
+        val roomId  = intent.getIntExtra("content2",-1)
+        Log.d("리뷰 더보기 roomId", roomId.toString())
 
         // 너무 빨리 데이터가 로드되면 스크롤 되는 Ui 를 확인하기 어려우므로,
         // Handler 를 사용하여 1초간 postDelayed 시켰다
         Handler(Looper.getMainLooper()).postDelayed({
-            api.getReviews(roomId = 1, getPage(), size)
+            api.getReviews(roomId = roomId.toLong(), getPage(), size)
                 .enqueue(object : Callback<ReviewGetData> {
                     @SuppressLint("SetTextI18n")
                     override fun onResponse(
                         call: Call<ReviewGetData>,
                         response: Response<ReviewGetData>
                     ) {
+                        Log.d("리뷰 더보기 roomId", roomId.toString())
+                        Log.d("리뷰 더보기 roomId", response.toString())
+                        Log.d("리뷰 더보기 roomId", response.body().toString())
                         val body = response.body()
                         if (body != null && response.isSuccessful) {
                             is_last = body.result.isLast
