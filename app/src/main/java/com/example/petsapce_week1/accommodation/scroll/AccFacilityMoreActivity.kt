@@ -37,11 +37,10 @@ class AccFacilityMoreActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnFacilitesClose.setOnClickListener {
-            val intent = Intent(this, AccMainActivity::class.java)
-            startActivity(intent)
+            finish()
         }
         //홈화면 리사이클러뷰에서 넘어감
-        val roomId  = intent.getIntExtra("content",-1)
+        val roomId  = intent.getIntExtra("content",1)
 
         api.getFacilities(roomId = roomId.toLong()).enqueue(object : Callback<AccommodationFacilityMore> {
             @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
