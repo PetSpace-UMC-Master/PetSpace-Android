@@ -79,8 +79,14 @@ class ReviewPostActivity : AppCompatActivity() {
             }
         })
 
-        // 이전 버튼
-        initPrevious()
+        binding.apply {
+            btnBack.setOnClickListener {
+                finish()
+            }
+            btnReviewCreate.setOnClickListener {
+                finish()
+            }
+        }
 
         // 별점 정수로 환산
         binding.ratingBar.setOnRatingBarChangeListener { ratingBar, rating, _ ->
@@ -240,16 +246,6 @@ class ReviewPostActivity : AppCompatActivity() {
             Log.d("파일 경로", "$mediaPath")*/
         }}
 
-
-
-    // 이전 화면
-    fun initPrevious() {
-        binding.apply {
-            btnBack.setOnClickListener {
-                finish()
-            }
-        }
-    }
 
     private fun String?.toPlainRequestBody() =
         requireNotNull(this).toRequestBody("text/plain".toMediaTypeOrNull())

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
@@ -291,6 +292,7 @@ class AccMainActivity : AppCompatActivity() {
                 ) {
                     Log.d("예약 생성 통신 성공", response.toString())
                     Log.d("예약 생성 통신 성공", response.body().toString())
+                    Toast.makeText(this@AccMainActivity, "예약 완료되었습니다.", Toast.LENGTH_LONG).show()
                 }
 
                 override fun onFailure(call: Call<ReservationCreateResponse>, t: Throwable) {
