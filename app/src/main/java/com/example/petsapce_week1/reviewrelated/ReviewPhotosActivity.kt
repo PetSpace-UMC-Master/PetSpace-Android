@@ -13,7 +13,7 @@ import com.example.petsapce_week1.accommodation.scroll.reviewFragment
 import com.example.petsapce_week1.databinding.ActivityReviewReadMorePhotosBinding
 
 //
-class ReviewPhotosActivity : AppCompatActivity() {
+class ReviewPhotosActivity(val accessToken : String) : AppCompatActivity() {
     private lateinit var binding : ActivityReviewReadMorePhotosBinding
     private val slideImageHandler : Handler = Handler()
     private val slideImageRunnable = Runnable {
@@ -50,7 +50,7 @@ class ReviewPhotosActivity : AppCompatActivity() {
         }
         binding.btnClose.setOnClickListener {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainerView, reviewFragment(roomId = roomId.toLong()))
+                .replace(R.id.fragmentContainerView, reviewFragment(roomId = roomId.toLong(), accessToken = accessToken))
                 .addToBackStack(null)
                 .commit()
 //            val intent = Intent(this, reviewFragment::class.java)

@@ -75,7 +75,6 @@ class PlaceToGoRegionActivity : AppCompatActivity() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 val layoutManager = binding.recyclerviewMainHome.layoutManager as LinearLayoutManager
-                //val layoutManager = recyclerView.layoutManager as LinearLayoutManager
                 val totalItemCount = layoutManager.itemCount
                 Log.d("부산1", totalItemCount.toString())
                 val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
@@ -106,13 +105,6 @@ class PlaceToGoRegionActivity : AppCompatActivity() {
                                     }
                                 }
                                 else{
-//                                    fragmentManager
-//                                        .beginTransaction()
-//                                        .add(R.id.thisLayout, NoPlaceToGoFragment() )
-//                                        .addToBackStack(null)
-//                                        .show(NoPlaceToGoFragment())
-//                                        //.hide(PlaceToGoFragment())
-//                                        .commit()
                                     val noplacetogofragment = NoPlaceToGoFragment()
                                     val placetogofragment = PlaceToGoFragment()
                                     Log.d("함께 갈 곳 2222", "222222")

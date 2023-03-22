@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.petsapce_week1.GifActivity
@@ -23,7 +24,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 
 
-class reviewFragment(val roomId : Long) : Fragment() {
+class reviewFragment(val roomId : Long, val accessToken : String) : Fragment() {
 
     private lateinit var binding:FragmentReviewBinding
     lateinit var adapter: reviewAdapter
@@ -32,7 +33,7 @@ class reviewFragment(val roomId : Long) : Fragment() {
     private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
     var api : AccomoService = retrofit.create(AccomoService::class.java)
 
-    val accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ5c2xpbTM3QG5hdmVyLmNvbSIsImlhdCI6MTY3NTMyMTY0NywiZXhwIjoxNjc1MzIzNDQ3fQ.4CDgFa2fp_b-9fEuDiiwPkTR3SC23bI23NYOEdBiSB8"
+    //토큰 저장 객체
     val accessTokenPost = "Bearer $accessToken"
 
     override fun onCreateView(
@@ -58,7 +59,7 @@ class reviewFragment(val roomId : Long) : Fragment() {
             ) {
                 Log.d("숙소 세부 정보 review 통신 성공",response.toString())
                 Log.d("숙소 세부 정보 review 통신 성공", response.body().toString())
-                
+
                 val body = response.body()
                 if (body != null) {
 
