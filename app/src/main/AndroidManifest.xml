@@ -38,7 +38,8 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity> <!-- 홈 내비게이션 액티비티 ===================================================================================== -->
+        </activity>
+        <!-- 홈 내비게이션 액티비티 ===================================================================================== -->
         <activity
             android:parentActivityName=".home.HomeResearchActivity"
             android:name=".home.Home2Activity"
@@ -54,11 +55,13 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity> <!-- 홈 내비게이션 액티비티 끝 ========================================================================== -->
+        </activity>
+        <!-- 홈 내비게이션 액티비티 끝 ========================================================================== -->
         <!-- 네이버 지도 -->
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="p11jn9hu1p" /> <!-- 숙소 상세보기 액티비티 ===================================================================================== -->
+            android:value="p11jn9hu1p" />
+        <!-- 숙소 상세보기 액티비티 ===================================================================================== -->
         <activity
             android:name=".accommodation.scroll.AccFacilityActivity"
             android:exported="false">
@@ -73,10 +76,12 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity android:name=".accommodation.scroll.AccHostViewMoreActivity"/>
         <activity
             android:name=".accommodation.AccMainActivity"
             android:exported="true" />
-        <activity android:name=".accommodation.scroll.AccFacilityMoreActivity" /> <!-- 숙소 상세보기 끝 ===================================================================================== -->
+        <activity android:name=".accommodation.scroll.AccFacilityMoreActivity" />
+        <!-- 숙소 상세보기 끝 ===================================================================================== -->
         <!-- 로그인 액티비티  ===================================================================================== -->
         <activity
             android:name=".loginrelated.LoginActivity"

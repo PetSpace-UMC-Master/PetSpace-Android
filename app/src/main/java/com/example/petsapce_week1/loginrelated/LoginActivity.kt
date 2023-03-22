@@ -72,6 +72,10 @@ class LoginActivity : AppCompatActivity() {
             kakaoLogin()
         }
 
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
+
     }
     // ================ 카카오 로그인 ==================
     private fun kakaoLogin() {

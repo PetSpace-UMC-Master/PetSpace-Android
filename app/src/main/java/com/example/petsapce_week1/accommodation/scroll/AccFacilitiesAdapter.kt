@@ -18,7 +18,6 @@ class AccFacilitiesAdapter(val item: List<AccomodationData.Facility>) : Recycler
 
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            Log.d("Im here", "들어왔어요크리에이트뷰홀더")
         val binding = FacilitiesItemListBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ViewHolder(binding)
     }

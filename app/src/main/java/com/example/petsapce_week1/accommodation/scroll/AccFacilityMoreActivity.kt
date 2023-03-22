@@ -29,8 +29,6 @@ class AccFacilityMoreActivity : AppCompatActivity() {
     var api : AccomoService = retrofit.create(AccomoService::class.java)
     val facilityReceivedList = mutableListOf<FacilityReceived>()
 
-    var facilityReceived = mutableListOf<FacilityData>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentFacilitiesMoreBinding.inflate(layoutInflater)

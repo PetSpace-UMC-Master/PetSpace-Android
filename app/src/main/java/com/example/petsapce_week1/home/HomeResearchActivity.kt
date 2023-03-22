@@ -24,7 +24,11 @@ class HomeResearchActivity : AppCompatActivity() {
         binding = ActivityHomeResearchBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-
+        binding.btnBack.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+//            finish()
+        }
 
         //뷰페이져 부분 터치하면 바로 액티비티 텍스트에 반영 viewmodel $$ observer패턴
         viewModel = ViewModelProvider(this).get(ResViewModel::class.java)

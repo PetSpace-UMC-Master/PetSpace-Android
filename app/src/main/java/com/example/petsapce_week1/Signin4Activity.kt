@@ -70,6 +70,10 @@ class Signin4Activity : AppCompatActivity() {
         //3번 패스워드 동일 체크
         initPasswordEqual()
 
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
+
 
     }
 

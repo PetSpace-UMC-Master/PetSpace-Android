@@ -54,32 +54,17 @@ class PlaceToGoFragment : Fragment() {
             R.drawable.menu7,
         )
         getAccessToken()
-        val fragmentManager = (activity as AppCompatActivity).supportFragmentManager
         if(accessToken != null){
             val gridVew = binding.placeGridview
             gridVew.adapter =
                 tcontext?.let { PlaceGridAdapter(parentFragmentManager, it, accessToken = accessToken!!, img_list = img) }
-            //adapter = tcontext?.let { PlaceGridAdapter(it, img, accessToken!!) }!!
-//            binding.placeGridview.adapter =
-//                tcontext?.let { PlaceGridAdapter(context = requireContext(), accessToken = accessToken!!, img_list = img) }
-            //binding.placeGridview.adapter = adapter
+
             Log.d("함께 갈 곳", "안비었음, ${img}")
         }
         else{
             Log.d("함께 갈 곳", "비었음")
 
-//            val fragmentManager = (activity as AppCompatActivity).supportFragmentManager
-//            val fragmentTransaction = fragmentManager.beginTransaction()
-//            val newFragment = NoLoginPlacetogoFragment()
-//            fragmentTransaction.replace(R.id.placetogoLayout, newFragment)
-//            fragmentTransaction.addToBackStack(null)
-//            fragmentTransaction.commit()
         }
-
-        //adapter = PlaceToGoRegionAdapter(dataList)
-        //        binding.recyclerviewMain.adapter = adapter
-        //        binding.recyclerviewMain.isNestedScrollingEnabled = true
-//        adapter = context?.let { accessToken?.let { it1 -> PlaceGridAdapter(it, img, it1) } }!!
 
         return binding.root
     }

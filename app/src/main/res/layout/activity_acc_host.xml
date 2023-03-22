@@ -45,17 +45,18 @@
     </LinearLayout>
 
     <TextView
-        android:clickable="true"
         android:id="@+id/tv_viewmore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
         android:text="@string/more"
         android:textColor="@color/textForBlack"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:focusable="true" />
+        tools:ignore="TouchTargetSizeCheck" />
 
     <LinearLayout
         android:id="@+id/linearLayout_text"

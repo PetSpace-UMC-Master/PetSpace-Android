@@ -8,6 +8,7 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -143,13 +144,20 @@ class ReviewPostActivity : AppCompatActivity() {
                         Log.d("통신 완료된 해쉬맵(내용, 별점)", textHashMap.toMap().toString())
                         Log.d("통신 완료된 사진", images.toString())
                         Log.d("파일 경로", "$mediaPath")
+
+                        Toast.makeText(this@ReviewPostActivity, "리뷰 작성 완료", Toast.LENGTH_LONG).show()
+
+                        finish()
+
+
+
                         // 통신 응답 확인
                         val body = response.body()
-                        if (body != null) {
-                            success_review_id = body.result.id
-                            Log.d("응답 받은 리뷰ID (포스트 된 리뷰ID)", "{${success_review_id.toString()}}"
-                            )
-                        }
+//                        if (body != null) {
+//                            success_review_id = body.result.id
+//                            Log.d("응답 받은 리뷰ID (포스트 된 리뷰ID)", "{${success_review_id.toString()}}"
+//                            )
+//                        }
                     }
 
                     // 통신 실패

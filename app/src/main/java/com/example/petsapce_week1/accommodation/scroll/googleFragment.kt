@@ -1,6 +1,7 @@
 package com.example.petsapce_week1.accommodation.scroll
 
 import android.annotation.SuppressLint
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.graphics.Color
 import android.media.AudioMetadata.createMap
@@ -9,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.petsapce_week1.databinding.FragmentGoogleBinding
@@ -31,11 +33,17 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import kotlin.properties.Delegates
 
-class googleFragment(val roomId : Long) : Fragment(), OnMapReadyCallback {
+class googleFragment(val roomId : Long, val accessToken: String) : Fragment(), OnMapReadyCallback {
 
     private lateinit var viewModel: GoogleViewModel
     private lateinit var viewBinding:FragmentGoogleBinding
     private lateinit var mapView : MapView
+
+    var latitude : Double = 0.0
+    var longitude : Double = 0.0
+
+//    private var latitude by Delegates.notNull<Double>()
+//    private var longitude by Delegates.notNull<Double>()
 
     val marker = Marker()
     private val LOCATION_PERMISSION_REQUEST_CODE: Int = 1000
@@ -43,9 +51,9 @@ class googleFragment(val roomId : Long) : Fragment(), OnMapReadyCallback {
     //백엔드 서버 연동
     private var retrofit: Retrofit = RetrofitHelper.getRetrofitInstance()
     var api : AccomoService = retrofit.create(AccomoService::class.java)
-    val accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ5c2xpbTM3QG5hdmVyLmNvbSIsImlhdCI6MTY3NTMyMTY0NywiZXhwIjoxNjc1MzIzNDQ3fQ.4CDgFa2fp_b-9fEuDiiwPkTR3SC23bI23NYOEdBiSB8"
-    val accessTokenPost = "Bearer $accessToken"
 
+    //토큰 저장 객체
+    val accessTokenPost = "Bearer $accessToken"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,7 +61,6 @@ class googleFragment(val roomId : Long) : Fragment(), OnMapReadyCallback {
     ): View? {
         viewBinding = FragmentGoogleBinding.inflate(layoutInflater)
         //activity의 setcontentview가 아닌 return값을 주면된다.
-
 
         api.getRoomDetail(accessToken = accessTokenPost, roomId = roomId).enqueue(object : Callback<AccomodationData> {
             @SuppressLint("SetTextI18n")
@@ -96,8 +103,7 @@ class googleFragment(val roomId : Long) : Fragment(), OnMapReadyCallback {
 
     private var naverMap : NaverMap ?= null
     private lateinit var locationSource: FusedLocationSource
-    private var latitude : Double = 0.0
-    private var longitude : Double = 0.0
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -106,6 +112,7 @@ class googleFragment(val roomId : Long) : Fragment(), OnMapReadyCallback {
     }
 
     override fun onMapReady(naverMap: NaverMap) {
+
         this.naverMap = naverMap
         naverMap.locationSource = locationSource
 
